@@ -6,8 +6,6 @@ Javascripish syntax for clojurescript
 
 Because the javascript dot-notation is awesome!
 
-#### Include
-
 ***WARNING*** 
 Still under developement, not ready for production
 
@@ -59,25 +57,26 @@ Simple Usage
 `?>` Example:
 
 ```clojure
-(defn set3rd [arr value]
+(let [arr (array 1 2 3)]
   (if (?> => arr.length 3)
-     (! arr.2 value)))
-
-(def arr1 (array 1 2 3))
-(set3rd arr1 10)
-arr1 ;=> [1 2 10]
+     (! arr.2 value))
+  arr)
+;=> [1 2 10]
 ```
 
 `!>` Example:
 
 ```clojure
-(defn append [arr value]
-  (!> arr.push value))
+(let [arr (array 1 2)]
+  (!> arr.push 3)
+  arr)
+;=> [1 2 3]
 
-
-(def arr2 (array 1 2))
-(append arr2 3)
-arr2 ;=> [1 2 3]
+;; Can use `this` as well
+(def o3 (obj :a 2
+             :fn (fn [] this.a)))
+(!> o3.fn) 
+;=> 2
 ```
 
 #### functions
