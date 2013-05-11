@@ -2,12 +2,14 @@
 
 javascript-ish syntax for clojurescript
 
-##Why?
+***WARNING*** 
+Still under developement, not ready for production
+
+#### Why?
 
 Because the javascript dot-notation is awesome! but mostly because I can't stand `aget` `aset` and `.-<blah>` accessors.
 
-***WARNING*** 
-Still under developement, not ready for production
+#### Installation
 
 ```shell
 git clone https://github.com/zcaudate/purnam.git
