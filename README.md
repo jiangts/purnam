@@ -4,7 +4,7 @@ javascript-ish syntax for clojurescript
 
 ##Why?
 
-Because the javascript dot-notation is awesome! but mostly because I can't stand `aget` and `aset`
+Because the javascript dot-notation is awesome! but mostly because I can't stand `aget` `aset` and `.-<blah>` accessors.
 
 ***WARNING*** 
 Still under developement, not ready for production
