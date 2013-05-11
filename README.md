@@ -92,7 +92,7 @@ Example:
   (! app.layout.breadcrumbs
      (let [arr (array)]
        (doseq [i v.trail]
-         (arr.push (aget app.static i)))
+         (arr.push (aget app.static i))) ;; future syntax: app.static|i|
        (arr.push v)
        arr)))
 ```
