@@ -2,7 +2,7 @@
 
 javascript-ish syntax for clojurescript
 
-***WARNING*** 
+***WARNING***
 Still under developement, not ready for production
 
 #### Why?
@@ -11,7 +11,7 @@ Because the javascript dot-notation is awesome! but mostly because I can't stand
 
 #### Installation
 
-```shell
+```bash
 git clone https://github.com/zcaudate/purnam.git
 cd purnam
 lein install
@@ -19,26 +19,53 @@ lein install
 
 In your project file, add
 
-```clojure 
+```clojure
 [purnam "0.1.0-SNAPSHOT"]
+```
+
+#### TDD Workflow
+
+######.cljs files
+Open two terminal window in the project directory. You will require [karma](http://github.com/karma-runner/karma):
+
+In the first:
+
+```bash
+lein cljsbuild auto
+```
+
+In the second:
+
+```bash
+karma start
+```
+
+Use any editor. cljsbuild will compile all `.cljs` files to `harness/purnam.js` and will be run by karma.
+
+######.clj files
+
+These are tests for macro helper functions written in `.clj` in the `src` directory.
+
+```bash
+lein midje :autotest
 ```
 
 #### Javascript
 
 
-```clojure 
+```clojure
 (ns <app>.core
   (:use [purnam.cljs :only [aset-in aget-in]])
   (:require-macros
    [purnam.js :refer [! ? !> ?> def.n f.n obj]]))
 ```
 
-Four macros are defined for use in functions: 
+Four macros are defined for use in functions:
 
-    `?`  Getter
-    `?>` Call 
-    `!`  Setter
-    `!>` Invoke
+  -  `?`  Getter
+  -  `?>` Call
+  -  `!`  Setter
+  -  `!>` Invoke
 
 Simple Usage
 
@@ -77,7 +104,7 @@ Simple Usage
 ;; Can use `this` as well
 (def o3 (obj :a 2
              :fn (fn [] this.a)))
-(!> o3.fn) 
+(!> o3.fn)
 ;=> 2
 ```
 
@@ -126,7 +153,7 @@ Angularjs macros help alleviate the amount of callback functions that one has to
   (! $scope.state $state)
   ($state.transitionTo "home"))
 ```
-  
+
 #### jasmin
 
 Jasmin macros for clearer tests

@@ -7,7 +7,7 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'harness/purnam.js'
+  'harness/*.js'
 ];
 
 // list of files to exclude
