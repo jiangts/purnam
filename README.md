@@ -1,10 +1,10 @@
 # purnam
 
-Javascripish syntax for clojurescript
+javascript-ish syntax for clojurescript
 
 ##Why?
 
-Because the javascript dot-notation is awesome!
+Because the javascript dot-notation is awesome! but mostly because I can't stand `aget` and `aset`
 
 ***WARNING*** 
 Still under developement, not ready for production
