@@ -7,13 +7,31 @@ Javascripish syntax for clojurescript
 Because the javascript dot-notation is awesome!
 
 #### Include
- 
-    (ns <app>.core
-      (:use [purna.cljs :only [aset-in aget-in]])
-      (:require-macros
-       [purna.js :refer [! ? !> ?> def.n f.n obj]]))
+
+***WARNING*** 
+Still under developement, not ready for production
+
+```shell
+git clone https://github.com/zcaudate/purnam.git
+cd purnam
+lein install
+```
+
+In your project file, add
+
+```clojure 
+[purnam "0.1.0-SNAPSHOT"]
+```
 
 #### Javascript
+
+
+```clojure 
+(ns <app>.core
+  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:require-macros
+   [purnam.js :refer [! ? !> ?> def.n f.n obj]]))
+```
 
 Four macros are defined for use in functions: 
 
@@ -132,11 +150,11 @@ Jasmin macros for clearer tests
 
 ## Todos
 
-- a clearer introduction
-- better documentation and examples (maybe copy off coffeescript page)
+- a clearer introduction with coffeescript/clojurescript comparison
+- better documentation and examples (maybe copy off coffeescript/lispyscript page)
 - more tests
 - how to do testing with karma and cljsbuild
-
+- syntax for refered values: (! lookup.child.|query.|i|.mother|.name "Anne")
 
 ## License
 
