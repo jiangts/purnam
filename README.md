@@ -11,7 +11,7 @@ So the use case can be seen below:
 ###### Getters:
 
     ## javascript (12 keystrokes):
-    object.a.b.c    
+    object.a.b.c
 
     ## clojurescript (45 keystrokes):
     (-> object
@@ -25,7 +25,7 @@ So the use case can be seen below:
 ###### Setters:
 
     ## javascript (17 keystrokes):
-    object.a.b.c = 10    
+    object.a.b.c = 10
 
     ## clojurescript (48 keystrokes):
     (-> object
@@ -43,13 +43,13 @@ These are really bad examples of code but its what usually happens when working 
     ## javascript (~100 chars):
     var bad_code = function(obj, val){
       obj.inner.number = 10;
-      val.inner.count = obj.inner.count + 10;}    
+      val.inner.count = obj.inner.count + 10;}
 
     ## clojurescript (~180 chars):
     (defn bad-code [obj val]
       (-> obj (aget "inner") (aset "number" 10))
-      (-> val 
-          (aget "inner") 
+      (-> val
+          (aget "inner")
           (aset "count"
                 (+ 10 (-> obj (aget "inner") (aget "count")))))
       nil)
@@ -57,8 +57,8 @@ These are really bad examples of code but its what usually happens when working 
     ## clojurescript + purnam (~110 chars):
     (def.n bad-code [obj val]
       (! obj.inner.number 10)
-      (! val.inner.count 
-         (+ 10 obj.inner.count)) 
+      (! val.inner.count
+         (+ 10 obj.inner.count))
       nil)
 
 #### Installation
@@ -72,7 +72,7 @@ lein install
 In your project file, add
 
 ```clojure
-[purnam "0.1.0-SNAPSHOT"]
+[purnam "0.0.9"]
 ```
 
 #### Javascript
@@ -92,11 +92,11 @@ The following are macros are defined for extending clojurescript:
   -  `!>` Invoke
   -  `obj` Creates nested objects
   -  `def.n` Function definitions
-  -  `do.n` Function definitions 
+  -  `do.n` Function definitions
   -  `f.n` is rarely needed
 
-The javascript.`dot`.notation can be used inside any of the forms
-  
+The javascript.dot.notation can be used inside any of the forms
+
 ##### Simple Usage
 
 ```clojure
@@ -136,7 +136,7 @@ The javascript.`dot`.notation can be used inside any of the forms
 
 ;; Can use `this` as well
 (def o3 (obj :a 2
-             :fn (fn [] this.a))) 
+             :fn (fn [] this.a)))
 
 (!> o3.fn)
 ;=> 2
@@ -146,10 +146,10 @@ The javascript.`dot`.notation can be used inside any of the forms
 ;; instead of (this-as me
 ;;               (aget me "a"))
 ;;
-;; Note, the `this` in purnam is implemented as a 
+;; Note, the `this` in purnam is implemented as a
 ;; pointer to the object, not the `this` in javascript.
 ;;
-;; I don't really advise using `this` in your 
+;; I don't really advise using `this` in your
 ;; clojurescript code. This is more an experimental
 ;; feature that I'm playing around with so that
 ;; functions are more explicit in what they are doing,
@@ -176,13 +176,13 @@ The javascript.`dot`.notation can be used inside any of the forms
 #### functions
 
 When `f.n` and `def.n` are used for function definitions, there is no need to write `?`, `?>` and `!>` within the form as it is handled automatically. Actually, the short hand is avaliable Within any of the macro forms.
-   
+
 Typing:
    - a.b.c is the same as typing `(? a.b.c)`:
    - `(inc a.b.c 1)` is the same as typing `(?> inc a.b.c 1)`:
    - `(a.call arg1 arg2)` is the same as typing `(!> a.call arg1 arg2)`:
    - Only the setter function `(! a.b.c (new value))` remains the same.
-   
+
 Example:
 
 ```clojure

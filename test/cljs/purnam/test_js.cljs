@@ -1,6 +1,5 @@
 (ns purnam.test-js
-  (:require [goog.testing.jsunit :as jsunit]
-            [purnam.cljs :as p])
+  (:use [purnam.cljs :only [aget-in aset-in]])
   (:require-macros [purnam.js :as j])
   (:use-macros [purnam.js :only [obj ? ?> ! !> f.n def.n]]
                [purnam.jasmin :only [init-jasmin describe it is is-not equals]]))
@@ -28,7 +27,7 @@
   o2 (obj :a 1 :b 2 :c 3)
   n1 "a" n2 "b" n3 "c"]
  (it
-  "can create js-objects"
+  "can create js-objects and allow arbitrary accessors"
   (is (? o2.a) 1)
   (is (? o2.b) 2)
   (is (? o2.b) even?)
@@ -43,6 +42,22 @@
   (is (? o1.array.|o1.array.|o1.array.0||) 3)
   (is (? o1.array.|o1.array.|o1.array.|o1.array.0|||) 4)
   (is (? o2.d) js/undefined)))
+
+(describe
+ "obj.this"
+ [o3 (obj :a 2 :fn (fn [] this.a))
+  o4 (obj :a 3 :fn o3.fn)
+  a  (? o3.fn)]
+ (it
+  "is different to `this` in js"
+  (is (aget (aget-in o3 []) "a") 2)
+  (is (!> o3.fn) 2)
+  (is (!> o4.fn) 2)
+  (is (a) 2)
+  (! o3.a 4)
+  (is (!> o3.fn) 4)
+  (is (!> o4.fn) 4)
+  (is (a) 4)))
 
 (describe
  "obj fns"
