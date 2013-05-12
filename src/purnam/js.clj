@@ -18,7 +18,8 @@
 (declare split-dotted-pipe)
 
 (defn reconstruct-dotted [output current ss]
-  (str (s/join "." output) "." current (apply str ss)))
+  (str (s/join "." output) "." current (apply str ss)))\
+
 
 (defmacro split-error [msg]
   `(throw (Exception.
@@ -208,19 +209,24 @@
 
 (declare make-var)
 
-(defn make-js-object-aset [sym [k v]]
+(defn make-js-object-aset [sym context [k v]]
   (list 'aset sym (name k)
         (make-var
-         (change-root v 'this sym #{'obj}))))
+          (-> v
+              (change-root 'self sym #{'obj})
+              ;;(change-root 'this context #{'obj})
+              ))))
 
 (defn make-js-object
   ([m] (make-js-object nil m))
   ([sym m]
      (let [sym  (or sym (gensym))
-           body (map #(make-js-object-aset sym %) m)]
-         (concat ['let [sym '(js-obj)]]
+           context (gensym)
+           body (map #(make-js-object-aset sym context %) m)]
+         (list 'this-as context
+           (concat ['let [sym '(js-obj)]]
                  body
-                 [sym]))))
+                 [sym])))))
 
 (defn make-js-array [v]
   (apply list 'array

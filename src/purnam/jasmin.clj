@@ -1,5 +1,6 @@
 (ns purnam.jasmin
-  (require [clojure.string :as s]))
+  (:require [clojure.string :as s])
+  (:use [purnam.js :only [js-expand]]))
 
 (defmacro init-jasmin []
   (list
@@ -20,10 +21,11 @@
          }})});"))
 
 (defmacro describe [desc bindings & body]
-  (list 'let bindings
-        (list 'js/describe desc
-              `(fn [] ~@body
-                 nil))))
+  (js-expand
+   (list 'let bindings
+         (list 'js/describe desc
+               `(fn [] ~@body
+                  nil)))))
 
 (defmacro beforeEach [& body]
   (list 'js/beforeEach

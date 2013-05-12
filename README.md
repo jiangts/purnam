@@ -1,72 +1,131 @@
 # purnam
 
-Introducing javascript-ish language extensions for clojurescript. Inspired by [lispyscript](http://lispyscript.com), [coffescript](http://coffeescript.org) and [clang](https://github.com/pangloss/clang‎)
+Purnam - AngularJs Language Extensions for Clojurescript
 
-#### Why?
+Inspired by [lispyscript](http://lispyscript.com), [coffescript](http://coffeescript.org) and [clang](https://github.com/pangloss/clang‎)
 
-Because the javascript dot-notation is awesome and the javascript/clojurescript interop (`aget` `aset`, `.<fn>` and `.-<prop>` accessors) make for really ugly code. Using the language-extension macros, clojurescript becomes more than twice as concise when working with existing javascript libraries (I'm mainly working with angularjs).
 
-So the use case can be seen below:
+#### Installation
 
-###### Getters:
+In your project file, add
 
-    ## javascript (12 keystrokes):
-    object.a.b.c
+```clojure
+[purnam "0.0.10"]
+```
 
-    ## clojurescript (45 keystrokes):
-    (-> object
-      (aget "a")
-      (aget "b")
-      (aget "c"))
+#### Features
+Purnam has three main components:
 
-    ## clojurescript + purnam (16 keystrokes):
-    (? object.a.b.c)
+1. Angular Language Extensions
+2. Jasmin Language Extensions for TDD with Karma
+3. Clojurescript Language Extensions (which the previous two are built upon)
 
-###### Setters:
+#### Why not use lispyscript/coffeescript/clang?
+I like each of the languages for their own features:
 
-    ## javascript (17 keystrokes):
-    object.a.b.c = 10
+   - coffeescript for its succinctness
+   - lispyscript for its syntax and macros
+   - clang for its sheer brilliance and audacity
 
-    ## clojurescript (48 keystrokes):
-    (-> object
-      (aget "a")
-      (aget "b")
-      (aset "c" 10))
+However, in using each language I did find some weaknesses
 
-    ## clojurescript + purnam (19 keystrokes):
-    (! object.a.b.c 10)
+   - coffeescript and its ambiguous syntax that changes meaning with whitespace
+   - lispyscript is too new for me and not widely adopted
+   - clang is to ambitious in what it is trying to do (make angular work with clojure) and I think there are definite performance implications in doing so.
 
-###### Functions:
+The goal of this project is to provide opt-in language extensions for clojurescript to have the same sort of succintness when working with angular and all other javascript libraries.
 
-These are really bad examples of code but its what usually happens when working with existing javascript libraries. Using the dot-notation can save alot of screen and head space:
+#### Angular
+Write angular.js like its angular.cljs!
 
-    ## javascript (~100 chars):
-    var bad_code = function(obj, val){
-      obj.inner.number = 10;
-      val.inner.count = obj.inner.count + 10;}
+I'll put up a simpler example soon. But this code is taken off a current project that I am working on
+using angular, angular-ui, ui-bootstrap and ui-router:
 
-    ## clojurescript (~180 chars):
-    (defn bad-code [obj val]
-      (-> obj (aget "inner") (aset "number" 10))
-      (-> val
-          (aget "inner")
-          (aset "count"
-                (+ 10 (-> obj (aget "inner") (aget "count")))))
-      nil)
+```clojure
+(ns <app>.core
+  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:require-macros
+   [purnam.js :refer [! def.n obj]]
+   [purnam.angular :refer [def.module def.config
+                          def.controller def.service]]))
+                          
+(def.module app [ui ui.bootstrap ui.compat])
 
-    ## clojurescript + purnam (~110 chars):
-    (def.n bad-code [obj val]
-      (! obj.inner.number 10)
-      (! val.inner.count
-         (+ 10 obj.inner.count))
-      nil)
+(def.config app [$locationProvider $routeProvider]
+  (doto $locationProvider (.hashPrefix "!"))
+  (doto $routeProvider
+    (.when "" (obj :redirectTo "/home"))))
 
-#### Symbol Abuse
+(def.controller app.MainCtrl [$scope $state App AppFn]
+  (! $scope.app App)
+  (! $scope.fn AppFn)
+  (! $scope.state $state)
+  ($state.transitionTo "home"))
 
-From a question on [Stackoverflow](http://stackoverflow.com/questions/16496533/a-regular-expression-that-can-split-a-string-having-nested-brackets-that-are-the):
+(def.service app.$markdown [] 
+  (js/Showdown.converter.))
+  
+(def.service app.App []
+  (obj :catalog {}
+       :cart {}
+       :user {}
+       :defaults {:catalog {:products {:list  {:page 1 :perPage 20}}}}
+       :layout   {:breadcrumbs []
+                  :meta {:seo []
+                         :keywords []}}))
 
+(def.service app.AppFn [$markdown]
+  (obj :md (fn [data] 
+              (.makeHtml $markdown (str data)))))
+```
+
+#### Jasmin
+Angular has a great testing facility and you can hook right into it with the purnam.jasmin library to be run with Karma for TDD.
+
+```clojure
+(ns purnam.test-js
+  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:require-macros [purnam.js :as j])
+  (:use-macros [purnam.js :only [obj ? ?> ! !> f.n def.n]]
+               [purnam.jasmin :only [init-jasmin describe it is is-not equals]]))
+
+(init-jasmin)
+
+(describe
+ "objs contain js arrays"
+ [o1 (obj :array [1 2 3 4])]
+ (it "describes something"  
+   (is o1.array.0 odd?)
+   (is o1.array.1 2)
+   (is o1.array.2 3)
+   (is o1.array.3 4)
+   (is o1.array.4 js/undefined)
+   (! o1.array.4 5)
+   (is o1.array.4 5))
+
+(describe
+ "obj.self refers to the object"
+ [o3 (obj :a 2 :fn (fn [] self.a))
+  o4 (obj :a 3 :fn o3.fn)
+  fn1  o3.fn]
+ (it "is different to `this` in js"
+  (is (aget (aget-in o3 []) "a") 2)
+  (is (o3.fn) 2)
+  (is (o4.fn) 2)
+  (is (fn1) 2)
+  (! o3.a 4)
+  (is (o3.fn) 4)
+  (is (o4.fn) 4)
+  (is (fn1) 4)))
+```
+
+#### Language Extensions
+
+Javascript dot-notation is really handy to have around.
+
+#### Dots and Pipes as Accessors
 We can't use square brackets `[]` in clojure so instead, pipes `||` are used to
-denote accessors. The following translates to javascript syntax:
+denote variable accessors. The following translates to javascript syntax:
 
     cljs: a.hello
     ->js:  a["hello"] or a.hello
@@ -77,17 +136,86 @@ denote accessors. The following translates to javascript syntax:
     cljs: a.|b.c.|d.e||.f.|g|
     ->js:  a[b.c[d.e]].f[g]
 
-In this way, it is now very easy to write accessors in cljs.
+##### def.n
 
-#### Installation
-
-In your project file, add
+The `def.n` form is the same as `defn` but allows dot-notation within
 
 ```clojure
-[purnam "0.0.9"]
+;;
+;; Add Comparison
+;; 
+(defn add-vals [val1 val2]      ;; defn
+ (+ (.. val1 -inner -count)
+    (.. val2 -inner -count)))
+
+(def.n add-vals [val1 val2]     ;; def.n
+  (+ val1.inner.count 
+     val2.inner.count)))
+
+;;
+;; Function call with index lookup
+;;
+(defn call-vals [app arg1 arg2 n]      ;; defn
+  (.call (.-methods app)
+      (.-value (aget arg1 n))
+      (.-value (aget arg2 n))))
+
+(def.n call-vals [app arg1 arg2 n]     ;; def.n
+  (app.methods.call 
+     arg1.|n|.value 
+     arg2.|n|.value))
+
+;;
+;; Setters
+;;
+(defn bad-code [o val]         ;; defn
+ (aset o "inner" "number" 10)
+ (aset val "inner" "count"
+       (+ 10 (aget o "inner" "count"))))
+
+(def.n bad-code [o val]
+ (! o.inner.number 10)
+ (! val.inner.count
+    (+ 10 o.inner.count)))
 ```
 
-#### Javascript
+##### obj
+
+`obj` is an extension of `js-object` with data constructor and self-reference
+within the obj form, `{}` are interpreted as js-objects and `[]` are interpreted 
+as arrays
+
+```clojure
+(def o1 (obj :arr [1 2 3 4]
+             :l1 {:l2 [1 2 3 4]}))     
+```
+
+makes the equivalent object in javascript:
+
+```javascript
+var o1 = {"arr": [1,2,3,4],
+          "l1": {"l2": [1, 2, 3, 4]}}
+```
+
+So essentially it is almost identical syntax but if there is a case where
+scope is needed, you can nest `obj` calls to differ between scope
+
+```clojure
+(def v1 (obj :a 1           ;; self.a refers to this a
+             :b {:a 2
+                 :fn (fn [] self.a)})
+(def v2 (obj :a 1
+             :b  (obj :a 2  ;; self.a refers to this a
+                      :fn (fn [] self.a)))]
+
+(do.n     
+  (js/console.log (v1.b.fn))   ;=> 1
+  (js/console.log (v2.b.fn)))  ;=> 2
+```
+
+#### other extensions
+
+There are other macros that are defined:
 
 ```clojure
 (ns <app>.core
@@ -102,10 +230,8 @@ The following are macros are defined for extending clojurescript:
   -  `?>` Call
   -  `!`  Setter
   -  `!>` Invoke
-  -  `obj` Creates nested objects
-  -  `def.n` Function definitions
-  -  `do.n` Function definitions
-  -  `f.n` is rarely needed
+  -  `do.n` Do block
+  -  `f.n` Lambdas (rarely needed)
 
 The javascript.dot.notation can be used inside any of the forms
 
@@ -145,160 +271,117 @@ The javascript.dot.notation can be used inside any of the forms
   (!> arr.push 3)
   arr)
 ;=> [1 2 3]
-
-;; Can use `this` as well
-(def o3 (obj :a 2
-             :fn (fn [] this.a)))
-
-(!> o3.fn)
-;=> 2
-
-
-;; Notice that this.a is used
-;; instead of (this-as me
-;;               (aget me "a"))
-;;
-;; Note, the `this` in purnam is implemented as a
-;; pointer to the object, not the `this` in javascript.
-;;
-;; I don't really advise using `this` in your
-;; clojurescript code. This is more an experimental
-;; feature that I'm playing around with so that
-;; functions are more explicit in what they are doing,
-;; instead of swapping scope when they go into another
-;; object.
-;;
-
-(def o4 (obj :a 3
-             :fn o3.fn))
-
-(!> o4.fn)
-;=> 2 (points to o3.a instead of o4.a)
-
-(! o3.a 4)
-(!> o4.fn)
-;=> 4
-
-(let [a (o3.fn)]
-  (a))
-;=> 4
 ```
 
 
-#### functions
+#### Creating a Simple TDD Workflow
 
-When `f.n` and `def.n` are used for function definitions, there is no need to write `?`, `?>` and `!>` within the form as it is handled automatically. Actually, the short hand is avaliable Within any of the macro forms.
+Angular TDD workflow can be automated using cljsbuild and karma
 
-Typing:
-   - a.b.c is the same as typing `(? a.b.c)`:
-   - `(inc a.b.c 1)` is the same as typing `(?> inc a.b.c 1)`:
-   - `(a.call arg1 arg2)` is the same as typing `(!> a.call arg1 arg2)`:
-   - Only the setter function `(! a.b.c (new value))` remains the same.
+##### Step 1
 
-Example:
+Install [karma](http://github.com/karma-runner/karma) and the lein-cljsbuild plugin
+
+##### Step 2 - Configuring Cljsbuild
+
+Add `purnam` as a project dependency:
 
 ```clojure
-(def.n set-static-breadcrumbs [app v]
-  (js/console.log "Setting breadcrumbs")
-  (! app.layout.breadcrumbs
-     (let [arr (array)]
-       (doseq [i v.trail]
-         (arr.push (aget app.static i))) ;; future syntax: app.static|i|
-       (arr.push v)
-       arr)))
+[purnam "0.0.10"]
 ```
 
-## Other Libraries
-
-#### angularjs
-
-Angularjs macros help alleviate the amount of callback functions that one has to write
+Put a `test` build in your `project.clj` file:
 
 ```clojure
-(ns <app>.core
-  (:use [purnam.cljs :only [aset-in aget-in]])
-  (:require-macros
-   [purnam.js :refer [! def.n obj]]
-   [purnam.angular :refer [def.module def.config
-                          def.controller def.service]]))
-
-(def.module app [ui ui.bootstrap ui.compat])
-
-(def.config app [$locationProvider]
-  (doto $locationProvider (.hashPrefix "!")))
-
-
-(def.config app [$routeProvider]
-  (doto $routeProvider
-    (.when "" (obj :redirectTo "/home"))))
-
-(def.controller app.MainCtrl [$scope $state App AppFn]
-  (! $scope.app App)
-  (! $scope.fn AppFn)
-  (! $scope.state $state)
-  ($state.transitionTo "home"))
+:cljsbuild {:builds [{:source-paths ["src" "test/cljs"]   ;; <- where your 
+                      :id "test",
+                      :compiler
+                      {:pretty-print true,
+                       :output-to "<PATH-OF-TEST.JS>" ;; eg: "harness/test-app.js"
+                       :optimizations :whitespace}}
+                      ...
+                      ... other builds
+                      ...]}
 ```
 
-#### jasmin
+##### Step 3 - Configuring Karma
+Open a terminal screen in your project directory, run `karma init`:
 
-Jasmin macros for clearer tests. The .cljs tests are defined using jasmin macros (which are really kinda cool)
+```
+Which testing framework do you want to use ?
+Press tab to list possible options. Enter to move to the next question.
+> jasmine
 
-```clojure
-(ns purnam.test-js
-  (:require [purnam.cljs :as p])
-  (:use-macros [purnam.js :only [obj ?]]
-               [purnam.jasmin :only [describe it is is-not]]))
+.....
 
-(init-jasmin) ;; installs the `.toSatisfy` function that `is` and `is-not` templates
 
-(describe
- "objs contain js arrays"
- [o1 (obj :array [1 2 3 4])]
+Which files do you want to test ?
+You can use glob patterns, eg. "js/*.js" or "test/**/*Spec.js".
+Enter empty string to move to the next question.
+> "<PATH-OF-TEST.JS>"
 
- (it "describes something"
-  (is (? o1.array.0) 1)
-  (is (? o1.array.1) 2)
-  (is (? o1.array.2) 3)
-  (is (? o1.array.3) 4)
-  (is (? o1.array.4) js/undefined)))
+......
+
 ```
 
-
-#### TDD Workflow
-
-######.cljs files
-Open two terminal window in the project directory. You will require [karma](http://github.com/karma-runner/karma):
-
-In the first:
-
-```bash
-lein cljsbuild auto
-```
-
-In the second:
+##### Step 4 - Running Tests
+Run Karma in your first window
 
 ```bash
 karma start
 ```
 
-Use any editor. cljsbuild will compile all `.cljs` files to `harness/purnam.js` and will be run by karma.
-
-######.clj files
-
-These are tests for macro helper functions written in `.clj` in the `src` directory.
+Open another terminal window in you project directory and run
 
 ```bash
-lein midje :autotest
+lein cljsbuild auto test
 ```
 
+##### Step 5 - Write a Test
 
-## Todos
+Use any editor. Create a new test in the `test/cljs` folder
 
-- a clearer introduction with coffeescript/clojurescript comparison
-- better documentation and examples (maybe copy off coffeescript/lispyscript page)
-- more tests
-- how to do testing with karma and cljsbuild
-- syntax for refered values: (! lookup.child.|query.|i|.mother|.name "Anne")
+```clojure
+;;; test-app.js ;;;
+(ns purnam.test-js
+  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use-macros [purnam.jasmin :only [init-jasmin describe it is is-not equals]]))
+
+(init-jasmin)
+
+(describe 
+  "my first test using purnam"
+  [o1 (obj :array [1 2 3 4])]
+  (it "describes something"
+   (is o1.array.0 odd?)
+   (is o1.array.1 even?)
+   (is o1.array.2 even?)
+   (is o1.array.3 4)
+   (is o1.array.4 2)))
+```
+
+You will now see the output at the bottom of the karma window:
+
+    Expression: (purnam.cljs/aget-in o1 ["array" "2"])
+       Expected result: even?
+       Actual result: 3
+    Expression: (purnam.cljs/aget-in o1 ["array" "4"])
+       Expected result: 2
+       Actual result: undefined
+
+##### Step 6 - Fix the Test
+
+Make a change:
+
+     (is o1.array.2 odd?) to (is o1.array.2 odd?)
+     (is o1.array.4 js/undefined)
+
+And now all the tests are passed:
+
+    Safari 6.0 (Mac): Executed 1 of 1 SUCCESS (0.423 secs / 0.012 secs)
+
+
+
 
 ## License
 
