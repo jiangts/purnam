@@ -63,12 +63,6 @@ These are really bad examples of code but its what usually happens when working 
 
 #### Installation
 
-```bash
-git clone https://github.com/zcaudate/purnam.git
-cd purnam
-lein install
-```
-
 In your project file, add
 
 ```clojure
