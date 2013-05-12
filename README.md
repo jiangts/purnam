@@ -61,6 +61,24 @@ These are really bad examples of code but its what usually happens when working 
          (+ 10 obj.inner.count))
       nil)
 
+#### Symbol Abuse
+
+From a question on [Stackoverflow](http://stackoverflow.com/questions/16496533/a-regular-expression-that-can-split-a-string-having-nested-brackets-that-are-the):
+
+We can't use square brackets `[]` in clojure so instead, pipes `||` are used to
+denote accessors. The following translates to javascript syntax:
+
+    cljs: a.hello
+    ->js:  a["hello"] or a.hello
+
+    cljs: a.|hello|
+    ->js:  a[hello]
+
+    cljs: a.|b.c.|d.e||.f.|g|
+    ->js:  a[b.c[d.e]].f[g]
+
+In this way, it is now very easy to write accessors in cljs.
+
 #### Installation
 
 In your project file, add
