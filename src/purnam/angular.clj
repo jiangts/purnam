@@ -1,5 +1,5 @@
 (ns purnam.angular
-  (:use [purnam.js :only [patch-dotted-syms]])
+  (:use [purnam.js :only [js-expand]])
   (:require [clojure.string :as s]))
 
 (defn- inj-array [params]
@@ -39,7 +39,7 @@
                 ctrl (symbol ctrl)))))
 
 (defn- module-fn [sym f params body]
-  (let [fn-body       (inj-fn params (patch-dotted-syms body))]
+  (let [fn-body       (inj-fn params (js-expand body))]
     (value-fn sym f fn-body)))
 
 (defn angular-macro [fn-k f]

@@ -23,15 +23,26 @@
   (equals (array 1 2 3 4) (array 1 2 3 4))))
 
 (describe
- "objs"
- [o2 (obj :a 1 :b 2 :c 3)]
- (it "can access objects"
-   (is (? o2.a) 1)
-   (is (? o2.b) 2)
-   (is (? o2.b) even?)
-   (is (? o2.b) (fn [v] (= v 2)))
-   (is (? o2.c) 3)
-   (is (? o2.d) js/undefined)))
+ "obj"
+ [o1 (obj :array [1 2 3 4])
+  o2 (obj :a 1 :b 2 :c 3)
+  n1 "a" n2 "b" n3 "c"]
+ (it
+  "can create js-objects"
+  (is (? o2.a) 1)
+  (is (? o2.b) 2)
+  (is (? o2.b) even?)
+  (is (? o2.b) (fn [v] (= v 2)))
+  (is (? o2.c) 3)
+  (is (? o2.|n1|) 1)
+  (is (? o2.|n2|) 2)
+  (is (? o2.|n3|) 3)
+  (is (? o1.array.|o2.a|) 2)
+  (is (? o1.array.0) 1)
+  (is (? o1.array.|o1.array.0|) 2)
+  (is (? o1.array.|o1.array.|o1.array.0||) 3)
+  (is (? o1.array.|o1.array.|o1.array.|o1.array.0|||) 4)
+  (is (? o2.d) js/undefined)))
 
 (describe
  "obj fns"

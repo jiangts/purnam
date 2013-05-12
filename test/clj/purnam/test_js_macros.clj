@@ -4,32 +4,59 @@
         [purnam.js :only [obj]])
   (:require [purnam.js :as js]))
 
-(fact "split-syms"
-  (js/split-syms 'hello) => ["hello"]
-  (js/split-syms 'hello.there) => ["hello" "there"]
-  (js/split-syms 'hello.there.again) => ["hello" "there" "again"]
-  (js/split-syms 'js/console.log) => ["js/console" "log"]
-  (js/split-syms 'purnam.cljs/test.method) => ["purnam.cljs/test" "method"]
-  (js/split-syms 'purnam.cljs/test.module.a) => ["purnam.cljs/test" "module" "a"])
 
-(fact "dotted-sym?"
-  (js/dotted-sym? 'hello) => false
-  (js/dotted-sym?  'hello.there) => true
-  (js/dotted-sym?  'hello.there/js.n) => true
-  (js/dotted-sym?  'purnam.cljs/aget) => false)
+(fact "split-dotted"
+  (js/split-dotted "a") => ["a"]
+  (js/split-dotted "a.b") => ["a" "b"]
+  (js/split-dotted "a.b.c") => ["a" "b" "c"]
+  (js/split-dotted "a.||") => ["a" "||"]
+  (js/split-dotted "a.|b|.c") => ["a" "|b|" "c"]
+  (js/split-dotted "a.|b|.|c|") => ["a" "|b|" "|c|"]
+  (js/split-dotted "a.|b.c|.|d|") => ["a" "|b.c|" "|d|"]
+  (js/split-dotted "a.|b.|c||.|d|") => ["a" "|b.|c||" "|d|"]
+  (js/split-dotted "a.|b.|c||.|d|") => ["a" "|b.|c||" "|d|"]
+  (js/split-dotted "a.|b.|c.d.|e|||.|d|") => ["a" "|b.|c.d.|e|||" "|d|"])
 
-(fact "patch-dotted-sym"
-  (js/patch-dotted-sym 'hello) =>  'hello
-  (js/patch-dotted-sym 'hello.there) => '(purnam.cljs/aget-in hello ["there"])
-  (js/patch-dotted-sym 'hello.there.again) => '(purnam.cljs/aget-in hello ["there" "again"])
-  (js/patch-dotted-sym "hello.there") => "hello.there")
+(fact "split-dotted exceptions"
+  (js/split-dotted "|a|") => (throws Exception)
+  (js/split-dotted "a|") => (throws Exception)
+  (js/split-dotted "a.") => (throws Exception)
+  (js/split-dotted "a.|||") => (throws Exception)
+  (js/split-dotted "a.|b.|e|") => (throws Exception))
 
-(fact "patch-dotted-syms"
-  (js/patch-dotted-syms '[hello.there])
-  => '[(purnam.cljs/aget-in hello ["there"])]
-  (js/patch-dotted-syms '(hello.there))
-  => '(let [obj# (purnam.cljs/aget-in hello [])]
-        (.there obj#)))
+(fact "symbol-with-ns?"
+  (js/symbol-with-ns? 'clojure.core/add) => true
+  (js/symbol-with-ns? 'js/console) => true
+  (js/symbol-with-ns? 'add) => falsey
+  (js/symbol-with-ns? 'js/console.log) => falsey
+  (js/symbol-with-ns? 'js/console.log) => falsey)
+
+(fact "js-exp?"
+  (js/js-exp? 'add) => false
+  (js/js-exp? 'js/console) => false
+  (js/js-exp? 'java.util.Set.) => false
+  (js/js-exp? 'java.math.BigInteger/probablePrime) => false
+  (js/js-exp? 'clojure.core/add) => false
+  (js/js-exp? 'clojure.core) => true
+  (js/js-exp? 'x.y/a.|b|.c) => true
+  (js/js-exp? 'x.|y|.a) => true)
+
+(fact "js-split-first"
+  (js/js-split-first 'js/console.log) => '("js/console" ".log")
+  (js/js-split-first 'a.b.c) => ["a" ".b.c"]
+  (js/js-split-first 'a|b|.b.c) => nil
+  (js/js-split-first 'js/console) => nil)
+
+(fact "js-split-syms"
+  (js/js-split-syms 'js/console.log) => ["js/console" "log"]
+  (js/js-split-syms 'a.b.c/d.e.f) => ["a.b.c/d" "e" "f"]
+  (js/js-split-syms 'a.b.c) => ["a" "b" "c"]
+  (js/js-split-syms 'a.|b|.b.c) => ["a" "|b|" "b" "c"]
+  (js/js-split-syms 'a|b|.b.c) => (throws Exception)
+  (js/js-split-syms 'a.|b|./b.c) => (throws Exception)
+  (js/js-split-syms 'a.|b|.c/b.c) => (throws Exception)
+  (js/js-split-syms 'ns/a.|ns/b.c|) => ["ns/a" "|ns/b.c|"]
+  (js/js-split-syms 'ns/b.c) => ["ns/b" "c"])
 
 (fact "match"
   (match '(1 1) '(1 1)) => true
@@ -46,25 +73,42 @@
               (aset %x "a" (fn [] (? %x.val)))
               (aset %x "val" 3) %x)))
 
+(defn expands-into [result]
+  (fn [form]
+    (match (macroexpand-1 form) result)))
+
 ;; Macros
 (fact "!"
-  (macroexpand-1 '(js/! hello.there 10))
-  => '(purnam.cljs/aset-in hello ["there"] 10)
+  '(js/! hello.there 10)
+  => (expands-into
+      '(purnam.cljs/aset-in hello ["there"] 10))
 
-  (macroexpand-1 '(js/! hello.there.again 10))
-  => '(purnam.cljs/aset-in hello ["there" "again"] 10))
+  '(js/! hello.there.again 10)
+  => (expands-into
+      '(purnam.cljs/aset-in hello ["there" "again"] 10))
+
+  '(js/! a.|b|.c 10)
+  => (expands-into
+      '(purnam.cljs/aset-in a [b "c"] 10))
+
+  '(js/! a.|b.c|.d 10)
+  => (expands-into
+      '(purnam.cljs/aset-in a [(purnam.cljs/aget-in b ["c"]) "d"] 10)))
 
 (fact "!>"
-  (macroexpand-1 '(js/!> hello.lib.add 1 2 3 4 5))
-  => '(let [obj# (purnam.cljs/aget-in hello ["lib"])]
-        (.add obj# 1 2 3 4 5)))
+  '(js/!> hello.lib.add 1 2 3 4 5)
+  => (expands-into
+      '(let [obj# (purnam.cljs/aget-in hello ["lib"])]
+         (.add obj# 1 2 3 4 5))))
 
 (fact "?"
-  (macroexpand-1 '(js/? hello.there))
-  => '(purnam.cljs/aget-in hello ["there"])
+  '(js/? hello.there)
+  => (expands-into
+      '(purnam.cljs/aget-in hello ["there"]))
 
-  (macroexpand-1 '(js/? hello.there.again))
-  => '(purnam.cljs/aget-in hello ["there" "again"]))
+  '(js/? hello.there.again)
+  => (expands-into
+      '(purnam.cljs/aget-in hello ["there" "again"])))
 
 (fact "def.n"
   (macroexpand-1
@@ -78,8 +122,6 @@
        (purnam.cljs/aget-in x ["one"])
        (let [obj# (purnam.cljs/aget-in x [])]
          (.func obj# 1 2 3)))))
-
-
 
 (fact "has-root?"
   (js/has-root? 'hello 'hello) => true
@@ -114,7 +156,8 @@
    '(obj :a 1
          :b  (obj :a 2
                   :fn (fn [] this.a))))
-  => '(let [G__52827 (js-obj)]
-        (aset G__52827 "a" 1)
-        (aset G__52827 "b" (obj :a 2 :fn (fn [] this.a)))
-        G__52827))
+  => (matches '(let [%x (js-obj)]
+                (aset %x "a" 1)
+                (aset %x "b" (obj :a 2 :fn (fn [] this.a)))
+                %x)))
+
