@@ -1,4 +1,4 @@
-(defproject purnam "0.0.8"
+(defproject purnam "0.0.9"
   :description "Clojurescript macros for working with various javascript frameworks
                 (currently angularjs and jasmin)"
   :url "http://www.github.com/zcaudate/purnam"
