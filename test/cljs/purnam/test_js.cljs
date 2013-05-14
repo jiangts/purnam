@@ -57,6 +57,13 @@
   (is o2.d js/undefined)))
 
 (describe
+ "obj"
+ [name array
+  o1   (obj name [1 2 3 4])]
+ (it "can do things"
+     (is o1.|name|.0 1)))
+
+(describe
  "obj.self refers to the object"
  [o3 (obj :a 2 :fn (fn [] self.a))
   o4 (obj :a 3 :fn o3.fn)

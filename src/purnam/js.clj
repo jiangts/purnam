@@ -209,13 +209,16 @@
 
 (declare make-var)
 
+(defn make-js-object-resolve [sym]
+  (cond (symbol? sym) sym
+        (keyword? sym) (name sym)
+        :elso (str sym)))
+
 (defn make-js-object-aset [sym context [k v]]
-  (list 'aset sym (name k)
+  (list 'aset sym (make-js-object-resolve k)
         (make-var
           (-> v
-              (change-root 'self sym #{'obj})
-              ;;(change-root 'this context #{'obj})
-              ))))
+              (change-root 'self sym #{'obj}) ))))
 
 (defn make-js-object
   ([m] (make-js-object nil m))
