@@ -6,10 +6,13 @@ basePath = '';
 // list of files / patterns to load in the browser
 files = [
   JASMINE,
-  JASMINE_ADAPTER,  
-  'resources/app/components/angular/angular.js',
-  'resources/app/components/angular-mocks/angular-mocks.js',
-  'harness/*.js',
+  JASMINE_ADAPTER,
+  'app/components/angular/angular.js',
+  'app/components/angular-mocks/angular-mocks.js',
+  'app/scripts/*.js',
+  'app/scripts/**/*.js',
+  'test/mock/**/*.js',
+  'test/spec/**/*.js'
 ];
 
 // list of files to exclude
@@ -33,7 +36,7 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = true;
+autoWatch = false;
 
 // Start these browsers, currently available:
 // - Chrome
@@ -43,7 +46,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Safari'];
+browsers = ['Chrome'];
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 5000;

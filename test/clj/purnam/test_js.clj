@@ -1,4 +1,4 @@
-(ns purnam.test-js-macros
+(ns purnam.test-js
   (:use midje.sweet
         purnam.checks
         [purnam.js :only [obj]])
@@ -129,13 +129,13 @@
           (let [obj# (purnam.cljs/aget-in <ARG2> [])]
             (.<FN> obj# <X> <Y> <Z>)))))
 
-(fact "has-root?"
-  (j/has-root? 'hello 'hello) => true
-  (j/has-root? 'hello 'NONE) => false
-  (j/has-root? 'hello.there 'hello) => true
-  (j/has-root? 'hello.there 'hello.there) => false
-  (j/has-root? 'hello.there 'NONE) => false
-  (j/has-root? 'hello.there 'NONE) => false)
+(fact "has-sym-root?"
+  (j/has-sym-root? 'hello 'hello) => true
+  (j/has-sym-root? 'hello 'NONE) => false
+  (j/has-sym-root? 'hello.there 'hello) => true
+  (j/has-sym-root? 'hello.there 'hello.there) => false
+  (j/has-sym-root? 'hello.there 'NONE) => false
+  (j/has-sym-root? 'hello.there 'NONE) => false)
 
 (fact "change-root"
   (j/change-sym-root 'hello 'change) => 'change

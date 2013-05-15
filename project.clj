@@ -12,5 +12,17 @@
                         :id "test",
                         :compiler
                         {:pretty-print true,
-                         :output-to "harness/purnam.js",
+                         :output-to "harness/test-purnam.js",
+                         :optimizations :whitespace}}
+                       {:source-paths ["src" "samples/src" "samples/test"],
+                         :id "test-samples",
+                         :compiler
+                         {:pretty-print true,
+                          :output-to "harness/test-samples.js",
+                          :optimizations :whitespace}}
+                       {:source-paths ["src" "samples/src"],
+                        :id "samples",
+                        :compiler
+                        {:pretty-print true,
+                         :output-to "resources/app/script/samples.js",
                          :optimizations :whitespace}}]})
