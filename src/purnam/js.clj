@@ -289,3 +289,37 @@
 (defmacro obj [& args]
     (let [m (apply hash-map args)]
       (js-expand (make-var m))))
+
+(def default-binding-forms '#{let fn loop for doseq if-let when-let})
+
+(declare walk-js-raw)
+
+(defn walk-binding-form [[f bindings & body]]
+  (let [b (partition 2 bindings)
+        res (-> (mapcat (fn [[k v]] [k (walk-js-raw v)]) b)
+                vec)]
+    (apply list f res (walk-js-raw body))))
+
+(defn walk-js-raw [form]
+  (cond (vector? form)
+        (apply list 'array (map walk-js-raw form))
+
+        (hash-map? form)
+        (apply list 'obj
+               (mapcat (fn [[k x]] [k (walk-js-raw x)]) form))
+
+        (seq? form)
+        (cond (default-binding-forms (first form))
+              (walk-binding-form form)
+
+              :else
+              (apply list (map walk-js-raw form)))
+        :else form))
+
+(defmacro defv [name form]
+  (list 'def name
+        (js-expand (walk-js-raw form))))
+
+(defmacro defv.n [name args form]
+  (list 'defn name args
+        (js-expand (walk-js-raw form))))

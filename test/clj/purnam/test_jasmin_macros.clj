@@ -108,7 +108,7 @@
 
 
 
-(fact "describe.controller"
+(fact "describe.controller will generate this type of template:"
   (macroexpand-1
    '(describe.controller
      <DESC>
@@ -137,3 +137,5 @@
     (<FUNC> spec.<V1>.<VAR>)
     (<FUNC> spec.<V2>.<VAR>)
     (<FUNC> spec.$scope.<VAR>)))
+
+(fact "describe.service")
