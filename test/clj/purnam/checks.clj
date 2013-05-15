@@ -28,3 +28,7 @@
 (defn matches [template]
   (fn [value]
     (match value template)))
+
+(defn expands-into [result]
+  (fn [form]
+    (match (macroexpand-1 form) result)))

@@ -7,6 +7,25 @@
 (defn hash-map? [obj]
   (instance? clojure.lang.IPersistentMap obj))
 
+(defn lazy-seq?
+  "Returns `true` if `x` is of type `clojure.lang.LazySeq`."
+  [x] (instance? clojure.lang.LazySeq x))
+
+(defmacro suppress
+  "Suppresses any errors thrown.
+
+    (suppress (error \"Error\")) ;=> nil
+
+    (suppress (error \"Error\") :error) ;=> :error
+  "
+  ([body]
+     `(try ~body (catch Throwable ~'t)))
+  ([body catch-val]
+     `(try ~body (catch Throwable ~'t
+                   (cond (fn? ~catch-val)
+                         (~catch-val ~'t)
+                         :else ~catch-val)))))
+
 (defmacro case-let [[var bound] & body]
   `(let [~var ~bound]
      (case ~var ~@body)))
@@ -172,53 +191,75 @@
 
 ;; Macro to create objects
 
-(defn has-root? [sym root]
+(defn get-sym-root [sym]
   (let [syms  (s/split (name sym) #"\.")]
-    (= (str root) (first syms))))
+    (symbol (first syms))))
 
-(defn change-root
+(defn has-sym-root? [sym root]
+  (let [syms  (s/split (name sym) #"\.")]
+    (cond (or (hash-map? root) (hash-set? root))
+          (root (symbol (first syms)))
+          :else
+          (= (str root) (first syms)))))
+
+(defn cons-sym-root [sym root]
+  (symbol (str root "." sym)))
+
+(defn change-sym-root
   ([sym new]
      (let [syms  (s/split (str sym) #"\.")
            nsyms (cons (str new) (rest syms))]
        (symbol (s/join "." nsyms))))
-  ([form root new] (change-root form root new #{}))
-  ([form root new ex]
-     (let [cr-fn #(change-root % root new ex)]
-      (cond (symbol? form) (if (has-root? form root)
-                            (change-root form new) form)
-            (vector? form)   (mapv cr-fn form)
-            (hash-set? form) (set (map cr-fn form))
-            (hash-map? form) (into {} (map (fn [[k x]] [k (cr-fn x)]) form))
-            (seq? form)
-            (cond (get ex (first form)) form
+  ([sym old new]
+     (if (has-sym-root? sym old)
+       (change-sym-root sym new)
+       sym)))
 
-                  :else
-                  (apply list (map cr-fn form)))
-            :else form))))
-
-(defn transform-tree
+(defn walk-and-transform
   [form pred? ex-pred? transform]
-  (let [r-fn #(transform-tree % pred? ex-pred? transform)]
-    (cond (pred? form)     (transform form)
-          (ex-pred? form)  form
+  (let [r-fn #(walk-and-transform % pred? ex-pred? transform)]
+    (cond (suppress (pred? form))     (transform form)
+          (suppress (ex-pred? form))  form
           (vector? form)   (mapv r-fn form)
           (hash-set? form) (set (map r-fn form))
           (hash-map? form) (into {} (map (fn [[k x]] [k (r-fn x)]) form))
           (seq? form) (apply list (map r-fn form))
           :else form)))
 
+(defn has-first-element [obj f]
+  (and (or (list? obj) (lazy-seq? obj))
+       (f (first obj))))
+
+(defn change-roots
+  ([form old new] (change-roots form old new #{}))
+  ([form old new exclude]
+     (walk-and-transform
+      form
+      #(has-sym-root? % old)
+      #(has-first-element % exclude)
+      #(change-sym-root % new))))
+
+(defn change-roots-map
+  ([form m] (change-roots-map form m #{}))
+  ([form m exclude]
+     (walk-and-transform
+      form
+      #(has-sym-root? % m)
+      #(has-first-element % exclude)
+      #(change-sym-root % (m (get-sym-root %))))))
+
 (declare make-var)
 
 (defn make-js-object-resolve [sym]
   (cond (symbol? sym) sym
         (keyword? sym) (name sym)
-        :elso (str sym)))
+        :else (str sym)))
 
 (defn make-js-object-aset [sym context [k v]]
   (list 'aset sym (make-js-object-resolve k)
         (make-var
-          (-> v
-              (change-root 'self sym #{'obj}) ))))
+         (change-roots-map v {'self sym
+                              'this context} #{'obj}))))
 
 (defn make-js-object
   ([m] (make-js-object nil m))

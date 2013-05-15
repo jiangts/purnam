@@ -46,11 +46,11 @@
   (list 'defmacro (symbol (str "def." f)) '[sym params & body]
         (list (symbol (str (name fn-k) "-fn")) 'sym (list 'quote (symbol (str "." f))) 'params 'body)))
 
-(defmacro defangular [m]
+(defmacro def.angular [m]
   (apply list 'do
          (mapcat (fn [[fn-k fns]]
                    (map #(angular-macro fn-k %) fns))
                  m)))
 
-(defangular {:module [controller service factory provider filter directive]
-             :value  [constant value resource]})
+(def.angular {:module [controller service factory provider filter directive]
+              :value  [constant value resource]})
