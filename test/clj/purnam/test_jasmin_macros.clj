@@ -27,10 +27,10 @@
        <BODY>))))
 
 (fact "it"
-  '(it <DESC> <BODY>)
+  '(it "<DESC>" <BODY>)
   =>
   (expands-into
-   '(js/it <DESC>
+   '(js/it "<DESC>"
      (clojure.core/fn []
        <BODY>))))
 
@@ -51,13 +51,13 @@
 (fact "describe.controller"
   (macroexpand-1
    '(describe.controller
-     <DESC>
+     "<DESC>"
      {:module <MODULE-NAME>
       :controller <CONTROLLER-NAME>}
      <BODY>))
   =>
   '(describe
-     <DESC>
+     "<DESC>"
      [spec (js-obj)]
      (js/beforeEach (js/module "<MODULE-NAME>"))
      (js/beforeEach
@@ -87,14 +87,14 @@
 (fact "describe.controller"
   (macroexpand-1
    '(describe.controller
-     <DESC>
+     "<DESC>"
      {:module <MODULE-NAME>
       :controller <CONTROLLER-NAME>}
      (<FUNC> $scope.<VAR>)
      (<FUNC> $ctrl.<VAR>)))
   =>
   '(describe
-     <DESC>
+     "<DESC>"
      [spec (js-obj)]
      (js/beforeEach (js/module "<MODULE-NAME>"))
      (js/beforeEach
@@ -111,7 +111,7 @@
 (fact "describe.controller will generate this type of template:"
   (macroexpand-1
    '(describe.controller
-     <DESC>
+     "<DESC>"
      {:module <MODULE-NAME>
       :controller <CONTROLLER-NAME>
       :inject {:<V1> <V1-FORM>
@@ -122,7 +122,7 @@
      (<FUNC> $scope.<VAR>)))
   =>
   '(describe
-    <DESC>
+    "<DESC>"
     [spec (js-obj)]
     (js/beforeEach (js/module "<MODULE-NAME>"))
     (js/beforeEach
@@ -138,4 +138,24 @@
     (<FUNC> spec.<V2>.<VAR>)
     (<FUNC> spec.$scope.<VAR>)))
 
-(fact "describe.service")
+(fact "describe.ng"
+  (macroexpand-1
+   '(describe.ng
+     "<DESC>"
+     {:module <MODULE-NAME>
+      :bindings [<B1> <V1>]}
+     <BODY>))
+  => '(describe
+       "<DESC>"
+       [spec (js-obj)
+        <B1> <V1>]
+       (js/beforeEach (js/module "<MODULE-NAME>"))
+       <BODY>))
+
+(fact "service"
+  (macroexpand-1
+   '(service
+    "<DESC>"
+    [<SERVICE>]
+    <BODY>))
+  => '(js/inject (array "<SERVICE>" (fn [<SERVICE>] <BODY>))))

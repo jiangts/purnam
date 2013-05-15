@@ -52,6 +52,20 @@
 
 (def l list)
 
+(defmacro describe.ng [desc mopts & body]
+  (let [{:keys [module bindings]} mopts]
+    (apply
+     l 'describe desc
+     (vec (concat ['spec '(js-obj)] bindings))
+     (l 'js/beforeEach
+        (l 'js/module (str module)))
+     body)))
+
+(defmacro service [desc [name] & body]
+  (l 'js/inject
+     (l 'array (str name)
+        (concat (l 'fn [name])
+                body))))
 
 (defn controller-default-injections [controller]
   {:$scope '($rootScope.$new)
@@ -61,8 +75,8 @@
 (defn controller-set-injection [isym icmd]
   (l '! (symbol (str "spec." isym)) icmd))
 
-(defmacro describe.controller [desc options & body]
-  (let [{:keys [module controller inject]} options
+(defmacro describe.controller [desc mopts & body]
+  (let [{:keys [module controller inject bindings]} mopts
         ijm  (merge (controller-default-injections controller)
                     inject)
         ikeys (->> (dissoc ijm :$scope :$ctrl)
@@ -75,7 +89,7 @@
         tmap   (zipmap bsyms tsyms)]
     (apply
      l 'describe desc
-       ['spec '(js-obj)]
+     (vec (concat ['spec '(js-obj)] bindings))
      (l 'js/beforeEach
         (l 'js/module (str module)))
      (l 'js/beforeEach
