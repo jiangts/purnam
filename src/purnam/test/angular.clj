@@ -1,7 +1,7 @@
 (ns purnam.test.angular
   (:require [clojure.string :as s])
   (:use [purnam.js :only [js-expand change-roots-map cons-sym-root]]))
-  
+
 (def l list)
 
 (defmacro describe.ng [desc mopts & body]
@@ -21,7 +21,7 @@
 
 (defn controller-default-injections [controller]
   {:$scope '($rootScope.$new)
-   :$ctrl (l '$controller
+   :$controller (l '$controller
              (str controller) 'spec)})
 
 (defn controller-set-injection [isym icmd]
@@ -31,12 +31,12 @@
   (let [{:keys [module controller inject bindings]} mopts
         ijm  (merge (controller-default-injections controller)
                     inject)
-        ikeys (->> (dissoc ijm :$scope :$ctrl)
+        ikeys (->> (dissoc ijm :$scope :$controller)
                     keys sort)
         inames (map name ikeys)
         icmds  (map ijm ikeys)
         isyms  (map symbol inames)
-        bsyms  (conj isyms '$scope '$ctrl)
+        bsyms  (conj isyms '$scope)
         tsyms  (map #(cons-sym-root % 'spec) bsyms)
         tmap   (zipmap bsyms tsyms)]
     (apply
@@ -53,5 +53,5 @@
                 (l 'fn (apply vector '$rootScope '$controller isyms)
                    (l '! 'spec.$scope (ijm :$scope)))
                 (map controller-set-injection isyms icmds)
-                (l  (l '! 'spec.$ctrl (ijm :$ctrl))))))))
+                (l  (ijm :$controller)))))))
      (change-roots-map body tmap))))

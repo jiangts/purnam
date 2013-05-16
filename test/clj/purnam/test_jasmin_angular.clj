@@ -20,7 +20,7 @@
        (array "$rootScope" "$controller"
               (fn [$rootScope $controller]
                 (! spec.$scope ($rootScope.$new))
-                (! spec.$ctrl ($controller "<CONTROLLER-NAME>" spec))))))
+                ($controller "<CONTROLLER-NAME>" spec)))))
      <BODY>)
 
   (comment (defmacro describe.controller [desc options & body]
@@ -35,8 +35,7 @@
                       (l 'array "$rootScope" "$controller"
                          (l 'fn ['$rootScope '$controller]
                             '(! spec.$scope ($rootScope.$new))
-                            (l '! 'spec.$ctrl (l '$controller
-                                                 (str controller) 'spec))))))
+                            (l '$controller (str controller) 'spec)))))
                 body)))))
 
 (fact "describe.controller"
@@ -57,9 +56,9 @@
        (array "$rootScope" "$controller"
               (fn [$rootScope $controller]
                 (! spec.$scope ($rootScope.$new))
-                (! spec.$ctrl ($controller "<CONTROLLER-NAME>" spec))))))
+                ($controller "<CONTROLLER-NAME>" spec)))))
      (<FUNC> spec.$scope.<VAR>)
-     (<FUNC> spec.$ctrl.<VAR>)))
+     (<FUNC> $ctrl.<VAR>)))
 
 
 
@@ -73,8 +72,7 @@
                :<V2> <V2-FORM>}}
      (<FUNC> $scope.<VAR>)
      (<FUNC> <V1>.<VAR>)
-     (<FUNC> <V2>.<VAR>)
-     (<FUNC> $scope.<VAR>)))
+     (<FUNC> <V2>.<VAR>)))
   =>
   '(describe
     "<DESC>"
@@ -87,11 +85,10 @@
                (! spec.$scope ($rootScope.$new))
                (! spec.<V1> <V1-FORM>)
                (! spec.<V2> <V2-FORM>)
-               (! spec.$ctrl ($controller "<CONTROLLER-NAME>" spec))))))
+               ($controller "<CONTROLLER-NAME>" spec)))))
     (<FUNC> spec.$scope.<VAR>)
     (<FUNC> spec.<V1>.<VAR>)
-    (<FUNC> spec.<V2>.<VAR>)
-    (<FUNC> spec.$scope.<VAR>)))
+    (<FUNC> spec.<V2>.<VAR>)))
 
 (fact "describe.ng"
   (macroexpand-1

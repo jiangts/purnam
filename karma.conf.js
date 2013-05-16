@@ -7,9 +7,9 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,  
-  'resources/app/components/angular/angular.js',
-  'resources/app/components/angular-mocks/angular-mocks.js',
-  'harness/*.js',
+  'resources/app/libs/angular/angular.js',
+  'resources/app/libs/angular/angular-mocks.js',
+  'harness/test-purnam.js',
 ];
 
 // list of files to exclude

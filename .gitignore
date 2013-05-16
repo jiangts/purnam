@@ -10,4 +10,7 @@ pom.xml.asc
 .lein-failures
 .lein-plugins
 .lein-repl-history
-harness/purnam.js
+.DS_Store
+samples/*-bak
+harness/test-purnam.js
+/resources/app/script
