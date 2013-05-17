@@ -3,9 +3,12 @@
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
             :url "http://opensource.org/licencses/MIT"}
-  :dependencies 
-    [[purnam/purnam-js      "0.1.0-alpha"]
-     [purnam/purnam-angular "0.1.0-alpha"]]
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [purnam/purnam-js      "0.1.0-alpha"]
+                 [purnam/purnam-angular "0.1.0-alpha"]]
+  :sub 
+    ["purnam-js"
+     "purnam-angular"]
   :profiles {:dev {:dependencies [[midje "1.5.1"]]}}
   :plugins [[lein-sub "0.2.1"]
             [lein-cljsbuild "0.3.0"]

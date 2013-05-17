@@ -7,14 +7,11 @@
                [purnam.angular :only [def.module def.config def.controller def.service]]
                [purnam.test.angular :only [describe.controller describe.ng service]]))
 
-
-
 ;;
 ;; Defining our Module
 ;;
 
 (def.module sample [])
-
 
 ;;
 ;; Defining a SimpleService
@@ -55,8 +52,6 @@
   "ExampleService Change Login"
   [ExampleService]
   (is ExampleService.user.login "login")))
-
-
 
 ;;
 ;; Angular Test Controller Example

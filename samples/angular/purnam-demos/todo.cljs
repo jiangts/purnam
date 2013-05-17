@@ -1,9 +1,8 @@
 (ns purnam-demos.todo
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
-  (:use-macros [purnam.js :only [obj arr ! def.n def.n*]]
-               [purnam.angular :only [def.module def.config def.factory
-                                      def.controller def.service]]))
+  (:use-macros [purnam.js :only [obj arr ! def.n*]]
+               [purnam.angular :only [def.module def.config def.factory def.controller]]))
 
 (def.module todoDemo [])
 
