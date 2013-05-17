@@ -80,6 +80,8 @@
             (recur output (str current "." nch) (nnext ss) level))
        (recur output (str current ch) (next ss) level))))
 
+(defmacro this* [] (list 'js* "this"))
+
 (defn symbol-with-ns? [sym]
   (if-let [res (re-find #"[\.\w\_\-]+/[\w\_\-]+\.?(.*)" (str sym))]
     (-> res second empty?)))
@@ -109,9 +111,13 @@
 
 (declare js-parse-sub-exp)
 
+(defn js-parse-var [var-str]
+  (if (= var-str "this") '(js* "this")
+      (symbol var-str)))
+
 (defn js-parse-exp [sym]
  (let [[var & ks] (js-split-syms sym)]
-   (list 'purnam.cljs/aget-in (symbol var)
+   (list 'purnam.cljs/aget-in (js-parse-var var)
          (vec (map js-parse-sub-exp ks)))))
 
 (defn js-parse-sub-exp [ss]
@@ -125,22 +131,26 @@
 (declare js-expand)
 
 (defn js-expand-sym [obj]
-  (if (js-exp? obj)
-    (js-parse-exp obj)
-    obj))
+  (cond (js-exp? obj)
+        (js-parse-exp obj)
+
+        (= 'this obj)
+        '(js* "this")
+
+        :else obj))
 
 (defn js-expand-fn [sym args]
   (let [[var & ks] (js-split-syms sym)
         sel  (vec (butlast ks))
         fnc  (last ks)]
-    (list 'let ['obj# (list 'purnam.cljs/aget-in (symbol var)
+    (list 'let ['obj# (list 'purnam.cljs/aget-in (js-parse-var var)
                             (vec (map js-parse-sub-exp sel)))]
           (apply list (symbol (str "." fnc)) 'obj#
                  (js-expand args false)))))
 
 (defn js-expand
   ([form] (js-expand form true))
-  ([form pfn] (js-expand form pfn '#{! !> ? ?> obj f.n do.n}))
+  ([form pfn] (js-expand form pfn '#{! !> ? ?> obj arr fn* do.n do.n* }))
   ([form pfn ex]
      (cond (set? form) (apply set (map js-expand form))
 
@@ -172,15 +182,12 @@
 
 (defmacro ! [sym val]
  (let [[var & ks] (js-split-syms sym)]
-   (list 'purnam.cljs/aset-in (symbol var)
+   (list 'purnam.cljs/aset-in (js-parse-var var)
          (vec (map js-parse-sub-exp ks))
          (js-expand val))))
 
 (defmacro !> [sym & args]
   (js-expand-fn sym args))
-
-(defmacro f.n [args & body]
-  `(fn ~args ~@(js-expand body)))
 
 (defmacro def.n [sym args & body]
   `(defn ~sym ~args
@@ -255,22 +262,20 @@
         (keyword? sym) (name sym)
         :else (str sym)))
 
-(defn make-js-object-aset [sym context [k v]]
+(defn make-js-object-aset [sym [k v]]
   (list 'aset sym (make-js-object-resolve k)
         (make-var
-         (change-roots-map v {'self sym
-                              'this context} #{'obj}))))
+         (change-roots-map v {'self sym} #{'obj}))))
 
 (defn make-js-object
   ([m] (make-js-object nil m))
   ([sym m]
      (let [sym  (or sym (gensym))
            context (gensym)
-           body (map #(make-js-object-aset sym context %) m)]
-         (list 'this-as context
-           (concat ['let [sym '(js-obj)]]
-                 body
-                 [sym])))))
+           body (map #(make-js-object-aset sym %) m)]
+       (concat ['let [sym '(js-obj)]]
+               body
+               [sym]))))
 
 (defn make-js-array [v]
   (apply list 'array
@@ -290,7 +295,12 @@
     (let [m (apply hash-map args)]
       (js-expand (make-var m))))
 
-(def default-binding-forms '#{let fn loop for doseq if-let when-let})
+(defmacro arr [& args]
+  (let []
+     (js-expand (make-js-array args))))
+
+
+(def default-binding-forms '#{let loop for doseq if-let when-let})
 
 (declare walk-js-raw)
 
@@ -299,6 +309,9 @@
         res (-> (mapcat (fn [[k v]] [k (walk-js-raw v)]) b)
                 vec)]
     (apply list f res (walk-js-raw body))))
+
+(defn walk-lambda-form [[f bindings & body]]
+  (apply list f bindings (walk-js-raw body)))
 
 (defn walk-js-raw [form]
   (cond (vector? form)
@@ -312,14 +325,23 @@
         (cond (default-binding-forms (first form))
               (walk-binding-form form)
 
+              (= 'fn (first form))
+              (walk-lambda-form form)
+
               :else
               (apply list (map walk-js-raw form)))
         :else form))
 
-(defmacro defv [name form]
-  (list 'def name
-        (js-expand (walk-js-raw form))))
+(defmacro def* [name form]
+  `(def ~name
+        ~(js-expand (walk-js-raw form))))
 
-(defmacro defv.n [name args form]
-  (list 'defn name args
-        (js-expand (walk-js-raw form))))
+(defmacro def.n* [name args & body]
+  `(defn ~name ~args
+         ~@(js-expand (walk-js-raw body))))
+
+(defmacro fn* [args & body]
+  `(fn ~args ~@(js-expand (walk-js-raw body))))
+
+(defmacro do* [& body]
+  `(do ~@(js-expand (walk-js-raw body))))

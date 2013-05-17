@@ -79,6 +79,20 @@
   (is (o4.fn) 4)
   (is (fn1) 4)))
 
+
+(describe "self and this"
+ [a1 (obj :a 1
+          :thisfn (fn [] this.a)
+          :selffn (fn [] self.a))
+  a2 (obj :a 2
+          :thisfn a1.thisfn
+          :selffn a1.selffn)]
+  (it "will show the difference"
+    (is (a1.thisfn) 1)
+    (is (a1.selffn) 1)    
+    (is (a2.thisfn) 2)
+    (is (a2.selffn) 1)))
+
 (describe
  "obj.self will match the scope that it is declared in"
  [a1 (obj :a 1

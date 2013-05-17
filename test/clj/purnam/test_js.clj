@@ -174,33 +174,32 @@
   (j/change-roots-map ['hello.there] {'hello 'change}) => '[change.there]
   (j/change-roots-map {:a 'hello.there} {'hello 'change}) => '{:a change.there})
 
+(fact "obj")
+
 (fact "obj"
   (macroexpand-1
    '(obj :<K1> <X1>  :<FN> (fn [] (+ self.<X>
                                     this.<Y>))))
-  => (matches '(this-as %y
-                (let [%x (js-obj)]
-                  (aset %x "<FN>"
-                        (fn [] (+ (purnam.cljs/aget-in %x ["<X>"])
-                                 (purnam.cljs/aget-in %y ["<Y>"]))))
-                  (aset %x "<K1>" <X1>)
-                  %x))))
+  => (matches '(let [%x (js-obj)]
+                (aset %x "<FN>"
+                      (fn [] (+ (purnam.cljs/aget-in %x ["<X>"])
+                               (purnam.cljs/aget-in (js* "this") ["<Y>"]))))
+                (aset %x "<K1>" <X1>)
+                %x)))
 
-(fact "obj"
+(fact "obj self"
   (macroexpand-1
    '(obj :<A> <X1>
          :<B> (obj :<A> <X2>
                    :<FN> (fn [] self.<A>))))
   => (matches
-      '(this-as
-        %y
-        (let [%x (js-obj)]
-          (aset %x "<B>" (obj :<A> <X2> :<FN> (fn [] self.<A>)))
-          (aset %x "<A>" <X1>) %x))))
+      '(let [%x (js-obj)]
+        (aset %x "<B>" (obj :<A> <X2> :<FN> (fn [] self.<A>)))
+        (aset %x "<A>" <X1>) %x)))
 
-(fact "defv"
+(fact "def*"
   (macroexpand-1
-   '(j/defv <NAME>
+   '(j/def* <NAME>
       (let [<X> [<V1> <V2>]
             <Y> {:<W1> <W2>}
             <Z> {<W1> <W2>}]
@@ -212,16 +211,31 @@
           <Z> (obj <W1> <W2>)]
       (obj <X> (array <X> <Y>)))))
 
-(fact "defv.n"
+(fact "def.n*"
   (macroexpand-1
-   '(j/defv.n <NAME> [<ARG1> <ARG2>]
+   '(j/def.n* <NAME> [<ARG1> <ARG2>]
       (let [<X> [<V1> <V2>]
             <Y> {:<W1> <W2>}
             <Z> {<W1> <W2>}]
         {<X> [<X> <Y>]})))
   =>
-  '(defn <NAME> [<ARG1> <ARG2>]
+  '(clojure.core/defn <NAME> [<ARG1> <ARG2>]
     (let [<X> (array <V1> <V2>)
           <Y> (obj :<W1> <W2>)
           <Z> (obj <W1> <W2>)]
       (obj <X> (array <X> <Y>)))))
+
+
+(fact "fn*"
+  (macroexpand-1
+   '(j/fn* [<ARG1> <ARG2>]
+     (let [<X> [<ARG1>.<V1> <V2>]
+           <Y> {:<W1> this.<W2>}
+           <Z> {:<W1> self.<W2>}]
+       {<X> [<Y> <Z>]})))
+  =>
+  '(clojure.core/fn [<ARG1> <ARG2>]
+     (let [<X> (array (purnam.cljs/aget-in <ARG1> ["<V1>"]) <V2>)
+           <Y> (obj :<W1> this.<W2>)
+           <Z> (obj :<W1> self.<W2>)]
+       (obj <X> (array <Y> <Z>)))))
