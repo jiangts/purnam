@@ -21215,98 +21215,98 @@ goog.require("purnam.cljs");
 goog.require("goog.object");
 goog.require("purnam.cljs");
 crafty_game.core.Game = function() {
-  var G__10950 = {};
-  G__10950["width"] = function() {
+  var G__11194 = {};
+  G__11194["width"] = function() {
     return purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["grid", "width"], true)) * purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true))
   };
-  G__10950["grid"] = function() {
-    var G__10952 = {};
-    G__10952["tile"] = function() {
-      var G__10954 = {};
-      G__10954["width"] = 16;
-      G__10954["height"] = 16;
-      return G__10954
+  G__11194["grid"] = function() {
+    var G__11196 = {};
+    G__11196["tile"] = function() {
+      var G__11198 = {};
+      G__11198["width"] = 16;
+      G__11198["height"] = 16;
+      return G__11198
     }();
-    G__10952["width"] = 24;
-    G__10952["height"] = 16;
-    return G__10952
+    G__11196["width"] = 24;
+    G__11196["height"] = 16;
+    return G__11196
   }();
-  G__10950["start"] = function() {
-    var G = G__10950;
-    var obj_SHARP__10962 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-    obj_SHARP__10962.init(function() {
+  G__11194["start"] = function() {
+    var G = G__11194;
+    var obj_SHARP__11206 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+    obj_SHARP__11206.init(function() {
       var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.EMPTY);
       return obj_SHARP___$1.width()
     }(), function() {
       var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.EMPTY);
       return obj_SHARP___$1.height()
     }());
-    var obj_SHARP__10963 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-    obj_SHARP__10963.background("rgb(249, 223, 125)");
+    var obj_SHARP__11207 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+    obj_SHARP__11207.background("rgb(249, 223, 125)");
     Crafty.e("PlayerCharacter").at(5, 5);
-    var G__10956_10964 = cljs.core.seq.call(null, cljs.core.range.call(null, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true))));
+    var G__11200_11208 = cljs.core.seq.call(null, cljs.core.range.call(null, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true))));
     while(true) {
-      if(G__10956_10964) {
-        var x_10965 = cljs.core.first.call(null, G__10956_10964);
-        var G__10957_10966 = cljs.core.seq.call(null, cljs.core.range.call(null, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true))));
+      if(G__11200_11208) {
+        var x_11209 = cljs.core.first.call(null, G__11200_11208);
+        var G__11201_11210 = cljs.core.seq.call(null, cljs.core.range.call(null, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true))));
         while(true) {
-          if(G__10957_10966) {
-            var y_10967 = cljs.core.first.call(null, G__10957_10966);
-            var edge_QMARK__10968 = function() {
-              var or__3943__auto__ = x_10965 === 0;
+          if(G__11201_11210) {
+            var y_11211 = cljs.core.first.call(null, G__11201_11210);
+            var edge_QMARK__11212 = function() {
+              var or__3943__auto__ = x_11209 === 0;
               if(or__3943__auto__) {
                 return or__3943__auto__
               }else {
-                var or__3943__auto____$1 = y_10967 === 0;
+                var or__3943__auto____$1 = y_11211 === 0;
                 if(or__3943__auto____$1) {
                   return or__3943__auto____$1
                 }else {
-                  var or__3943__auto____$2 = cljs.core._EQ_.call(null, x_10965, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true)) - 1);
+                  var or__3943__auto____$2 = cljs.core._EQ_.call(null, x_11209, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true)) - 1);
                   if(or__3943__auto____$2) {
                     return or__3943__auto____$2
                   }else {
-                    return cljs.core._EQ_.call(null, y_10967, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true)) - 1)
+                    return cljs.core._EQ_.call(null, y_11211, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true)) - 1)
                   }
                 }
               }
             }();
-            if(cljs.core.truth_(edge_QMARK__10968)) {
-              Crafty.e("Tree").at(x_10965, y_10967)
+            if(cljs.core.truth_(edge_QMARK__11212)) {
+              Crafty.e("Tree").at(x_11209, y_11211)
             }else {
             }
-            var G__10969 = cljs.core.next.call(null, G__10957_10966);
-            G__10957_10966 = G__10969;
+            var G__11213 = cljs.core.next.call(null, G__11201_11210);
+            G__11201_11210 = G__11213;
             continue
           }else {
           }
           break
         }
-        var G__10970 = cljs.core.next.call(null, G__10956_10964);
-        G__10956_10964 = G__10970;
+        var G__11214 = cljs.core.next.call(null, G__11200_11208);
+        G__11200_11208 = G__11214;
         continue
       }else {
       }
       break
     }
     var v = function() {
-      var G__10958 = {};
-      G__10958["count"] = 0;
-      return G__10958
+      var G__11202 = {};
+      G__11202["count"] = 0;
+      return G__11202
     }();
     var max = 10;
-    var G__10960 = cljs.core.seq.call(null, cljs.core.range.call(null, 1, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true)) - 1));
+    var G__11204 = cljs.core.seq.call(null, cljs.core.range.call(null, 1, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "width"], true)) - 1));
     while(true) {
-      if(G__10960) {
-        var x = cljs.core.first.call(null, G__10960);
-        var G__10961_10971 = cljs.core.seq.call(null, cljs.core.range.call(null, 1, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true)) - 1));
+      if(G__11204) {
+        var x = cljs.core.first.call(null, G__11204);
+        var G__11205_11215 = cljs.core.seq.call(null, cljs.core.range.call(null, 1, purnam.cljs.aget_in.call(null, G, cljs.core.PersistentVector.fromArray(["grid", "height"], true)) - 1));
         while(true) {
-          if(G__10961_10971) {
-            var y_10972 = cljs.core.first.call(null, G__10961_10971);
+          if(G__11205_11215) {
+            var y_11216 = cljs.core.first.call(null, G__11205_11215);
             if(function() {
               var obj_SHARP_ = purnam.cljs.aget_in.call(null, Math, cljs.core.PersistentVector.EMPTY);
               return obj_SHARP_.random()
             }() < 0.05) {
-              Crafty.e("Bush").at(x, y_10972)
+              Crafty.e("Bush").at(x, y_11216)
             }else {
               if(purnam.cljs.aget_in.call(null, v, cljs.core.PersistentVector.fromArray(["count"], true)) >= max) {
               }else {
@@ -21315,20 +21315,20 @@ crafty_game.core.Game = function() {
                   return obj_SHARP_.random()
                 }() < 0.04) {
                   purnam.cljs.aset_in.call(null, v, cljs.core.PersistentVector.fromArray(["count"], true), purnam.cljs.aget_in.call(null, v, cljs.core.PersistentVector.fromArray(["count"], true)) + 1);
-                  Crafty.e("Village").at(x, y_10972)
+                  Crafty.e("Village").at(x, y_11216)
                 }else {
                 }
               }
             }
-            var G__10973 = cljs.core.next.call(null, G__10961_10971);
-            G__10961_10971 = G__10973;
+            var G__11217 = cljs.core.next.call(null, G__11205_11215);
+            G__11205_11215 = G__11217;
             continue
           }else {
           }
           break
         }
-        var G__10974 = cljs.core.next.call(null, G__10960);
-        G__10960 = G__10974;
+        var G__11218 = cljs.core.next.call(null, G__11204);
+        G__11204 = G__11218;
         continue
       }else {
         return null
@@ -21336,24 +21336,24 @@ crafty_game.core.Game = function() {
       break
     }
   };
-  G__10950["height"] = function() {
+  G__11194["height"] = function() {
     return purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["grid", "height"], true)) * purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true))
   };
-  return G__10950
+  return G__11194
 }();
-var obj_SHARP__10993 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__10993.c("Grid", function() {
-  var G__10975 = {};
-  G__10975["init"] = function() {
+var obj_SHARP__11237 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11237.c("Grid", function() {
+  var G__11219 = {};
+  G__11219["init"] = function() {
     var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
     return obj_SHARP___$1.attr(function() {
-      var G__10977 = {};
-      G__10977["h"] = purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
-      G__10977["w"] = purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
-      return G__10977
+      var G__11221 = {};
+      G__11221["h"] = purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
+      G__11221["w"] = purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
+      return G__11221
     }())
   };
-  G__10975["at"] = function(x, y) {
+  G__11219["at"] = function(x, y) {
     if(function() {
       var and__3941__auto__ = cljs.core._EQ_.call(null, x, undefined);
       if(and__3941__auto__) {
@@ -21362,18 +21362,18 @@ obj_SHARP__10993.c("Grid", function() {
         return and__3941__auto__
       }
     }()) {
-      var G__10979 = {};
-      G__10979["y"] = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["y"], true)) / purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
-      G__10979["x"] = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["x"], true)) / purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
-      return G__10979
+      var G__11223 = {};
+      G__11223["y"] = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["y"], true)) / purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
+      G__11223["x"] = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["x"], true)) / purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
+      return G__11223
     }else {
       if("\ufdd0'else") {
-        var obj_SHARP__10994__$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
-        obj_SHARP__10994__$1.attr(function() {
-          var G__10981 = {};
-          G__10981["y"] = y * purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
-          G__10981["x"] = x * purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
-          return G__10981
+        var obj_SHARP__11238__$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
+        obj_SHARP__11238__$1.attr(function() {
+          var G__11225 = {};
+          G__11225["y"] = y * purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "height"], true));
+          G__11225["x"] = x * purnam.cljs.aget_in.call(null, crafty_game.core.Game, cljs.core.PersistentVector.fromArray(["grid", "tile", "width"], true));
+          return G__11225
         }());
         return this
       }else {
@@ -21381,33 +21381,33 @@ obj_SHARP__10993.c("Grid", function() {
       }
     }
   };
-  return G__10975
+  return G__11219
 }());
-var obj_SHARP__10995 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__10995.c("Actor", function() {
-  var G__10983 = {};
-  G__10983["init"] = function() {
+var obj_SHARP__11239 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11239.c("Actor", function() {
+  var G__11227 = {};
+  G__11227["init"] = function() {
     var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
     return obj_SHARP___$1.requires("2D, Canvas, Grid")
   };
-  return G__10983
+  return G__11227
 }());
-var obj_SHARP__10996 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__10996.c("PlayerCharacter", function() {
-  var G__10985 = {};
-  G__10985["init"] = function() {
+var obj_SHARP__11240 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11240.c("PlayerCharacter", function() {
+  var G__11229 = {};
+  G__11229["init"] = function() {
     return this.requires("Actor, Fourway, Color, Collision").fourway(4).color("rgb(20, 75, 40)").stopOnSolids().onHit("Village", purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["visitVillage"], true)))
   };
-  G__10985["visitVillage"] = function(data) {
+  G__11229["visitVillage"] = function(data) {
     var village = purnam.cljs.aget_in.call(null, data, cljs.core.PersistentVector.fromArray(["0", "obj"], true));
     var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, village, cljs.core.PersistentVector.EMPTY);
     return obj_SHARP___$1.collect()
   };
-  G__10985["stopOnSolids"] = function() {
+  G__11229["stopOnSolids"] = function() {
     this.onHit("Solid", purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["stopMovement"], true)));
     return this
   };
-  G__10985["stopMovement"] = function() {
+  G__11229["stopMovement"] = function() {
     purnam.cljs.aset_in.call(null, this, cljs.core.PersistentVector.fromArray(["_speed"], true), 0);
     if(cljs.core.truth_(purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["_movement"], true)))) {
       purnam.cljs.aset_in.call(null, this, cljs.core.PersistentVector.fromArray(["x"], true), purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["x"], true)) - purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.fromArray(["_movement", "x"], true)));
@@ -21416,37 +21416,37 @@ obj_SHARP__10996.c("PlayerCharacter", function() {
       return null
     }
   };
-  return G__10985
+  return G__11229
 }());
-var obj_SHARP__10997 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__10997.c("Village", function() {
-  var G__10987 = {};
-  G__10987["collect"] = function() {
-    var obj_SHARP__10998__$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
-    obj_SHARP__10998__$1.destroy();
+var obj_SHARP__11241 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11241.c("Village", function() {
+  var G__11231 = {};
+  G__11231["collect"] = function() {
+    var obj_SHARP__11242__$1 = purnam.cljs.aget_in.call(null, this, cljs.core.PersistentVector.EMPTY);
+    obj_SHARP__11242__$1.destroy();
     var obj_SHARP___$1 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
     return obj_SHARP___$1.trigger("VillageVisited", this)
   };
-  G__10987["init"] = function() {
+  G__11231["init"] = function() {
     return this.requires("Actor, Color").color("rgb(170, 125, 40)")
   };
-  return G__10987
+  return G__11231
 }());
-var obj_SHARP__10999 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__10999.c("Tree", function() {
-  var G__10989 = {};
-  G__10989["init"] = function() {
+var obj_SHARP__11243 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11243.c("Tree", function() {
+  var G__11233 = {};
+  G__11233["init"] = function() {
     return this.requires("Actor, Color, Solid").color("rgb(20, 125, 40)")
   };
-  return G__10989
+  return G__11233
 }());
-var obj_SHARP__11000 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
-obj_SHARP__11000.c("Bush", function() {
-  var G__10991 = {};
-  G__10991["init"] = function() {
+var obj_SHARP__11244 = purnam.cljs.aget_in.call(null, Crafty, cljs.core.PersistentVector.EMPTY);
+obj_SHARP__11244.c("Bush", function() {
+  var G__11235 = {};
+  G__11235["init"] = function() {
     return this.requires("Actor, Color, Solid").color("rgb(20, 185, 40)")
   };
-  return G__10991
+  return G__11235
 }());
 goog.provide("purnam.angular.directives");
 goog.require("cljs.core");

@@ -1,30 +1,24 @@
-(defproject purnam "0.1.0-SNAPSHOT"
-  :description "Clojurescript macros for working with various javascript frameworks
-                (currently angularjs and jasmin)"
+(defproject purnam "0.1.0-alpha"
+  :description "A better javascript experience on clojurescript"
   :url "http://www.github.com/zcaudate/purnam"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.5.1"]]
-  :profiles {:dev {:dependencies [[midje "1.5.1"]]}}
-  :plugins [[lein-cljsbuild "0.3.0"]]
-  :test-paths ["test/clj"]
+  :license {:name "The MIT License"
+            :url "http://opensource.org/licencses/MIT"}
+  :dependencies 
+    [[purnam/purnam-js      "0.1.0-alpha"]
+     [purnam/purnam-angular "0.1.0-alpha"]]
+  :plugins [[lein-sub "0.2.1"]
+            [lein-cljsbuild "0.3.0"]]
   :cljsbuild
   {:builds
-   [{:source-paths ["src" "test/cljs"],
-     :id "test",
+   [{:source-paths ["purnam-js/src" "test/cljs"],
+     :id "js-test",
      :compiler
      {:pretty-print true,
-      :output-to "harness/test-purnam.js",
+      :output-to "harness/purnam-js.js",
       :optimizations :whitespace}}
-    {:source-paths ["src" "samples/angular"],
-     :id "angular",
+    {:source-paths ["purnam-js/src" "purnam-js/samples/crafty"],
+     :id "crafty-demo",
      :compiler
      {:pretty-print true,
-      :output-to "resources/app/scripts/samples.js",
-      :optimizations :whitespace}}
-    {:source-paths ["src" "samples/crafty"],
-     :id "crafty",
-     :compiler
-     {:pretty-print true,
-      :output-to "resources/app/scripts/crafty-game.js",
+      :output-to "resources/app/scripts/crafty-demo.js",
       :optimizations :whitespace}}]})

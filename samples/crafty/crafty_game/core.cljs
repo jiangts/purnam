@@ -43,8 +43,7 @@
                  (< (js/Math.random) 0.04)
                  (do (! v.count (inc v.count))
                      (-> js/Crafty
-                         (.e "Village") (.at x y))))))
-       ))})
+                         (.e "Village") (.at x y))))))))})
 
 ;; Components
 
