@@ -6,19 +6,28 @@
   :dependencies 
     [[purnam/purnam-js      "0.1.0-alpha"]
      [purnam/purnam-angular "0.1.0-alpha"]]
+  :profiles {:dev {:dependencies [[midje "1.5.1"]]}}
   :plugins [[lein-sub "0.2.1"]
-            [lein-cljsbuild "0.3.0"]]
+            [lein-cljsbuild "0.3.0"]
+            [lein-midje "3.0.1"]]
+  :test-paths ["purnam-js/test" "purnam-angular/test"]
   :cljsbuild
   {:builds
-   [{:source-paths ["purnam-js/src" "test/cljs"],
+   [{:source-paths ["purnam-js/src" "test"],
      :id "js-test",
      :compiler
      {:pretty-print true,
-      :output-to "harness/purnam-js.js",
+      :output-to "harness/unit/purnam-js-unit.js",
       :optimizations :whitespace}}
-    {:source-paths ["purnam-js/src" "purnam-js/samples/crafty"],
-     :id "crafty-demo",
+      {:source-paths ["purnam-js/src" "samples/crafty"],
+       :id "crafty-demo",
+       :compiler
+       {:pretty-print true,
+        :output-to "harness/app/scripts/crafty-demo.js",
+        :optimizations :whitespace}}
+    {:source-paths ["purnam-js/src" "purnam-angular/src" "samples/angular"],
+     :id "angular-demo",
      :compiler
      {:pretty-print true,
-      :output-to "resources/app/scripts/crafty-demo.js",
+      :output-to "harness/app/scripts/angular-demo.js",
       :optimizations :whitespace}}]})

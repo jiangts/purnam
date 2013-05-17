@@ -12,5 +12,5 @@ pom.xml.asc
 .lein-repl-history
 .DS_Store
 samples/*-bak
-harness/test-purnam.js
-/resources/app/script
+harness/unit/purnam-js-unit.js
+harness/app/scripts
