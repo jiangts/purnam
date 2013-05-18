@@ -1,4 +1,4 @@
-(ns crafty-game.core
+(ns crafty-demo.core
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
   (:use-macros [purnam.js :only [obj arr ! def.n def.n* def* do*]]))

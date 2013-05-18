@@ -6,39 +6,24 @@
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Login Demo</title>
+    <title>Recipies Demo</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../libs/angular-ui/angular-ui.css"></script>    
+    <link rel="stylesheet" href="../libs/angular-ui/angular-ui.css"></script> 
   </head>
-  <body ng-app="loginDemo" 
-        ng-controller="MainCtrl"
-        ng-focus="setFocus('blank')"
+  <body ng-app="combinedDemo" 
+        ng-controller="CombinedMainCtrl"
         class="container">    
-    
-    <div class="span4 offset4" 
+    <div class="span4 offset2" 
          style="border:1px dotted yellow; padding-top: 100px">
       <div class="centered">
-        <h1>The Vault</h1>
-        <span ng-bind="statusMsg()" class="centered"></span>
+        <h1>Combined</h1>
       </div>
-      <input type="text" placeholder="Login"
-             ng-model="loginText"
-             ng-focus="setFocus('login')"/>
-      <input type="password" placeholder="Password"
-             ng-model="passwordText"
-             ng-focus="setFocus('password')"/>
-      <div><button class="btn" type="submit" ng-click="login(loginText, passwordText)">Login</button></div>
     </div>
-    
-    
     <script src="../libs/angular/angular.js"></script>
-    <!--script src="../libs/angular-ui/angular-ui.js"></script>
-    <script src="../libs/angular-ui/ui-bootstrap-0.3.0.js"></script-->
-    <!-- build:js scripts/scripts.js -->
     <script src="../scripts/angular-demo.js"></script>
     <!-- endbuild -->
 

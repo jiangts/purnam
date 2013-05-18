@@ -79,7 +79,6 @@
   (is (o4.fn) 4)
   (is (fn1) 4)))
 
-
 (describe "self and this"
  [a1 (obj :a 1
           :thisfn (fn [] this.a)

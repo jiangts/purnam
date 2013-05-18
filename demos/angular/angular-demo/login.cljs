@@ -1,4 +1,4 @@
-(ns purnam-demos.login
+(ns angular-demo.login
   (:use [purnam.cljs :only [aset-in aget-in]])
   (:use-macros
    [purnam.js :only [! def.n obj]]
@@ -26,7 +26,7 @@
              :focus  "blank"}))
 
 
-(def.controller loginDemo.MainCtrl [$scope App]
+(def.controller loginDemo.LoginMainCtrl [$scope App]
   (! $scope.app App)
 
   (! $scope.loginText "")

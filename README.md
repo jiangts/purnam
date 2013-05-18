@@ -5,13 +5,19 @@ Purnam - AngularJs Language Extensions for Clojurescript
 Inspired by [lispyscript](http://lispyscript.com), [coffescript](http://coffeescript.org) and [clang](https://github.com/pangloss/clang‎)
 
 
-#### Installation
+### Installation
 
 In your project file, add
 
 ```clojure
 [purnam "0.0.10"]
 ```
+
+### Instructions
+
+- [0A QUICKSTART](https://github.com/zcaudate/purnam/blob/master/README/0A_QUICKSTART.md)
+- [0B LANGUAGE OVERVIEW](https://github.com/zcaudate/purnam/blob/master/README/0B_OVERVIEW.md)
+- [1  ANGULARJS](https://github.com/zcaudate/purnam/blob/master/README/1_ANGULAR.md)
 
 #### Features
 Purnam has three main components:
@@ -20,20 +26,8 @@ Purnam has three main components:
 2. Jasmin Language Extensions for TDD with Karma
 3. Clojurescript Language Extensions (which the previous two are built upon)
 
-#### Why not use lispyscript/coffeescript/clang?
-I like each of the languages for their own features:
+### going away from js->clj and clj->js
 
-   - coffeescript for its succinctness
-   - lispyscript for its syntax and macros
-   - clang for its sheer brilliance and audacity
-
-However, in using each language I did find some weaknesses
-
-   - coffeescript and its ambiguous syntax that changes meaning with whitespace
-   - lispyscript is too new for me and not widely adopted
-   - clang is to ambitious in what it is trying to do (make angular work with clojure) and I think there are definite performance implications in doing so.
-
-The goal of this project is to provide opt-in language extensions for clojurescript to have the same sort of succintness when working with angular and all other javascript libraries.
 
 #### Angular
 Write angular.js like its angular.cljs!

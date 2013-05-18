@@ -1,4 +1,4 @@
-(ns purnam-demos.todo
+(ns angular-demos.todo
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
   (:use-macros [purnam.js :only [obj arr ! def.n*]]
@@ -25,7 +25,7 @@
          (fn [todos]
            (js/localStorage.setItem id (js/JSON.stringify (todos.map make-todo)))))))
 
-(def.n* setMainCtrl [$ todoStorage]
+(def.n* setTodoMainCtrl [$ todoStorage]
   (o/extend $
     {:todos (todoStorage.get)
      :newTodo ""
@@ -68,8 +68,8 @@
        ($.todos.forEach
         (fn [todo] (! todo.completed bool))))}))
 
-(def.controller todoDemo.MainCtrl [$scope todoStorage]
-  (setMainCtrl $scope todoStorage)
+(def.controller todoDemo.TodoMainCtrl [$scope todoStorage]
+  (setTodoMainCtrl $scope todoStorage)
   ($scope.$watch
    "todos.length"
    (fn [] (todoStorage.put $scope.todos))))

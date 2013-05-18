@@ -1,4 +1,4 @@
-(ns purnam-demo.recipes
+(ns angular-demo.recipes
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
   (:use-macros [purnam.js :only [obj arr ! def.n]]
@@ -13,7 +13,7 @@
 
 (def.module recipesDemo [])
 
-(def.controller recipesDemo.MainCtrl [$scope $http]
+(def.controller recipesDemo.RecipesMainCtrl [$scope $http]
   (->
    ($http (obj :method "JSONP"
                :params {:q "cabbage"

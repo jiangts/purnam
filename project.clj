@@ -22,13 +22,13 @@
      {:pretty-print true,
       :output-to "harness/unit/purnam-js-unit.js",
       :optimizations :whitespace}}
-      {:source-paths ["purnam-js/src" "samples/crafty"],
+      {:source-paths ["purnam-js/src" "demos/crafty"],
        :id "crafty-demo",
        :compiler
        {:pretty-print true,
         :output-to "harness/app/scripts/crafty-demo.js",
         :optimizations :whitespace}}
-    {:source-paths ["purnam-js/src" "purnam-angular/src" "samples/angular"],
+    {:source-paths ["purnam-js/src" "purnam-angular/src" "demos/angular"],
      :id "angular-demo",
      :compiler
      {:pretty-print true,
