@@ -1,6 +1,6 @@
 (ns purnam.test
   (:require [clojure.string :as s])
-  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root]]))
+  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root hash-map?]]))
 
 (defmacro init []
   (list
@@ -20,20 +20,27 @@
                } else { return expected === actual; }
          }})});"))
 
-(defmacro describe [desc bindings & body]
-  (js-expand
-   (list 'let bindings
-         (list 'js/describe desc
+(defmacro describe [options & body]
+  (let [[options body]
+        (if (hash-map? options)
+            [options body]
+            [{} (cons options body)])]
+    (js-expand
+     (list 'let (or (options :bindings) [])
+           (list 'js/describe (or (options :doc) "")
                `(fn [] ~@body
-                  nil)))))
-
-(defmacro beforeEach [& body]
-  (list 'js/beforeEach
-        `(fn [] ~@body)))
+                  nil))))))
 
 (defmacro it [desc & body]
-  (list 'js/it desc
-        `(fn [] ~@body)))
+  (let [[desc body]
+        (if (string? desc)
+          [desc body]
+          ["" (cons desc body)])]
+    (list 'js/it desc
+          `(fn [] ~@body))))
+
+(defmacro beforeEach [& body]
+  (list 'js/beforeEach `(fn [] ~@body)))
 
 (defmacro is [v expected]
   (list '.toSatisfy (list 'js/expect v) expected (str v) (str expected)))

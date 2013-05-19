@@ -6,13 +6,13 @@
   - primitive arrays ([arr](Syntax-Overview#arr))
 - accessors 
   - getters ([?](Syntax-Overview#getter)) 
+  - call with dot notation([?>](Syntax-Overview#calln))
   - setters ([!](Syntax-Overview#setter))
   - call on object ([!>](Syntax-Overview#callobj))
 - existential pointers
   - contextual pointer ([this](Syntax-Overview#this))
   - self referential pointer ([self](Syntax-Overview#self))
 - additional forms allowing javascript dot notation
-  - call ([?>](Syntax-Overview#calln))
   - function definition ([def.n](Syntax-Overview#defn))
   - do block ([do.n](Syntax-Overview#don))
 - forms interpreting primitives: 
@@ -37,7 +37,8 @@ denote variable accessors. The following table shows javascript syntax and its c
 
 The `.` notation can only be used within purnam extension forms. Examples are given in getters ([?](Syntax-Overview#getter)), setters ([!](Syntax-Overview#setter)) and function definitions ([def.n](Syntax-Overview#defn))
 
-### obj
+<a name=obj></a>
+### `obj` - primitive object constructor
 
 ##### 1.1 Strings
 Raw js objects are constructed in clojurescript with `obj`:
@@ -97,9 +98,10 @@ produces this javascript:
                data: [7, 8, 9]}}}) 
 ```
 
-### arr
+<a name=arr></a>
+### `arr` - primitive array constructor
 
-##### 3.1
+##### 3.1 Array Construction
 The `arr` form constructs a javascript array primitive:
 
 ```clojure
@@ -110,7 +112,7 @@ produces this javascript:
 [1, 2, 3, 4, 5]
 ```
 
-##### 3.2
+##### 3.2 Nesting
 The `arr` form also supports nested objects and arrays like that in obj:
 
 ```clojure
@@ -122,9 +124,9 @@ produces this javascript:
 ```
 
 <a name=getter></a>
-### ? 
+### `?` - object/array accessor
 
-##### 4.1
+##### 4.1 First look
 The `?` form provides dot notation access:
 ```clojure
 (def o (obj :a 1 :b 2 :c 3))
@@ -132,15 +134,16 @@ The `?` form provides dot notation access:
 ;; => 6 
 ```
 
-##### 4.2
+##### 4.2 Pipe Notation
 Pipe notation `object.|key|` provides symbol lookup:
 ```clojure
+(def o (obj :a 1 :b 2 :c 3))
 (def k "a")
 (- (? o.b) (o.|k|))
 ;; => 1
 ```
 
-##### 4.3
+##### 4.3 Arrays
 Because `?` is a transformation using `aget`, it also works on javascript arrays
 ```clojure
 (def o (arr [[1 2 3] [4 5 6] [7 8 9]]))
@@ -148,43 +151,158 @@ Because `?` is a transformation using `aget`, it also works on javascript arrays
 ;; => 8
 ```
 
-##### 4.4
+##### 4.4 Nil  
+If any of the keys are missing, `?` will not throw an object `undefined` exception but will return `nil` instead
 
+```clojure
+(def o (obj :a {:value 1}))
+(? o.a.value)  
+;; => 1
+(? o.b.value)  ;;-> missing 'b'
+;; => nil
+(? o.any.nested.syntax)
+;; => nil
+```
+<a name=calln></a>
+### `?>` - call with notation
+##### 5.1 Functions allowing Dot Notation 
+The call with object `?>` form allows function calls with dot-notation syntax.
+
+```clojure
+(let [o1 (obj :a 1))
+      o2 (obj :a 3))]
+  (?> + o1.a o2.a) ;;=> 4
+```
+
+##### 5.2 Inner Function
+Inner forms within `?>` are automatically interpreted as using dot-notation. There is no need to write `?` when inside of `?>`.
+
+```clojure
+(?> mapv (fn [x] (inc x.a))   ;; no need to write (inc (? x.a)) 
+         [(obj :a 1) (obj :a 2) (obj :a 3)])
+;=> [2 3 4]
+```
 
 <a name=setter></a>
-### !
+### `!` - setter
+
+##### 6.1 First look
+The `!` form provides dot notation :
+```clojure
+(def o (obj))
+(? o.a)    ;; => undefined 
+(! o.a 6)  ;;
+(? o.a)    ;; => 6
+```
+
+##### 6.2 Pipe Notation
+Pipe notation `object.|key|` provides symbol set:
+```clojure
+(def o (obj))
+(def k "a")
+(! o.|k| 6)
+(? o.a)    ;; => 6
+```
+
+##### 6.3 Root Var Not Rebindable
+Setting the root var will not work (same as in clojurescript)
+```clojure
+(def o (obj :a 1))
+(! o (obj :a 2)) ;; Throws compilation exception
+```
+
+##### 6.4 Creating Nested Objects
+If the hierachy of objects do not exist, `!` will create it
+```clojure
+(def o (obj))
+(! o.a.b.c 10)
+(? o.a.b.c)   ;;=> 10
+```
+
+##### 6.5 No Overwrites
+If one of the keys in the object hierachy is not an object, `!` will not create more nested structures
+```clojure
+(def o (obj :a 1))
+(! o.a.b.c 10)
+(? o.a.b.c)   ;;=> undefined
+```
+
+<a name=callobj></a>
+### `!>` - call on object
+The `!>` form allows for writing dot-notation function calls.
+```clojure
+(def a (arr))
+(!> a.push 1)
+(? a.0)   ;;=> 1
+```
 
 ### this
 
-##### 6.1
+##### 7.1 Context Operator
 The controversial `this` construct is now back into the language. Now, `this` really means `this`. Use it with extreme care! The function uses the object where it is bound, exactly the way javascript does it. The following illustrates this use.
 
 ```clojure
 (def objA (obj :a 10 
                :func (fn [] this.a)))
-(.func objA)  
+(!> objA.func)  
 ;; => 10
 
 (def objB (obj :a 20
-               :func objA.func)   ;; Also the first introduction to the js dot notation
-(.func objB)  
+               :func objA.func) 
+(!> objB.func)  
 ;; => 20
 ```
 
 There should be no suprises here. Everything works the way it does in javascript. The rational for adding `this` back into our language is that when a piece of a program really needs to work with existing javascript libraries (and it usually does), then clojurescript should give allow the flexibility to do that without adding additional noise to the code.
 
-##### 6.2
-Note that `this` can only be used
+### self 
 
-### self
+##### 8.1 Self Reference
+A new existential construct has been added, it be use **only** within the `obj` form. It is used to refer to the object itself and does not change contexts the way `this` does. It provides a somewhat safer self reference which does not change when the context is changed:
 
-##### 7.1
-A new existential construct has been added, it be use **only** within the `obj` form. It is used to refer to the object itself and does not change contexts the way `this` does. It is really a shortcut for:
-(let [objC (obj)]
-  ())
+```clojure
+(def a1 (obj :a 1
+             :thisfn (fn [] this.a)
+             :selffn (fn [] self.a)))
+     
+(!> a1.thisfn) ;=> 1
+(!> a1.selffn) ;=> 1
+```
+Note that `this` and `self` both refer to the object itself. 
 
+##### 8.2 Differences with `this`
+We can quickly see the difference by creating another object:
+
+```clojure
+(def a2 (obj :a 2
+             :thisfn a1.thisfn
+             :selffn a1.selffn))
+```
+
+a2 has been defined with the methods of a1 in the previous section. If we invoke the methods, it can be seen that the context for a2.thisfn has changed and so it returns a2.a. While a2.selffn still returns a value of a1.a
+
+```clojure
+(!> a2.thisfn) ;=> 2
+(!> a2.selffn) ;=> 1
+```
+
+##### 8.3 Nesting `obj` and Hashmaps
+A useful property of `obj` can be seen in this example below. Even though both have the same structure, `self` in `a1` refers to a1 whereas `self` in a2 refers to a2.b. This was due to the fact that in `a1`, a hashmap was used to construct :b as opposed to the `obj` form in `a2`.
+
+```clojure
+(def a1 (obj :a 1
+             :b {:a 2
+                 :func (fn [] self.a)})
+(def a2 (obj :a 1
+             :b  (obj :a 2
+                      :func (fn [] self.a)))
+
+(!> a1.func) ;=> 1
+(!> a2.func) ;=> 2
+```
 
 ### def.n
+##### 9.1 Function Definition with dot Notation
 If you use this notation in a normal clojurescript `defn` form, the cljs compiler will scream at you.
 
     (defn add-inner [a b]
@@ -195,7 +313,7 @@ If you use this notation in a normal clojurescript `defn` form, the cljs compile
      
     (print-this)  ;;=> 'undefined'     
 
-purnam provides the `def.n` construct which allows both js-notation and this.
+The `def.n` construct which allows both js-notation and this.
 
     (def.n add-inner [a b]
       (+ a.inner b.inner))
@@ -205,30 +323,11 @@ purnam provides the `def.n` construct which allows both js-notation and this.
 
     (print-this) ;; => <window>
 
-The rational for adding the `this` back into our language is that when a piece of a program really needs to work with existing javascript libraries, then clojurescript should give allow the flexibility to do that without adding additional noise to the code.
+Within 
 
 
-### def.n
-If you use this notation in a normal clojurescript `defn` form, the cljs compiler will scream at you.
-
-    (defn add-inner [a b]
-      (+ a.inner b.inner)) ;;=> unknown var `ainner`, `binner`     
-
-    (defn print-this []
-      (js/console.log this)) 
-     
-    (print-this)  ;;=> 'undefined'     
-
-purnam provides the `def.n` construct which allows both js-notation and this.
-
-    (def.n add-inner [a b]
-      (+ a.inner b.inner))
-
-    (def.n print-this []
-      (js/console.log this))
-
-    (print-this) ;; => <window>
-
-The rational is that when you really really need to work with 
-
-
+### do.n
+### def*
+### def.n*
+### fn*
+### do*

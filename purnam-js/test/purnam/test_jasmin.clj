@@ -3,36 +3,55 @@
         purnam.checks
         purnam.test))
 
-(fact "describe"
+(fact "describe without options"
+  (macroexpand-1
   '(describe
-    "test"
-    [a1 (obj :array [1 2 3 4])]
-    (it "descripition"
-        (is o1.array.0 odd?)))
+    <BODY>))
   =>
-  (expands-into
-   '(let [a1 (obj :array [1 2 3 4])]
-      (js/describe
-       "test"
-       (clojure.core/fn []
-         (it "descripition"
-             (is (purnam.cljs/aget-in o1 ["array" "0"]) odd?)) nil)))))
+  '(let []
+     (js/describe
+      ""
+      (clojure.core/fn []
+        <BODY> nil))))
+
+(fact "describe with options"
+  (macroexpand-1
+  '(describe
+    {:doc "<DESCRIPTION>"
+     :bindings [<VAR1> <FORM1>
+                <VAR2> <FORM1>]}
+    <BODY>))
+  =>
+  '(let [<VAR1> <FORM1>
+         <VAR2> <FORM1>]
+     (js/describe
+      "<DESCRIPTION>"
+      (clojure.core/fn []
+        <BODY> nil))))
 
 (fact "beforeEach"
-  '(beforeEach <BODY>)
+  (macroexpand-1
+   '(beforeEach <BODY>))
   =>
-  (expands-into
-   '(js/beforeEach
-     (clojure.core/fn []
-       <BODY>))))
+  '(js/beforeEach
+    (clojure.core/fn []
+      <BODY>)))
 
-(fact "it"
-  '(it "<DESC>" <BODY>)
+(fact "it without description"
+  (macroexpand-1
+   '(it <BODY>))
   =>
-  (expands-into
-   '(js/it "<DESC>"
-     (clojure.core/fn []
-       <BODY>))))
+  '(js/it ""
+          (clojure.core/fn []
+            <BODY>)))
+
+(fact "it with description"
+  (macroexpand-1
+   '(it "<DESC>" <BODY>))
+  =>
+  '(js/it "<DESC>"
+          (clojure.core/fn []
+            <BODY>)))
 
 (fact "is"
   '(is <FORM> <EXPECTED>)
@@ -46,3 +65,17 @@
   (expands-into
    '(.toSatisfy (.-not (js/expect <FORM>))
                 <EXPECTED> "<FORM>" "<EXPECTED>")))
+
+(fact "describe FULL"
+  (macroexpand-1
+  '(describe
+    {:doc "<DESC>"
+     :bindings [<V> (obj :array [1 2 3 4])]}
+    (it "<IT IS>"
+        (is <V>.array.<INDEX> <FN>))))
+  => '(let [<V> (obj :array [1 2 3 4])]
+        (js/describe
+         "<DESC>"
+         (clojure.core/fn []
+           (it "<IT IS>"
+               (is (purnam.cljs/aget-in <V> ["array" "<INDEX>"]) <FN>)) nil))))

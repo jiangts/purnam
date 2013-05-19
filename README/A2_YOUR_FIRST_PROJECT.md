@@ -1,35 +1,38 @@
 ### Objectives ###
 
-This is a step by step guide on how to quickly get a clojurescript development environment set up to enable your experience of writing clojurescript applications to be as smooth as possibly.
+This is a step by step guide on how to set up a clojurescript test-driven development environment, allowing immediate feedback to code changes during the clojurescript development process. The development workflow will be set up as follows:
 
-**Section A - Project Setup [[►|Your-First-Project#section-a---project-setup]]**
-  1. Creating and Configuring your ClojureScript Project
-  [[►|Your-First-Project#a1-creating-and-configuring-your-clojurescript-project]]
-  2. Creating a Testing Harness using Yo, Grunt and Bower
-  [[►|Your-First-Project#a2-creating-a-testing-harness-using-yo-grunt-and-bower]
-  3. Creating a Karma Configuration for TDD
-  [[►|Your-First-Project#a3-creating-a-karma-configuration-for-tdd]]
+    (1) DEVELOPER changes *.cljs code in [src] and [test] directories
+          ^       |
+          |       |-> (2) [src] and [test] directories are watched by cljsbuild and changes
+          ^           trigger recompilation of *.cljs code to [harness/unit/test-myapp.js]
+          |                |
+          ^                |-> (3) [harness/unit/test-my-app.js] is watched by karma and
+          |                    any changes to the file trigger rerunning of unit tests
+          ^                         | 
+          |                         |-> (4) KARMA UNIT TEST RESULTS
+          ^                                  | 
+          | < . < . < . < . < . < . < . < . <-
+                  Near Instant Feedback
 
-**Section B - Test Driven Development for Clojurescript [[►|Your-First-Project#section-b---test-driven-development-for-clojurescsript]]**
-  1. Writing your First Function [[►|Your-First-Project#b1-writing_your_first_function]]
-  2. Writing your First Test [[►|Your-First-Project#b2-writing_your_first_Test]]
-  
-**Section C - Light Table**
-  1. Light Table Setup 
-  2. Connecting to Your Project
-  3. Interactive Developement
+
+**A - Project Setup [[►|Your-First-Project#section-a---project-setup]]**
+  1. [[Creating and Configuring your ClojureScript Project |Your-First-Project#a1-creating-and-configuring-your-clojurescript-project]]
+  2. [[Creating a Karma Configuration for TDD |Your-First-Project#a2-creating-a-karma-configuration-for-tdd]]
+
+**B - Test Driven Development for Clojurescript**
+  1. [[Hello World in Clojurescript |Your-First-Project#b1-hello-world-in-clojurescript]]
+  2. [[Your First Test |Your-First-Project#b2-writing-your-first-test]]
+  3. [[Your First Purnam Function |Your-First-Project#b3-your-first-purnam-function]]
 
 ### Prerequisites ###
 
 You will require:
 
 - [leiningen](https://github.com/technomancy/leiningen)
-- [nodejs](http://nodejs.org/) and [npm](https://npmjs.org/)
-- [yeoman](http://yeoman.io/)
 - [karma](http://karma-runner.github.io/0.8/index.html)
 
-
-If you do not have these, please follow the links and install them first.
+If you do not have these already installed, please follow the links and install them first.
 
 ### Section A - Project Setup ###
 
@@ -53,40 +56,29 @@ Open `myapp/project.clj`. We will be adding a few entries into the original proj
 ;; -- Add purnam to dependencies 
 ;;
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [purnam "0.1.0-alpha"]
+                 [purnam "0.1.0-alpha"]]
                  
 ;; -- Add the `lein-cljsbuild` plugin
 ;;
   :plugins [[lein-cljsbuild "0.3.0"]]
 
 ;; -- Configure lein cljsbuild --
-;; We will configure two builds: unit tests and application.
-;; This project is assumed to be a strictly clojurescript
-;; project for purpose of simplicity
+;; We will configure our unit test build here
 ;; 
   :cljsbuild    
   {:builds
-   [;;
-    ;; -- This is the definition for our unit tests build
-    ;;
-    {:id "tests"
+   [{:id "tests"
      :source-paths ["src" "test"]
-     :compiler {:output-to "harness/unit/test-myapp.js"}}
-    ;;
-    ;; -- This is the definition for our application build
-    ;;
-    {:id "app"
-     :source-paths ["src"]
-     :compiler {:output-to "harness/app/scripts/myapp.js"}}]})
+     :compiler {:output-to "harness/unit/test-myapp.js"}}]})
 ```
 
 ###### Run cljsbuild
-Save your `project.clj` file. Now in the original terminal, download dependencies and run `lein cljsbuild auto` to automatically watch and compile files under the `:source-paths` defined in your cljsbuild options in the previous section.
+Save your `project.clj` file. Now in the original terminal, download dependencies and run `lein cljsbuild auto` to automatically watch and compile files under `:source-paths` defined in your cljsbuild options in the previous section.
 
 ```bash
 > cd myapp
 > lein deps
-  
+ # If lein-cljsbuild is not installed, it will be:  
  # Retrieving lein-cljsbuild/lein-cljsbuild/0.3.0/lein-cljsbuild-0.3.0.pom from clojars
  # Retrieving lein-cljsbuild/lein-cljsbuild/0.3.0/lein-cljsbuild-0.3.0.jar from clojars
     
@@ -99,70 +91,17 @@ Save your `project.clj` file. Now in the original terminal, download dependencie
  # Retrieving purnam/purnam-angular/0.1.0-alpha/purnam-angular-0.1.0-alpha.jar from clojars
  # Retrieving purnam/purnam-js/0.1.0-alpha/purnam-js-0.1.0-alpha.jar from clojars
  # Retrieving purnam/purnam/0.1.0-alpha/purnam-0.1.0-alpha.jar from clojars
-
+ # Compiling "harness/unit/test-myapp.js" from ["src" "test"]...
+ # Successfully compiled "harness/unit/test-myapp.js" in 2.968875 seconds.
 ```
 
-Any changes to `*.clj` and `*.cljs` files under `src` and `test` will be compiled to *.js to `harness/unit/test-myapps.js` and `harness/app/scripts/myapp.js`.
+If you leave this process running, any changes to `*.clj` and `*.cljs` files under `src` and `test` will trigger compilation to `harness/unit/test-myapps.js`.
 
-
-##### A.2 Creating a Testing Harness using Yo, Grunt and Bower
-
-Keep `lein cljsbuild` running and open up a new terminal window. Navigate to your project root and create a folder name `harness`. 
-
-```bash
-> mkdir harness
-> cd harness
-```
-This will be where we install our harness scaffolding using yo, grunt and bower. We will create the most basic project scaffolding using the `yo webapp` command.
-```bash
-> yo webapp
-
- #     _-----_
- #   |       |
- #   |--(o)--|   .--------------------------.
- #   `---------´  |    Welcome to Yeoman,    |
- #    ( _´U`_ )   |   ladies and gentlemen!  |
- #    /___A___\   '__________________________'
- #     |  ~  |
- #   __'.___.'__
- # ´   `  |° ´ Y `
-
- # Out of the box I include HTML5 Boilerplate, jQuery and Modernizr.
-```
-It will ask you some questions about Sass and RequireJS. Answer `n` to both for now.
-```bash
- # Would you like to include Twitter Bootstrap for Sass? (Y/n) 
- > n
- # Would you like to include RequireJS (for AMD support)? (Y/n) 
- > n
-```
-Let `yo` do its thing and generate a project scaffold for you as well as installs all project dependencies. After it is finished, We can start-up a server.
-```bash
-> grunt server
- # Running "livereload-start" task
- # ... Starting Livereload server on 35729 ...
-
- # Running "connect:livereload" (connect) task
- # Starting connect web server on localhost:9000.
-
- # Running "open:server" (open) task
-
- # Running "watch" task
- # Watching app/scripts/{,*/}*.coffee
- # Watching test/spec/{,*/}*.coffee
- # Watching app/styles/{,*/}*.{scss,sass}
- # Watching app/*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
-```
-the `grunt server` command will start a server, open up a browser and watch file changes so that the page will automatically reload on any asset changes in the `harness/app` directory. The page it brings up is a default page. We will be replacing this with our own in Section C.
-
-##### A.3 Creating a Karma configuration for TDD
-So now there are two running processes: 
+##### A.2 Creating a Karma configuration for TDD
+There is now a running process: 
   - `lein cljsbuild auto` for compiling our clojurescript files.
-  - `grunt server` for serving our clojurescript application.
 
-Although we will not be using the application server until Section C, we can keep both of the running for now.
-
-Open up a third terminal window and navigate to the `harness` directory. We will initialise a karma configuration file to watch all files in `harness/unit` and run tests on change.
+Open up another terminal window in the project root directory. We will initialise a karma configuration file to watch all files in `harness/unit` and run tests on change.
 
 ```bash
 > karma init
@@ -183,7 +122,7 @@ Open up a third terminal window and navigate to the `harness` directory. We will
  # Which files do you want to test ?
  # You can use glob patterns, eg. "js/*.js" or "test/**/*Spec.js".
  # Enter empty string to move to the next question.
- > unit/*.js  
+ > harness/unit/*.js  
  >
 
  # Any files you want to exclude ?
@@ -195,8 +134,8 @@ Open up a third terminal window and navigate to the `harness` directory. We will
  # Press tab to list possible options.
  > yes
 
-Config file generated at "<DEV-DIRECTORY>/myapp/harness/karma.conf.js". 
-```  
+Config file generated at "<ROOT>/karma.conf.js".
+```
 
 Now that we have configured karma, lets start it up:
 ```bash
@@ -207,36 +146,30 @@ Now that we have configured karma, lets start it up:
  # Chrome 28.0 (Mac): Executed 0 of 0 SUCCESS (0.112 secs / 0 secs)
 ```
 
-We have now setup our Clojurescript TDD pipeline. We are now ready to code!
+The Clojurescript TDD pipeline has been setup. We are ready to code!
+
+**Recap** of what just happened:
+
+- The clojurescript project was configured to use `cljsbuild`. `purnam` was included as a dependency. The command `lein cljsbuild auto` watches `src` and `test` directories for changes; compiles unit tests to `harness/unit/test-myapp.js` 
+- Karma Test Runner was configured and started to watch any file changes in `harness/unit` and run Unit Tests if it has detected changes to the directory.
 
 ### Section B - Test Driven Development for Clojurescript ###
 
-Recap of what happened in Section A:
-
-- The clojurescript project was configured to use `cljsbuild`. purnam was included as a dependency. The command `lein cljsbuild auto` watches `src` and `test` directories for changes; compiles unit tests to `harness/unit/test-myapp.js` and application code to `harness/app/scripts/myapp.js`. 
-- The skeleton for a webserver was set up in the `harness` directory using the `yo webapp` command . The webserver was launch using `grunt server`.
-- Karma Test Runner was configured and started
-
-Essentially, we have created the following setup:
-
-    <editor> --->  [src]  -> cljsbuild -> [harness/app/scripts/myapp.js] -> grunt server -> <BROWSER OUTPUT>
-              l->  [test] -> cljsbuild -> [harness/unit/test-myapp.js] -> karma -> <UNIT TESTING OUTPUT> 
-
-In your root folder, remove generated scaffold files
+##### B.1 Hello World in Clojurescript
+In your root folder, remove generated scaffold files from your new project
 ```bash
 > rm src/myapp/core.clj
 > rm test/myapp/core_test.clj
 ```
-
-Create a new file at `test/myapp/test_core.cljs` with the following :
-
+Create a new file at `test/myapp/test_core.cljs` with the following two lines:
 ```clojure
 (ns myapp.test-core)
 
 (js/console.log "Hello World")
 ```
+Now save the file.
 
-You will see on the `lein cljsbuild` terminal:
+You will see over on the `lein cljsbuild` terminal:
 ```bash
  # Compiling "harness/unit/test-myapp.js" from ["src" "test"]...
  # Successfully compiled "harness/unit/test-myapp.js" in 1.150932 seconds.
@@ -244,18 +177,131 @@ You will see on the `lein cljsbuild` terminal:
 
 Then over on the `karma` terminal
 ```bash
- # INFO [watcher]: Changed file "/Users/Chris/dev/play/myapp/harness/unit/myapp-tests.js".
+ # INFO [watcher]: Changed file "<ROOT>/harness/unit/myapp-tests.js".
  # Chrome 28.0 (Mac) LOG: 'Hello World'
  # Chrome 28.0 (Mac): Executed 0 of 0 SUCCESS (0.396 secs / 0 secs)
+```
+Congratulations! You are now writing TDD style Clojurescript!
+ 
+##### B.2 Writing Your First Test
 
-We can define our very first function:
+###### Update Test File
+Make the following changes to `test/myapp/test_core.cljs`
+```clojure
+(ns myapp.test_core
+;;
+;;-- Load our helper functions (required by macros)
+;;
+  (:use [purnam.cljs :only [aget-in aset-in]])
+;;
+;;-- Load our macros
+;; 
+  (:use-macros [purnam.test :only [init describe it is is-not]]))
 
+;;-- Initialise Test Suite (Requires)
+;;
+  (init)
 
-(ns myapp.test-app)
+;;-- Write our First Test
+(describe
+  (it "One Plus One Equals" 
+     (is (+ 1 1) 11)))
+```
 
-(js/console.log "Hello World")
+Over on the karma screen, there should be the following error
+```bash
+ # INFO [watcher]: Changed file "<ROOT>/harness/unit/test-myapp.js".
+ # Chrome 28.0 (Mac)  One Plus One Equals FAILED
+ #  Expression: (+ 1 1)
+ #  	   Expected result: 11
+ #  	   Actual result: 2
+```
 
-INFO [watcher]: Changed file "/Users/Chris/dev/play/myapp/harness/unit/test-myapp.js".
-Chrome 29.0 (Mac) LOG: 'Hello'
-Chrome 29.0 (Mac): Executed 0 of 0 SUCCESS (0.428 secs / 0 secs)
+###### Going Green
+Lets fix our test:
+```clojure
+(describe
+  (it "One Plus One Equals" 
+     (is (+ 1 1) 2)))
+```
+Now we will see that karma lets our test pass
+```bash
+ # INFO [watcher]: Changed file "<ROOT>/harness/unit/test-myapp.js".
+ # Chrome 28.0 (Mac): Executed 1 of 1 SUCCESS (0.423 secs / 0.024 secs)
+```
 
+###### Adding More Cases
+Lets add more test cases to our `describe` form:
+
+```clojure
+(describe
+ {:doc "A better test description"
+  :bindings [one-plus-one (+ 1 1)]}
+ (it "One plus one is:" 
+   (is one-plus-one 2)
+   (is-not one-plus-one 11)
+   (is one-plus-one even?)
+   (is-not one-plus-one odd?)
+   (is (js* "1+1") 2)
+   (is (js* "'1'+'1'") "11")))
+```
+
+We have created our first suite of tests!
+
+##### B.3 Your First Purnam Function
+Once the workflow is operation, we can start writing our library functions
+
+Create a new file at `src/myapp/core.cljs` with the following code:
+```clojure
+(ns myapp.core
+  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use-macros [purnam.js :only [def.n]]))
+
+(def.n add-and-log [a b]
+  (let [answer (+ a.value b.value)]
+     (js/console.log answer)
+     answer))
+```
+
+Save this file.
+
+Now we add tests for `add-and-log` in `test/myapp/test_core.cljs`:
+
+```clojure
+;; Modify the ns declaration to include additional 
+;; macros and functions
+;;
+(ns myapp.test_core
+  (:use [purnam.cljs :only [aget-in aset-in]]
+        [myapp.core :only  [add-and-log]]) ;; <--- Added
+  (:use-macros [purnam.js :only [! def.n obj]] <-- Added 
+               [purnam.test :only [init describe it is is-not]]))
+
+;;
+;;  ..... Old Test Code ....
+;;
+
+;; Tests for add-and-log
+(describe
+  {:doc "add-and-log will add inner values"
+   :bindings [a1 (obj :value 1)
+              a2 (obj :value 2)
+              a3 (obj :value 3)]}
+  (it "performs addition"
+    (is (add-and-log a1 a2) 3)
+    (is (add-and-log a1 a3) 4)
+    (is (add-and-log a2 a3) 5)))
+```
+Save this files and we should get immediate feedback from karma.
+
+```bash
+ # INFO [watcher]: Changed file "<ROOT>/harness/unit/test-myapp.js".
+ # Chrome 28.0 (Mac) LOG: 3
+ # Chrome 28.0 (Mac) LOG: 4
+ # Chrome 28.0 (Mac) LOG: 5
+ # Chrome 28.0 (Mac): Executed 2 of 2 SUCCESS (0.421 secs / 0.028 secs)
+```
+
+Congratulations! You have written your first purnam function and test-suite. We are now ready to move on to [[Interactive Development]].
+
+[[◄ Back (Home)|Home]] `      ` [[Next (Interactive Developement) ►|Interactive Developement]]

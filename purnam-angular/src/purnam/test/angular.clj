@@ -4,20 +4,25 @@
 
 (def l list)
 
-(defmacro describe.ng [desc mopts & body]
+(defmacro describe.ng [mopts & body]
   (let [{:keys [module bindings]} mopts]
-    (apply
-     l 'describe desc
-     (vec (concat ['spec '(js-obj)] bindings))
-     (l 'js/beforeEach
-        (l 'js/module (str module)))
-     body)))
+    (l 'let ['spec '(js-obj)]
+       (apply
+        l 'describe mopts
+        (l 'js/beforeEach
+           (l 'js/module (str module)))
+        body))))
 
-(defmacro service [desc [name] & body]
-  (l 'js/inject
-     (l 'array (str name)
-        (concat (l 'fn [name])
-                body))))
+(defmacro ng [[name] desc & body]
+  (let [[desc body]
+        (if (string? desc)
+          [desc body]
+          ["" (cons desc body)])])
+  (l 'js/it desc
+     (l 'js/inject
+        (l 'array (str name)
+           (concat (l 'fn [name])
+                   body)))))
 
 (defn controller-default-injections [controller]
   {:$scope '($rootScope.$new)
@@ -27,7 +32,7 @@
 (defn controller-set-injection [isym icmd]
   (l '! (symbol (str "spec." isym)) icmd))
 
-(defmacro describe.controller [desc mopts & body]
+(defmacro describe.controller [mopts & body]
   (let [{:keys [module controller inject bindings]} mopts
         ijm  (merge (controller-default-injections controller)
                     inject)
@@ -39,19 +44,19 @@
         bsyms  (conj isyms '$scope)
         tsyms  (map #(cons-sym-root % 'spec) bsyms)
         tmap   (zipmap bsyms tsyms)]
-    (apply
-     l 'describe desc
-     (vec (concat ['spec '(js-obj)] bindings))
-     (l 'js/beforeEach
-        (l 'js/module (str module)))
-     (l 'js/beforeEach
-        (l 'js/inject
-           (concat
-            (l 'array "$rootScope" "$controller")
-            inames
-            (l (concat
-                (l 'fn (apply vector '$rootScope '$controller isyms)
-                   (l '! 'spec.$scope (ijm :$scope)))
-                (map controller-set-injection isyms icmds)
-                (l  (ijm :$controller)))))))
-     (change-roots-map body tmap))))
+    (l 'let ['spec '(js-obj)]
+       (apply
+        l 'describe mopts
+        (l 'js/beforeEach
+           (l 'js/module (str module)))
+        (l 'js/beforeEach
+           (l 'js/inject
+              (concat
+               (l 'array "$rootScope" "$controller")
+               inames
+               (l (concat
+                   (l 'fn (apply vector '$rootScope '$controller isyms)
+                      (l '! 'spec.$scope (ijm :$scope)))
+                   (map controller-set-injection isyms icmds)
+                   (l  (ijm :$controller)))))))
+        (change-roots-map body tmap)))))

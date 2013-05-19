@@ -5,7 +5,7 @@
   (:use-macros [purnam.js :only [obj ! defv.ndef.n]]
                [purnam.test :only [init describe it is is-not is-equal is-not-equal]]
                [purnam.angular :only [def.module def.config def.controller def.service]]
-               [purnam.test.angular :only [describe.controller describe.ng service]]))
+               [purnam.test.angular :only [describe.controller describe.ng ng]]))
 
 ;;
 ;; Defining our Module
@@ -25,33 +25,30 @@
                       (! this.user.login login))))
 
 ;;
-;; Angular Module Testing for Example Service
+;; Angular Module Testing for Simple Service
 ;;
 
 (describe.ng
- "A sample Angular Test Suite"
- {:module sample
+ {:doc  "A sample Angular Test Suite"
+  :module sample
   :bindings [compare (obj :login "login"
                           :password "secret"
                           :greeting "hello world")]}
- (service
-  "ExampleService Basics"
-  [ExampleService]
-  (is-not ExampleService.user compare)
-  (is-equal ExampleService.user compare))
+ (ng [SimpleService]
+  "SimpleService Basics"
+  (is-not SimpleService.user compare)
+  (is-equal SimpleService.user compare))
 
- (service
-  "ExampleService Change Login"
-  [ExampleService]
-  (is ExampleService.user.login "login")
+ (ng [SimpleService]
+  "SimpleService Change Login"
+  (is SimpleService.user.login "login")
 
-  (do (ExampleService.changeLogin "newLogin")
-      (is ExampleService.user.login "newLogin")))
+  (do (SimpleService.changeLogin "newLogin")
+      (is SimpleService.user.login "newLogin")))
 
- (service ;; The login will reset
-  "ExampleService Change Login"
-  [ExampleService]
-  (is ExampleService.user.login "login")))
+ (ng [SimpleService] ;; The login will reset
+  "SimpleService Change Login"
+  (is SimpleService.user.login "login")))
 
 ;;
 ;; Angular Test Controller Example
@@ -61,14 +58,13 @@
   (! $scope.msg "Hello")
   (! $scope.setMessage (fn [msg] (! $scope.msg msg))))
 
-
 ;;
 ;; Controller Testing
 ;;
 
 (describe.controller
- "A sample controller for testing purposes"
- {:module sample
+ {:doc "A sample controller for testing purposes"
+  :module sample
   :controller SimpleCtrl}
 
  (it "should have an object called `spec`"
