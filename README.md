@@ -17,7 +17,7 @@ In your project file, add
 
 ### Starting Points:
 
-- [`purnam` wiki](https://github.com/zcaudate/purnam/wiki)
+- [Wiki Home](https://github.com/zcaudate/purnam/wiki)
 - [Quickstart](https://github.com/zcaudate/purnam/wiki/Your-First-Project)
 - [Building Demos](https://github.com/zcaudate/purnam/wiki/Building-Demos)
 
@@ -34,6 +34,11 @@ function square(x){
 ;; clojurescript + purnam
 (def.n square [x]
   (obj :value (* x.value x.value)))
+
+;; or
+(def*n square [x]
+  {:value (* x.value x.value)})
+
 ```
 ```clojure
 ;; clojurescript
@@ -53,6 +58,11 @@ var user = {id: 0
 ```
 ```clojure
 ;; clojurescript + purnam
+(def user (obj :id 0 
+               :account {:username "user"
+                         :password "pass"}))
+;; or
+
 (def* user {:id 0 
             :account {:username "user"
                       :password "pass"})})
