@@ -1,4 +1,4 @@
-(defproject purnam/purnam-js "0.1.0-alpha"
+(defproject purnam/purnam-js "0.1.0-beta"
   :description "Purnam js macros"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"

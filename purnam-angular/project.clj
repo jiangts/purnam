@@ -1,4 +1,4 @@
-(defproject purnam/purnam-angular "0.1.0-alpha"
+(defproject purnam/purnam-angular "0.1.0-beta"
   :description "Features for working with angularjs"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
