@@ -1,6 +1,6 @@
 # purnam
 
-Purnam - AngularJs Language Extensions for Clojurescript
+`purnam` - Javascript Language Extensions for Clojurescript
 
 ### Installation
 
@@ -13,13 +13,13 @@ In your project file, add
 ### What is Purnam?
 - [`purnam.js`](https://github.com/zcaudate/purnam/wiki/API---purnam-js) Javascript-like semantics for Clojurescript 
 - [`purnam.test`](https://github.com/zcaudate/purnam/wiki/API---purnam-test) - Jasmin Extensions for Test Driven Workflow
-- [`purnam.angular`](https://github.com/zcaudate/purnam/wiki/API---purnam-angular) and [`purnam.test-angular`](https://github.com/zcaudate/purnam/wiki/API---purnam-test-angular) - Angularjs Extensions for Boilerplace Reduction and Code Accuracy
+- [`purnam.angular`](https://github.com/zcaudate/purnam/wiki/API---purnam-angular) and [`purnam.test.angular`](https://github.com/zcaudate/purnam/wiki/API---purnam-test-angular) - Angularjs Extensions for Boilerplace Reduction and Code Accuracy
 
 ### Starting Points:
 
-- [PURNAM WIKI](https://github.com/zcaudate/purnam/wiki)
-- [QUICKSTART](https://github.com/zcaudate/purnam/wiki/Your-First-Project)
-- [BUILDING DEMOS](https://github.com/zcaudate/purnam/wiki/Building-Demos)
+- [`purnam` wiki](https://github.com/zcaudate/purnam/wiki)
+- [Quickstart](https://github.com/zcaudate/purnam/wiki/Your-First-Project)
+- [Building Demos](https://github.com/zcaudate/purnam/wiki/Building-Demos)
 
 ### A Taste of Purnam
 
@@ -102,7 +102,7 @@ var user = {id: 0
                            (! $scope.loginSuccess true)
                            (! $scope.loginSuccess false))))
              (.error (fn [] (js/console.log "error!!")))))))
-
+```
 
 ##### AngularJS Testing
 ```clojure
