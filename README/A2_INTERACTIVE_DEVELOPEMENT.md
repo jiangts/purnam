@@ -7,16 +7,13 @@ This is a step by step guide on how to configure your project for interactive de
   2. [[Scaffolding with Yeoman |Interactive-Development#a2-creating-a-testing-harness-using-yo]]
   3. [[Viewing your Clojurescript Application |Interactive-Development#a3-viewing-your-clojurescript-application]]
 
-**B - Connecting to Light Table**
-  1. [[How Light Table Works |]]
-  2. [[The Instarepl |]]
-
 ### Prerequisites ###
 
 You will require:
 
 - [leiningen](https://github.com/technomancy/leiningen)
 - [yeoman](http://yeoman.io/)
+- Files from [[Your First Project|Your First Project]]
 
 If you do not have these already installed, please follow the links and install/create them first.
 
@@ -130,7 +127,3 @@ Edit `harness/app/index.html` and place the following code
 ```
 
 Now go back to your browser, which would have already reloaded. http://localhost:9000, An alert should pop up - "Hello Clojurescript!"
-
-###Section B - Connecting to Light Table
-
-TBD.

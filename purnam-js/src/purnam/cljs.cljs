@@ -21,7 +21,8 @@
 (defn aget-in
   ([var] var)
   ([var arr]
-      (cond (empty? arr) var
+     (cond  (= var js/undefined) nil
+            (empty? arr) var
             (nil? var) nil
             :else (aget-in (aget var (first arr))
                            (next arr)))))
@@ -36,8 +37,3 @@
   ([x y] (if (coll? x)
            (.log js/console (str x ":") (str y) y)
            (.log js/console (str x ":") (str y))) y))
-
-(def anobj (js-obj))
-(def get_a (fn [] (this-as me (.-a me))))
-(aset anobj "a" 9)
-(aset anobj "get_a" get_a)

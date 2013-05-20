@@ -7,59 +7,55 @@
 
 **Getting Started**
 
-1. **Your First Project [[▼|]]**
-   * [[Cljsbuild Configuration|]]
-   * [[Karma Configuration|]]
-   * [[Clojurescript Hello World|]]
-   * [[Your First Test|]]
-   * [[Your First Purnam Function|]]
-2. **Interactive Development [[▼|]]**
-   * [[Project Configuration|]]
-   * [[Scaffolding with Yeoman|]]
-   * [[Connecting to Light Table|]]
-3. **Your First AngularJS Project [[▼|]]**
-   * [[Project Setup|]]
-   * [[AngularJS Hello World|]]
-   * [[Controllers|]]
-   * [[Services|]]
-   * [[Directives|]]
+1. **Your First Project [[▼|Your-First-Project]]**
+   * [[Cljsbuild Configuration |Your-First-Project#a1-creating-and-configuring-your-clojurescript-project]]
+   * [[Karma Configuration |Your-First-Project#a2-creating-a-karma-configuration-for-tdd]]
+   * [[Clojurescript Hello World |Your-First-Project#b1-hello-world-in-clojurescript]]
+   * [[Your First Test |Your-First-Project#b2-writing-your-first-test]]
+   * [[Your First Purnam Function |Your-First-Project#b3-your-first-purnam-function]]
+2. **Interactive Development [[▼|Interactive Development]]**
+   * [[Project Configuration|Interactive-Development#a1-adding-another-build-to-your-cljsbuild]]
+   * [[Scaffolding with Yeoman|Interactive-Development#a2-creating-a-testing-harness-using-yo]]
 
 **API Reference**
 
-**purnam.js [[▼|Syntax Overview]]**
-  * [obj](Syntax-Overview#obj)
-  * [arr](Syntax-Overview#arr)
-  * [?](Syntax-Overview#getter)
-  * [?>](Syntax-Overview#calln)
-  * [!](Syntax-Overview#setter)
-  * [!>](Syntax-Overview#callobj)
-  * [this](Syntax-Overview#this)
-  * [self](Syntax-Overview#self)
-  * [def.n](Syntax-Overview#defn)
-  * [do.n](Syntax-Overview#don) 
-  * [def*](Syntax-Overview#defraw) 
-  * [def.n*](Syntax-Overview#defnraw)
-  * [fn*](Syntax-Overview#fnraw)
-  * [do*](Syntax-Overview#doraw)
+**purnam.js [[▼|API---purnam-js]]**
+  * [obj](API---purnam-js#wiki-obj)
+  * [arr](API---purnam-js#wiki-arr)
+  * [?](API---purnam-js#wiki-getter)
+  * [?>](API---purnam-js#wiki-calln)
+  * [!](API---purnam-js#wiki-setter)
+  * [!>](API---purnam-js#wiki-callobj)
+  * [this](API---purnam-js#wiki-this)
+  * [self](API---purnam-js#wiki-self)
+  * [f.n](API---purnam-js#wiki-fn)
+  * [def.n](API---purnam-js#wiki-defn)
+  * [do.n](API---purnam-js#wiki-don) 
+  * [def*](API---purnam-js#wiki-defraw) 
+  * [f*n](API---purnam-js#wiki-fnraw)
+  * [def*n](API---purnam-js#wiki-defnraw)
+  * [do*n](API---purnam-js#wiki-doraw)
   
-**purnam.test [[▼|Tests Using Jasmine]]**
-  * [describe](Angular-JS-Tests#describe)
-  * [it](Angular-JS-Tests#it)
-  * [is](Angular-JS-Tests#is)
+**purnam.test [[▼|purnam-test]]**
+  * [describe](API---purnam-test#wiki-describe)
+  * [it](API---purnam-test#wiki-it)
+  * [is](API---purnam-test#wiki-is)
   
-**purnam.angular [[▼|Angular JS]]**
-  * [def.module](Angular-JS#defmodule)
-  * [def.config](Angular-JS#defconfig)
-  * [def.controller](Angular-JS#defcontroller)
-  * [def.constant](Angular-JS#defconstant)
-  * [def.value](Angular-JS#defvalue)
-  * [def.service](Angular-JS#defservice)
-  * [def.factory](Angular-JS#deffactory)
-  * [def.provider](Angular-JS#defprovider)
-  * [def.directive](Angular-JS#defdirective)
+**purnam.angular [[▼|purnam-angular]]**
+  * [def.module](API---purnam-angular#defmodule)
+  * [def.config](API---purnam-angular#defconfig)
+  * [def.constant](API---purnam-angular#defconstant)
+  * [def.controller](API---purnam-angular#defcontroller)
+  * [def.directive](API---purnam-angular#defdirective)
+  * [def.factory](API---purnam-angular#deffactory)
+  * [def.filter](API---purnam-angular#deffilter)
+  * [def.service](API---purnam-angular#defservice)
+  * [def.provider](API---purnam-angular#defprovider)
+  * [def.value](API---purnam-angular#defvalue)
   
-**purnam.test.angular [[▼|Angular JS Tests]]**  
-  * [describe.ng](Angular-JS-Tests#describeng) 
-  * [ng](Angular-JS-Tests#describeng)
-  * [describe.controller](Angular-JS-Tests#describecontroller)
-  * [describe.directive](Angular-JS-Tests#describedirective)
+**purnam.test.angular [[▼|purnam-test-angular]]**  
+  * [describe.ng](API---purnam-test-angular#wiki-describeng)
+  * [describe.controller](API---purnam-test-angular#wiki-describecontroller)
+  * [ng](API---purnam-test-angular#wiki-ng)
+  * [ng-filter](API---purnam-test-angular#wiki-ng-filter)
+  * [ng-compile](API---purnam-test-angular#wiki-ng-compile)

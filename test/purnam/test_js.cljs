@@ -7,6 +7,8 @@
 
 (init)
 
+
+
 (describe
  {:doc "objs contain js arrays"
   :bindings [o1 (obj :array [1 2 3 4])]}
@@ -16,7 +18,7 @@
      (is o1.array.1 2)
      (is o1.array.2 3)
      (is o1.array.3 4)
-     (is o1.array.4 js/undefined)
+     (is o1.array.4 nil)
      (! o1.array.4 5)
      (is o1.array.4 5)
      (is-not o1.array (array 1 2 3 4 5))
@@ -33,7 +35,7 @@
       (is o1.array.1 even?)
       (is o1.array.2 odd?)
       (is o1.array.3 4)
-      (is o1.array.4 js/undefined)))
+      (is o1.array.4 nil)))
 
 (describe
  {:doc "obj"
@@ -55,7 +57,7 @@
   (is o1.array.|o1.array.0| 2)
   (is o1.array.|o1.array.|o1.array.0|| 3)
   (is o1.array.|o1.array.|o1.array.|o1.array.0||| 4)
-  (is o2.d js/undefined)))
+  (is o2.d nil)))
 
 (describe
  {:doc "obj"
@@ -117,7 +119,6 @@
    d (? c.d)
    e (? d.e)
    _ (! d.e "f")]}
-
  (it "does the right thing"
      (is e "e")
      (is (? d.e) "f")
@@ -130,12 +131,12 @@
   (! a.b 1)
   (! a.b.c 1)
   (it "will not set "
-    (is a.b.c js/undefined)
+    (is a.b.c nil)
     (is a.b 1)))
 
 (describe
   {:doc "! - Example 5.2"
-   :bindings 
+   :bindings
    [o (obj)
     k "a"]}
   (! o.|k| 6)
@@ -144,11 +145,19 @@
 
 #_(describe
   {:doc "! - Example 5.3"
-   :bindings 
+   :bindings
    [o (obj :a 1)]}
   (! o (obj :a 2)) ;; => throws exception
   (it "will not rebind o.a"
     (is o.a 1)))
+
+(describe
+  {:doc "!> - Example 6.2"
+   :bindings
+   [o (obj :func (fn [] 6))
+    k "func"]}
+  (it "can use pipe notation to call"
+    (is (o.|k|) 6)))
 
 
 (describe

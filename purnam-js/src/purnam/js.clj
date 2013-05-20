@@ -34,15 +34,14 @@
   (if (empty? s) arr
       (conj arr s)))
 
-(declare split-dotted-pipe)
-
 (defn reconstruct-dotted [output current ss]
   (str (s/join "." output) "." current (apply str ss)))\
-
 
 (defmacro split-error [msg]
   `(throw (Exception.
            (str ~msg ", input: " (reconstruct-dotted ~'output ~'current ~'ss)))))
+
+(declare split-dotted-pipe)
 
 (defn split-dotted
   ([ss]
@@ -128,8 +127,6 @@
         sym))
     ss))
 
-(declare js-expand)
-
 (defn js-expand-sym [obj]
   (cond (js-exp? obj)
         (js-parse-exp obj)
@@ -139,18 +136,24 @@
 
         :else obj))
 
+(declare js-expand)
+
 (defn js-expand-fn [sym args]
   (let [[var & ks] (js-split-syms sym)
         sel  (vec (butlast ks))
         fnc  (last ks)]
     (list 'let ['obj# (list 'purnam.cljs/aget-in (js-parse-var var)
-                            (vec (map js-parse-sub-exp sel)))]
-          (apply list (symbol (str "." fnc)) 'obj#
+                            (vec (map js-parse-sub-exp sel)))
+                'fn#  (list 'aget 'obj# (js-parse-sub-exp fnc))]
+          (apply list '.call 'fn# 'obj#
                  (js-expand args false)))))
 
 (defn js-expand
   ([form] (js-expand form true))
-  ([form pfn] (js-expand form pfn '#{! !> ? ?> obj arr fn* do.n do.n* }))
+  ([form pfn]
+     (js-expand form pfn '#{! !> ? ?> obj arr
+                            f.n def.n do.n
+                            f*n def*n do*n def*}))
   ([form pfn ex]
      (cond (set? form) (apply set (map js-expand form))
 
@@ -171,14 +174,11 @@
 
            :else (js-expand-sym form))))
 
-(defn js-apply-expand [f args]
-  (apply list f (js-expand args)))
-
 (defmacro ? [sym]
   (js-expand-sym sym))
 
-(defmacro ?> [f & args]
-  (js-apply-expand f args))
+(defmacro ?> [& args]
+  (apply list (map js-expand args)))
 
 (defmacro ! [sym val]
  (let [[var & ks] (js-split-syms sym)]
@@ -188,6 +188,9 @@
 
 (defmacro !> [sym & args]
   (js-expand-fn sym args))
+
+(defmacro f.n [args & body]
+  `(fn ~args ~@(js-expand body)))
 
 (defmacro def.n [sym args & body]
   `(defn ~sym ~args
@@ -336,12 +339,12 @@
   `(def ~name
         ~(js-expand (walk-js-raw form))))
 
-(defmacro def.n* [name args & body]
+(defmacro def*n [name args & body]
   `(defn ~name ~args
          ~@(js-expand (walk-js-raw body))))
 
-(defmacro fn* [args & body]
+(defmacro f*n [args & body]
   `(fn ~args ~@(js-expand (walk-js-raw body))))
 
-(defmacro do* [& body]
+(defmacro do*n [& body]
   `(do ~@(js-expand (walk-js-raw body))))

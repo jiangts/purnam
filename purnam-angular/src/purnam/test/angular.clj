@@ -13,16 +13,41 @@
            (l 'js/module (str module)))
         body))))
 
-(defmacro ng [[name] desc & body]
+(defmacro ng [names desc & body]
   (let [[desc body]
         (if (string? desc)
           [desc body]
-          ["" (cons desc body)])])
-  (l 'js/it desc
-     (l 'js/inject
-        (l 'array (str name)
-           (concat (l 'fn [name])
-                   body)))))
+          ["" (cons desc body)])]
+    (l 'js/it desc
+       (l 'js/inject
+          (concat (l 'array)
+                  (map str names)
+                  (l (concat (l 'fn names)
+                             body)))))))
+
+(defmacro ng-filter [[name] desc & body]
+  (let [[desc body]
+        (if (string? desc)
+          [desc body]
+          ["" (cons desc body)])]
+    (l 'js/it desc
+       (l 'js/inject
+          (l 'array "$filter"
+             (l 'fn ['$filter]
+                (apply l 'let [name (l '$filter (str name))]
+                       body)))))))
+
+(defmacro ng-compile [[name html] desc & body]
+  (let [[desc body]
+        (if (string? desc)
+          [desc body]
+          ["" (cons desc body)])]
+    (l 'js/it desc
+       (l 'js/inject
+          (l 'array "$compile" "$rootScope"
+             (l 'fn '[$compile $rootScope]
+                (apply l 'let [name (l (l '$compile html) '$rootScope)]
+                       body)))))))
 
 (defn controller-default-injections [controller]
   {:$scope '($rootScope.$new)

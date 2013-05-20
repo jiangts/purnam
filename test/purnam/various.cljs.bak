@@ -1,0 +1,23 @@
+
+(describe.ng
+  {:doc  "A sample Angular Test Suite"
+   :module sample.filters}
+   
+ (ng [$filter]
+   (let [r (($filter "range") (arr) 5)]
+     (is r.length 5)
+     (is r.0 0))))
+     
+(describe.ng
+ {:doc  "A sample Angular Test Suite"
+  :module sample.filters}
+  (js/it "should have a range filter"
+    (js/inject 
+      (fn [$filter]
+        (is-not ($filter "range") nil)
+        
+        (let [r (($filter "range") (arr) 5)]
+          (is r.length 5)
+          (is r.0 0))
+        ))))
+

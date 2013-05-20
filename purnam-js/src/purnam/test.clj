@@ -30,7 +30,7 @@
            (list 'js/describe (or (options :doc) "")
                `(fn [] ~@body
                   nil))))))
-
+                  
 (defmacro it [desc & body]
   (let [[desc body]
         (if (string? desc)

@@ -16,7 +16,7 @@ This is a step by step guide on how to set up a clojurescript test-driven develo
                   Near Instant Feedback
 
 
-**A - Project Setup [[►|Your-First-Project#section-a---project-setup]]**
+**A - Project Setup**
   1. [[Creating and Configuring your ClojureScript Project |Your-First-Project#a1-creating-and-configuring-your-clojurescript-project]]
   2. [[Creating a Karma Configuration for TDD |Your-First-Project#a2-creating-a-karma-configuration-for-tdd]]
 
@@ -304,4 +304,4 @@ Save this files and we should get immediate feedback from karma.
 
 Congratulations! You have written your first purnam function and test-suite. We are now ready to move on to [[Interactive Development]].
 
-[[◄ Back (Home)|Home]] `      ` [[Next (Interactive Developement) ►|Interactive Developement]]
+[[◄ Back (Home)|Home]] `      ` [[Next (Interactive Development) ►|Interactive Development]]

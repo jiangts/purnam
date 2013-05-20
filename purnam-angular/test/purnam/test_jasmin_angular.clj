@@ -3,7 +3,6 @@
         purnam.checks
         purnam.test.angular))
 
-
 (fact "describe.ng"
   (macroexpand-1
    '(describe.ng
@@ -25,7 +24,41 @@
    '(ng [<SERVICE>]
         "<DESC>"
         <BODY>))
-  => '(js/it "<DESC>" (js/inject (array "<SERVICE>" (fn [<SERVICE>] <BODY>)))))
+  => '(js/it "<DESC>" (js/inject (array "<SERVICE>" (fn [<SERVICE>] <BODY>))))
+
+  (macroexpand-1
+   '(ng [<SERVICE>]
+        <BODY>))
+  => '(js/it "" (js/inject (array "<SERVICE>" (fn [<SERVICE>] <BODY>))))
+
+  (macroexpand-1
+   '(ng [<SERVICE>]
+        "<DESC>"
+        <BODY>)))
+
+(fact "ng-filter"
+  (macroexpand-1
+   '(ng-filter [<FILTER>]
+        "<DESC>"
+        <BODY>))
+  => '(js/it "<DESC>"
+             (js/inject
+              (array "$filter"
+                     (fn [$filter]
+                       (let [<FILTER> ($filter "<FILTER>")]
+                         <BODY>))))))
+
+(fact "ng-compile"
+  (macroexpand-1
+   '(ng-compile [<NAME> <HTML>]
+        "<DESC>"
+        <BODY>))
+  => '(js/it "<DESC>"
+             (js/inject
+              (array "$compile" "$rootScope"
+                     (fn [$compile $rootScope]
+                       (let [<NAME> (($compile <HTML>) $rootScope)]
+                         <BODY>))))))
 
 (fact "describe.controller"
   (macroexpand-1

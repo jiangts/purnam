@@ -39,4 +39,4 @@ There is a list of samples that you can navigate to and play with.
     - craftyjs
     - More Coming!
 
-[[◄ Back (Home)|Home]] `      ` [[Next (Your First Project) ►|Your First Project]]
+[[◄ Back (Home)|Home]] `      ` [[Next (Project Structure) ►|Project Structure]]

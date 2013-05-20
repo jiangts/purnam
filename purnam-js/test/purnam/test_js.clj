@@ -73,6 +73,26 @@
               (aset %x "val" 3) %x)))
 
 
+(fact "?"
+  '(j/? <OBJ>)
+  => (expands-into '<OBJ>)
+
+  '(j/? <OBJ>.<V1>)
+  => (expands-into
+      '(purnam.cljs/aget-in <OBJ> ["<V1>"]))
+
+  '(j/?  <OBJ>.<V1>.<V2>)
+  => (expands-into
+      '(purnam.cljs/aget-in <OBJ> ["<V1>" "<V2>"])))
+
+(fact "?>"
+  (macroexpand-1
+   '(j/?> <FUNC> <OBJ>.<V1> <OBJ>.<V2> <VALUE>))
+
+  => '(<FUNC> (purnam.cljs/aget-in <OBJ> ["<V1>"])
+              (purnam.cljs/aget-in <OBJ> ["<V2>"])
+              <VALUE>))
+
 ;; Macros
 (fact "!"
   '(j/! <OBJ>.<V1> <VALUE>)
@@ -94,27 +114,17 @@
         [(purnam.cljs/aget-in <V1> ["<V2>"]) "<V3>"] <VALUE>)))
 
 (fact "!>"
-  '(j/!> <OBJ>.<FN> <ARG1> <ARG2> <ARG3>)
-  => (expands-into
-      '(let [obj# (purnam.cljs/aget-in <OBJ> [])]
-         (.<FN> obj# <ARG1> <ARG2> <ARG3>)))
+  (macroexpand-1
+   '(j/!> <OBJ>.<FN> <ARG1> <ARG2> <ARG3>))
+  => '(let [obj# (purnam.cljs/aget-in <OBJ> [])
+            fn# (aget obj# "<FN>")]
+        (.call fn# obj# <ARG1> <ARG2> <ARG3>))
 
-  '(j/!> <OBJ>.<V1>.<FN> <ARG1> <ARG2> <ARG3>)
-  => (expands-into
-      '(let [obj# (purnam.cljs/aget-in <OBJ> ["<V1>"])]
-         (.<FN> obj# <ARG1> <ARG2> <ARG3>))))
+  (macroexpand-1  '(j/!> <OBJ>.<V1>.<FN> <ARG1> <ARG2> <ARG3>))
+  => '(let [obj# (purnam.cljs/aget-in <OBJ> ["<V1>"])
+            fn# (aget obj# "<FN>")]
+        (.call fn# obj# <ARG1> <ARG2> <ARG3>)))
 
-(fact "?"
-  '(j/? <OBJ>)
-  => (expands-into '<OBJ>)
-
-  '(j/? <OBJ>.<V1>)
-  => (expands-into
-      '(purnam.cljs/aget-in <OBJ> ["<V1>"]))
-
-  '(j/?  <OBJ>.<V1>.<V2>)
-  => (expands-into
-      '(purnam.cljs/aget-in <OBJ> ["<V1>" "<V2>"])))
 
 (fact "def.n"
   (macroexpand-1
@@ -122,12 +132,13 @@
       (if <ARG1>.<V1>.<V2>
         <ARG2>.<W1>
         (<ARG2>.<FN> <X> <Y> <Z>))))
-
-  => '(clojure.core/defn <FUNCTION> [<ARG1> <ARG2>]
-        (if (purnam.cljs/aget-in <ARG1> ["<V1>" "<V2>"])
-          (purnam.cljs/aget-in <ARG2> ["<W1>"])
-          (let [obj# (purnam.cljs/aget-in <ARG2> [])]
-            (.<FN> obj# <X> <Y> <Z>)))))
+  =>
+  '(clojure.core/defn <FUNCTION> [<ARG1> <ARG2>]
+     (if (purnam.cljs/aget-in <ARG1> ["<V1>" "<V2>"])
+       (purnam.cljs/aget-in <ARG2> ["<W1>"])
+       (let [obj# (purnam.cljs/aget-in <ARG2> [])
+             fn# (aget obj# "<FN>")]
+         (.call fn# obj# <X> <Y> <Z>)))))
 
 (fact "has-sym-root?"
   (j/has-sym-root? 'hello 'hello) => true
@@ -227,6 +238,13 @@
 
 
 (fact "fn*"
+  (macroexpand-1
+   '(j/fn* [o] (! o.val [1 2 3 4 5])))
+  => '(clojure.core/fn [o] (! o.val (array 1 2 3 4 5)))
+
+
+
+
   (macroexpand-1
    '(j/fn* [<ARG1> <ARG2>]
      (let [<X> [<ARG1>.<V1> <V2>]
