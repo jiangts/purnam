@@ -36,14 +36,18 @@
 
   (macroexpand-1
    '(def.module my.app [ui ui.bootstrap]))
-  )
+  => '(def my_app (.module js/angular "my.app"
+                           (array "ui" "ui.bootstrap"))))
 
 (fact "def.config"
   (macroexpand-1
    '(def.config <MODULE>.<NS> [<VAR1> <VAR2>] <EXP1> <EXP2>))
   => '(.config (.module js/angular "<MODULE>.<NS>")
                (array "<VAR1>" "<VAR2>"
-                      (fn [<VAR1> <VAR2>] <EXP1> <EXP2>))))
+                      (fn [<VAR1> <VAR2>] <EXP1> <EXP2>)))
+
+  (macroexpand-1
+   '(def.config my.app [$routeParams])))
 
 (fact "value-fn"
   (value-fn '<MODULE>.<NS>.<VAL> '.<FUNC> '<BODY>)

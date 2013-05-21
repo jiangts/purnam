@@ -222,9 +222,9 @@
           <Z> (obj <W1> <W2>)]
       (obj <X> (array <X> <Y>)))))
 
-(fact "def.n*"
+(fact "def*n"
   (macroexpand-1
-   '(j/def.n* <NAME> [<ARG1> <ARG2>]
+   '(j/def*n <NAME> [<ARG1> <ARG2>]
       (let [<X> [<V1> <V2>]
             <Y> {:<W1> <W2>}
             <Z> {<W1> <W2>}]
@@ -237,16 +237,13 @@
       (obj <X> (array <X> <Y>)))))
 
 
-(fact "fn*"
+(fact "f*n"
   (macroexpand-1
-   '(j/fn* [o] (! o.val [1 2 3 4 5])))
+   '(j/f*n [o] (! o.val [1 2 3 4 5])))
   => '(clojure.core/fn [o] (! o.val (array 1 2 3 4 5)))
 
-
-
-
   (macroexpand-1
-   '(j/fn* [<ARG1> <ARG2>]
+   '(j/f*n [<ARG1> <ARG2>]
      (let [<X> [<ARG1>.<V1> <V2>]
            <Y> {:<W1> this.<W2>}
            <Z> {:<W1> self.<W2>}]

@@ -20,24 +20,62 @@
                } else { return expected === actual; }
          }})});"))
 
-(defmacro describe [options & body]
+(def l list)
+
+(def describe-default-options
+  {:doc  ""
+   :spec 'spec
+   :vars []
+   :globals []})
+
+(defn describe-bind-vars
+  [spec vars]
+  (let [bindings (partition 2 vars)]
+    (apply list
+           (map (fn [[v b]]
+                  (list 'aset spec (str v) b))
+                bindings))))
+
+(defn describe-roots-map
+  [spec vars]
+  (let [bindings (partition 2 vars)]
+    (into {}
+          (map (fn [[v _]]
+                 [v (symbol (str spec "." v))])
+                bindings))))
+
+
+(defn describe-fn [options body]
   (let [[options body]
         (if (hash-map? options)
-            [options body]
-            [{} (cons options body)])]
+          [(merge describe-default-options options) body]
+          [describe-default-options (cons options body)])
+        {:keys [doc spec globals vars]} options]
     (js-expand
-     (list 'let (or (options :bindings) [])
-           (list 'js/describe (or (options :doc) "")
-               `(fn [] ~@body
-                  nil))))))
-                  
+     (concat (l 'let (apply vector spec '(js-obj) globals))
+             (describe-bind-vars spec vars)
+             (l (l 'js/describe doc
+                   `(fn [] ~@(change-roots-map
+                             body
+                             (describe-roots-map spec vars))
+                      nil)))))))
+
+(defmacro describe [options & body]
+  (describe-fn options body))
+
+
+(defn it-preprocess [desc body]
+  (if (string? desc)
+    [desc body]
+    ["" (cons desc body)]))
+
+(defn it-fn [desc body]
+  (list 'js/it desc
+        `(fn [] ~@body)))
+
 (defmacro it [desc & body]
-  (let [[desc body]
-        (if (string? desc)
-          [desc body]
-          ["" (cons desc body)])]
-    (list 'js/it desc
-          `(fn [] ~@body))))
+  (let [[desc body] (it-preprocess desc body)]
+    (it-fn desc body)))
 
 (defmacro beforeEach [& body]
   (list 'js/beforeEach `(fn [] ~@body)))

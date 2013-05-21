@@ -6,41 +6,43 @@
                                    is-equal is-not-equal
                                    beforeEach]]))
 
+(init)
+
 (describe
- {:doc "obj - primitive object constructor"}
- (it "1.1"
-     (is-equal
-      (obj "key1" "val1" "key2" "val2")
-      (js* "{key1: 'val1', key2: 'val2'}")))
+   {:doc "obj - primitive object constructor"}
+   (it "1.1"
+       (is-equal
+        (obj "key1" "val1" "key2" "val2")
+        (js* "{key1: 'val1', key2: 'val2'}")))
 
- (it "1.2"
-     (is-equal
-      (obj :key1 "val1" :key2 "val2")
-      (js* "{key1: 'val1', key2: 'val2'}")))
+   (it "1.2"
+       (is-equal
+        (obj :key1 "val1" :key2 "val2")
+        (js* "{key1: 'val1', key2: 'val2'}")))
 
- (it "1.3"
-     (let [s1 "key1"
-           s2 "key2"]
-       (is-equal (obj s1 "val1" s2 "val2")
-                 (js* "{key1: 'val1', key2: 'val2'}")))
-     (let [s1 :key1
-           s2 :key2]
-       (is-not-equal (obj s1 "val1" s2 "val2")
-                     (js* "{key1: 'val1', key2: 'val2'}"))))
+   (it "1.3"
+       (let [s1 "key1"
+             s2 "key2"]
+         (is-equal (obj s1 "val1" s2 "val2")
+                   (js* "{key1: 'val1', key2: 'val2'}")))
+       (let [s1 :key1
+             s2 :key2]
+         (is-not-equal (obj s1 "val1" s2 "val2")
+                       (js* "{key1: 'val1', key2: 'val2'}"))))
 
- (it "1.4"
-     (is-equal
-      (obj :data [{:id 1 :name "one"}
-                  {:id 2 :name "two"}])
-      (js* "{data: [{id:1,name:'one'},
+   (it "1.4"
+       (is-equal
+        (obj :data [{:id 1 :name "one"}
+                    {:id 2 :name "two"}])
+        (js* "{data: [{id:1,name:'one'},
                     {id:2,name:'two'}]}")))
 
- (it "1.5"
-     (is-equal
-      (obj :name "l1" :data [1 2 3]
-           :next {:name "l2" :data [4 5 6]
+   (it "1.5"
+       (is-equal
+        (obj :name "l1" :data [1 2 3]
+             :next {:name "l2" :data [4 5 6]
                     :next {:name "l3" :data [7 8 9]}})
-      (js* "{name: 'l1',
+        (js* "{name: 'l1',
               data: [1,2,3],
               next: {name: 'l2',
                      data: [4,5,6],
@@ -61,11 +63,14 @@
       (js* "[{data: [1,2,3,4,5]},
              {data: [6,7,8,9,10]}]"))))
 
+
+
+
 (describe
  {:doc "? - object/array accessor"
-  :bindings [o (obj :a 1 :b 2 :c 3)
-             ka "a"
-             kb "b"]}
+  :globals [ka "a"
+            kb "b"]
+  :vars [o (obj :a 1 :b 2 :c 3)]}
 
  (it "3.1"
      (is 1 (? o.a))
@@ -76,21 +81,20 @@
      (is 3 (+ (? o.|ka|) (? o.|kb|))))
 
  (it "3.3"
-     (let [o (arr [1 2 3]
-                  [4 5 6]
-                  [7 8 9])]
-       (is 8 (- (? o.2.2) (? o.0.0))) ))
+     (! o (arr [1 2 3]
+               [4 5 6]
+               [7 8 9]))
+     (is 8 (- (? o.2.2) (? o.0.0))) )
 
  (it "3.4"
-     (let [o (obj :a {:data 1})]
-       (is (? o.a.data) 1)
-       (is (? o.b.data) nil)
-       (is (? o.any.nested.syntax) nil))))
+     (! o (obj :a {:data 1}))
+     (is (? o.a.data) 1)
+     (is (? o.b.data) nil)
+     (is (? o.any.nested.syntax) nil)))
 
 (describe
  {:doc "?> - call with notation"
-  :bindings
-  [o (obj :a 1 :b 2)]}
+  :vars [o (obj :a 1 :b 2)]}
 
  (it "4.1"
      (is (?> + o.a o.b) 3)
@@ -128,14 +132,14 @@
          (! o (obj :a 1)))) ;; cannot compile
 
  (it "5.4"
-   (let [o (obj)]
-     (is (? o.a.b.c.d) nil)
-     (is (? o.a) nil)
-     (! o.a.b.c.d 6)
-     (is (? o.a.b.c.d) 6)
-     (is-equal
-      (? o.a)
-      (obj :b {:c {:d 6}}))))
+     (let [o (obj)]
+       (is (? o.a.b.c.d) nil)
+       (is (? o.a) nil)
+       (! o.a.b.c.d 6)
+       (is (? o.a.b.c.d) 6)
+       (is-equal
+        (? o.a)
+        (obj :b {:c {:d 6}}))))
 
  (it "5.5"
      (let [o1 (obj :a 1)
@@ -202,11 +206,12 @@
        (is (!> o1.b.func) 10)
        (is (!> o2.b.func) 20))))
 
-#_(defn add-inner [a b]
- (+ a.inner b.inner))
 
- (defn print-this []
-   (js/console.log this)) 
+#_(defn add-inner [a b]
+      (+ a.inner b.inner))
+
+#_(defn print-this []
+        (js/console.log this))
 
 
 (def.n add-inner [a b]
@@ -243,9 +248,9 @@
 (def*n f2 [o] (! o.val [1 2 3 4 5]))
 (describe
  {:doc "def* def*n and f*n - function"
-  :bindings [a (obj)]}
+  :globals [a (obj)]}
 
- (beforeEach (js-delete a "val"))
+ (beforeEach (! a.val nil))
 
  (it "def*"
      (is a.val nil)
@@ -282,7 +287,3 @@
  (it ""
      (is (o1.b.func) 20)
      (is (o2.b.func) 20)))
-
-
-(comment
-  do* def* def.n*)
