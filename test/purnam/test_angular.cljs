@@ -88,9 +88,7 @@
 
 
 (def.service sample.SimpleService []
-  (obj :user {:login "login"
-              :password "secret"
-              :greeting "hello world"}
+  (obj :user {:login "login"}
        :changeLogin (fn [login]
                       (! this.user.login login))))
 
@@ -137,7 +135,8 @@
  {:doc "A sample controller for testing purposes"
   :module sample
   :inject [[$scope ([$rootScope $controller]
-                      ($controller "SimpleCtrl" (obj :$scope ($rootScope.$new))))]]}
+                     ($controller "SimpleCtrl" (obj :$scope ($rootScope.$new))))]]}
+                     
  (it "should have an object called `spec`"
        (is-not spec js/undefined))
 

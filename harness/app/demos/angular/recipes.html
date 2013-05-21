@@ -17,10 +17,20 @@
   <body ng-app="recipesDemo" 
         ng-controller="RecipesMainCtrl"
         class="container">    
-    <div class="span4 offset2" 
+    <div class="span8 offset2" 
          style="border:1px dotted yellow; padding-top: 100px">
       <div class="centered">
         <h1>Recipes</h1>
+        <form>
+          <input ng-model="recipe"></input>
+          <button type="submit" ng-click="searchRecipes()">search</button>
+          <ul>
+            <li ng-repeat="h in data.results">
+              <h4 ng-bind="h.title"></h4>
+              <img ng-src="{{h.thumbnail}}"></img>
+            </li>
+          </ul>
+      </form>
       </div>
     </div>
     <script src="../../libs/angular/angular.js"></script>

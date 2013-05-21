@@ -14,11 +14,17 @@
 (def.module recipesDemo [])
 
 (def.controller recipesDemo.RecipesMainCtrl [$scope $http]
-  (->
-   ($http (obj :method "JSONP"
-               :params {:q "cabbage"
-                        :callback "jsonsearch"}
-               :url "http://www.recipepuppy.com/api"))
-   (.success (fn [res]))
-   (.error (fn []
-             (js/console.log JSONP.data)))))
+  (! $scope.recipe "chocolate")
+  
+  (! $scope.searchRecipes
+    (fn []
+      (->
+       ($http (obj :method "JSONP"
+                   :params {:q $scope.recipe
+                            :callback "jsonsearch"}
+                   :url "http://www.recipepuppy.com/api"))
+       (.success (fn [res]))
+       (.error (fn []
+         (! $scope.data JSONP.data))))))
+  (if-not $scope.data
+    ($scope.searchRecipes)))
