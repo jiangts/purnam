@@ -140,6 +140,21 @@
              fn# (aget obj# "<FN>")]
          (.call fn# obj# <X> <Y> <Z>)))))
 
+(fact "property"
+ (macroexpand-1 '(j/property <A>.<B>.<C>))
+ => '(clojure.core/fn 
+         ([] (purnam.js/? <A>.<B>.<C>)) 
+         ([v] (clojure.core/cond 
+                (clojure.core/= "object" 
+                (js/goog.typeOf (purnam.js/? <A>.<B>.<C>)) 
+                (js/goog.typeOf v)) 
+              (purnam.cljs/areplace (purnam.js/? <A>.<B>.<C>) v) 
+              :else (purnam.js/! <A>.<B>.<C> v))))
+ (macroexpand-1 '(j/property <A>.<B>.<C> true))
+ => '(clojure.core/fn 
+       ([] (purnam.js/? <A>.<B>.<C>)) 
+       ([v] (throw (js/Error "<A>.<B>.<C> is readonly")))))
+
 (fact "has-sym-root?"
   (j/has-sym-root? 'hello 'hello) => true
   (j/has-sym-root? 'hello 'NONE) => false
@@ -235,7 +250,6 @@
           <Y> (obj :<W1> <W2>)
           <Z> (obj <W1> <W2>)]
       (obj <X> (array <X> <Y>)))))
-
 
 (fact "f*n"
   (macroexpand-1

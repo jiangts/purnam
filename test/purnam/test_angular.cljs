@@ -2,9 +2,9 @@
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
   (:require-macros [purnam.js :as j])
-  (:use-macros [purnam.js :only [obj arr ! defv.ndef.n]]
+  (:use-macros [purnam.js :only [obj arr ! def.n]]
                [purnam.test :only [init describe it is is-not is-equal is-not-equal]]
-               [purnam.angular :only [def.module def.config
+               [purnam.angular :only [def.module def.config def.factory
                                       def.filter def.controller
                                       def.service def.directive]]
                [purnam.test.angular :only [describe.controller describe.ng
@@ -44,7 +44,8 @@
  (it "can test for range filters"
   (let [r (($filter "range") (arr) 5)]
     (is r.length 5)
-    (is r.0 0))))
+    (is r.0 0)
+    (is r.1 1))))
 
 (describe.ng
  {:doc  "Testing Filters"
@@ -106,7 +107,8 @@
 
  (it "SimpleService Basics"
      (is-not SimpleService.user compare)
-     (is-equal SimpleService.user compare))
+     ;;(is-equal SimpleService.user compare)
+     )
 
  (it "SimpleService Change Login"
      (is SimpleService.user.login "login")
@@ -171,3 +173,16 @@
 
        (do ($scope.setMessage "Angular Rocks!")
            (is $scope.msg "Angular Rocks!"))))
+
+(def.module hello [])
+(def.factory hello.Data [] 
+ (obj :a 1))
+
+(describe.ng
+{:doc  "Simple Services Test"
+ :module hello
+ :inject [Data]}
+(it "SimpleService Change Login"
+  (is Data.a 1)
+  (is-equal 1 1)
+  ))

@@ -153,7 +153,7 @@
   ([form pfn]
      (js-expand form pfn '#{! !> ? ?> obj arr
                             f.n def.n do.n
-                            f*n def*n do*n def*}))
+                            f*n def*n do*n def* property}))
   ([form pfn ex]
      (cond (set? form) (apply set (map js-expand form))
 
@@ -198,6 +198,27 @@
 
 (defmacro do.n [& body]
   `(do ~@(js-expand body)))
+
+
+(defmacro property [sym & [readonly]]
+  `(fn ([] (? ~sym))
+       ([~'v]
+        ~(if readonly
+           `(throw (js/Error ~(str sym " is readonly")))
+           `(cond (= "object" 
+                  (js/goog.typeOf (? ~sym))
+                  (js/goog.typeOf ~'v))
+               (purnam.cljs/areplace (? ~sym) ~'v)
+              :else
+              (! ~sym ~'v))))))
+
+
+#_(defmacro property [sym]
+  `(fn ([] (? ~sym))
+       ([~'v] (! ~sym ~'v)
+         #_(if (? ~sym)
+           (purnam.cljs/merge (? ~sym) ~'v)
+           (! ~sym ~'v)))))
 
 ;; Macro to create objects
 
