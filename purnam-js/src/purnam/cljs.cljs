@@ -62,10 +62,16 @@
        (aget-in x (st/split func #"\.")))
      func))
 
-(defn check-fn [func chk]
- (fn [x]
-   (let [res (func x)]
+(defn check-fn
+ ([chk]
+   (fn [x]
      (if (fn? chk)
-        (chk res)
-        (= res chk)))))
+        (chk x)
+        (= x chk)))) 
+ ([func chk]
+   (fn [x]
+     (let [res (func x)]
+       (if (fn? chk)
+          (chk res)
+          (= res chk))))))
 

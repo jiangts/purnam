@@ -10,7 +10,8 @@
 
 (def.filter purnam.filters.subArray []
   (fn [input start end]
-      (a/slice input start end)))
+    (let [out (if input (a/clone input) (arr))]
+      (a/slice out start end))))
       
 (def.filter purnam.filters.unique []
   (fn [input]
@@ -55,6 +56,10 @@
 (def.filter purnam.filters.flatten []
   (fn [input]
     (a/flatten input)))
+        
+(def.filter purnam.filters.count []
+  (fn [input]
+    (.-length input)))
     
 (def.filter purnam.filters.sortBy []
   (fn 
@@ -69,7 +74,7 @@
     ([input func rev]
       (let [f   (augment-fn-string func)
             out (a/clone input)]
-        (.sort out
+        (a/sort out
           (fn [a b]
             (< (f a) (f b))))
         out))))
