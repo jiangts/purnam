@@ -1,11 +1,12 @@
-(defproject purnam "0.1.0-beta"
+(defproject purnam "0.1.0"
   :description "A better javascript experience on clojurescript"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
             :url "http://opensource.org/licencses/MIT"}
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [purnam/purnam-js      "0.1.0-beta"]
-                 [purnam/purnam-angular "0.1.0-beta"]
+                 [org.clojure/clojurescript "0.0-1835"]
+                 ;;[purnam/purnam-js      "0.1.0"]
+                 ;;[purnam/purnam-angular "0.1.0"]
                  ]
   :sub 
     ["purnam-js"

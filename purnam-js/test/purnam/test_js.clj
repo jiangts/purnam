@@ -148,7 +148,7 @@
                 (clojure.core/= "object" 
                 (js/goog.typeOf (purnam.js/? <A>.<B>.<C>)) 
                 (js/goog.typeOf v)) 
-              (purnam.cljs/areplace (purnam.js/? <A>.<B>.<C>) v) 
+              (purnam.cljs/js-replace (purnam.js/? <A>.<B>.<C>) v) 
               :else (purnam.js/! <A>.<B>.<C> v))))
  (macroexpand-1 '(j/property <A>.<B>.<C> true))
  => '(clojure.core/fn 

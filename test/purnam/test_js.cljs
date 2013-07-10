@@ -33,7 +33,7 @@
      (is o1.array.1 even?)
      (is o1.array.2 odd?)
      (is o1.array.3 4)
-     (is o1.array.4 nil)))
+     (is o1.array.4 nil)));
 
 (describe
  {:doc "obj"

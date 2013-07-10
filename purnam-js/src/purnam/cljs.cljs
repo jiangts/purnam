@@ -1,14 +1,14 @@
 (ns purnam.cljs
-  (:require [goog.object :as o]
+  (:require [goog.object :as gobject]
+            [goog.array :as garray]
             [clojure.string :as st]))
 
-(defn obj-in
- ([ks val] (obj-in (js-obj) ks val))
- ([obj ks val]
-    (if-let [k (first ks)]
-      (do (aset obj k (obj-in (next ks) val))
-          obj)
-      val)))
+(defn nested-val [[k & ks] val]
+  (if (nil? k)
+    val
+    (let [o (js-obj)]
+      (aset o k (nested-val ks val))
+      o)))
 
 (defn aset-in [var arr val]
   (let [[k & ks] arr]
@@ -17,32 +17,154 @@
           :else
           (if-let [svar (aget var k)]
             (aset-in svar ks val)
-            (aset var k (obj-in ks val))))
+            (aset var k (nested-val ks val))))
     var))
-
-
-(defn aclear [a]
-  (o/forEach (o/getKeys a)
-     (fn [k] (js-delete a k)))
-  a)
-
-(defn amerge [a b]
-  (o/forEach (o/getKeys b)
-             (fn [k] (aset a k (aget b k))))
-  a)
-
-(defn areplace [a b]
-  (aclear a)
-  (amerge a b))
 
 (defn aget-in
   ([var] var)
   ([var arr]
-     (cond  (= var js/undefined) nil
+     (cond  (nil? var) nil
             (empty? arr) var
-            (nil? var) nil
             :else (aget-in (aget var (first arr))
                            (next arr)))))
+
+(defn js-strkey [x]
+  (cond
+    (string? x) x
+    (keyword? x) (name x)
+    :else (str x)))
+
+(defn js-obj-name [this]
+  (if-let [[_ n] (re-find #"^function (\w+)" (str this))]
+    n
+    "Object"))
+
+(defn js-lookup
+  ([o k]
+     (aget o (js-strkey k)))
+  ([o k not-found]
+     (let [s (js-strkey k)]
+       (if-let [res (aget o s)]
+         res
+         not-found))))
+
+(defn js-assoc
+  ([o k v]
+     (do (aset o (js-strkey k) v)
+         o))
+  ([o k v & more]
+     (js-assoc o k v)
+     (if more
+       (recur o (first more) (second more) (nnext more))
+       o)))
+
+(defn js-dissoc
+  [o & ks]
+  (doseq [k ks]
+    (js-delete o k))
+  o)
+
+(defn js-empty [o]
+  (case (js/goog.typeOf o)
+    "object"
+    (doseq [k (js-keys o)]
+      (js-delete o k))
+
+    "array"
+    (aset o "length" 0))
+ o)
+
+(defn js-merge
+  ([o1 o2]
+     (doseq [k (js-keys o2)]
+       (aset o1 k (aget o2 k)))
+      o1)
+  ([o1 o2 & more]
+     (apply js-merge (js-merge o1 o2) more)))
+
+(defn js-merge-nil
+  ([o1 o2]
+     (doseq [k (js-keys o2)]
+       (if-not (aget o1 k)
+         (aset o1 k (aget o2 k))))
+     o1)
+  ([o1 o2 & more]
+     (js-merge-nil o1 o2)
+     (if more
+       (recur (js-merge-nil o1 o2) (first more) (next more))
+       o1)))
+
+(defn js-replace [o1 o2]
+ (js-empty o1)
+ (js-merge o1 o2))
+
+(defn js-equals [v1 v2]
+  (if (= v1 v2) true
+      (let [t1 (js/goog.typeOf v1)
+            t2 (js/goog.typeOf v2)]
+        (cond (= "array" t1 t2)
+              (garray/equals v1 v2 js-equals)
+
+              (= "object" t1 t2)
+              (let [ks1 (.sort (js-keys v1))
+                    ks2 (.sort (js-keys v2))]
+                (if (garray/equals ks1 ks2)
+                  (garray/every
+                   ks1
+                   (fn [k]
+                     (js-equals (aget v1 k) (aget v2 k))))
+                  false))
+              :else
+              false))))
+
+(defn js-copy-assoc
+  [o & pairs]
+  (let [out (gobject/clone o)]
+      (apply js-assoc out pairs)))
+
+(defn js-copy-dissoc
+  [o & ks]
+  (let [out (gobject/clone o)]
+    (apply js-dissoc out ks)
+    out))
+
+(defn js-initial-value [v]
+  (let [t (js/goog.typeOf v)]
+    (cond (= t "object") (js-obj)
+          (= t "array")  (array)
+          :else v)))
+
+(defn js-deep-extend
+  ([to from]
+     (let [visited   (array from)
+           visitedlu (array to)]
+       (js-deep-extend to from visited visitedlu)
+       to))
+  ([to from visited visitedlu]
+     (doseq [k  (js-keys from)]
+       (let [v  (aget from k)
+             vn (js-initial-value v)]
+         (cond (not= v vn)
+               (let [i  (.indexOf visited v)]
+                 (if (= -1 i)
+                   (do (.push visited v)
+                       (.push visitedlu vn)
+                       (js-deep-extend vn v visited visitedlu)
+                       (aset to k vn))
+                   (aset to k (aget visitedlu i))))
+               :else
+               (aset to k v))))
+     to))
+
+(defn js-deep-copy [value]
+  (let [vn (js-initial-value value)]
+    (if (not= value vn)
+      (js-deep-extend vn value)
+      value)))
+
+(defn js-deep-replace [o1 o2]
+  (js-empty o1)
+  (js-deep-extend o1 o2))
 
 (defn js<- [obj]
   (clj->js obj))
@@ -54,7 +176,7 @@
   ([x y] (if (coll? x)
            (.log js/console (str x ":") (str y) y)
            (.log js/console (str x ":") (str y))) y))
-           
+
 
 (defn augment-fn-string [func]
  (if (string? func)
@@ -67,11 +189,10 @@
    (fn [x]
      (if (fn? chk)
         (chk x)
-        (= x chk)))) 
+        (= x chk))))
  ([func chk]
    (fn [x]
      (let [res (func x)]
        (if (fn? chk)
           (chk res)
           (= res chk))))))
-

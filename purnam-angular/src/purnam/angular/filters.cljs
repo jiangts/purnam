@@ -1,7 +1,8 @@
 (ns purnam.angular.filters
   (:use [purnam.cljs :only [aget-in aset-in augment-fn-string check-fn]])
   (:require [goog.object :as o]
-            [goog.array :as a])
+            [goog.array :as a]
+            [purnam.types :as t])
   (:require-macros [purnam.js :as j])
   (:use-macros [purnam.js :only [obj arr ! def.n]]
                [purnam.angular :only [def.module def.filter]]))
@@ -79,6 +80,13 @@
             (< (f a) (f b))))
         out))))
 
+(def.filter purnam.filters.partition []
+  (fn -partition 
+    ([input size]
+      (input size (obj)))
+    ([input size output]
+      output)))
+
 ;; TODO
 (def.filter purnam.filters.groupBy []
   (fn 
@@ -87,3 +95,4 @@
     ([input func chk]
      (a/bucket input 
       (check-fn (augment-fn-string func) chk)))))
+      

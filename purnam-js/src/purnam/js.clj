@@ -199,7 +199,6 @@
 (defmacro do.n [& body]
   `(do ~@(js-expand body)))
 
-
 (defmacro property [sym & [readonly]]
   `(fn ([] (? ~sym))
        ([~'v]
@@ -208,17 +207,9 @@
            `(cond (= "object" 
                   (js/goog.typeOf (? ~sym))
                   (js/goog.typeOf ~'v))
-               (purnam.cljs/areplace (? ~sym) ~'v)
+               (purnam.cljs/js-replace (? ~sym) ~'v)
               :else
               (! ~sym ~'v))))))
-
-
-#_(defmacro property [sym]
-  `(fn ([] (? ~sym))
-       ([~'v] (! ~sym ~'v)
-         #_(if (? ~sym)
-           (purnam.cljs/merge (? ~sym) ~'v)
-           (! ~sym ~'v)))))
 
 ;; Macro to create objects
 
