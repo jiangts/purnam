@@ -21,3 +21,19 @@
        "focus"
        (fn [e]
          (scope.$apply (fn [] (f scope (obj :$event e)))))))))
+
+(def.directive purnam.ngLet []
+  (obj
+    :scope false
+    :link 
+    (fn [$scope $element $attr]
+      (let [regex #"^\s*(.*)\s+as\s+(.*)\s*"]
+        (doseq [line ($attr.ngLet.split ";")]
+          (if-let [match (line.match regex)]
+            (let [varName match.1
+                  varExp  match.2
+                  assign  
+                  (fn [value] 
+                    (! $scope.|varName| value))]
+               (assign ($scope.$eval varExp))
+               ($scope.$watch varExp assign))))))))

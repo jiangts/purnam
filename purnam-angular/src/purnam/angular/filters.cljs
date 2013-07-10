@@ -13,6 +13,12 @@
   (fn [input start end]
     (let [out (if input (a/clone input) (arr))]
       (a/slice out start end))))
+
+(def.filter purnam.filters.pr []
+  (fn [input title]
+    (js/console.log title input)
+    input))
+
       
 (def.filter purnam.filters.unique []
   (fn [input]
@@ -80,13 +86,31 @@
             (< (f a) (f b))))
         out))))
 
-(def.filter purnam.filters.partition []
-  (fn -partition 
-    ([input size]
-      (input size (obj)))
-    ([input size output]
-      output)))
+(def.filter purnam.filters.change []
+  (fn [input]
+    (let [out (arr)]
+      (input.forEach
+        (fn [v] (out.push v)))
+       out)))
 
+(def.filter purnam.filters.partition []
+  (fn [input n]
+      (loop [i    0
+             j    -1
+             out  (arr)]
+        (cond (>= i input.length) out
+  
+              (= 0 (mod i n))
+              (let [oarr (arr input.|i|)]
+                (! input.|i|.$$hashKey (str "A" i))
+                (! oarr.$$hashKey (str "A" i))
+                (out.push oarr)
+                (recur (inc i) (inc j) out))
+              
+              :else
+              (do (! input.|i|.$$hashKey (str "A" i))
+                  (out.|j|.push input.|i|)
+                  (recur (inc i) j out))))))
 ;; TODO
 (def.filter purnam.filters.groupBy []
   (fn 
