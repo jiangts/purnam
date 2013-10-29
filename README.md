@@ -7,7 +7,7 @@
 In your project file, add
 
 ```clojure
-[purnam "0.1.0-beta"]
+[purnam "0.1.5"]
 ```
 
 ### What is Purnam?
