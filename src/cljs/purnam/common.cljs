@@ -61,7 +61,7 @@
      (do (aset o (>strkey k) v)
          o))
   ([o k v & more]
-      (apply >assoc! (>assoc o k v) more)))
+      (apply >assoc! (>assoc! o k v) more)))
 
 (defn >assoc
   ([o k v]

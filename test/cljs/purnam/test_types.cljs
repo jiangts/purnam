@@ -57,7 +57,7 @@
     (is (get-in o [:b :c :d]) 2)
     (is-equal (get-in o [:b :c]) (obj :d 2))
     (is (get o :c) nil?)
-    (is (get o :c :not-found) :not-found)
+    (is-equal (get o :c :not-found) :not-found)
     (is (get-in o [:c :d]) nil?))
   
   (it "works for arrays"
@@ -65,7 +65,7 @@
     (is (get a :none) nil?)
     (is (get-in a [1 1 1]) 3)
     (is (get-in a [1 1 2]) nil?)
-    (is (get-in a [1 1 2] :not-found) :not-found)
+    (is-equal (get-in a [1 1 2] :not-found) :not-found)
   ))
 
 (describe

@@ -1,7 +1,7 @@
 (ns purnam.angular.directives
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require-macros [purnam.js :as j])
-  (:use-macros [purnam.js :only [obj ! defv.ndef.n]]
+  (:use-macros [purnam.js :only [obj ! def.n]]
                [purnam.angular :only [def.module def.directive]]))
 
 (def.module purnam [])
