@@ -13,7 +13,10 @@
            (let [actual this.actual
                  actualText (str actual)
                  actualText (if (= actualText "[object Object]")
-                               (js/JSON.stringify actual)
+                               (let [ks (js/goog.object.getKeys actual)
+                                     vs (js/goog.object.getValues actual)]
+                                 (into {} (map (fn [x y] [x y]) 
+                                             ks vs)))
                                actualText)
                  notText (if this.isNot "Not " "")]
              (aset this "message"

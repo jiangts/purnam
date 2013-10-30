@@ -16,9 +16,4 @@
      :id "js-test",
      :compiler {:pretty-print true,
                 :output-to "harness/unit/purnam-js-unit.js",
-                :optimizations :whitespace}}
-    {:source-paths ["src/cljs" "demos/angular"],
-     :id "angular-demo",
-     :compiler {:pretty-print true,
-                :output-to "harness/app/scripts/angular-demo.js",
                 :optimizations :whitespace}}]})
