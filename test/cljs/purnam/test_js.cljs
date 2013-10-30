@@ -1,9 +1,8 @@
 (ns purnam.test-js
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require-macros [purnam.js :as j])
-  (:use-macros [purnam.js :only [obj ? ?> ! !> f.n def.n]]
-               [purnam.test :only [init describe it is is-not
-                                   is-equal is-not-equal]]))
+  (:use-macros [purnam.js :only [obj arr ? ?> ! !> f.n def.n]]
+               [purnam.test :only [init describe it is is-not]]))
 
 (init)
 
@@ -19,10 +18,8 @@
      (is o1.array.4 nil)
      (! o1.array.4 5)
      (is o1.array.4 5)
-     (is-not o1.array (array 1 2 3 4 5))
-     (is-equal o1.array (array 1 2 3 4 5))
-     (is-not (array 1 2 3 4) (array 1 2 3 4))
-     (is-equal (array 1 2 3 4) (array 1 2 3 4))))
+     (is o1.array (array 1 2 3 4 5))
+     (is (array 1 2 3 4) (array 1 2 3 4))))
 
 (describe
  {:doc "my first test using purnam"

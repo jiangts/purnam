@@ -1,4 +1,4 @@
-(defproject im.chit/purnam "0.1.5"
+(defproject im.chit/purnam "0.1.6"
   :description "A better javascript experience on clojurescript"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
@@ -9,17 +9,13 @@
   :plugins [[lein-cljsbuild "0.3.4"]
             [lein-midje "3.0.1"]]
   :source-paths ["src/cljs"]
+  :test-paths ["test/clj"]
   :cljsbuild
   {:builds
    [{:source-paths ["src/cljs" "test/cljs"],
      :id "js-test",
      :compiler {:pretty-print true,
                 :output-to "harness/unit/purnam-js-unit.js",
-                :optimizations :whitespace}}
-    {:source-paths ["src/cljs" "demos/crafty"],
-     :id "crafty-demo",
-     :compiler {:pretty-print true,
-                :output-to "harness/app/scripts/crafty-demo.js",
                 :optimizations :whitespace}}
     {:source-paths ["src/cljs" "demos/angular"],
      :id "angular-demo",

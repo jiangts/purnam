@@ -3,7 +3,7 @@
   (:require [goog.object :as o])
   (:require-macros [purnam.js :as j])
   (:use-macros [purnam.js :only [obj arr ! def.n]]
-               [purnam.test :only [init describe it is is-not is-equal is-not-equal]]
+               [purnam.test :only [init describe it is is-not]]
                [purnam.angular :only [def.module def.config def.factory
                                       def.filter def.controller
                                       def.service def.directive]]
@@ -184,5 +184,5 @@
  :inject [Data]}
 (it "SimpleService Change Login"
   (is Data.a 1)
-  (is-equal 1 1)
+  (is 1 1)
   ))

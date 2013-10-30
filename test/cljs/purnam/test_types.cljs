@@ -4,8 +4,7 @@
             [goog.object :as o]
             [goog.array :as a])
   (:use-macros [purnam.js :only [obj arr !]]
-               [purnam.test :only [init describe it is is-not beforeEach
-                                   is-equal is-not-equal]]))
+               [purnam.test :only [init describe it is is-not beforeEach]]))
 
 (init)
 
@@ -53,11 +52,11 @@
   
   (it "works for objects"
     (is (get o :a) 1)
-    (is-equal (get o :b) (obj :c {:d 2}))
+    (is (get o :b) (obj :c {:d 2}))
     (is (get-in o [:b :c :d]) 2)
-    (is-equal (get-in o [:b :c]) (obj :d 2))
+    (is (get-in o [:b :c]) (obj :d 2))
     (is (get o :c) nil?)
-    (is-equal (get o :c :not-found) :not-found)
+    (is (get o :c :not-found) :not-found)
     (is (get-in o [:c :d]) nil?))
   
   (it "works for arrays"
@@ -65,7 +64,7 @@
     (is (get a :none) nil?)
     (is (get-in a [1 1 1]) 3)
     (is (get-in a [1 1 2]) nil?)
-    (is-equal (get-in a [1 1 2] :not-found) :not-found)
+    (is (get-in a [1 1 2] :not-found) :not-found)
   ))
 
 (describe
@@ -73,39 +72,39 @@
    :globals [o (obj :a 1)
              a (arr 1 2 3)]}
  (it "works for objects"
-   (is-equal (assoc! o :b 2) (obj :a 1 :b 2))
-   (is-equal o (obj :a 1 :b 2)))
+   (is (assoc! o :b 2) (obj :a 1 :b 2))
+   (is o (obj :a 1 :b 2)))
  (it "works for arrays"
-   (is-equal (assoc! a 3 4) (arr 1 2 3 4))
-   (is-equal a (arr 1 2 3 4))))
+   (is (assoc! a 3 4) (arr 1 2 3 4))
+   (is a (arr 1 2 3 4))))
 
 (describe 
  {:doc "ITransientCollection - conj!"
   :globals [o (obj :a 1)
             a (arr 1 2 3)]}
  (it "works for objects"
-   (is-equal (conj! o (arr :b 2)) (obj :a 1 :b 2))
-   (is-equal o (obj :a 1 :b 2)))
+   (is (conj! o (arr :b 2)) (obj :a 1 :b 2))
+   (is o (obj :a 1 :b 2)))
  (it "works for arrays"
-   (is-equal (conj! a 4) (arr 1 2 3 4))))
+   (is (conj! a 4) (arr 1 2 3 4))))
 
 (describe
  {:doc "IEmptyableCollection - empty"
   :globals [o (obj :a 1 :b 2 :c 3)
             a (arr 1 2 3 4)]}
  (it "works for objects"
-   (is-equal (empty o) (obj))
-   (is-equal o (obj :a 1 :b 2 :c 3)))
+   (is (empty o) (obj))
+   (is o (obj :a 1 :b 2 :c 3)))
  (it "works for arrays"
-   (is-equal (empty a) (arr))
-   (is-equal a (arr 1 2 3 4))))
+   (is (empty a) (arr))
+   (is a (arr 1 2 3 4))))
 
 (describe
  {:doc "ICollection - conj"
   :globals [o (obj :a 1)
             a (arr 1 2 3)]}
  (it "works for objects"
-   (is-equal (conj o (arr :b 2)) (obj :a 1 :b 2))))
+   (is (conj o (arr :b 2)) (obj :a 1 :b 2))))
 
 
 (describe
@@ -115,7 +114,7 @@
   (beforeEach (j/js-replace o (obj :a 1)))
   
   (it "works for objects"
-    (is-equal (conj o (arr :b 2)) (obj :a 1 :b 2))))
+    (is (conj o (arr :b 2)) (obj :a 1 :b 2))))
 
 #_(describe
  {:doc "strkey will convert any key to a string"}

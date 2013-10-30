@@ -1,25 +1,36 @@
 (ns purnam.test
   (:require [clojure.string :as s])
-  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root hash-map?]]))
+  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root hash-map? do.n obj !]]))
 
 (defmacro init []
-  (list
-   'js* "beforeEach(function(){
-           this.addMatchers({
-             toSatisfy: function(expected, tactual, texpected){
-               var actual = this.actual;
-               var notText = this.isNot ? 'Not ' : '';
+  '(purnam.js/do.n
+    (js/beforeEach
+     (fn []
+       (this.addMatchers
+        (purnam.js/obj
+         :toSatisfy
+         (fn [expected tactual texpected]
+           (let [actual this.actual
+                 actualText (str actual)
+                 actualText (if (= actualText "[object Object]")
+                               (js/JSON.stringify actual)
+                               actualText)
+                 notText (if this.isNot "Not " "")]
+             (aset this "message"
+                   (fn []
+                     (str "Expression: " tactual
+                          "\n  Expected: " notText texpected
+                          "\n  Actual: " actualText)))
+             (cond (= (js/goog.typeOf expected) "array")
+                   (purnam.cljs/js-equals expected actual)
 
-               this.message = function(){
-                 return 'Expression: ' + tactual +
-                       '\\n   Expected result: ' + notText + texpected +
-                       '\\n   Actual result: ' +  actual;}
+                   (fn? expected)
+                   (expected actual)
 
-               if(typeof(expected) == 'function'){
-                 return expected(actual);
-               } else { return expected === actual; }
-         }})});"))
-
+                   :else
+                   (or (= expected actual)
+                       (purnam.cljs/js-equals expected actual)))))))))))
+                       
 (def l list)
 
 (def describe-default-options
@@ -63,7 +74,6 @@
 (defmacro describe [options & body]
   (describe-fn options body))
 
-
 (defn it-preprocess [desc body]
   (if (string? desc)
     [desc body]
@@ -85,9 +95,3 @@
 
 (defmacro is-not [v expected]
   (list '.toSatisfy (list '.-not (list 'js/expect v)) expected (str v) (str expected)))
-
-(defmacro is-equal [v expected]
-  (list '.toEqual (list 'js/expect v) expected))
-
-(defmacro is-not-equal [v expected]
-  (list '.toEqual (list '.-not (list 'js/expect v)) expected))

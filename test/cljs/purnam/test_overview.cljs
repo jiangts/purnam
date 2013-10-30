@@ -2,43 +2,41 @@
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:use-macros [purnam.js :only [obj arr ? ?> ! !> def.n
                                  f.n do.n f*n do*n def* def*n]]
-               [purnam.test :only [init describe it is is-not
-                                   is-equal is-not-equal
-                                   beforeEach]]))
+               [purnam.test :only [init describe it is is-not beforeEach]]))
 
 (init)
 
 (describe
    {:doc "obj - primitive object constructor"}
    (it "1.1"
-       (is-equal
+       (is
         (obj "key1" "val1" "key2" "val2")
         (js* "{key1: 'val1', key2: 'val2'}")))
 
    (it "1.2"
-       (is-equal
+       (is
         (obj :key1 "val1" :key2 "val2")
         (js* "{key1: 'val1', key2: 'val2'}")))
 
    (it "1.3"
        (let [s1 "key1"
              s2 "key2"]
-         (is-equal (obj s1 "val1" s2 "val2")
+         (is (obj s1 "val1" s2 "val2")
                    (js* "{key1: 'val1', key2: 'val2'}")))
        (let [s1 :key1
              s2 :key2]
-         (is-not-equal (obj s1 "val1" s2 "val2")
-                       (js* "{key1: 'val1', key2: 'val2'}"))))
+         (is-not (obj s1 "val1" s2 "val2")
+                   (js* "{key1: 'val1', key2: 'val2'}"))))
 
    (it "1.4"
-       (is-equal
+       (is
         (obj :data [{:id 1 :name "one"}
                     {:id 2 :name "two"}])
         (js* "{data: [{id:1,name:'one'},
                     {id:2,name:'two'}]}")))
 
    (it "1.5"
-       (is-equal
+       (is
         (obj :name "l1" :data [1 2 3]
              :next {:name "l2" :data [4 5 6]
                     :next {:name "l3" :data [7 8 9]}})
@@ -53,11 +51,11 @@
  {:doc "arr - primitive array constructor"}
 
  (it "2.1"
-     (is-equal (arr 1 2 3 4 5)
+     (is (arr 1 2 3 4 5)
                (js* "[1,2,3,4,5]")))
 
  (it "2.2"
-     (is-equal
+     (is
       (arr {:data [1 2 3 4 5]}
            {:data [6 7 8 9 10]})
       (js* "[{data: [1,2,3,4,5]},
@@ -101,11 +99,11 @@
      (is (?> - o.a o.b) -1))
 
  (it "4.2"
-     (is-equal
+     (is
       (?> mapv (fn [x] (inc x.a))   ;; no need to write (inc (? x.a))
           [(obj :a 1) (obj :a 2) (obj :a 3)])
       [2 3 4])
-     (is-equal
+     (is
       (?> .map (arr {:a 1} {:a 2} {:a 3})
           (fn [x] (inc x.a)))
       (js* "[2,3,4]"))))
@@ -137,7 +135,7 @@
        (is (? o.a) nil)
        (! o.a.b.c.d 6)
        (is (? o.a.b.c.d) 6)
-       (is-equal
+       (is
         (? o.a)
         (obj :b {:c {:d 6}}))))
 
@@ -237,7 +235,7 @@
            o2 (obj :inner 2)
            o3 (obj :inner 3)
            o (obj)]
-       (is-equal
+       (is
         (do.n
          (! o.val.a (+ o1.inner o2.inner))
          (! o.val.b (* o2.inner o3.inner))
@@ -255,24 +253,24 @@
  (it "def*"
      (is a.val nil)
      (f1 a)
-     (is-equal a.val
+     (is a.val
                (arr 1 2 3 4 5)))
 
  (it "def*n"
      (is a.val nil)
      (f2 a)
-     (is-equal a.val
+     (is a.val
                (arr 1 2 3 4 5)))
  (it "f*n"
      (is a.val nil)
      ((f*n [o] (! o.val [1 2 3 4 5])) a)
-     (is-equal a.val
+     (is a.val
                (arr 1 2 3 4 5)))
  (it "do*n"
      (is a.val nil)
      (do*n
       ((fn [o] (! o.val [1 2 3 4 5])) a))
-     (is-equal a.val
+     (is a.val
                (arr 1 2 3 4 5))))
 
 (def* o1 {:a 10
