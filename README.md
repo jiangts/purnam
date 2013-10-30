@@ -10,6 +10,11 @@ In your project file, add
 [im.chit/purnam "0.1.6"]
 ```
 
+### What's New
+
+##### 0.1.6
+- midje styles tests in the `purnam.test.sweet` namespace
+
 ### What is Purnam?
 - [`purnam.js`](https://github.com/zcaudate/purnam/wiki/API---purnam-js) Javascript-like semantics for Clojurescript 
 - [`purnam.test`](https://github.com/zcaudate/purnam/wiki/API---purnam-test) - Jasmin Extensions for Test Driven Workflow
