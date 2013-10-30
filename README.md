@@ -20,9 +20,11 @@ In your project file, add
 - [Wiki Home](https://github.com/zcaudate/purnam/wiki)
 - [Quickstart](https://github.com/zcaudate/purnam/wiki/Your-First-Project)
 - [Building Demos](https://github.com/zcaudate/purnam/wiki/Building-Demos)
+
 - Examples
   - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game)
   - [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing)
+
 ### A Taste of Purnam
 
 ##### Functions
