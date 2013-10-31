@@ -13,14 +13,32 @@
 
 (defn fact-groups [forms]
   (let [forms (vec forms)
-        idxs (find-arrow-positions forms)
-        len  (count forms)]
-    (vec (for [i idxs]
-           (if (and (< (inc i) len) (>= (dec i) 0))
-             [(nth forms (dec i)) (nth forms (inc i))])))))
+        idxs  (set (find-arrow-positions forms))
+        len   (count forms)]
+    (->> (for [i (range len)]
+          (cond (or (idxs (dec i)) (idxs (inc i)))
+                nil
 
-(defn fact-is [[actual expected]]
+                (and (idxs i) (>= (dec i) 0))
+                [::is (nth forms (dec i)) (nth forms (inc i))]
+
+                :else
+                [::norm (nth forms i)]))
+         (filter identity)
+         (vec))))
+
+(defn fact-is [actual expected]
   (list '.toSatisfy (list 'js/expect actual) expected (str actual) (str expected)))
+
+(defn fact-render [[type f1 f2]]
+  (condp = type
+    ::is (fact-is f1 f2)
+    ::norm f1))
+
+(defn double-vec-map? [ele]
+  (and (vector? ele)
+       (vector? (first ele))
+       (instance? clojure.lang.APersistentMap (ffirst ele))))
 
 (defn fact-fn [opts? body]
   (let [[opts? body]
@@ -30,14 +48,14 @@
               (string? opts?)
               [{:doc opts?} body]
 
-              (instance? clojure.lang.APersistentMap opts?)
-              [opts? body]
+              (double-vec-map?)
+              [(ffirst opts?) body]
 
               :else [{} (cons opts? body)])
         fgrps (fact-groups body)]
     (describe-fn opts?
                  [(it-fn ""
-                         (map fact-is fgrps))])))
+                         (map fact-render fgrps))])))
 
 (defmacro fact [opts? & body]
   (fact-fn opts? body))

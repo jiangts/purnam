@@ -1,17 +1,18 @@
 (ns purnam.test-angular
-  (:require [midje.sweet :exclude [contains]]
-            [purnam.test.sweet :as m]))
+  (:use midje.sweet)
+  (:require [purnam.test.sweet :as m]))
 
 (fact
   (m/fact-groups
    '[1 => 1])
-  => [[1 1]])
+   => [[:purnam.test.sweet/is 1 1]])
 
 
 (fact
   (macroexpand-1
    '(m/fact
       1 => 1))
+
   =>
   '(let [spec (js-obj)]
      (js/describe ""
