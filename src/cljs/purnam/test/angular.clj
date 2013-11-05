@@ -88,7 +88,9 @@
 (defn describe-controller-fn [options body]
   (let [{:keys [controller inject]} options
         ninject (conj inject ['$scope (l ['$rootScope '$controller]
-                             (l '$controller (str controller) (l 'obj :$scope '($rootScope.$new))))])]
+                               (l 'let ['scp# '($rootScope.$new)]
+                                 (l '$controller (str controller) (l 'obj :$scope 'scp#))
+                                 'scp#))])]
     (describe-ng-fn (-> options (assoc :inject ninject) (dissoc :controller)) body)))
 
 (defmacro describe.controller [options & body]

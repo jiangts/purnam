@@ -1,4 +1,4 @@
-(defproject im.chit/purnam "0.1.7"
+(defproject im.chit/purnam "0.1.8"
   :description "A better javascript experience on clojurescript"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"

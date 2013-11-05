@@ -7,10 +7,13 @@
 In your project file, add
 
 ```clojure
-[im.chit/purnam "0.1.6"]
+[im.chit/purnam "0.1.8"]
 ```
 
 ### What's New
+
+##### 0.1.8
+- Bug fix for `describe.controller`
 
 ##### 0.1.6
 - midje styles tests in the `purnam.test.sweet` namespace
@@ -23,10 +26,9 @@ In your project file, add
 ### Starting Points:
 
 - [Wiki Home](https://github.com/zcaudate/purnam/wiki)
-- [Quickstart](https://github.com/zcaudate/purnam/wiki/Your-First-Project)
-- [Building Demos](https://github.com/zcaudate/purnam/wiki/Building-Demos)
 
 - Examples
+  - [Angular.js Example](https://github.com/zcaudate/puram-angular-example)
   - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game)
   - [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing)
 

@@ -137,7 +137,40 @@
                             (is (purnam.cljs/aget-in r ["length"]) 5)
                             (is (purnam.cljs/aget-in r ["0"]) 0))) nil)))
 
-
+(fact "describe.controller"
+  (macroexpand-1
+   '(describe.controller
+     {:doc "<DESC>"
+      :module <MODULE-NAME>
+      :controller <CONTROLLER-NAME>
+      :inject {:<V1> <V1-FORM>
+               :<V2> <V2-FORM>}}
+     (<FUNC> $scope.<VAR>)
+     (<FUNC> <V1>.<VAR>)
+     (<FUNC> <V2>.<VAR>)))
+  =>
+  '(let [spec (js-obj)]
+     (js/describe
+      "<DESC>"
+      (clojure.core/fn []
+        (js/beforeEach (js/module "<MODULE-NAME>"))
+        (js/beforeEach
+         (js/inject
+          (array "$controller" "<V2-FORM>" "$rootScope" "<V1-FORM>"
+                 (fn [$controller <V2-FORM>
+                     $rootScope <V1-FORM>]
+                   (aset spec "$scope"
+                         (let [scp#
+                               (let [obj# (purnam.cljs/aget-in $rootScope [])
+                                     fn# (aget obj# "$new")]
+                                 (.call fn# obj#))]
+                           ($controller "<CONTROLLER-NAME>"
+                                        (obj :$scope scp#)) scp#))
+                   (aset spec ":<V1>" <V1-FORM>)
+                   (aset spec ":<V2>" <V2-FORM>)))))
+        (<FUNC> (purnam.cljs/aget-in spec ["$scope" "<VAR>"]))
+        (<FUNC> (purnam.cljs/aget-in <V1> ["<VAR>"]))
+        (<FUNC> (purnam.cljs/aget-in <V2> ["<VAR>"])) nil))))
 
 
   (comment
