@@ -2,10 +2,10 @@
   (:require [clojure.string :as s]))
 
 (defn hash-set? [obj]
-  (instance? clojure.lang.IPersistentSet obj))
+  (instance? clojure.lang.APersistentSet obj))
 
 (defn hash-map? [obj]
-  (instance? clojure.lang.IPersistentMap obj))
+  (instance? clojure.lang.APersistentMap obj))
 
 (defn lazy-seq?
   "Returns `true` if `x` is of type `clojure.lang.LazySeq`."
@@ -180,9 +180,9 @@
 (defmacro ?> [& args]
   (apply list (map js-expand args)))
 
-(defmacro ! [sym val]
- (let [[var & ks] (js-split-syms sym)]
-   (list 'purnam.cljs/aset-in (js-parse-var var)
+(defmacro ! [sym & [val]]
+   (let [[var & ks] (js-split-syms sym)]
+     (list 'purnam.cljs/aset-in (js-parse-var var)
          (vec (map js-parse-sub-exp ks))
          (js-expand val))))
 

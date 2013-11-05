@@ -71,9 +71,9 @@
   :vars [o (obj :a 1 :b 2 :c 3)]}
 
  (it "3.1"
-     (is 1 (? o.a))
-     (is 6 (+ (? o.a) (? o.b) (? o.c))))
-
+     (is 1 o.a)
+     (is 6 (+ o.a o.b o.c)))
+     
  (it "3.2"
      (is 1 (? o.|ka|))
      (is 3 (+ (? o.|ka|) (? o.|kb|))))

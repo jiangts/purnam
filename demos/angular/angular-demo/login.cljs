@@ -25,7 +25,6 @@
    :current {:status "initial"
              :focus  "blank"}))
 
-
 (def.controller loginDemo.LoginMainCtrl [$scope App Db]
   (! $scope.app App)
 
@@ -56,7 +55,6 @@
 
   (! $scope.login
      (fn [login pass]
-       ;;(js/console.log login pass $scope)
        (let [rpass (get-in @Db [:users login])]
          (if (= pass rpass)
            (js/alert (str "You are Logging in as " login))

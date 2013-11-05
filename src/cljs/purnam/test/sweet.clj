@@ -48,7 +48,7 @@
               (string? opts?)
               [{:doc opts?} body]
 
-              (double-vec-map?)
+              (double-vec-map? opts?)
               [(ffirst opts?) body]
 
               :else [{} (cons opts? body)])

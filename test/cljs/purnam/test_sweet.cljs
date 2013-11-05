@@ -7,8 +7,8 @@
 
 (init)
 
-(fact {:doc "One Plus One"
-       :globals [o1 (obj :a 1)]}
+(fact [[{:doc "One Plus One"
+         :globals [o1 (obj :a 1)]}]]
 
   (+ 1 1) => 2
   
@@ -16,6 +16,5 @@
   
   o1 => (obj :a 1)
   
-  (obj :a 1 :b 3) => {:a 3}
-  
-  )
+  (obj :a 1 :b 3) 
+  => (obj :a 1 :b 3))

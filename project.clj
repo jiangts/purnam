@@ -1,4 +1,4 @@
-(defproject im.chit/purnam "0.1.6"
+(defproject im.chit/purnam "0.1.7"
   :description "A better javascript experience on clojurescript"
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
@@ -10,6 +10,13 @@
             [lein-midje "3.0.1"]]
   :source-paths ["src/cljs"]
   :test-paths ["test/clj"]
+  :documentation {:files {"doc/index"
+                          {:input "test/cljs/midje_doc/purnam_guide.cljs"
+                           :title "purnam"
+                           :sub-title "javascript on clojurescript"
+                           :author "Chris Zheng"
+                           :email  "z@caudate.me"
+                           :tracking "UA-31320512-2"}}}
   :cljsbuild
   {:builds
    [{:source-paths ["src/cljs" "test/cljs"],

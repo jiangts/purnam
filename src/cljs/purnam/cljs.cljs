@@ -1,6 +1,7 @@
 (ns purnam.cljs
-  (:require [goog.object :as gobject]
-            [goog.array :as garray]
+  (:require [goog.object :as gobj]
+            [goog.array :as garr]
+            [purnam.common :as common]
             [clojure.string :as st]))
 
 (defn nested-val [[k & ks] val]
@@ -10,16 +11,29 @@
       (aset o k (nested-val ks val))
       o)))
 
-(defn aset-in [var arr val]
-  (let [[k & ks] arr]
-    (cond (nil? k) nil
-          (empty? ks) (aset var k val)
-          :else
-          (if-let [svar (aget var k)]
-            (aset-in svar ks val)
-            (aset var k (nested-val ks val))))
-    var))
+(defn nested-delete [[k & ks] val]
+  (if (nil? ks)
+    (js-delete val k)
+    (nested-delete ks val))
+  val)
 
+(defn aset-in
+  ([var arr] (aset-in var arr nil)) 
+  ([var arr val]
+    (let [[k & ks] arr]
+      (cond (nil? k) nil
+            
+            (empty? ks) 
+            (if val
+              (aset var k val)
+              (js-delete var k))
+            
+            :else
+            (if-let [svar (aget var k)]
+              (aset-in svar ks val)
+              (if val (aset var k (nested-val ks val)))))
+      var)))
+      
 (defn aget-in
   ([var] var)
   ([var arr]
@@ -59,10 +73,11 @@
        o)))
 
 (defn js-dissoc
-  [o & ks]
-  (doseq [k ks]
-    (js-delete o k))
-  o)
+  [o k & more]
+  (js-delete o (js-strkey k))
+  (if more
+    (recur o (first more) (next more))
+    o))
 
 (defn js-empty [o]
   (case (js/goog.typeOf o)
@@ -103,30 +118,23 @@
       (let [t1 (js/goog.typeOf v1)
             t2 (js/goog.typeOf v2)]
         (cond (= "array" t1 t2)
-              (js/goog.array.equals v1 v2 js-equals)
+              (garr/equals v1 v2 js-equals)
 
               (= "object" t1 t2)
               (let [ks1 (.sort (js-keys v1))
                     ks2 (.sort (js-keys v2))]
-                (if (js/goog.array.equals ks1 ks2)
-                  (js/goog.array.every
+                (if (garr/equals ks1 ks2)
+                  (garr/every
                    ks1
                    (fn [k]
                      (js-equals (aget v1 k) (aget v2 k))))
                   false))
               :else
               false))))
-
-(defn js-copy-assoc
-  [o & pairs]
-  (let [out (gobject/clone o)]
-      (apply js-assoc out pairs)))
-
-(defn js-copy-dissoc
-  [o & ks]
-  (let [out (gobject/clone o)]
-    (apply js-dissoc out ks)
-    out))
+              
+(defn js-copy
+  [o]
+  (gobj/clone o))
 
 (defn js-initial-value [v]
   (let [t (js/goog.typeOf v)]
@@ -176,7 +184,6 @@
   ([x y] (if (coll? x)
            (.log js/console (str x ":") (str y) y)
            (.log js/console (str x ":") (str y))) y))
-
 
 (defn augment-fn-string [func]
  (if (string? func)
