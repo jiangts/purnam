@@ -15,5 +15,4 @@ pom.xml.asc
 .#*
 .nrepl-port
 samples/*-bak
-harness/unit/purnam-js-unit.js
-harness/app/scripts
+harness/purnam-js-unit.js

@@ -14,9 +14,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-    'harness/app/libs/angular/angular.js',
-    'harness/app/libs/angular/angular-mocks.js',
-    'harness/unit/*.js'
+    'harness/js/angular.js',
+    'harness/js/angular-mocks.js',
+    'harness/purnam-js-unit.js'
     ],
 
 

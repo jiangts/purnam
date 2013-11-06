@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-js
-  (:require [purnam.cljs :refer [js-equals]])
+  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
   (:use-macros [purnam.js :only [? ?> ! !> f.n def.n do.n 
                                  obj arr def* def*n f*n do*n]]
                [purnam.test :only [init]]
@@ -198,39 +198,38 @@
 
 "`self` is similar to `this`. Note that the two keywords both refer to the object itself."
 
-  #_(let [o (obj :a 1
+  (let [o (obj :a 1
                :thisfn (fn [] this.a)
                :selffn (fn [] self.a))]
       [(!> o.thisfn) (!> o.selffn)])
-  ;;  => [1 1]
+  => [1 1]
      
 "We can quickly see the difference by creating another object. `o1` has been initiated with functions defined `o`. If we invoke the `o1` functions, it can be seen that the context for `o.thisfn` has changed and so it returns `o1.a` (2). While `o1.selffn` returns the value `o.a` (1)"
 
-  #_(let [o (obj :a 1
+  (let [o (obj :a 1
                :thisfn (fn [] this.a)
                :selffn (fn [] self.a))
         o1 (obj :a 2
                :thisfn o.thisfn
                :selffn o.selffn)]
     [(!> o1.thisfn) (!> o1.selffn)])
-  ;;=> [2 1]
+  => [2 1]
 
 "A useful property of `obj` and `self` can be seen in the next example. Even though both have the same structure, `self` in `a1` refers to a1 whereas `self` in a2 refers to a2.b. This was due to the fact that in `a1`, a hashmap was used to construct :b as opposed to the `obj` form in `a2`."
 
-  #_(let [a1 (obj :a 1
-               :b {:a 2         ;; Note {} is used
-                   :func (fn [] self.a)})
+  (let [a1 (obj :a 1
+                :b {:a 2         ;; Note {} is used
+                    :func (fn [] self.a)})
         a2 (obj :a 1
-                :b  (obj :a 2   ;; Note obj is used
-                         :func (fn [] self.a)))]
-      [(!> a1.func) (!> a2.func)])
-
-  ;; => [1 2]
+                :b (obj :a 2   ;; Note obj is used
+                        :func (fn [] self.a)))]
+      [(!> a1.b.func) (!> a2.b.func)])
+  => [1 2]
 )
 
 [[:section {:title "def.n" :tag "dot-defn"}]]
 
-"`def.n` allow construction of functions with the javascript dot-notation. Within the forms, there is no need to add ?, ?> and !> forms:"
+"`def.n` allow construction of functions with the javascript dot-notation. Within the forms, there is no need to add [?](#getter), [?>](#call) and [!>](#call-on) forms:"
 
 "? getters are automatic"
  
