@@ -1,0 +1,1222 @@
+<html><head><meta content="chrome=1" http-equiv="X-UA-Compatible" /><meta charset="utf-8" /><meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport" /><title>purnam</title><style>body {
+  padding:50px;
+  font:14px/1.5 Helvetica, Arial, sans-serif;
+  color:#777;
+  font-weight:300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:#222;
+  margin:0 0 20px;
+}
+
+p, ul, ol, table, pre, dl {
+  margin:0 0 20px;
+}
+
+h1, h2, h3 {
+  line-height:1.1;
+}
+
+h1 {
+  font-size:28px;
+}
+
+h2 {
+  color:#393939;
+}
+
+h4, h5, h6 {
+  color:#494949;
+  margin:0;
+}
+
+header h4{
+  margin: 10 0 0 0px;
+}
+
+a {
+  color:#39c;
+  font-weight:400;
+  text-decoration:none;
+}
+
+a small {
+  font-size:11px;
+  color:#777;
+  margin-top:-0.6em;
+  display:block;
+}
+
+.wrapper {
+  width:860px;
+  margin:0 auto;
+}
+
+.figure div.img {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+blockquote {
+  border-left:1px solid #e5e5e5;
+  margin:0;
+  padding:0 0 0 20px;
+  font-style:italic;
+}
+
+code, pre {
+  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  color:#333;
+  font-size:12px;
+}
+
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border-radius:5px;
+  border:1px solid #e5e5e5;
+  overflow-x: auto;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td {
+  text-align:left;
+  padding:5px 10px;
+  border-bottom:1px solid #e5e5e5;
+}
+
+dt {
+  color:#444;
+  font-weight:700;
+}
+
+th {
+  color:#444;
+}
+
+img {
+  max-width:100%;
+}
+
+header {
+  width:270px;
+  float:left;
+  /*position:fixed;*/
+}
+
+header ul {
+  list-style:none;
+  height:40px;
+  
+  padding:0;
+  
+  background: #eee;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #dddddd 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#dddddd));
+  background: -webkit-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -o-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  background: linear-gradient(top, #f8f8f8 0%,#dddddd 100%);
+  
+  border-radius:5px;
+  border:1px solid #d2d2d2;
+  box-shadow:inset #fff 0 1px 0, inset rgba(0,0,0,0.03) 0 -1px 0;
+  width:270px;
+}
+
+header li {
+  width:89px;
+  float:left;
+  border-right:1px solid #d2d2d2;
+  height:40px;
+}
+
+header ul a {
+  line-height:1;
+  font-size:11px;
+  color:#999;
+  display:block;
+  text-align:center;
+  padding-top:6px;
+  height:40px;
+}
+
+strong {
+  font-weight:700;
+}
+
+header ul li + li {
+  width:88px;
+  border-left:1px solid #fff;
+}
+
+header ul li + li + li {
+  border-right:none;
+  width:89px;
+}
+
+header ul a strong {
+  font-size:14px;
+  display:block;
+  color:#222;
+}
+
+section {
+  width: 60%;
+  float:right;
+  padding-bottom:50px;
+  padding-right: 10%;
+}
+
+small {
+  font-size:11px;
+}
+
+hr {
+  border:0;
+  background:#e5e5e5;
+  height:1px;
+  margin:0 0 20px;
+}
+
+footer {
+  width:270px;
+  float:left;
+  position:fixed;
+  bottom:50px;
+}
+
+header div.heading {
+  display:none;
+}
+
+
+@media print, screen and (max-width: 960px) {
+  
+  div.wrapper {
+    width:auto;
+    margin:0;
+  }
+  
+  header, section, footer {
+    float:none;
+    position:static;
+    width:auto;
+  }
+  
+  header div.heading {
+    display:block;
+  }
+    
+  section div.heading {
+    display:none;
+  }
+  
+  section {
+    border:1px solid #e5e5e5;
+    border-width:1px 0;
+    padding:20px 0;
+    margin:0 0 20px;
+  }
+  
+  header a small {
+    display:inline;
+  }
+  
+  header ul {
+    position:absolute;
+    right:50px;
+    top:52px;
+  }
+}
+
+@media print, screen and (max-width: 720px) {
+  body {
+    word-wrap:break-word;
+  }
+  
+  header {
+    padding:0;
+  }
+  
+  header ul, header p.view {
+    position:static;
+  }
+  
+  pre, code {
+    word-wrap:normal;
+  }
+}
+
+@media print, screen and (max-width: 480px) {
+  body {
+    padding:15px;
+  }
+  
+  header ul {
+    display:none;
+  }
+}
+
+@media print {
+  body {
+    padding:0.4in;
+    font-size:12pt;
+    color:#444;
+  }
+}
+
+
+.highlight  { background: #ffffff; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { font-weight: bold } /* Keyword */
+.highlight .o { font-weight: bold } /* Operator */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .gd .x { color: #000000; background-color: #ffaaaa } /* Generic.Deleted.Specific */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .gi .x { color: #000000; background-color: #aaffaa } /* Generic.Inserted.Specific */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold; } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #d14 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #d14 } /* Literal.String.Backtick */
+.highlight .sc { color: #d14 } /* Literal.String.Char */
+.highlight .sd { color: #d14 } /* Literal.String.Doc */
+.highlight .s2 { color: #d14 } /* Literal.String.Double */
+.highlight .se { color: #d14 } /* Literal.String.Escape */
+.highlight .sh { color: #d14 } /* Literal.String.Heredoc */
+.highlight .si { color: #d14 } /* Literal.String.Interpol */
+.highlight .sx { color: #d14 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #d14 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+.type-csharp .highlight .k { color: #0000FF }
+.type-csharp .highlight .kt { color: #0000FF }
+.type-csharp .highlight .nf { color: #000000; font-weight: normal }
+.type-csharp .highlight .nc { color: #2B91AF }
+.type-csharp .highlight .nn { color: #000000 }
+.type-csharp .highlight .s { color: #A31515 }
+.type-csharp .highlight .sc { color: #A31515 }
+
+
+</style></head><body><header><div class="heading"><h1>purnam</h1><h3>javascript essentials for clojurescript</h3><hr /><div class="info"><h5>Author: Chris Zheng<b>&nbsp;&nbsp;<a href="mailto:z@caudate.me">(z@caudate.me)</a></b></h5><h5>Library: v0.1.8</h5><h5>Date: 07 November 2013</h5><h5>Website: <a href="http://www.github.com/zcaudate/purnam">http://www.github.com/zcaudate/purnam</a></h5><h5>Generated By: <a href="http://www.github.com/zcaudate/lein-midje-doc">MidjeDoc</a></h5></div><br /><hr /></div><h4><a href="#installation">1 &nbsp; Installation</a></h4><h4><a href="#motivation">2 &nbsp; Motivation</a></h4><h4><a href="#quickstart">3 &nbsp; Quickstart</a></h4><h5>&nbsp;&nbsp;<i><a href="#native-datastructures">3.1 &nbsp; Native Datastructures</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#native-functions">3.2 &nbsp; Native Functions</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#native-protocols">3.3 &nbsp; Native Protocols</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#dsl-for-testing">3.4 &nbsp; DSL for Testing</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#dsl-for-angular">3.5 &nbsp; DSL for Angular</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#testing-for-angular">3.6 &nbsp; Testing for Angular</a></i></h5><h4><a href="#purnam-cljs">4 &nbsp; purnam.cljs</a></h4><h5>&nbsp;&nbsp;<i><a href="#js-lookup">4.1 &nbsp; js-lookup</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-equals">4.2 &nbsp; js-equals</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-assoc">4.3 &nbsp; js-assoc</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-dissoc">4.4 &nbsp; js-dissoc</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-empty">4.5 &nbsp; js-empty</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-merge">4.6 &nbsp; js-merge</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-merge-nil">4.7 &nbsp; js-merge-nil</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-copy">4.8 &nbsp; js-copy</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-deep-copy">4.9 &nbsp; js-deep-copy</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#js-replace">4.10 &nbsp; js-replace</a></i></h5><h4><a href="#purnam-js">5 &nbsp; purnam.js</a></h4><h5>&nbsp;&nbsp;<i><a href="#init-js">5.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#obj">5.2 &nbsp; obj</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#arr">5.3 &nbsp; arr</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#getter">5.4 &nbsp; getter - ?</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#setter">5.5 &nbsp; setter - !</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#call">5.6 &nbsp; call - ?></a></i></h5><h5>&nbsp;&nbsp;<i><a href="#call-on">5.7 &nbsp; call on - !></a></i></h5><h5>&nbsp;&nbsp;<i><a href="#this">5.8 &nbsp; this</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#self">5.9 &nbsp; self</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#dot-defn">5.10 &nbsp; def.n</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#dot-fn">5.11 &nbsp; f.n</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#dot-do">5.12 &nbsp; do.n</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#raw">5.13 &nbsp; raw forms</a></i></h5><h4><a href="#purnam-types">6 &nbsp; purnam.types</a></h4><h5>&nbsp;&nbsp;<i><a href="#init-types">6.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#seq-protocol">6.2 &nbsp; seq protocol</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#transient-protocol">6.3 &nbsp; transient protocol</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#collection-protocol">6.4 &nbsp; collection protocol</a></i></h5><h4><a href="#purnam-test">7 &nbsp; purnam.test</a></h4><h5>&nbsp;&nbsp;<i><a href="#init">7.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#describe">7.2 &nbsp; describe</a></i></h5><h4><a href="#purnam-test-sweet">8 &nbsp; purnam.test.sweet</a></h4><h5>&nbsp;&nbsp;<i><a href="#init-sweet">8.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#fact">8.2 &nbsp; fact</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#facts">8.3 &nbsp; facts</a></i></h5><h4><a href="#purnam-angular">9 &nbsp; purnam.angular</a></h4><h5>&nbsp;&nbsp;<i><a href="#init-angular">9.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-module">9.2 &nbsp; def.module</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-config">9.3 &nbsp; def.config</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-controller">9.4 &nbsp; def.controller</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-directive">9.5 &nbsp; def.directive</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-filter">9.6 &nbsp; def.filter</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-constant">9.7 &nbsp; def.constant</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-value">9.8 &nbsp; def.value</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-service">9.9 &nbsp; def.service</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-factory">9.10 &nbsp; def.factory</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#def-provider">9.11 &nbsp; def.provider</a></i></h5><h4><a href="#purnam-test-angular">10 &nbsp; purnam.test.angular</a></h4><h5>&nbsp;&nbsp;<i><a href="#init-test-angular">10.1 &nbsp; init</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#services">10.2 &nbsp; services</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#filters">10.3 &nbsp; filters</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#directives">10.4 &nbsp; directives</a></i></h5><h5>&nbsp;&nbsp;<i><a href="#controllers">10.5 &nbsp; controllers</a></i></h5><h4><a href="#end-notes">11 &nbsp; End Notes</a></h4><br /></header><section><div class="heading"><h1>purnam</h1><h3>javascript essentials for clojurescript</h3><hr /><div class="info"><h5>Author: Chris Zheng<b>&nbsp;&nbsp;<a href="mailto:z@caudate.me">(z@caudate.me)</a></b></h5><h5>Library: v0.1.8</h5><h5>Date: 07 November 2013</h5><h5>Website: <a href="http://www.github.com/zcaudate/purnam">http://www.github.com/zcaudate/purnam</a></h5><h5>Generated By: <a href="http://www.github.com/zcaudate/lein-midje-doc">MidjeDoc</a></h5></div><br /><hr /></div><div><a name="installation"></a><h2><b>1 &nbsp;&nbsp; Installation</b></h2></div><div><p>Add to <code>project.clj</code> dependencies (use double quotes): </p><pre>
+&#91;im.chit/purnam '0.1.8'&#93;
+</pre></div><div><a name="motivation"></a><h2><b>2 &nbsp;&nbsp; Motivation</b></h2></div><div><p><a href='https://www.github.com/zcaudate/purnam'>purnam</a> is a <em>clojurescript</em> library designed to provide better clojurescript/javascript interop, testing and documentation tools to the programmer. It also has very comprehensive modules for <a href='http://angularjs.org'>angular.js</a> applications. </p><p>Current projects requiring interface with external javascript libraries will greatly benefit from this library. 'Pure' clojure/clojurescript libraries will also benefit with its unit-testing and documentation workflows. The library was written to solve a number of pain points that I have experienced in clojurescript development:</p><h4>Better JS Interop</h4><p>The first pain point was having to deal with the clojurish <code>&#40;.dot syntax&#41;</code> for javascript interop as well as a lack of functionality when working with native js objects. This made it especially hard for working with any external js library. Purnam offers:</p><ul><li><a href='#purnam-cljs'>purnam.cljs</a> - functions for native objects and arrays</li><li><a href='#purnam-js'>purnam.js</a> - a set of macros allowing javascript-like syntax for better interop</li><li><a href='#purnam-types'>purnam.types</a> - clojure protocols for native objects and arrays<p></li></ul><h4>In-Browser Testing</h4></p><p>The second pain point was the lack of testing tools that worked within the browser. Even though testing with <a href='http://phantomjs.com'>phantom.js</a> was fine for non-browser code, I wanted something with more debugging power and so unit testing is integrated with the <a href='http://karma-runner.github.io/'>karma</a> test runner using two different test styles:</p><ul><li><a href='#purnam-test'>purnam.test</a> - testing using <a href='http://pivotal.github.io/jasmine/'>jasmine</a> syntax</li><li><a href='#purnam-test-sweet'>purnam.test.sweet</a> - testing using <a href='https://github.com/marick/Midje'>midje</a> syntax (compatible with <a href='https://www.github.com/zcaudate/lein-midje-doc'><code>midje-doc</code></a>)</li></ul><h4>Angularjs on Clojurescript</h4><p>The third pain point was the code bloat I was experiencing when developing and testing <em>angular.js</em> code using javascript. It was very easy to complect modules within large <em>angular.js</em> applications and I wanted to use clojure syntax so that my code was smaller, more readable and easier to handle. Purnam offers:</p><ul><li><a href='#purnam-angular'>purnam.angular</a> - a simple dsl for eliminating boilerplate <em>angular.js</em></li><li><a href='#purnam-test-angular'>purnam.test.angular</a> - testing macros for eliminating more boilerplate test code for services, controllers, directives and filters</li></ul><h4>Integrated Documentation</h4><p>The fourth pain point was the lack of documentation tools for clojurescript as well as clojure. <code>purnam</code> is compatible with <a href='https://www.github.com/zcaudate/lein-midje-doc'>midje-doc</a> so that the integrated testing and documentation <a href='http://z.caudate.me/combining-tests-and-documentation/'>workflow</a> can be also used in clojurescript.</p></div><div><a name="quickstart"></a><h2><b>3 &nbsp;&nbsp; Quickstart</b></h2></div><div><p>The quickest way to start is to look at some sample projects:</p><ul><li><a href='https://github.com/zcaudate/purnam-crafty-game'>Crafty.js Example</a> uses <a href='#purnam-js'><code>purnam.js</code></a></li><li><a href='https://github.com/zcaudate/purnam-angular-example'>Angular.js Example</a> uses <a href='#purnam-angular'><code>purnam.angular</code></a> and <a href='#purnam-test-angular'><code>purnam.test.angular</code></a></li><li><a href='https://github.com/zcaudate/puram-karma-testing'>Karma Testing Example</a> uses <a href='#purnam-test'><code>purnam.test</code></a> and <a href='#purnam-test-sweet'><code>purnam.test.sweet</code></a></li></ul></div><div><a name="native-datastructures"></a><h3>3.1 &nbsp;&nbsp; Native Datastructures</h3></div><div><p><a href='#obj'>obj</a>, <a href='#arr'>arr</a> and <a href='#raw'>def&#42;</a> in the <a href='#purnam-js'>purnam.js</a> namespace allow nested objects and arrays to be constructed. The examples below show equivalent objects in javascript and clojurescript</p></div><div><a name="js-object"></a><h4><i>e.3.1  &nbsp;-&nbsp; js object</i></h4><div class="highlight"><pre><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span><span class="nx">ids</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="nx">account</span><span class="o">:</span> <span class="p">{</span><span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;pass&#39;</span><span class="p">}}</span>
+</pre></div>
+</div><div><a name="cljs-object---obj"></a><h4><i>e.3.2  &nbsp;-&nbsp; cljs object - obj</i></h4><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">user</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:ids</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="ss">:account</span> <span class="p">{</span><span class="ss">:username</span> <span class="s">&quot;user&quot;</span> <span class="ss">:password</span> <span class="s">&quot;pass&quot;</span><span class="p">}))</span>
+</pre></div>
+</div><div><a name="cljs-object---def*"></a><h4><i>e.3.3  &nbsp;-&nbsp; cljs object - def*</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">def*</span> <span class="nv">user</span> <span class="p">{</span><span class="ss">:ids</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="ss">:account</span> <span class="p">{</span><span class="ss">:username</span> <span class="s">&quot;user&quot;</span> <span class="ss">:password</span> <span class="s">&quot;pass&quot;</span><span class="p">}})</span>
+</pre></div>
+</div><div><p>Arrays are constructed using <a href='#arr'>arr</a>. The two examples below show equivalent arrays in javascript and clojurescript:</p></div><div><a name="js-array"></a><h4><i>e.3.4  &nbsp;-&nbsp; js array</i></h4><div class="highlight"><pre><span class="kd">var</span> <span class="nx">kids</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Sam&#39;</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Bob&#39;</span> <span class="nx">age</span><span class="o">:</span> <span class="mi">10</span><span class="p">}]</span>
+</pre></div>
+</div><div><a name="cljs-array---arr"></a><h4><i>e.3.5  &nbsp;-&nbsp; cljs array - arr</i></h4><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">kids</span> <span class="p">(</span><span class="nf">arr</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;Sam&quot;</span> <span class="ss">:age</span> <span class="mi">3</span><span class="p">}</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;Bob&quot;</span> <span class="ss">:age</span> <span class="mi">10</span><span class="p">}))</span>
+</pre></div>
+</div><div><a name="cljs-array---def*"></a><h4><i>e.3.6  &nbsp;-&nbsp; cljs array - def*</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">def*</span> <span class="nv">kids</span> <span class="p">[{</span><span class="ss">:name</span> <span class="s">&quot;Sam&quot;</span> <span class="ss">:age</span> <span class="mi">3</span><span class="p">}</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;Bob&quot;</span> <span class="ss">:age</span> <span class="mi">10</span><span class="p">}])</span>
+</pre></div>
+</div><div><a name="native-functions"></a><h3>3.2 &nbsp;&nbsp; Native Functions</h3></div><div><p><a href='#dot-defn'>def.n</a> and <a href='#dot-fn'>f.n</a> allow functions to be defined using the javascript <code>dot-notation</code> syntax. The following are examples of the square function defined in javascript and clojurescript.</p></div><div><a name="js-function"></a><h4><i>e.3.7  &nbsp;-&nbsp; js function</i></h4><div class="highlight"><pre><span class="nx">square</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">value</span> <span class="o">*</span> <span class="nx">x</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
+</pre></div>
+</div><div><a name="cljs-function---defn"></a><h4><i>e.3.8  &nbsp;-&nbsp; cljs function - def.n</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">def.n</span> <span class="nv">square</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">obj</span> <span class="ss">:value</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x.value</span> <span class="nv">x.value</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="cljs-function---fn"></a><h4><i>e.3.9  &nbsp;-&nbsp; cljs function - f.n</i></h4><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">square</span> 
+  <span class="p">(</span><span class="nf">f.n</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">obj</span> <span class="ss">:value</span> <span class="p">(</span><span class="nb">* </span><span class="nv">x.value</span> <span class="nv">x.value</span><span class="p">))))</span>
+</pre></div>
+</div><div><p>As a comparison, here is the same function in clojurescript without the macro helpers.</p></div><div><a name="cljs-function---defn"></a><h4><i>e.3.10  &nbsp;-&nbsp; cljs function - defn</i></h4><div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">square</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">js-obj</span><span class="p">)</span>
+        <span class="nv">v</span> <span class="p">(</span><span class="nb">aget </span><span class="nv">x</span> <span class="s">&quot;value&quot;</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">aset </span><span class="nv">o</span> <span class="s">&quot;value&quot;</span> <span class="p">(</span><span class="nb">* </span><span class="nv">v</span> <span class="nv">v</span><span class="p">))</span>
+    <span class="nv">o</span><span class="p">))</span>
+</pre></div>
+</div><div><a name="native-protocols"></a><h3>3.3 &nbsp;&nbsp; Native Protocols</h3></div><div><p>The <a href='#purnam-types'>purnam.types</a> namespace provide for idiomatic clojure syntax to be used:</p></div><div><a name="idiomatic-clojure-protocols"></a><h4><i>e.3.11  &nbsp;-&nbsp; Idiomatic Clojure Protocols</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">))</span> <span class="nv">=&gt;</span> <span class="mi">3</span>
+
+<span class="p">(</span><span class="nb">get </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span> <span class="s">&quot;a&quot;</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">1</span>
+
+<span class="p">(</span><span class="nb">nth </span><span class="p">(</span><span class="nf">arr</span> <span class="ss">:0</span> <span class="ss">:1</span> <span class="ss">:2</span> <span class="ss">:3</span> <span class="ss">:4</span><span class="p">)</span> <span class="mi">3</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="ss">:3</span>
+</pre></div>
+</div><div><p>The <a href='#purnam-cljs'>purnam.cljs</a> namespace also provide additional manipulation functions like <a href='#js-merge'>js-merge</a>, <a href='#js-merge-nil'>js-merge-nil</a> and <a href='#js-deep-copy'>js-deep-copy</a>. More examples can be seen in the <a href='(#purnam-cljs'>api</a>).</p></div><div><a name="dsl-for-testing"></a><h3>3.4 &nbsp;&nbsp; DSL for Testing</h3></div><div><p>Choose between two styles of sytax for testing clojurescript code - jasmine style (default style in the <a href='#purnam-test'>purnam.test</a> namespace) or midje style (in the <a href='#purnam-test-sweet'>purnam.test.sweet</a> namespace). Or you can mix and match both of them together.</p></div><div><a name="testing---jasmine-style"></a><h4><i>e.3.12  &nbsp;-&nbsp; testing - jasmine style</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">describe</span> <span class="s">&quot;Addition&quot;</span>
+  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should add things&quot;</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">3</span><span class="p">)</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is-not</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">4</span><span class="p">)</span> <span class="mi">0</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="testing---midje-style"></a><h4><i>e.3.13  &nbsp;-&nbsp; testing - midje style</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">fact</span> <span class="p">[[{</span><span class="ss">:doc</span> <span class="s">&quot;Addition should add things&quot;</span><span class="p">}]]</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">2</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">3</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">3</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">4</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">4</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="o">#</span><span class="p">(</span><span class="nb">not= </span><span class="mi">0</span> <span class="nv">%</span><span class="p">))</span>
+</pre></div>
+</div><div><p>Although there are currently more features available when using the jasmine style syntax, using midje style syntax also allow compilation of your test files into beautiful documentation using <a href='https://www.github.com/zcaudate/lein-midje-doc'>midje-doc</a>. The current document has been generated in this way.</p></div><div><a name="dsl-for-angular"></a><h3>3.5 &nbsp;&nbsp; DSL for Angular</h3></div><div><p><a href='http://angularjs.org'>Angular.js</a> is the premier javascript framework for building large-scale, single-page applications. <a href='#purnam-angular'>purnam.angular</a> allows clean, readable definitions of angular.js modules and tests. Below is the definition of an angular.js module, a storage service, and a controller that uses the service.</p></div><div><a name="module-definition"></a><h4><i>e.3.14  &nbsp;-&nbsp; module definition</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">def.module</span> <span class="nv">myApp</span> <span class="p">[])</span>
+
+<span class="p">(</span><span class="nf">def.service</span> <span class="nv">myApp.storage</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">store</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{})]</span>
+    <span class="p">(</span><span class="nf">obj</span> <span class="ss">:put</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">swap!</span> <span class="nv">store</span> <span class="o">#</span><span class="p">(</span><span class="nb">assoc </span><span class="nv">%</span> <span class="nv">k</span> <span class="nv">v</span><span class="p">)))</span>
+         <span class="ss">:get</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">k</span><span class="p">]</span> <span class="p">(</span><span class="nf">js/console.log</span>  <span class="nv">k</span> <span class="p">(</span><span class="o">@</span><span class="nv">store</span> <span class="nv">k</span><span class="p">))</span>
+                <span class="p">(</span><span class="o">@</span><span class="nv">store</span> <span class="nv">k</span><span class="p">))</span>
+         <span class="ss">:clear</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="p">(</span><span class="nf">reset!</span> <span class="nv">store</span> <span class="p">{}))</span>
+         <span class="ss">:print</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="p">(</span><span class="nf">js/console.log</span> <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="o">@</span><span class="nv">store</span><span class="p">))))))</span>
+
+<span class="p">(</span><span class="nf">def.controller</span> <span class="nv">myApp.AppCtrl</span> <span class="p">[</span><span class="nv">$scope</span> <span class="nv">storage</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.key</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.val</span> <span class="s">&quot;world&quot;</span><span class="p">)</span>  
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.printStore</span> <span class="nv">storage.print</span><span class="p">)</span> 
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.clearStore</span> <span class="nv">storage.clear</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.putStore</span> <span class="nv">storage.put</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.getStore</span> <span class="nv">storage.get</span><span class="p">))</span>
+</pre></div>
+</div><div><p>The full api can be seen <a href='#purnam-angular'>here</a>.</p></div><div><a name="testing-for-angular"></a><h3>3.6 &nbsp;&nbsp; Testing for Angular</h3></div><div><p>Testing angular.js apps are quite brain intensive when using pure javascript. The <a href='#purnam-test-angular'>purnam.test.angular</a> namespace takes care of all the injections for us</p></div><div><a name="testing-services"></a><h4><i>e.3.15  &nbsp;-&nbsp; testing services</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;Storage&quot;</span>
+   <span class="ss">:module</span> <span class="nv">myApp</span>
+   <span class="ss">:inject</span> <span class="p">[</span><span class="nv">storage</span><span class="p">]}</span>
+  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;allows saving and retriving&quot;</span>
+    <span class="p">(</span><span class="nf">storage.put</span> <span class="s">&quot;hello&quot;</span> <span class="s">&quot;world&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">storage.get</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="s">&quot;world&quot;</span><span class="p">)</span>
+    
+    <span class="p">(</span><span class="nf">storage.clear</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">storage.get</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="nv">nil</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="testing-controllers"></a><h4><i>e.3.16  &nbsp;-&nbsp; testing controllers</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.controller</span> 
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;AppCtrl&quot;</span>
+   <span class="ss">:module</span> <span class="nv">myApp</span>
+   <span class="ss">:controller</span> <span class="nv">AppCtrl</span><span class="p">}</span>
+   
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;has key and val within the scope&quot;</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.key</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.val</span> <span class="s">&quot;world&quot;</span><span class="p">))</span>
+ 
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;has put and get functionality&quot;</span>
+   <span class="p">(</span><span class="nf">$scope.putStore</span> <span class="nv">$scope.key</span> <span class="nv">$scope.val</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">$scope.getStore</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="s">&quot;world&quot;</span><span class="p">))</span>
+   
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;additional tests&quot;</span>
+   <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.key</span> <span class="s">&quot;bye&quot;</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">$scope.putStore</span> <span class="nv">$scope.key</span> <span class="nv">$scope.val</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">$scope.getStore</span> <span class="s">&quot;hello&quot;</span><span class="p">)</span> <span class="nv">nil</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">$scope.getStore</span> <span class="s">&quot;bye&quot;</span><span class="p">)</span> <span class="s">&quot;world&quot;</span><span class="p">)))</span>
+</pre></div>
+</div><div><p>More complete examples can be seen <a href='https://www.github.com/zcaudate/purnam-angular-examples'>here</a></p></div><div><a name="purnam-cljs"></a><h2><b>4 &nbsp;&nbsp; purnam.cljs</b></h2></div><div><p>Utility functions for javascript native objects and arrays.</p></div><div><a name="js-lookup"></a><h3>4.1 &nbsp;&nbsp; js-lookup</h3></div><div><p><code>js-lookup</code> is like <code>get</code> for native javascript. It works with keywords and strings</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-lookup</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span> <span class="s">&quot;a&quot;</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-lookup</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span> <span class="ss">:b</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="mi">2</span>
+</pre></div>
+</div><div><a name="js-equals"></a><h3>4.2 &nbsp;&nbsp; js-equals</h3></div><div><p><code>js-equals</code> checks for equality on native objects. The clojurescript equality <code>=</code> does not check for equality on native objects</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">false</span>
+</pre></div>
+</div><div><p><code>js-equals</code> fills this gap:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-equals</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+</div><div><p><code>js-equals</code> will also check equality for nested native objects and arrays</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-equals</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="p">[{</span><span class="ss">:b</span> <span class="p">[{</span><span class="ss">:c</span> <span class="mi">1</span><span class="p">}]}])</span>
+            <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="p">[{</span><span class="ss">:b</span> <span class="p">[{</span><span class="ss">:c</span> <span class="mi">1</span><span class="p">}]}]))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+</div><div><a name="js-assoc"></a><h3>4.3 &nbsp;&nbsp; js-assoc</h3></div><div><p><code>js-assoc</code> is the native mutable version of <code>assoc</code>, it works with both keyword and string keys</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-assoc</span> <span class="nv">o</span> <span class="s">&quot;b&quot;</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">;; string</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-assoc</span> <span class="nv">o</span> <span class="ss">:c</span> <span class="mi">3</span> <span class="s">&quot;d&quot;</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1">;; keyword and string </span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span> <span class="ss">:d</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div><div><p><code>js-assoc</code> also works with native arrays and allows number keys</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o</span> <span class="p">(</span><span class="nf">array</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-assoc</span> <span class="nv">o</span> <span class="s">&quot;1&quot;</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1">;; string</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">array</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-assoc</span> <span class="nv">o</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">)</span>     <span class="c1">;; number</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">array</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="js-dissoc"></a><h3>4.4 &nbsp;&nbsp; js-dissoc</h3></div><div><p><code>js-dissoc</code> is the native mutable version of <code>dissoc</code>, it works with both keyword and string keys</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span> <span class="ss">:d</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-dissoc</span> <span class="nv">o</span> <span class="s">&quot;a&quot;</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:d</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="js-empty"></a><h3>4.5 &nbsp;&nbsp; js-empty</h3></div><div><p><code>js-empty</code> is the native mutable version of <code>empty</code></p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span> <span class="ss">:d</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-empty</span> <span class="nv">o</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="js-merge"></a><h3>4.6 &nbsp;&nbsp; js-merge</h3></div><div><p><code>js-merge</code> is the native mutable version of <code>merge</code>. It will only mutate the first object argument.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">o2</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-merge</span> <span class="nv">o1</span> <span class="nv">o2</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><p>If the keys are the same, it will overwrite</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o3</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:b</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">js-merge</span> <span class="nv">o1</span> <span class="nv">o3</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="js-merge-nil"></a><h3>4.7 &nbsp;&nbsp; js-merge-nil</h3></div><div><p><code>js-merge-nil</code> is like <code>js-merge</code> but it will only merge the keys that are not defined</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">o2</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">2</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-merge-nil</span> <span class="nv">o1</span> <span class="nv">o2</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="js-copy"></a><h3>4.8 &nbsp;&nbsp; js-copy</h3></div><div><p><code>js-copy</code> creates another object with the same key/values</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">o2</span> <span class="p">(</span><span class="nf">js-copy</span> <span class="nv">o1</span><span class="p">))</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">js-equals</span> <span class="nv">o1</span> <span class="nv">o2</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">= </span><span class="nv">o1</span> <span class="nv">o2</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="nv">false</span>
+</pre></div>
+</div><div><a name="js-deep-copy"></a><h3>4.9 &nbsp;&nbsp; js-deep-copy</h3></div><div><p><code>js-deep-copy</code> copys everything about an object, including circular references</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:val</span> <span class="mi">1</span> 
+             <span class="ss">:ref</span> <span class="nv">self</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">o2</span> <span class="p">(</span><span class="nf">js-deep-copy</span> <span class="nv">o1</span><span class="p">))</span>
+</pre></div>
+</div><div><p>Notice that we can walk o2.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">aget </span><span class="nv">o2</span> <span class="s">&quot;ref&quot;</span> <span class="s">&quot;ref&quot;</span> <span class="s">&quot;val&quot;</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div><div><p>But o1 and o2 are not equal</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">= </span><span class="nv">o1</span> <span class="nv">o2</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="nv">false</span>
+</pre></div>
+</div><div><p>And neither are the references</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">aget </span><span class="nv">o1</span> <span class="s">&quot;ref&quot;</span><span class="p">)</span> <span class="p">(</span><span class="nb">aget </span><span class="nv">o2</span> <span class="s">&quot;ref&quot;</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">false</span>
+</pre></div>
+</div><div><a name="js-replace"></a><h3>4.10 &nbsp;&nbsp; js-replace</h3></div><div><p><code>js-replace</code> is like <code>js-copy</code>, but it uses keeps the pointer to the first object argument</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">js-replace</span> <span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nv">o1</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="purnam-js"></a><h2><b>5 &nbsp;&nbsp; purnam.js</b></h2></div><div><a name="init-js"></a><h3>5.1 &nbsp;&nbsp; init</h3></div><div><p>There is a dependency on <a href='#purnam-cljs'>purnam.cljs</a> and so the following MUST be placed in your project namespace:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+</pre></div>
+</div><div><a name="obj"></a><h3>5.2 &nbsp;&nbsp; obj</h3></div><div><p>Raw js objects are constructed in clojurescript with <code>obj</code>:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">obj</span> <span class="s">&quot;key1&quot;</span> <span class="s">&quot;val1&quot;</span> <span class="s">&quot;key2&quot;</span> <span class="s">&quot;val2&quot;</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{key1: &#39;val1&#39;, key2: &#39;val2&#39;}&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>Keywords can be used instead of strings for improved legibility. The previous example can also be written as:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">obj</span> <span class="ss">:key1</span> <span class="s">&quot;val1&quot;</span> <span class="ss">:key2</span> <span class="s">&quot;val2&quot;</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{key1: &#39;val1&#39;, key2: &#39;val2&#39;}&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>Symbol are evalutated. This will produce an equivalent object to the previous examples:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s1</span> <span class="s">&quot;key1&quot;</span>
+      <span class="nv">s2</span> <span class="s">&quot;key2&quot;</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">js-equals</span> <span class="p">(</span><span class="nf">obj</span> <span class="nv">s1</span> <span class="s">&quot;val1&quot;</span> <span class="nv">s2</span> <span class="s">&quot;val2&quot;</span><span class="p">)</span>
+              <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{key1: &#39;val1&#39;, key2: &#39;val2&#39;}&quot;</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">true</span>
+</pre></div>
+</div><div><p>Note that the symbols have to represent strings to get the same output as previous. The following WILL NOT construct the equivalent object as before:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s1</span> <span class="ss">:key1</span>
+      <span class="nv">s2</span> <span class="ss">:key2</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">js-equals</span> <span class="p">(</span><span class="nf">obj</span> <span class="nv">s1</span> <span class="s">&quot;val1&quot;</span> <span class="nv">s2</span> <span class="s">&quot;val2&quot;</span><span class="p">)</span>
+              <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{key1: &#39;val1&#39;, key2: &#39;val2&#39;}&quot;</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">false</span>
+</pre></div>
+</div><div><p>The <code>obj</code> form can be used to set up nested js objects and arrays primitives. Using <code>&#91;&#93;</code> with the form will create a new js array, <code>{}</code> will create a new js object.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">obj</span> <span class="ss">:data</span> <span class="p">[{</span><span class="ss">:id</span> <span class="mi">1</span> <span class="ss">:name</span> <span class="s">&quot;one&quot;</span><span class="p">}</span>
+            <span class="p">{</span><span class="ss">:id</span> <span class="mi">2</span> <span class="ss">:name</span> <span class="s">&quot;two&quot;</span><span class="p">}])</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{data: [{id:1,name:&#39;one&#39;},</span>
+<span class="s">                 {id:2,name:&#39;two&#39;}]}&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>The nesting notation alleviates the use of the clj-&gt;js transform for constructing large javascipt variables. In this way, deeply nested javascript object structures can be created in clojurescript in the same way clojure maps and arrays are created.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">obj</span> <span class="ss">:name</span> <span class="s">&quot;l1&quot;</span> <span class="ss">:data</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+     <span class="ss">:next</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;l2&quot;</span> <span class="ss">:data</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+            <span class="ss">:next</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">&quot;l3&quot;</span> <span class="ss">:data</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]}})</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;{name: &#39;l1&#39;,</span>
+<span class="s">          data: [1,2,3],</span>
+<span class="s">          next: {name: &#39;l2&#39;,</span>
+<span class="s">                 data: [4,5,6],</span>
+<span class="s">                 next: {name: &#39;l3&#39;,</span>
+<span class="s">                        data: [7,8,9]}}}&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="arr"></a><h3>5.3 &nbsp;&nbsp; arr</h3></div><div><p><code>arr</code> constructs a javascript array primitive, the same way as <code>array</code></p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;[1,2,3,4,5]&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><p><code>arr</code> supports nesting of native objects and arrays much like <code>obj</code></p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">arr</span> <span class="p">{</span><span class="ss">:data</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]}</span>
+     <span class="p">{</span><span class="ss">:data</span> <span class="p">[</span><span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span> <span class="mi">10</span><span class="p">]})</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">js*</span> <span class="s">&quot;[{data: [1,2,3,4,5]},</span>
+<span class="s">            {data: [6,7,8,9,10]}]&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="getter"></a><h3>5.4 &nbsp;&nbsp; getter - ?</h3></div><div><p><code>?</code> provides javascript-like dot notation access for objects</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">?</span> <span class="nv">o.a</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.b</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.c</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">6</span>
+</pre></div>
+</div><div><p>Pipe notation <code>object.|key|</code> provides symbol lookup</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="nv">k</span> <span class="s">&quot;a&quot;</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">- </span><span class="p">(</span><span class="nf">?</span> <span class="nv">o.b</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">k</span><span class="err">|</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div><div><p><code>?</code> also works on javascript arrays</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">arr</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">])]</span>
+   <span class="p">(</span><span class="nb">- </span><span class="p">(</span><span class="nf">?</span> <span class="nv">o.2.2</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.0.0</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">8</span>
+</pre></div>
+</div><div><p>If any of the keys are missing, <code>?</code> will not throw an object <code>undefined</code> exception but will return <code>nil</code>.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">?</span> <span class="nv">o.any.nested.syntax</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="nv">nil</span>
+</pre></div>
+</div><div><a name="setter"></a><h3>5.5 &nbsp;&nbsp; setter - !</h3></div><div><p>The <code>!</code> form provides setting using dot notation:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o.a</span> <span class="mi">6</span><span class="p">)</span>  
+  <span class="p">(</span><span class="nf">?</span> <span class="nv">o.a</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">6</span>
+</pre></div>
+</div><div><p>Pipe notation <code>object.|key|</code> also works</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+      <span class="nv">k</span> <span class="s">&quot;a&quot;</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">k</span><span class="err">|</span> <span class="mi">6</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">?</span> <span class="nv">o.a</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">6</span>
+</pre></div>
+</div><div><p>Setting the root var will not work (same as in clojurescript). There is currently a compile time error.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">2</span><span class="p">)))</span>
+  
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">throws</span> <span class="nv">Exception</span><span class="p">)</span>
+</pre></div>
+</div><div><p>If there is no value or the value is <code>nil</code>, <code>!</code> will delete the key from the object:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o.a</span><span class="p">)</span>
+  <span class="nv">o</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+</pre></div>
+</div><div><p>If the hierachy of nested objects does not exist, <code>!</code> will create it</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o.a.b.c</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">?</span> <span class="nv">o.a.b.c</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">10</span>
+</pre></div>
+</div><div><p>If one of the keys in the object accessor is not an object, <code>!</code> WILL NOT create nested structures</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o.a.b.c</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">[(</span><span class="nf">?</span> <span class="nv">o.a.b.c</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.a</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="nv">nil</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div><div><a name="call"></a><h3>5.6 &nbsp;&nbsp; call - ?></h3></div><div><p>?&gt; allows function calls with dot-notation syntax.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="nv">o2</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">3</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">?&gt;</span> <span class="nb">+ </span><span class="nv">o1.a</span> <span class="nv">o2.a</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">4</span>
+</pre></div>
+</div><div><p>Inner forms within ?&gt; are automatically interpreted using dot-notation. There is no need to write <code>?</code>.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">?&gt;</span> <span class="nv">.map</span> <span class="p">(</span><span class="nf">arr</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span><span class="p">}</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">2</span><span class="p">}</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">3</span><span class="p">})</span>
+         <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">inc </span><span class="nv">x.a</span><span class="p">)))</span> <span class="c1">;; no need to write (inc (? x.a))</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="call-on"></a><h3>5.7 &nbsp;&nbsp; call on - !></h3></div><div><p>The !&gt; form allows for writing dot-notation function calls.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nf">arr</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a.push</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a.push</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="nv">a</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><p>We can also use pipe notation to dynamically invoke our function.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a</span> <span class="p">(</span><span class="nf">arr</span><span class="p">)</span>
+      <span class="nv">k</span> <span class="s">&quot;push&quot;</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a.</span><span class="err">|</span><span class="nv">k</span><span class="err">|</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a.</span><span class="err">|</span><span class="nv">k</span><span class="err">|</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="nv">a</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="this"></a><h3>5.8 &nbsp;&nbsp; this</h3></div><div><p>The rational for adding <code>this</code> back into our language is that when a piece of a program really needs to work with existing javascript libraries (and it usually does), then clojurescript should give allow the flexibility to do that without adding additional noise to the code. Use with care!</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">10</span> 
+              <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">this.a</span><span class="p">))</span>
+      <span class="nv">o2</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">20</span>
+              <span class="ss">:func</span> <span class="nv">o1.func</span><span class="p">)]</span>
+  <span class="p">[(</span><span class="nf">!&gt;</span> <span class="nv">o1.func</span><span class="p">)</span> <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">o2.func</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">10</span> <span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div><div><p>When <code>this</code> is nested, it works within the scope of the nested object</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">10</span>
+             <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">this.a</span><span class="p">)</span>
+             <span class="ss">:b</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">20</span>
+                 <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">this.a</span><span class="p">)})]</span>
+  <span class="p">[(</span><span class="nf">!&gt;</span> <span class="nv">o.func</span><span class="p">)</span> <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">o.b.func</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">10</span> <span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div><div><a name="self"></a><h3>5.9 &nbsp;&nbsp; self</h3></div><div><p>A new existential construct has been added, it be use <strong>only</strong> within the <code>obj</code> form. It is used to refer to the object itself and does not change contexts the way <code>this</code> does. It provides a somewhat safer self reference which does not change when the context is changed.</p></div><div><p><code>self</code> is similar to <code>this</code>. Note that the two keywords both refer to the object itself.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span>
+             <span class="ss">:thisfn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">this.a</span><span class="p">)</span>
+             <span class="ss">:selffn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">self.a</span><span class="p">))]</span>
+    <span class="p">[(</span><span class="nf">!&gt;</span> <span class="nv">o.thisfn</span><span class="p">)</span> <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">o.selffn</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div><div><p>We can quickly see the difference by creating another object. <code>o1</code> has been initiated with functions defined <code>o</code>. If we invoke the <code>o1</code> functions, it can be seen that the context for <code>o.thisfn</code> has changed and so it returns <code>o1.a</code> (2). While <code>o1.selffn</code> returns the value <code>o.a</code> (1)</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span>
+             <span class="ss">:thisfn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">this.a</span><span class="p">)</span>
+             <span class="ss">:selffn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">self.a</span><span class="p">))</span>
+      <span class="nv">o1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">2</span>
+             <span class="ss">:thisfn</span> <span class="nv">o.thisfn</span>
+             <span class="ss">:selffn</span> <span class="nv">o.selffn</span><span class="p">)]</span>
+  <span class="p">[(</span><span class="nf">!&gt;</span> <span class="nv">o1.thisfn</span><span class="p">)</span> <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">o1.selffn</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div><div><p>A useful property of <code>obj</code> and <code>self</code> can be seen in the next example. Even though both have the same structure, <code>self</code> in <code>a1</code> refers to a1 whereas <code>self</code> in a2 refers to a2.b. This was due to the fact that in <code>a1</code>, a hashmap was used to construct :b as opposed to the <code>obj</code> form in <code>a2</code>.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">a1</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span>
+              <span class="ss">:b</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">2</span>         <span class="c1">;; Note {} is used</span>
+                  <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">self.a</span><span class="p">)})</span>
+      <span class="nv">a2</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span>
+              <span class="ss">:b</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">2</span>   <span class="c1">;; Note obj is used</span>
+                      <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">self.a</span><span class="p">)))]</span>
+    <span class="p">[(</span><span class="nf">!&gt;</span> <span class="nv">a1.b.func</span><span class="p">)</span> <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a2.b.func</span><span class="p">)])</span>
+
+<span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div><div><a name="dot-defn"></a><h3>5.10 &nbsp;&nbsp; def.n</h3></div><div><p><code>def.n</code> allow construction of functions with the javascript dot-notation. Within the forms, there is no need to add <a href='#getter'>?</a>, <a href='#call'>?&gt;</a> and <a href='#call-on'>!&gt;</a> forms:</p></div><div><p>? getters are automatic</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">?</span> <span class="nv">a.b</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="nv">a.b</span>
+</pre></div>
+</div><div><p>?&gt; call syntax is automatically applied</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">?&gt;</span> <span class="nb">+ </span><span class="nv">a.b</span> <span class="nv">c.d</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">a.b</span> <span class="nv">c.d</span><span class="p">)</span>
+</pre></div>
+</div><div><p>!&gt; syntax is also automatically applied:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">a.b</span> <span class="nv">c.d</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">a.b</span> <span class="nv">c.d</span><span class="p">)</span>
+</pre></div>
+</div><div><p>The <code>defn</code> function:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">dostuff</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">b.func</span> <span class="mi">10</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">?&gt;</span> <span class="nb">+ </span><span class="nv">a.val</span> <span class="nv">b.val</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nf">?</span> <span class="nv">c.val</span><span class="p">)))</span>
+</pre></div>
+</div><div><p>Can be written more succinctly using <code>def.n</code>:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.n</span> <span class="nv">dostuff</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">b.func</span> <span class="mi">10</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="nv">a.val</span> <span class="nv">b.val</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">inc </span><span class="nv">c.val</span><span class="p">))</span>
+</pre></div>
+</div><div><a name="dot-fn"></a><h3>5.11 &nbsp;&nbsp; f.n</h3></div><div><p><code>f.n</code> is the equivalent dot-notation counterpart for <code>fn</code></p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">dostuff</span> 
+  <span class="p">(</span><span class="nf">f.n</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span> <span class="nv">c</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">b.func</span> <span class="mi">10</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">+ </span><span class="nv">a.val</span> <span class="nv">b.val</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">inc </span><span class="nv">c.val</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="dot-do"></a><h3>5.12 &nbsp;&nbsp; do.n</h3></div><div><p>The <code>do.n</code> block is like <code>do</code> but allows dot-notation syntax:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">do.n</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val.a</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val.b</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">+ </span><span class="nv">o.val.a</span> <span class="nv">o.val.b</span><span class="p">)))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">3</span>
+</pre></div>
+</div><div><a name="raw"></a><h3>5.13 &nbsp;&nbsp; raw forms</h3></div><div><p>For those that want to write clojurescript with <code>{}</code> interpreted as js objects and <code>&#91;&#93;</code> interpreted as arrays, then the raw js forms are very handy. <code>def&#42;</code>, <code>def&#42;n</code>, <code>f&#42;n</code> and <code>do&#42;n</code> allow this. The same function <code>raw-fn</code> can be defined the following four ways:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">raw-fn</span> <span class="p">(</span><span class="nf">f*n</span> <span class="p">[</span><span class="nv">o</span><span class="p">]</span> <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">])))</span>
+
+<span class="p">(</span><span class="nf">def*</span> <span class="nv">raw-fn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">o</span><span class="p">]</span> <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">])))</span>
+
+<span class="p">(</span><span class="nf">def*n</span> <span class="nv">raw-fn</span> <span class="p">[</span><span class="nv">o</span><span class="p">]</span> <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="nf">do*n</span> <span class="p">(</span><span class="k">def </span><span class="nv">raw-fn</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">o</span><span class="p">]</span> <span class="p">(</span><span class="nf">!</span> <span class="nv">o.val</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">]))))</span>
+</pre></div>
+</div><div><p>where</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">raw-fn</span> <span class="p">(</span><span class="nf">obj</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:val</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div><div><p>Within the raw js form, <code>self</code> only refers to the current nested object, unlike <a href='#obj'>obj</a> where it refers to the top level object.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def*</span> <span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">10</span>
+             <span class="ss">:b</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">20</span>
+                 <span class="ss">:func</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="nv">self.a</span><span class="p">)}))</span>
+
+<span class="p">(</span><span class="nf">!&gt;</span> <span class="nv">o.b.func</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="mi">20</span>
+</pre></div>
+</div><div><p>The raw js forms will only recognise the <code>cljs.core</code> vector binding constructs: <code>let</code>, <code>loop</code>, <code>for</code>, <code>doseq</code>, <code>if-let</code> and <code>when-let</code>. Any custom macros within a raw form will run into problems.</p></div><div><a name="purnam-types"></a><h2><b>6 &nbsp;&nbsp; purnam.types</b></h2></div><div><p>Clojure protocols for javascript native objects and arrays.</p></div><div><a name="init-types"></a><h3>6.1 &nbsp;&nbsp; init</h3></div><div><p>There is a dependency on <a href='#purnam-cljs'>purnam.cljs</a> and so the following MUST be placed in your project namespace in order to use this protocol</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+<span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">purnam.types</span> <span class="ss">:as</span> <span class="nv">types</span><span class="p">])</span>
+</pre></div>
+</div><div><a name="seq-protocol"></a><h3>6.2 &nbsp;&nbsp; seq protocol</h3></div><div><p>The clojure <code>seq</code> protocol allow native js arrays and objects to be accessible like clojure vectors and maps:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">seq </span><span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">seq </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="o">&#39;</span><span class="p">([</span><span class="s">&quot;a&quot;</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="s">&quot;b&quot;</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div><div><p>As well as all the built-in functionality that come with it. Although the datastructure then becomes a clojurescript list.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">2</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">take </span><span class="mi">2</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="mi">4</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">get </span><span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span> <span class="s">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="mi">2</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">get-in</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="p">{</span><span class="ss">:b</span> <span class="p">{</span><span class="ss">:c</span> <span class="mi">1</span><span class="p">}})</span> <span class="p">[</span><span class="s">&quot;a&quot;</span> <span class="s">&quot;b&quot;</span> <span class="s">&quot;c&quot;</span><span class="p">])</span>
+
+<span class="nv">=&gt;</span> <span class="mi">1</span>
+</pre></div>
+</div><div><a name="transient-protocol"></a><h3>6.3 &nbsp;&nbsp; transient protocol</h3></div><div><p>The clojure transinet protocol allow native js objects arrays to be manipulated using transient methods</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">assoc!</span> <span class="nv">o</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="nv">o</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)]</span>
+  <span class="p">(</span><span class="nf">dissoc!</span> <span class="nv">o</span> <span class="ss">:a</span><span class="p">)</span>
+  <span class="nv">o</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">persistent!</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nv">=&gt;</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div><div><a name="collection-protocol"></a><h3>6.4 &nbsp;&nbsp; collection protocol</h3></div><div><p>The collection protocols allow native js objects arrays to use <code>conj</code>, <code>assoc</code> and <code>dissoc</code> methods.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">def </span><span class="nv">o1</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">o</span> <span class="p">[</span><span class="ss">:a</span> <span class="mi">1</span><span class="p">]))</span>
+  <span class="nv">o</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+  <span class="nv">o1</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div><div><p>It works with both arrays and objects</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">conj </span><span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span><span class="p">)</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">conj </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span> <span class="p">[</span><span class="ss">:b</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="ss">:c</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">assoc </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="p">(</span><span class="nb">dissoc </span><span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span><span class="p">)</span> <span class="ss">:a</span><span class="p">)</span>
+
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="purnam-test"></a><h2><b>7 &nbsp;&nbsp; purnam.test</b></h2></div><div><a name="init"></a><h3>7.1 &nbsp;&nbsp; init</h3></div><div><p>All tests require the following within the namespace declaration.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+<span class="p">(</span><span class="ss">:use-macros</span> <span class="p">[</span><span class="nv">purnam.test</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">init</span> <span class="nv">describe</span> <span class="nv">it</span> <span class="nv">is</span> <span class="nv">is-not</span><span class="p">]])</span>
+</pre></div>
+</div><div><p><code>init</code> is a macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">init</span><span class="p">)</span> <span class="c1">;; ALWAYS REQUIRED BEFORE ANY TESTS</span>
+</pre></div>
+</div><div><a name="describe"></a><h3>7.2 &nbsp;&nbsp; describe</h3></div><div><p><code>describe</code> is the top-level form for testing. Its usage is in combination with the setup clause <code>it</code> and the checkers <code>is</code> and <code>is-not</code>. <code>:globals</code> sets up bindings for variables that can be manipulated but cannot be rebounded. <code>:vars</code> are allowed to be rebounded.</p></div><div><a name="describe-purnam-example"></a><h4><i>e.7.1  &nbsp;-&nbsp; describe purnam example</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">describe</span>
+   <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;an example test description&quot;</span>
+    <span class="ss">:globals</span> <span class="p">[</span><span class="nv">ka</span> <span class="s">&quot;a&quot;</span>
+              <span class="nv">kb</span> <span class="s">&quot;b&quot;</span><span class="p">]</span>
+    <span class="ss">:vars</span> <span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)]}</span>
+
+   <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;dot notation for native objects&quot;</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">1</span> <span class="nv">o.a</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">6</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">o.a</span> <span class="nv">o.b</span> <span class="nv">o.c</span><span class="p">)))</span>
+
+   <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;support for both native and cljs comparisons&quot;</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]))</span>
+
+   <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;support for function comparison&quot;</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">2</span> <span class="nv">even?</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is-not</span> <span class="mi">2</span> <span class="nv">odd?</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">3</span> <span class="p">(</span><span class="nb">comp not </span><span class="nv">even?</span><span class="p">)))</span>
+
+   <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;globals&quot;</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">1</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">ka</span><span class="err">|</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">3</span> <span class="p">(</span><span class="nb">+ </span><span class="p">(</span><span class="nf">?</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">ka</span><span class="err">|</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">kb</span><span class="err">|</span><span class="p">))))</span>
+
+   <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;vars are allowed to be rebound&quot;</span>
+       <span class="p">(</span><span class="nf">!</span> <span class="nv">o</span> <span class="p">(</span><span class="nf">arr</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+                 <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+                 <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]))</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="mi">8</span> <span class="p">(</span><span class="nb">- </span><span class="p">(</span><span class="nf">?</span> <span class="nv">o.2.2</span><span class="p">)</span> <span class="p">(</span><span class="nf">?</span> <span class="nv">o.0.0</span><span class="p">)))))</span>
+</pre></div>
+</div><div><p>Normal clojure datastructures can also be compared:</p></div><div><a name="describe-clojure-example"></a><h4><i>e.7.2  &nbsp;-&nbsp; describe clojure example</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">describe</span> 
+ <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;Basic Hashmaps&quot;</span>
+  <span class="ss">:globals</span> <span class="p">[</span><span class="nv">o</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">}]}</span>
+
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be easy to use&quot;</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">o</span> <span class="ss">:a</span><span class="p">)</span> <span class="mi">1</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is-not</span> <span class="p">(</span><span class="nf">o</span> <span class="ss">:a</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">get </span><span class="nv">o</span> <span class="ss">:b</span><span class="p">)</span> <span class="mi">2</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="ss">:c</span> <span class="nv">o</span><span class="p">)</span> <span class="mi">3</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">o</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">])</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">})))</span>
+</pre></div>
+</div><div><a name="purnam-test-sweet"></a><h2><b>8 &nbsp;&nbsp; purnam.test.sweet</b></h2></div><div><a name="init-sweet"></a><h3>8.1 &nbsp;&nbsp; init</h3></div><div><p>All tests require the following within the namespace declaration.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+<span class="p">(</span><span class="ss">:use-macros</span> <span class="p">[</span><span class="nv">purnam.test</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">init</span><span class="p">]]</span>
+             <span class="p">[</span><span class="nv">purnam.test.sweet</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">fact</span> <span class="nv">facts</span><span class="p">]])</span>
+</pre></div>
+</div><div><p>Because <code>purnam.test.sweet</code> is an add-on to <code>purnam.test</code>, the <a href='#init'>init</a> macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">init</span><span class="p">)</span> <span class="c1">;; ALWAYS REQUIRED BEFORE ANY TESTS</span>
+</pre></div>
+</div><div><a name="fact"></a><h3>8.2 &nbsp;&nbsp; fact</h3></div><div><p><code>fact</code> is the default form for testing. It can currently only use the =&gt; checker and is a much lighter version of <a href='https://www.github.com/Marick/midje'>midje</a>. However, it is enough for all but the most common cases. The <a href='#describe'>describe</a> example is rewritten below:</p></div><div><a name="fact-form-example"></a><h4><i>e.8.1  &nbsp;-&nbsp; fact form example</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">fact</span> <span class="p">[[{</span><span class="ss">:doc</span> <span class="s">&quot;an example test description&quot;</span>
+         <span class="ss">:globals</span> <span class="p">[</span><span class="nv">ka</span> <span class="s">&quot;a&quot;</span>
+                   <span class="nv">kb</span> <span class="s">&quot;b&quot;</span><span class="p">]</span>
+         <span class="ss">:vars</span> <span class="p">[</span><span class="nv">o</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)]}]]</span>
+
+ <span class="s">&quot;dot notation for native objects&quot;</span>
+ <span class="nv">o.a</span> <span class="nv">=&gt;</span> <span class="mi">1</span>
+ <span class="p">(</span><span class="nb">+ </span><span class="nv">o.a</span> <span class="nv">o.b</span> <span class="nv">o.c</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">6</span>
+
+ <span class="s">&quot;support for both native and cljs comparisons&quot;</span>
+ <span class="nv">o</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">)</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="nv">=&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span>
+ 
+ <span class="s">&quot;support for function comparison&quot;</span>
+  <span class="mi">2</span> <span class="nv">=&gt;</span> <span class="nv">even?</span>
+  <span class="mi">3</span> <span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">comp not </span><span class="nv">even?</span><span class="p">)</span>
+  
+ <span class="s">&quot;globals&quot;</span>
+  <span class="nv">o.</span><span class="err">|</span><span class="nv">ka</span><span class="err">|</span> <span class="nv">=&gt;</span> <span class="mi">1</span>
+  <span class="p">(</span><span class="nb">+ </span><span class="nv">o.</span><span class="err">|</span><span class="nv">ka</span><span class="err">|</span> <span class="nv">o.</span><span class="err">|</span><span class="nv">kb</span><span class="err">|</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">3</span>
+  
+  <span class="s">&quot;vars are allowed to be rebound&quot;</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">o</span> <span class="p">(</span><span class="nf">arr</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+            <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span>
+            <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]))</span>
+            
+  <span class="p">(</span><span class="nb">- </span><span class="nv">o.2.2</span> <span class="nv">o.0.0</span><span class="p">)</span> <span class="nv">=&gt;</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div><div><a name="facts"></a><h3>8.3 &nbsp;&nbsp; facts</h3></div><div><p><code>facts</code> and <code>fact</code> are interchangeable. The difference is how they are rendered in a document. See <a href='http://docs.caudate.me/lein-midje-doc#facts'>lein-midje-doc</a> for more details.</p></div><div><a name="facts-form-example"></a><h4><i>e.8.2  &nbsp;-&nbsp; facts form example</i></h4><div class="highlight"><pre><span class="p">(</span><span class="nf">facts</span> <span class="p">[[{</span><span class="ss">:doc</span> <span class="s">&quot;Basic Hashmaps&quot;</span>
+          <span class="ss">:globals</span> <span class="p">[</span><span class="nv">o</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span> <span class="ss">:c</span> <span class="mi">3</span><span class="p">}]}]]</span>
+  <span class="p">(</span><span class="nf">o</span> <span class="ss">:a</span><span class="p">)</span>       <span class="nv">=&gt;</span> <span class="mi">1</span> 
+  <span class="p">(</span><span class="nf">o</span> <span class="ss">:a</span><span class="p">)</span>       <span class="nv">=&gt;</span> <span class="o">#</span><span class="p">(</span><span class="nb">not= </span><span class="mi">0</span> <span class="nv">%</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">get </span><span class="nv">o</span> <span class="ss">:b</span><span class="p">)</span>   <span class="nv">=&gt;</span> <span class="mi">2</span>
+  <span class="p">(</span><span class="ss">:c</span> <span class="nv">o</span><span class="p">)</span>       <span class="nv">=&gt;</span> <span class="mi">3</span>
+  <span class="p">(</span><span class="nb">select-keys </span><span class="nv">o</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">])</span> <span class="nv">=&gt;</span> <span class="p">{</span><span class="ss">:a</span> <span class="mi">1</span> <span class="ss">:b</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div><div><a name="purnam-angular"></a><h2><b>9 &nbsp;&nbsp; purnam.angular</b></h2></div><div><p>Libraries to work with angular.js</p></div><div><a name="init-angular"></a><h3>9.1 &nbsp;&nbsp; init</h3></div><div><p>There is a dependency on <a href='#purnam-cljs'>purnam.cljs</a> and so the following MUST be placed in your project namespace:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+</pre></div>
+</div><div><a name="def-module"></a><h3>9.2 &nbsp;&nbsp; def.module</h3></div><div><p><code>def.module</code> provides an easy way to define angular modules. The following clojurescript code generates the equivalent javascript code below it:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.module</span> <span class="nv">my.app</span> <span class="p">[</span><span class="nv">ui</span> <span class="nv">ui.bootstrap</span><span class="p">])</span>
+</pre></div>
+</div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ui&#39;</span><span class="p">,</span> <span class="s1">&#39;ui.bootstrap&#39;</span><span class="p">])</span>
+</pre></div>
+</div><div><p>Typically, the <code>def.module</code> is at the very top of the file, one module is defined for one clojure namespace.</p></div><div><a name="def-config"></a><h3>9.3 &nbsp;&nbsp; def.config</h3></div><div><p><code>def.config</code> is used to setup module providers. </p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.config</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;PROVIDERS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+   <span class="nv">...</span> 
+   <span class="nv">&lt;FUNCTION</span> <span class="nv">BODY&gt;</span>
+   <span class="nv">...</span>     <span class="p">)</span>
+</pre></div>
+</div><div><p>It is most commonly used to setup the routing for an application.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.config</span> <span class="nv">my.app</span> <span class="p">[</span><span class="nv">$locationProvider</span> <span class="nv">$routeProvider</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">doto </span><span class="nv">$locationProvider</span> <span class="p">(</span><span class="nf">.hashPrefix</span> <span class="s">&quot;!&quot;</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">doto </span><span class="nv">$routeProvider</span>
+    <span class="p">(</span><span class="nf">.when</span> <span class="s">&quot;&quot;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:redirectTo</span> <span class="s">&quot;/home&quot;</span><span class="p">))))</span>
+</pre></div>
+</div><div><p>The equivalent javascript code can be seen below.</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+         <span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$locationProvider&#39;</span><span class="p">,</span> <span class="s1">&#39;$routeProvider&#39;</span><span class="p">,</span> 
+               <span class="kd">function</span><span class="p">(</span><span class="nx">$locationProvider</span><span class="p">,</span> <span class="nx">$routeProvider</span><span class="p">){</span>
+                 <span class="nx">$locationProvider</span><span class="p">.</span><span class="nx">hashPrefix</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">);</span>
+                 <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">redirectTo</span><span class="o">:</span> <span class="s1">&#39;/home&#39;</span><span class="p">});</span>
+           <span class="p">}]);</span>
+</pre></div>
+</div><div><a name="def-controller"></a><h3>9.4 &nbsp;&nbsp; def.controller</h3></div><div><p><code>def.controller</code> defines a controller. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.controller</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;CONTROLLER</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+   <span class="nv">...</span> 
+   <span class="nv">&lt;CONTROLLER</span> <span class="nv">BODY&gt;</span>
+   <span class="nv">...</span> <span class="p">)</span>
+</pre></div>
+</div><div><p>A sample controller</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.controller</span> <span class="nv">my.app.SimpleCtrl</span> <span class="p">[</span><span class="nv">$scope</span><span class="p">]</span>
+   <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.msg</span> <span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+   <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.setMessage</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">msg</span><span class="p">]</span> <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.msg</span> <span class="nv">msg</span><span class="p">))))</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;SimpleCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">){</span>
+                    <span class="nx">$scope</span><span class="p">.</span><span class="nx">msg</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+                    <span class="nx">$scope</span><span class="p">.</span><span class="nx">setMessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">msg</span><span class="p">){</span>
+                      <span class="nx">$scope</span><span class="p">.</span><span class="nx">msg</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">;</span>
+                    <span class="p">}}])</span>
+</pre></div>
+</div><div><a name="def-directive"></a><h3>9.5 &nbsp;&nbsp; def.directive</h3></div><div><p><code>def.directive</code> defines a directive. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.directive</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;DIRECTIVE</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span> 
+   <span class="c1">;; Initialisation code to return a function:</span>
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">$scope</span> <span class="nv">element</span> <span class="nv">attrs</span><span class="p">]</span>
+      <span class="nv">....</span> <span class="nv">&lt;FUNCTION&gt;</span> <span class="nv">....</span>  <span class="p">))</span>
+</pre></div>
+</div><div><p>A sample directive</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.directive</span> <span class="nv">my.app.appWelcome</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">$scope</span> <span class="nv">element</span> <span class="nv">attrs</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">html</span> <span class="p">(</span><span class="nf">element.html</span><span class="p">)]</span>
+      <span class="p">(</span><span class="nf">element.html</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Welcome &lt;strong&gt;&quot;</span> <span class="nv">html</span> <span class="s">&quot;&lt;/strong&gt;&quot;</span><span class="p">)))))</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;appWelcome&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">element</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="p">{</span>
+             <span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">html</span><span class="p">();</span>
+             <span class="nx">element</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;Welcome: &lt;strong&gt;&#39;</span> <span class="o">+</span> <span class="nx">html</span> <span class="o">+</span> <span class="s1">&#39;&lt;/strong&gt;&#39;</span><span class="p">);</span>
+          <span class="p">};}]);</span>
+</pre></div>
+</div><div><a name="def-filter"></a><h3>9.6 &nbsp;&nbsp; def.filter</h3></div><div><p><code>def.filter</code> defines a filter. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.filter</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;FILTER</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+ 
+   <span class="c1">;; Initialisation code to return a function:</span>
+ 
+   <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">input</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+      <span class="nv">....</span> <span class="nv">&lt;FUNCTION&gt;</span> <span class="nv">....</span> <span class="p">))</span>
+</pre></div>
+</div><div><p>The sample filter</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.filter</span> <span class="nv">my.app.range</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">input</span> <span class="nv">total</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="nv">input</span>
+      <span class="p">(</span><span class="nb">doseq </span><span class="p">[</span><span class="nv">i</span> <span class="p">(</span><span class="nb">range </span><span class="p">(</span><span class="nf">js/parseInt</span> <span class="nv">total</span><span class="p">))]</span>
+        <span class="p">(</span><span class="nf">input.push</span> <span class="nv">i</span><span class="p">))</span>
+      <span class="nv">input</span><span class="p">)))</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="s1">&#39;range&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">total</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">input</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+          <span class="nx">total</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">total</span><span class="p">);</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span><span class="nx">total</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+            <span class="nx">input</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">input</span><span class="p">;</span>
+        <span class="p">};</span>
+      <span class="p">}]);</span>
+</pre></div>
+</div><div><a name="def-constant"></a><h3>9.7 &nbsp;&nbsp; def.constant</h3></div><div><p><code>def.constant</code> defines a constant. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.value</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;CONSTANT</span> <span class="nv">NAME&gt;</span>
+  <span class="nv">&lt;CONSTANT&gt;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>The sample constant</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.constant</span> <span class="nv">my.app.MeaningOfLife</span> <span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">constant</span><span class="p">(</span><span class="s1">&#39;MeaningOfLife&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+</pre></div>
+</div><div><a name="def-value"></a><h3>9.8 &nbsp;&nbsp; def.value</h3></div><div><p><code>def.value</code> defines a value. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.value</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;VALUE</span> <span class="nv">NAME&gt;</span>
+  <span class="nv">&lt;VALUE&gt;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>The sample value</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.value</span> <span class="nv">my.app.AnotherMeaningOfLife</span> <span class="s">&quot;A Mystery&quot;</span><span class="p">)</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">value</span><span class="p">(</span><span class="s1">&#39;AnotherMeaningOfLife&#39;</span><span class="p">,</span> <span class="s1">&#39;A Mystery&#39;</span><span class="p">);</span>
+</pre></div>
+</div><div><a name="def-service"></a><h3>9.9 &nbsp;&nbsp; def.service</h3></div><div><p><code>def.service</code> defines a service. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.service</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;SERVICE</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+    <span class="nv">&lt;RETURN</span> <span class="nv">OBJECT&gt;</span>  <span class="p">)</span>
+</pre></div>
+</div><div><p>The sample service</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.service</span> <span class="nv">my.app.LoginService</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">obj</span> <span class="ss">:user</span> <span class="p">{</span><span class="ss">:login</span> <span class="s">&quot;login&quot;</span>
+              <span class="ss">:password</span> <span class="s">&quot;secret&quot;</span>
+              <span class="ss">:greeting</span> <span class="s">&quot;hello world&quot;</span><span class="p">}</span>
+       <span class="ss">:changeLogin</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">login</span><span class="p">]</span>
+                      <span class="p">(</span><span class="nf">!</span> <span class="nv">this.user.login</span> <span class="nv">login</span><span class="p">))))</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">service</span><span class="p">(</span><span class="s1">&#39;LoginService&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kd">function</span><span class="p">(){</span>
+         <span class="k">return</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="p">{</span><span class="o">:</span><span class="nx">login</span> <span class="s1">&#39;login&#39;</span><span class="p">,</span>
+                        <span class="o">:</span><span class="nx">password</span> <span class="s1">&#39;secret&#39;</span><span class="p">,</span>
+                        <span class="o">:</span><span class="nx">greeting</span> <span class="s1">&#39;hello world&#39;</span><span class="p">},</span>
+                 <span class="nx">changeLogin</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">login</span><span class="p">){</span>
+                                  <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="nx">login</span><span class="p">;}}}]);</span>
+</pre></div>
+</div><div><a name="def-factory"></a><h3>9.10 &nbsp;&nbsp; def.factory</h3></div><div><p><code>def.factory</code> defines a factory. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.factory</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;FACTORY</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+    <span class="nv">&lt;RETURN</span> <span class="nv">OBJECT&gt;</span>  <span class="p">)</span>
+</pre></div>
+</div><div><p>The sample factory</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.factory</span> <span class="nv">my.app.LoginService</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">obj</span> <span class="ss">:user</span> <span class="p">{</span><span class="ss">:login</span> <span class="s">&quot;login&quot;</span>
+              <span class="ss">:password</span> <span class="s">&quot;secret&quot;</span>
+              <span class="ss">:greeting</span> <span class="s">&quot;hello world&quot;</span><span class="p">}</span>
+       <span class="ss">:changeLogin</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">login</span><span class="p">]</span>
+                      <span class="p">(</span><span class="nf">!</span> <span class="nv">this.user.login</span> <span class="nv">login</span><span class="p">))))</span>
+</pre></div>
+</div><div><p>Produces the equivalent javascript code:</p></div><div><div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;my.app&#39;</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;LoginService&#39;</span><span class="p">,</span> <span class="p">[</span><span class="kd">function</span><span class="p">(){</span>
+         <span class="k">return</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="p">{</span><span class="o">:</span><span class="nx">login</span> <span class="s1">&#39;login&#39;</span><span class="p">,</span>
+                        <span class="o">:</span><span class="nx">password</span> <span class="s1">&#39;secret&#39;</span><span class="p">,</span>
+                        <span class="o">:</span><span class="nx">greeting</span> <span class="s1">&#39;hello world&#39;</span><span class="p">},</span>
+                 <span class="nx">changeLogin</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">login</span><span class="p">){</span>
+                                  <span class="k">this</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="nx">login</span><span class="p">;}}}]);</span>
+</pre></div>
+</div><div><a name="def-provider"></a><h3>9.11 &nbsp;&nbsp; def.provider</h3></div><div><p><code>def.provider</code> defines a provider. The typical usage is like this:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.provider</span> <span class="nv">&lt;MODULE</span> <span class="nv">NAME&gt;.&lt;SERVICE</span> <span class="nv">NAME&gt;</span> <span class="p">[</span><span class="nv">...</span> <span class="nv">&lt;INJECTIONS&gt;</span> <span class="nv">...</span><span class="p">]</span>
+    <span class="nv">&lt;RETURN</span> <span class="nv">OBJECT&gt;</span>  <span class="p">)</span>
+</pre></div>
+</div><div><p>The following is a definition, configuration, and usage of a provider</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">def.provider</span> <span class="nv">my.app.HelloWorld</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="nf">obj</span> <span class="ss">:name</span> <span class="s">&quot;Default&quot;</span>
+       <span class="ss">:$get</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span>
+               <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">n</span> <span class="nv">self.name</span><span class="p">]</span>
+                 <span class="p">(</span><span class="nf">obj</span> <span class="ss">:sayHello</span>
+                      <span class="p">(</span><span class="k">fn </span><span class="p">[]</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Hello &quot;</span> <span class="nv">n</span> <span class="s">&quot;!&quot;</span><span class="p">)))))</span>
+       <span class="ss">:setName</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">name</span><span class="p">]</span>
+                  <span class="p">(</span><span class="nf">!</span> <span class="nv">self.name</span> <span class="nv">name</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="nf">def.config</span> <span class="nv">my.app</span> <span class="p">[</span><span class="nv">HelloWorldProvider</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">HelloWorldProvider.setName</span> <span class="s">&quot;World&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nf">def.controller</span> <span class="nv">my.app.sfpMainCtrl</span> <span class="p">[</span><span class="nv">$scope</span> <span class="nv">HelloWorld</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">!</span> <span class="nv">$scope.hello</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="nf">HelloWorld.sayHello</span><span class="p">)</span> <span class="s">&quot; From Provider&quot;</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="purnam-test-angular"></a><h2><b>10 &nbsp;&nbsp; purnam.test.angular</b></h2></div><div><a name="init-test-angular"></a><h3>10.1 &nbsp;&nbsp; init</h3></div><div><p>All tests require the following within the namespace declaration.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="ss">:use</span> <span class="p">[</span><span class="nv">purnam.cljs</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">aget-in</span> <span class="nv">aset-in</span><span class="p">]])</span>
+<span class="p">(</span><span class="ss">:use-macros</span> <span class="p">[</span><span class="nv">purnam.test</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">init</span><span class="p">]]</span>
+             <span class="p">[</span><span class="nv">purnam.test.angular</span> <span class="ss">:only</span> 
+               <span class="p">[</span><span class="nv">describe.ng</span> <span class="nv">it-uses</span> <span class="nv">it-compiles</span> <span class="nv">it-uses-filter</span><span class="p">]])</span>
+</pre></div>
+</div><div><p>Because <code>purnam.test.angular</code> is an add-on to <code>purnam.test</code>, the <a href='#init'>init</a> macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">init</span><span class="p">)</span> <span class="c1">;; ALWAYS REQUIRED BEFORE ANY TESTS</span>
+</pre></div>
+</div><div><a name="services"></a><h3>10.2 &nbsp;&nbsp; services</h3></div><div><p>Angular constants, values, services, factories and providers are all tested the same way: with <code>describe.ng</code> and <code>it-uses</code>. There are a couple ways of testing out functionality. The easiest is with <code>:inject</code>. The definition are from previously defined examples - <a href='#def-constant'>constant</a>, <a href='#def-value'>value</a></p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;The Meaning of Life&quot;</span>
+   <span class="ss">:module</span> <span class="nv">my.app</span>
+   <span class="ss">:inject</span> <span class="p">[</span><span class="nv">MeaningOfLife</span> <span class="nv">AnotherMeaningOfLife</span><span class="p">]}</span>
+   
+  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be contentious&quot;</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">MeaningOfLife</span> <span class="mi">42</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">AnotherMeaningOfLife</span> <span class="s">&quot;A Mystery&quot;</span><span class="p">)))</span>
+</pre></div>
+</div><div><p><code>:inject</code> can also be used to bind other values within the modules</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;The Meaning of Life&quot;</span>
+   <span class="ss">:module</span> <span class="nv">my.app</span>
+   <span class="ss">:inject</span> <span class="p">[[</span><span class="nv">MeaningOfLife</span> <span class="p">([]</span> <span class="s">&quot;Don&#39;t Know&quot;</span><span class="p">)]]}</span>
+
+  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be unclear&quot;</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">MeaningOfLife</span> <span class="s">&quot;Don&#39;t Know&quot;</span><span class="p">)))</span>
+</pre></div>
+</div><div><p>or to reference other defined services:</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;The Meaning of Life&quot;</span>
+   <span class="ss">:module</span> <span class="nv">my.app</span>
+   <span class="ss">:inject</span> <span class="p">[[</span><span class="nv">AnotherMeaningOfLife</span> 
+            <span class="p">([</span><span class="nv">MeaningOfLife</span><span class="p">]</span> 
+              <span class="p">(</span><span class="nb">+ </span><span class="mi">13</span> <span class="nv">MeaningOfLife</span><span class="p">))]]}</span>
+
+  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be another random number&quot;</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">AnotherMeaningOfLife</span> <span class="mi">55</span><span class="p">)))</span>
+</pre></div>
+</div><div><p><a href='#def-service'>services</a> are tested the same way. However this time, we will use <code>it-uses</code> to inject them into the test suite. It uses just puts the default</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+  <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;Login Service&quot;</span>
+   <span class="ss">:module</span> <span class="nv">my.app</span><span class="p">}</span>
+  
+  <span class="p">(</span><span class="nf">it-uses</span> <span class="p">[</span><span class="nv">LoginService</span><span class="p">]</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">LoginService.user.login</span> <span class="s">&quot;login&quot;</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">LoginService.user.password</span> <span class="s">&quot;secret&quot;</span><span class="p">)))</span>
+</pre></div>
+</div><div><a name="filters"></a><h3>10.3 &nbsp;&nbsp; filters</h3></div><div><p>Filters are dependent on the <code>$filters</code> service and so are tested in the following way.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+ <span class="p">{</span><span class="ss">:doc</span>  <span class="s">&quot;Testing Filters&quot;</span>
+  <span class="ss">:module</span> <span class="nv">my.app</span><span class="p">}</span>
+
+ <span class="p">(</span><span class="nf">it-uses</span> <span class="p">[</span><span class="nv">$filter</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">r</span> <span class="p">((</span><span class="nf">$filter</span> <span class="s">&quot;range&quot;</span><span class="p">)</span> <span class="p">(</span><span class="nf">arr</span><span class="p">)</span> <span class="mi">5</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">r.length</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">is</span> <span class="nv">r</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)))))</span>
+</pre></div>
+</div><div><p>A convience macro <code>it-uses-filter</code> can also be used to achieve the same effect.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+ <span class="p">{</span><span class="ss">:doc</span>  <span class="s">&quot;Testing Filters&quot;</span>
+  <span class="ss">:module</span> <span class="nv">my.app</span><span class="p">}</span>
+
+  <span class="p">(</span><span class="nf">it-uses-filter</span> <span class="p">[</span><span class="nv">range</span><span class="p">]</span>
+    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">r</span> <span class="p">(</span><span class="nb">range </span><span class="p">(</span><span class="nf">arr</span><span class="p">)</span> <span class="mi">5</span><span class="p">)]</span>
+     <span class="p">(</span><span class="nf">is</span> <span class="nv">r.length</span> <span class="mi">5</span><span class="p">)</span>
+     <span class="p">(</span><span class="nf">is</span> <span class="nv">r</span> <span class="p">(</span><span class="nf">arr</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)))))</span>
+</pre></div>
+</div><div><a name="directives"></a><h3>10.4 &nbsp;&nbsp; directives</h3></div><div><p>Directives require the <code>$compile</code> and <code>$rootScope</code> services.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+ <span class="p">{</span><span class="ss">:doc</span>  <span class="s">&quot;Directives&quot;</span>
+  <span class="ss">:module</span> <span class="nv">my.app</span>
+  <span class="ss">:inject</span> <span class="p">[</span><span class="nv">$compile</span> <span class="nv">$rootScope</span><span class="p">]}</span>
+
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should change the html output&quot;</span>
+     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">ele</span> <span class="p">((</span><span class="nf">$compile</span> <span class="s">&quot;&lt;div app-welcome&gt;User&lt;/div&gt;&quot;</span><span class="p">)</span>
+                <span class="nv">$rootScope</span><span class="p">)]</span>
+                <span class="p">(</span><span class="nf">js/console.log</span> <span class="nv">ele</span> <span class="p">(</span><span class="nf">ele.html</span><span class="p">))</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">ele.html</span><span class="p">)</span> <span class="p">(</span><span class="nf">type</span> <span class="s">&quot;Welome &lt;strong&gt;User&lt;/strong&gt;&quot;</span><span class="p">)))))</span>
+</pre></div>
+</div><div><p>For convenience, there is the <code>it-compiles</code> macro which hides the implementation details.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+ <span class="p">{</span><span class="ss">:doc</span>  <span class="s">&quot;Directives&quot;</span>
+  <span class="ss">:module</span> <span class="nv">sample</span><span class="p">}</span>
+
+ <span class="p">(</span><span class="nf">it-compiles</span> <span class="p">[</span><span class="nv">ele</span> <span class="s">&quot;&lt;div app-welcome&gt;User&lt;/div&gt;&quot;</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nf">ele.html</span><span class="p">)</span> <span class="p">(</span><span class="nf">type</span> <span class="s">&quot;Welome &lt;strong&gt;User&lt;/strong&gt;&quot;</span><span class="p">))))</span>
+</pre></div>
+</div><div><a name="controllers"></a><h3>10.5 &nbsp;&nbsp; controllers</h3></div><div><p>Controllers require a bit more boilerplate to set up testing. The following is a test for <a href='#def-controller'>SimpleCtrl</a> using describe.ng</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.ng</span>
+ <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;A sample controller for testing purposes&quot;</span>
+  <span class="ss">:module</span> <span class="nv">sample</span>
+  <span class="ss">:inject</span> <span class="p">[[</span><span class="nv">$scope</span> <span class="p">([</span><span class="nv">$rootScope</span> <span class="nv">$controller</span><span class="p">]</span>
+                     <span class="p">(</span><span class="nf">$controller</span> <span class="s">&quot;SimpleCtrl&quot;</span> <span class="p">(</span><span class="nf">obj</span> <span class="ss">:$scope</span> <span class="p">(</span><span class="nf">$rootScope.$new</span><span class="p">))))]]}</span>
+                     
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should set a message within the $scope&quot;</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;Hello&quot;</span><span class="p">))</span>
+
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be able to change the message within the $scope&quot;</span>
+   <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">$scope.setMessage</span> <span class="s">&quot;World!&quot;</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;World!&quot;</span><span class="p">))</span>
+
+   <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">$scope.setMessage</span> <span class="s">&quot;Angular Rocks!&quot;</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;Angular Rocks!&quot;</span><span class="p">))))</span>
+</pre></div>
+</div><div><p><code>describe.controller</code> hides all implementation details to make the tests much more clearer to read.</p></div><div><div class="highlight"><pre><span class="p">(</span><span class="nf">describe.controller</span>
+ <span class="p">{</span><span class="ss">:doc</span> <span class="s">&quot;A sample controller for testing purposes&quot;</span>
+  <span class="ss">:module</span> <span class="nv">sample</span>
+  <span class="ss">:controller</span> <span class="nv">SimpleCtrl</span><span class="p">}</span>
+
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should set a message within the $scope&quot;</span>
+   <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;Hello&quot;</span><span class="p">))</span>
+
+ <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;should be able to change the message within the $scope&quot;</span>
+   <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">$scope.setMessage</span> <span class="s">&quot;World!&quot;</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;World!&quot;</span><span class="p">))</span>
+
+   <span class="p">(</span><span class="k">do </span><span class="p">(</span><span class="nf">$scope.setMessage</span> <span class="s">&quot;Angular Rocks!&quot;</span><span class="p">)</span>
+       <span class="p">(</span><span class="nf">is</span> <span class="nv">$scope.msg</span> <span class="s">&quot;Angular Rocks!&quot;</span><span class="p">))))</span>
+</pre></div>
+</div><div><a name="end-notes"></a><h2><b>11 &nbsp;&nbsp; End Notes</b></h2></div><div><p>For any feedback, requests and comments, please feel free to lodge an issue on github or contact me directly.</p><p>Chris.</p></div></section></body><script type="text/javascript">var metas = document.getElementsByTagName('meta');
+var i;
+if (navigator.userAgent.match(/iPhone/i)) {
+  for (i=0; i<metas.length; i++) {
+    if (metas[i].name == "viewport") {
+      metas[i].content = "width=device-width, minimum-scale=1.0, maximum-scale=1.0";
+    }
+  }
+  document.addEventListener("gesturestart", gestureStart, false);
+}
+function gestureStart() {
+  for (i=0; i<metas.length; i++) {
+    if (metas[i].name == "viewport") {
+      metas[i].content = "width=device-width, minimum-scale=0.25, maximum-scale=1.6";
+    }
+  }
+}</script><script>var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-31320512-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();</script></html>
