@@ -10,6 +10,15 @@ In your project file, add
 [im.chit/purnam "0.1.8"]
 ```
 
+### Starting Points:
+
+- [Documentation](https://docs.caudate.me/purnam/)
+
+- Examples
+  - [Angular.js Example](https://github.com/zcaudate/puram-angular-example)
+  - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game)
+  - [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing)
+
 ### What's New
 
 ##### 0.1.8
@@ -49,15 +58,6 @@ The third pain point was the code bloat I was experiencing when developing and t
 #### Integrated Documentation
 
 The fourth pain point was the lack of documentation tools for clojurescript as well as clojure. `purnam` is compatible with [midje-doc](https://www.github.com/zcaudate/lein-midje-doc) so that the integrated testing and documentation [workflow](http://z.caudate.me/combining-tests-and-documentation/) can be also used in clojurescript.
-
-### Starting Points:
-
-- [Wiki Home](https://github.com/zcaudate/purnam/wiki)
-
-- Examples
-  - [Angular.js Example](https://github.com/zcaudate/puram-angular-example)
-  - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game)
-  - [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing)
 
 ### A Taste of Purnam
 
