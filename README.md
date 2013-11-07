@@ -15,9 +15,9 @@ In your project file, add
 - [Documentation](https://docs.caudate.me/purnam/)
 
 - Examples
-  - [Angular.js Example](https://github.com/zcaudate/puram-angular-example)
+  - [Angular.js Example](https://github.com/zcaudate/purnam-angular-example)
   - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game)
-  - [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing)
+  - [Karma Testing Example](https://github.com/zcaudate/purnam-karma-testing)
 
 ### What's New
 
@@ -123,6 +123,36 @@ var user = {id: 0
                       :password "pass"})})
 ```
 
+##### Midje Tests
+```
+(fact [[{:doc "an example test description"
+         :globals [ka "a"
+                   kb "b"]
+         :vars [o (obj :a 1 :b 2 :c 3)]}]]
+
+ "dot notation for native objects"
+ o.a => 1
+ (+ o.a o.b o.c) => 6
+
+ "support for both native and cljs comparisons"
+ o => (obj :a 1 :b 2 :c 3)
+ [1 2 3 4] => [1 2 3 4]
+ 
+ "support for function comparison"
+  2 => even?
+  3 => (comp not even?)
+  
+ "globals"
+  o.|ka| => 1
+  (+ o.|ka| o.|kb|) => 3
+  
+  "vars are allowed to be rebound"
+  (! o (arr [1 2 3]
+            [4 5 6]
+            [7 8 9]))
+            
+  (- o.2.2 o.0.0) => 8)
+```
 
 ##### Angular JS
 

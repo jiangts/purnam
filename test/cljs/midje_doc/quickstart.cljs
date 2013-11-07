@@ -16,7 +16,7 @@ The quickest way to start is to look at some sample projects:
 
 - [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game) uses [`purnam.js`](#purnam-js)
 - [Angular.js Example](https://github.com/zcaudate/purnam-angular-example) uses [`purnam.angular`](#purnam-angular) and [`purnam.test.angular`](#purnam-test-angular)
-- [Karma Testing Example](https://github.com/zcaudate/puram-karma-testing) uses [`purnam.test`](#purnam-test) and [`purnam.test.sweet`](#purnam-test-sweet)
+- [Karma Testing Example](https://github.com/zcaudate/purnam-karma-testing) uses [`purnam.test`](#purnam-test) and [`purnam.test.sweet`](#purnam-test-sweet)
 "
 
 [[:section {:title "Native Datastructures"}]]
