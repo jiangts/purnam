@@ -13,7 +13,7 @@
   :documentation {:files {"doc/index"
                           {:input "test/cljs/midje_doc/purnam_guide.cljs"
                            :title "purnam"
-                           :sub-title "javascript on clojurescript"
+                           :sub-title "javascript essentials for clojurescript"
                            :author "Chris Zheng"
                            :email  "z@caudate.me"
                            :tracking "UA-31320512-2"}}}

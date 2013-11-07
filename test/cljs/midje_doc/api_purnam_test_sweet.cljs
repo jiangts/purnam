@@ -4,9 +4,6 @@
                [purnam.test :only [init describe is it]]
                [purnam.test.sweet :only [fact facts]]))
 
-[[{:hide true}]]
-(init)
-
 [[:chapter {:title "purnam.test.sweet" :tag "purnam-test-sweet"}]]
 
 [[:section {:title "init" :tag "init-sweet"}]]
@@ -14,6 +11,7 @@
 "All tests require the following within the namespace declaration."
 
 (comment 
+  (:use [purnam.cljs :only [aget-in aset-in]])
   (:use-macros [purnam.test :only [init]]
                [purnam.test.sweet :only [fact facts]]))
 

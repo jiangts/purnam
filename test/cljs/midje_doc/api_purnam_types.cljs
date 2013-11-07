@@ -11,15 +11,14 @@
 
 "Clojure protocols for javascript native objects and arrays."
 
-[[:section {:title "install"}]]
+[[:section {:title "init" :tag "init-types"}]]
 
-"In the namespace declaration, require `purnam.type` to install the protocols"
+"There is a dependency on [purnam.cljs](#purnam-cljs) and so the following MUST be placed in your project namespace in order to use this protocol"
 
 (comment
-  (ns my.app
-    (:require .....
-              [purnam.types :as type]
-              .....)))
+  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:require [purnam.types :as types]))
+
 
 [[:section {:title "seq protocol"}]]
 

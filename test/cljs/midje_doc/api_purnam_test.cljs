@@ -11,6 +11,7 @@
 "All tests require the following within the namespace declaration."
 
 (comment 
+  (:use [purnam.cljs :only [aget-in aset-in]])
   (:use-macros [purnam.test :only [init describe it is is-not]]))
 
 

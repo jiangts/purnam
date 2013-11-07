@@ -33,7 +33,7 @@
           (angular-module ss params))))
 
 (defmacro def.config [mod params & body]
-  (list '.config (angular-module (str mod)) (inj-fn params body)))
+  (list '.config (angular-module (str mod)) (inj-fn params (js-expand body))))
 
 (defn value-fn [sym f body]
   (let [[module ctrl] (module-syms sym)

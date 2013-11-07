@@ -10,6 +10,13 @@
 
 [[:chapter {:title "purnam.js" :tag "purnam-js"}]]
 
+[[:section {:title "init" :tag "init-js"}]]
+
+"There is a dependency on [purnam.cljs](#purnam-cljs) and so the following MUST be placed in your project namespace:"
+
+(comment
+  (:use [purnam.cljs :only [aget-in aset-in]]))
+
 [[:section {:title "obj"}]]
 
 (facts  [[{:doc "obj"}]]
