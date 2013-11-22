@@ -155,7 +155,7 @@
                             f.n def.n do.n
                             f*n def*n do*n def* property}))
   ([form pfn ex]
-     (cond (set? form) (apply set (map js-expand form))
+     (cond (set? form) (set (map js-expand form))
 
            (hash-map? form)
            (into {}

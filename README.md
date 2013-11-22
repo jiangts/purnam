@@ -21,6 +21,15 @@ In your project file, add
 
 ### What's New
 
+#### 0.3.0
+- Bug fix for sets in js-expand
+- Moved namespace around
+- Ported fluokitten to cljs
+
+todos:
+- array - fapply
+- object - fmap fapply pure
+
 ##### 0.1.8
 - Bug fix for `describe.controller`
 

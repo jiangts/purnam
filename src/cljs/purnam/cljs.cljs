@@ -53,6 +53,13 @@
     n
     "Object"))
 
+(defn js-type [o]
+  (let [ty (type o)
+        ty (if (and ty (.-cljs$lang$type ty))
+             (.-cljs$lang$ctorStr ty)
+             (js/goog.typeOf o))]
+  ty))
+
 (defn js-lookup
   ([o k]
      (aget o (js-strkey k)))
@@ -61,6 +68,39 @@
        (if-let [res (aget o s)]
          res
          not-found))))
+
+(defn js-map* [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (.-length ar)) args))]
+    (doseq [i (range len)]
+      (.push output (apply f (map #(aget % i) args))))
+    output))
+
+(defn js-mapcat* [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (.-length ar)) args))]
+    (loop [i 0 output output]
+      (if (< i len)
+       (let [res (apply f (map #(aget % i) args))]
+         (recur (inc i) (.concat output res)))
+        output))))
+
+(defn js-map [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (count ar)) args))]
+    (doseq [i (range len)]
+      (.push output (apply f (map #(nth % i) args))))
+    output))
+
+(defn js-mapcat [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (count ar)) args))]
+    (loop [i 0 output output]
+      (if (< i len)
+       (let [res (apply f (map #(nth % i) args))]
+         (recur (inc i) (.concat output res)))
+        output))))
+
 
 (defn js-assoc
   ([o k v]

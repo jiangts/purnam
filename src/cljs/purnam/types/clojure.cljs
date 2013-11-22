@@ -1,11 +1,11 @@
-(ns purnam.types
+(ns purnam.types.clojure
   (:require [goog.object :as gobject]
             [goog.array :as  garray]
             [purnam.cljs :as j]))
-
-(defn- obj-only [o method]
+            
+(defn obj-only [o method]
   (when-not (identical? (type o) js/Object)
-    (throw (js/TypeError. (str (j/js-obj-name (type o)) " does not implement '" (name method) "'")))))
+    (throw (js/TypeError. (str (j/js-type o) " does not implement '" (name method) "'")))))
 
 (extend-protocol ISeqable
   object
@@ -124,7 +124,6 @@
     (let [o (js-obj)]
       (gobject/extend o parent)
       (dissoc! o k)))
-
 
   ITransientMap
   (-dissoc! [o k]
