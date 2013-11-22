@@ -1,15 +1,9 @@
 (ns purnam.types.magma
   (:require
+    [purnam.cljs :refer [js-concat]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.protocols :refer [Magma op pure]])
   (:use-macros [purnam.types.macros :only [extend-all]]))
-  
-
-(extend-type nil Magma
-  (op
-    ([_ y] y)
-    ([_ y ys]
-       (reduce op y ys))))
 
 (defn op-function
   ([x y]
@@ -19,44 +13,96 @@
   ([x y ys]
     (reduce op-function x (cons y ys))))
 
+(defn op-array
+  ([x y]
+     (js-concat x y))
+  ([x y ys]
+     (apply js-concat x y ys)))
+
+(defn op-string
+  ([x y]
+     (str x y))
+  ([x y ys]
+     (apply str x y ys)))
+
+(defn op-number
+  ([x y]
+     (+ x y))
+  ([x y ys]
+     (apply + x y ys)))
+
+(defn op-keyword
+  ([x y]
+     (keyword (str (name x) (name y))))
+  ([x y ys]
+     (keyword (apply str
+                     (name x)
+                     (name y)
+                     (map name ys)))))
 (defn op-atom
   ([rx ry]
-     (pure rx (op (deref rx) (deref ry))))
+    (pure rx (op (deref rx) (deref ry))))
   ([rx ry rys]
-     (pure rx (op
-               (deref rx)
-               (deref ry)
-               (map deref rys)))))
+    (pure rx (op
+              (deref rx)
+              (deref ry)
+              (map deref rys)))))
+
+(defn op-coll
+  ([x y]
+     (into x y))
+  ([x y ys]
+     (reduce into (into x y) ys)))
+
+ (defn op-lazyseq
+   ([x y]
+      (concat x y))
+   ([x y ys]
+      (apply concat x y ys)))
+
+ (defn op-list
+   ([x y]
+      (apply list (op-lazyseq x y)))
+   ([x y ys]
+      (apply list (op-lazyseq x y ys))))
+
+
+(extend-type nil Magma
+  (op
+    ([_ y] y)
+    ([_ y ys]
+       (reduce op y ys))))
 
 (extend-all Magma
  [(op 
    ([x y] (?% x y)) 
    ([x y ys] (?% x y ys)))]
 
- function          [fmap-function]
- array             [fmap-array]
- string            [fmap-string]
- Keyword           [fmap-keyword]
+ ;;object             [op-object]
+ function          [op-function]
+ array             [op-array]
+ string            [op-string]
+ number            [op-number]
+ Keyword           [op-keyword]
  Atom              [op-atom]
-
- (comment
- LazySeq           [#(lazy-seq [v]) fapply-lazyseq]
-
- [IndexedSeq RSeq NodeSeq 
+ 
+ LazySeq           [op-lazyseq]
+ 
+ [EmptyList
+  IndexedSeq RSeq NodeSeq 
   ArrayNodeSeq List Cons
   ChunkedCons ChunkedSeq 
   KeySeq ValSeq Range 
   PersistentArrayMapSeq
-  EmptyList]          [list fapply-list]
+  EmptyList]       [op-list]
 
  [PersistentVector
   Subvec BlackNode 
-  RedNode]            [vector fapply-coll]
+  RedNode             
 
- [PersistentHashSet
-  PersistentTreeSet]  [hash-set fapply-coll]
-
-
- [PersistentHashMap
+  PersistentHashSet
+  PersistentTreeSet
+  
+  PersistentHashMap
   PersistentTreeMap
-  PersistentArrayMap]  [#(hash-map nil %2) fapply-map]))
+  PersistentArrayMap]  [op-coll])

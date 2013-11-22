@@ -17,3 +17,11 @@
   (let [types (partition 2 args)]
     `(do
        ~@(mapcat #(extend-entry proto ptmpls %) types))))
+
+(defmacro with-context
+ "Establishes the monadic context that can be accessed
+  with the get-context function in the dynamic scope inside
+  the body."
+ [context & body]
+ `(binding [purnam.types.monad/*pure-context* ~context]
+    ~@body))

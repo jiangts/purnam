@@ -23,5 +23,5 @@
   (id [m]))
 
 (defprotocol Foldable
-  (fold [foldable])
-  (foldmap [foldable g]))
+  (fold [fd])
+  (foldmap [fd g]))

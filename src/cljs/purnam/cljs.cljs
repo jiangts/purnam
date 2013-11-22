@@ -69,39 +69,6 @@
          res
          not-found))))
 
-(defn js-map* [f & args]
-  (let [output (array)
-        len (apply min (map (fn [ar] (.-length ar)) args))]
-    (doseq [i (range len)]
-      (.push output (apply f (map #(aget % i) args))))
-    output))
-
-(defn js-mapcat* [f & args]
-  (let [output (array)
-        len (apply min (map (fn [ar] (.-length ar)) args))]
-    (loop [i 0 output output]
-      (if (< i len)
-       (let [res (apply f (map #(aget % i) args))]
-         (recur (inc i) (.concat output res)))
-        output))))
-
-(defn js-map [f & args]
-  (let [output (array)
-        len (apply min (map (fn [ar] (count ar)) args))]
-    (doseq [i (range len)]
-      (.push output (apply f (map #(nth % i) args))))
-    output))
-
-(defn js-mapcat [f & args]
-  (let [output (array)
-        len (apply min (map (fn [ar] (count ar)) args))]
-    (loop [i 0 output output]
-      (if (< i len)
-       (let [res (apply f (map #(nth % i) args))]
-         (recur (inc i) (.concat output res)))
-        output))))
-
-
 (defn js-assoc
   ([o k v]
      (do (aset o (js-strkey k) v)
@@ -213,6 +180,45 @@
 (defn js-deep-replace [o1 o2]
   (js-empty o1)
   (js-deep-extend o1 o2))
+
+(defn js-map* [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (.-length ar)) args))]
+    (doseq [i (range len)]
+      (.push output (apply f (map #(aget % i) args))))
+    output))
+
+(defn js-mapcat* [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (.-length ar)) args))]
+    (loop [i 0 output output]
+      (if (< i len)
+       (let [res (apply f (map #(aget % i) args))]
+         (recur (inc i) (.concat output res)))
+        output))))
+
+(defn js-map [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (count ar)) args))]
+    (doseq [i (range len)]
+      (.push output (apply f (map #(nth % i) args))))
+    output))
+
+(defn js-mapcat [f & args]
+  (let [output (array)
+        len (apply min (map (fn [ar] (count ar)) args))]
+    (loop [i 0 output output]
+      (if (< i len)
+       (let [res (apply f (map #(nth % i) args))]
+         (recur (inc i) (.concat output res)))
+        output))))
+
+(defn js-concat [& args]
+  (let [output (array)]
+    (doseq [ar args
+            v  ar]
+      (.push output v))
+    output))
 
 (defn js<- [obj]
   (clj->js obj))

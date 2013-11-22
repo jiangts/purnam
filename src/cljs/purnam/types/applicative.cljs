@@ -103,4 +103,4 @@
 
   [PersistentHashMap
    PersistentTreeMap
-   PersistentArrayMap]  [#(hash-map nil %2) fapply-map])
+   PersistentArrayMap]  [#(hash-map nil v) fapply-map])

@@ -1,20 +1,27 @@
-(ns purnam.hs.test-hs-types
+(ns purnam.types.test-applicative
   (:use [purnam.core :only [fmap pure fapply op]]
         [purnam.cljs :only [js-type js-mapcat]])
   (:use-macros [purnam.js :only [obj arr !]]
-               [purnam.test :only [init]]
                [purnam.test.sweet :only [fact facts]]))
 
-(init)
-
-#_(fact
+(fact
   @(pure (atom nil) 1) => 1
 
   (pure #{1 2 3} 1) => #{1}
-  ;;(pure nil nil) => nil
-  )
+  
+  (pure [4 5] 1) => [1]
 
-#_(fact
+  (pure (list) 1) => (list 1)
+
+  (pure (seq [3]) 1) => (seq [1])
+
+  (pure (lazy-seq [4]) 1) => (lazy-seq [1])
+
+  (pure #{} 1) => #{1}
+
+  (pure {} 1) => {nil 1})
+
+(fact
   (fapply [] []) => []
 
   (fapply [] [1 2 3]) => []
@@ -94,71 +101,13 @@
     {:a 3 :b 4} 
     {:c 2 :d 5})
   => {:a 4 :b 4 :c 1 :d 5}
-  
-  
-  
-  ;;(fapply (first {nil inc}) (first {nil 1}))
-  ;;=> (first {nil 2})
-  
-  (js/console.log #_(first {nil 2})
-    (js-type (first (seq {:a 2}))))
-    
-  (comment
 
-    (fapply (first {:a inc}) (first {:b 1}))
-    => (first {:b 1})
-
-    (fapply (first {:a inc}) (first {:a 1}))
-    => (first {:a 2})
-
-    (fapply (first {nil inc}) (first {:a 1}))
-    => (first {:a 2}))
-
-)
-
-
-(fact
-  (op nil 1) => 1  
-  
-  (fmap + (arr 1 2 3 4) '(1 2 3 4))
-  => (arr 2 4 6 8)
-
-  (fmap + '(1 2 3 4) (arr 1 2 3 4))
-  => '(2 4 6 8)
-
-  (fmap + [1 2 3 4] (arr 1 2 3 4))
-  => [2 4 6 8]
-  
   (fapply (arr dec inc #(* 2 %)) (arr 1 2 3 4))
   => (arr 0 1 2 3 2 3 4 5 2 4 6 8)
   
   (fapply (arr dec inc #(* 2 %)) [1 2 3 4])
-  => (arr 0 1 2 3 2 3 4 5 2 4 6 8)) 
-
-
-(fact
-  (fmap inc (cons 1 ())) => '(2)
-  (fmap inc []) => []
-
-  (fmap inc [1 2 3]) => [2 3 4]
-
-  (fmap + [1 2] [3 4 5] [6 7 8]) => [10 13]
-
-  (fmap inc (list)) => (list)
-
-  (fmap inc (list 1 2 3)) => (list 2 3 4))
-
-#_(fact ""
-  (fmap inc [1 2 3]) => [2 3 4]
-  (fmap inc #{1 2 3}) => #{2 3 4}
-  (fmap + (arr 1 2 3) (arr 1 2 3) (arr 1 2 3)) => (arr 3 6 9)
-  (fmap #(apply str "A" %&) "b" "c" "d") => "Abcd"
+  => (arr 0 1 2 3 2 3 4 5 2 4 6 8)
   
-  (fmap inc {:a 1}) => {:a 2}
-  (fmap + {:a 1} {:b 1}) => {:a 1 :b 1}
-  
-  (fmap inc '(1 2 3)) => '(2 3 4)
-  ((fmap str +) 1 2 3) => "6"
-  
-  @(fmap inc (atom 1)) => 2)
-
+  (fapply {nil inc}
+          {:a 1 :b 2 :c 3})
+  => {:a 2 :b 3 :c 4}) 
