@@ -117,8 +117,8 @@
         ([mv g mvs] (?% mv g mvs)))
   (join [mv] (?% mv))]
 
- ;;object            []
- ;;array             [fold-array foldmap-array]
+ ;;object            [bind-object join-object]
+ ;;array             [bind-array join-array]
  Atom              [bind-default join-atom]
 
  LazySeq           [bind-lazyseq join-seq]

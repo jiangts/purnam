@@ -88,7 +88,6 @@
     ([fv g fvs] (?% fv g fvs)))]
   
   object            [fmap-object]
-  ;;date              [fmap-object]
   function          [fmap-function]
   array             [fmap-array]
   string            [fmap-string]
