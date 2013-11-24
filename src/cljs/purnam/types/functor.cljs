@@ -3,14 +3,9 @@
     [purnam.cljs :refer [js-map js-type]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.protocols :refer [Functor]])
-  (:use-macros [purnam.types.macros :only [extend-all]]))
-
-(defn fmap-object
-  ([fv g] (obj-only fv :fmap)
-     (g fv))
-  ([fv g fvs]
-     (obj-only fv :fmap)
-     (apply g fv fvs)))
+  (:use-macros
+   [purnam.core :only [obj]]
+   [purnam.types.macros :only [extend-all]]))
 
 (defn fmap-function
   ([fv g] (comp g fv))
@@ -43,7 +38,7 @@
 
 (defn fmap-coll
   ([fv g] (with-meta (into (empty fv) (map g fv)) (meta fv)))
-  ([fv g fvs] (with-meta 
+  ([fv g fvs] (with-meta
       (into (empty fv) (apply map g fv fvs)) (meta fv))))
 
 (defn group-entries [k ms]
@@ -72,6 +67,14 @@
      (into (empty fv) (fmap-map-r fv g fvs))
      (meta fv))))
 
+(defn fmap-object
+  ([fv g]
+     (obj-only fv :fmap)
+     (apply conj (obj) (fmap-map-r fv g)))
+  ([fv g fvs]
+     (obj-only fv :fmap)
+     (apply conj (obj) (fmap-map-r fv g fvs))))
+
 (extend-type nil Functor
  (fmap
    ([_ _] nil)
@@ -86,28 +89,28 @@
   [(fmap
     ([fv g] (?% fv g))
     ([fv g fvs] (?% fv g fvs)))]
-  
+
   object            [fmap-object]
   function          [fmap-function]
   array             [fmap-array]
   string            [fmap-string]
   Keyword           [fmap-keyword]
   Atom              [fmap-atom]
-  
-  [IndexedSeq RSeq NodeSeq 
+
+  [IndexedSeq RSeq NodeSeq
    ArrayNodeSeq List Cons
    ChunkedCons ChunkedSeq
-   KeySeq ValSeq Range 
+   KeySeq ValSeq Range
    PersistentArrayMapSeq]    [fmap-list]
-   
+
   LazySeq                    [fmap-lazyseq]
-  
+
   [PersistentVector
-   Subvec BlackNode 
+   Subvec BlackNode
    RedNode
    PersistentHashSet
    PersistentTreeSet]        [fmap-coll]
-   
+
   [PersistentHashMap
    PersistentTreeMap
    PersistentArrayMap]       [fmap-map])

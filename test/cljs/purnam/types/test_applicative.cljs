@@ -1,7 +1,7 @@
 (ns purnam.types.test-applicative
   (:use [purnam.core :only [fmap pure fapply op]]
         [purnam.cljs :only [js-type js-mapcat]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 
 (fact
@@ -19,7 +19,9 @@
 
   (pure #{} 1) => #{1}
 
-  (pure {} 1) => {nil 1})
+  (pure {} 1) => {nil 1}
+  
+  (pure (obj) 1) => (obj nil 1))
 
 (fact
   (fapply [] []) => []
@@ -110,4 +112,10 @@
   
   (fapply {nil inc}
           {:a 1 :b 2 :c 3})
-  => {:a 2 :b 3 :c 4}) 
+  => {:a 2 :b 3 :c 4}
+  
+  (fapply (obj :a inc) (obj :a 1 :b 1)) 
+  => (obj :a 2 :b 1)
+  
+  (fapply (obj nil inc) (obj :a 1 :b 2 :c 3)) 
+  => (obj :a 2 :b 3 :c 4)) 

@@ -26,7 +26,7 @@
 
 **API Reference**
 
-**purnam.js [[▼|Syntax Overview]]**
+**purnam.core [[▼|Syntax Overview]]**
   * [obj](Syntax-Overview#obj)
   * [arr](Syntax-Overview#arr)
   * [?](Syntax-Overview#getter)

@@ -1,6 +1,6 @@
 (ns purnam.types.test-monad
   (:use [purnam.core :only [bind join return]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
                
 (facts
@@ -53,11 +53,18 @@
  => {:a 2}
 
  (bind {:a 1  :b 2 :c 3} #(hash-map :increment (inc %)))
- => {[:a :increment] 2 [:b :increment] 3 [:c :increment] 4}
+ => {:a/increment 2 :b/increment 3 :c/increment 4}
 
  (bind {:a 1} {:a 2 :b 3} {:b 4 :c 5}
        (fn [& args] {:sum (apply + args)}))
- => {[:a :sum] 3 [:b :sum] 7 [:c :sum] 5})
+ => {:a/sum 3 :b/sum 7 :c/sum 5}
+ 
+ (bind (arr 1 2 3) increment)
+ => (arr 2 3 4)
+ 
+ (bind (obj :a 1) (obj :a 2 :b 3) (obj :b 4 :c 5)
+       (fn [& args] (obj :sum (apply + args))))
+ => (obj :a/sum 3 :b/sum 7 :c/sum 5))
  
 (fact
  (join [[1 2] [3 [4 5] 6]]) => [1 2 3 [4 5] 6]
@@ -73,4 +80,10 @@
 
  (join #{#{1 2} #{3 #{4 5} 6}}) => #{1 2 3 #{4 5} 6}
 
- (join {:a 1 :b {:c 2 :d {:e 3}}}) => {:a 1 [:b :c] 2 [:b :d] {:e 3}})
+ (join {:a 1 :b {:c 2 :d {:e 3}}}) => {:a 1 :b/c 2 :b/d {:e 3}}
+ 
+ (join (arr (arr 1 2 3) (arr 4 5) 6)) => (arr 1 2 3 4 5 6)
+ 
+ (join (obj :a 1 :b {:c 2 :d {:e 3}})) => (obj :a 1 :b/c 2 :b/d {:e 3})
+ 
+ )

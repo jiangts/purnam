@@ -19,7 +19,7 @@
 
 **API Reference**
 
-**purnam.js [[▼|API---purnam-js]]**
+**purnam.core [[▼|API---purnam-js]]**
   * [obj](API---purnam-js#wiki-obj)
   * [arr](API---purnam-js#wiki-arr)
   * [?](API---purnam-js#wiki-getter)

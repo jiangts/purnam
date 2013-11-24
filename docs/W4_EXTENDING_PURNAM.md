@@ -26,6 +26,6 @@ I wrote purnam-angular because I really liked angularjs but I could not follow a
 Feel free to contribute in these aspects. I can be contacted via email: z (at) caudate (dot) me for any feedback/suggestions
 
 
-[[◄ Back (Project Structure)|Project Structure]] `      ` [[Next (Reference) ►|purnam.js]]
+[[◄ Back (Project Structure)|Project Structure]] `      ` [[Next (Reference) ►|purnam.core]]
 
 [[◄ Home (Home)|Home]] 

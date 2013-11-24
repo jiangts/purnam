@@ -1,9 +1,10 @@
 (ns purnam.types.monad
   (:require
-    [purnam.common :refer [get-context]]
-    [purnam.types.clojure :refer [obj-only]]
-    [purnam.types.functor :refer [fmap-map-r]]
-    [purnam.protocols :refer [Monad join fmap op]])
+   [purnam.common :refer [get-context]]
+   [purnam.cljs :refer [js-mapcat]]
+   [purnam.types.clojure :refer [obj-only]]
+   [purnam.types.functor :refer [fmap-map-r]]
+   [purnam.protocols :refer [Monad bind join fmap op]])
   (:use-macros [purnam.types.macros :only [extend-all with-context]]))
 
 (defn with-current-context
@@ -15,15 +16,28 @@
     (fn [& args]
       (with-context current-context
         (apply f args)))))
-          
+
 (defn bind-default
   ([mv g]
      (join (fmap mv g)))
   ([mv g mvs]
      (join (fmap mv g mvs))))
 
-(defn join-atom [mv]
-  (fmap mv #(if (instance? Atom %) (deref %) %)))
+(defn join-atom [mv] mv)
+
+(defn join-array [mv]
+  (let [output (array)]
+    (.map mv (fn [e]
+               (if (coll? e)
+                 (doseq [i e] (.push output i))
+                 (.push output e))))
+    output))
+
+(defn bind-array
+  ([mv g]
+     (js-mapcat g mv))
+  ([mv g mvs]
+     (apply js-mapcat g mv mvs)))
 
 (defn bind-coll
   ([mv g]
@@ -82,7 +96,10 @@
               (if (map? x)
                 (map (fn [[kx vx]]
                          [(if (and k kx)
-                            (vec (flatten [k kx]))
+                            (->> (flatten [k kx])
+                                 (map name)
+                                 (clojure.string/join "/")
+                                 keyword)
                             (or k kx))
                           vx])
                        x)
@@ -102,6 +119,34 @@
            (join-map-r
             (fmap-map-r m g ms)))))
 
+(defn join-object-r [m]
+  (mapcat (fn [[k x :as e]]
+              (if (map? x)
+                (map (fn [[kx vx]]
+                         [(if (and k kx)
+                            (clojure.string/join "/" (flatten [k kx]))
+                            (or k kx))
+                          vx])
+                       x)
+                [e]))
+            m))
+
+(defn join-object [m]
+  (obj-only m :join)
+  (apply conj (js-obj) (join-object-r m)))
+
+(defn bind-object
+  ([m g]
+     (obj-only m :bind)
+     (apply conj (js-obj)
+           (join-object-r
+            (fmap-map-r m g))))
+  ([m g ms]
+     (mapv #(obj-only % :bind) (conj ms m))
+     (apply conj (js-obj)
+           (join-object-r
+            (fmap-map-r m g ms)))))
+
 (extend-type nil  Monad
   (bind
     ([_ _] nil)
@@ -113,8 +158,8 @@
         ([mv g mvs] (?% mv g mvs)))
   (join [mv] (?% mv))]
 
- ;;object            [bind-object join-object]
- ;;array             [bind-array join-array]
+ object            [bind-object join-object]
+ array             [bind-array join-array]
  Atom              [bind-default join-atom]
 
  LazySeq           [bind-lazyseq join-seq]
@@ -131,7 +176,7 @@
 
   PersistentHashSet
   PersistentTreeSet] [bind-coll join-coll]
-  
+
  [PersistentHashMap
   PersistentTreeMap
   PersistentArrayMap]  [bind-map join-map])

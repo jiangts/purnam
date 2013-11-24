@@ -1,6 +1,6 @@
 (ns purnam.hs.test-hs-types
   (:use [purnam.core :only [fmap]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test :only [init]]
                [purnam.test.sweet :only [fact facts]]))
 

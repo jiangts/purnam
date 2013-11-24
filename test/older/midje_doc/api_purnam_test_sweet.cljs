@@ -1,6 +1,6 @@
 (ns midje-doc.api-purnam-test-sweet
   (:use [purnam.cljs :only [aget-in aset-in js-equals]])
-  (:use-macros [purnam.js :only [! ? f.n def.n obj arr]]
+  (:use-macros [purnam.core :only [! ? f.n def.n obj arr]]
                [purnam.test :only [init describe is it]]
                [purnam.test.sweet :only [fact facts]]))
 

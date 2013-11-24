@@ -128,6 +128,3 @@
                      x xs))))))
                      
   (join [cf] (bind cf identity)))
-  
-(.log js/console (((curry 5 +) 1 2 3 4)))
-#_(.log js/console (js-type (curry +)))

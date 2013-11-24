@@ -1,7 +1,7 @@
 (ns angular-demo.recipes
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
-  (:use-macros [purnam.js :only [obj arr ! def.n]]
+  (:use-macros [purnam.core :only [obj arr ! def.n]]
                [purnam.angular :only [def.module def.config def.factory
                                       def.controller def.service]]))
 

@@ -1,6 +1,6 @@
 (ns purnam.types.test-functor
   (:use [purnam.core :only [fold foldmap]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 
 (fact
@@ -16,4 +16,8 @@
 
  (fold #{1 2 3}) => 6
 
- (fold {:a 1 :b 2 :c 3}) => 6)
+ (fold {:a 1 :b 2 :c 3}) => 6
+ 
+ (fold (array 1 2 3)) => 6 
+
+ (fold (obj :a 1 :b 2 :c 3)) => 6)

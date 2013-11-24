@@ -5,7 +5,7 @@
                                  js-merge js-merge-nil
                                  js-copy js-deep-copy
                                  js-replace js-deep-replace]])
-  (:use-macros [purnam.js :only [obj arr]]
+  (:use-macros [purnam.core :only [obj arr]]
                [purnam.test :only [init]]
                [purnam.test.sweet :only [fact facts]]))
 

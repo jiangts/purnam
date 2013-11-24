@@ -1,6 +1,6 @@
 (ns angular-demos.sfp
   (:use [purnam.cljs :only [aget-in aset-in]])
-  (:use-macros [purnam.js :only [obj arr ! !> def.n]]
+  (:use-macros [purnam.core :only [obj arr ! !> def.n]]
                [purnam.angular :only
                 [def.module def.config def.factory
                  def.provider def.service def.controller]]))

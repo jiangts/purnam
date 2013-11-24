@@ -1,6 +1,6 @@
 (ns midje-doc.api-purnam-js
   (:use [purnam.cljs :only [aget-in aset-in js-equals]])
-  (:use-macros [purnam.js :only [? ?> ! !> f.n def.n do.n 
+  (:use-macros [purnam.core :only [? ?> ! !> f.n def.n do.n 
                                  obj arr def* def*n f*n do*n]]
                [purnam.test :only [init]]
                [purnam.test.sweet :only [fact facts]]))
@@ -8,7 +8,7 @@
 [[{:hide true}]]
 (init)
 
-[[:chapter {:title "purnam.js" :tag "purnam-js"}]]
+[[:chapter {:title "purnam.core" :tag "purnam-js"}]]
 
 [[:section {:title "init" :tag "init-js"}]]
 

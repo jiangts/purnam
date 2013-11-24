@@ -1,6 +1,6 @@
 (ns midje-doc.api-purnam-angular-test
   (:use [purnam.cljs :only [aget-in aset-in js-equals]])
-  (:use-macros [purnam.js :only [! f.n def.n obj arr]]
+  (:use-macros [purnam.core :only [! f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller 
                                       def.value def.constant 
                                       def.filter def.factory 

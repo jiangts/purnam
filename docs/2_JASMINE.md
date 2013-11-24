@@ -35,4 +35,4 @@ A test suite looks something like this:
        (is (? o.any.nested.syntax) nil))))
 ```
 
-[[◄ Back (API purnam.js)|API   purnam js]] `      ` [[Next (API purnam.angular) ►|API   purnam angular]]
+[[◄ Back (API purnam.core)|API   purnam js]] `      ` [[Next (API purnam.angular) ►|API   purnam angular]]

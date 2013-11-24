@@ -1,6 +1,6 @@
 (ns purnam.types.test-monoid
   (:use [purnam.core :only [id]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 
 (facts
@@ -16,4 +16,8 @@
 
  (id #{2 3}) => #{}
 
- (id {:1 2}) => {})
+ (id {:1 2}) => {}
+ 
+ (id (array 1 2 3 4)) => (array)
+ 
+ (id (obj :a 1)) => (obj))

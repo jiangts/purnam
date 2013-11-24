@@ -1,6 +1,6 @@
 ### Overview ###
 
-Javascript language extensions are defined in the `purnam.js` namespace. 
+Javascript language extensions are defined in the `purnam.core` namespace. 
 
 - use of javascript [`dot`](#dot-notation) notation semantics
 - constructors

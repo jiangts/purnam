@@ -1,8 +1,8 @@
 (ns purnam.test-angular
   (:use [purnam.cljs :only [aget-in aset-in]])
   (:require [goog.object :as o])
-  (:require-macros [purnam.js :as j])
-  (:use-macros [purnam.js :only [obj arr ! def.n]]
+  (:require-macros [purnam.core :as j])
+  (:use-macros [purnam.core :only [obj arr ! def.n]]
                [purnam.test :only [init describe it is is-not]]
                [purnam.angular :only [def.module def.config def.factory
                                       def.filter def.controller

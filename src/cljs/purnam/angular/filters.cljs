@@ -2,8 +2,8 @@
   (:use [purnam.cljs :only [aget-in aset-in augment-fn-string check-fn]])
   (:require [goog.object :as o]
             [goog.array :as a])
-  (:require-macros [purnam.js :as j])
-  (:use-macros [purnam.js :only [obj arr ! def.n]]
+  (:require-macros [purnam.core :as j])
+  (:use-macros [purnam.core :only [obj arr ! def.n]]
                [purnam.angular :only [def.module def.filter]]))
 
 (def.module purnam.filters [])

@@ -1,9 +1,17 @@
 (ns purnam.types.magma
   (:require
-    [purnam.cljs :refer [js-concat]]
+    [purnam.cljs :refer [js-concat js-merge]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.protocols :refer [Magma op pure]])
   (:use-macros [purnam.types.macros :only [extend-all]]))
+
+(defn op-object
+  ([x y]
+     (mapv #(obj-only % :op) [x y])
+     (js-merge x y))
+  ([x y ys]
+     (mapv #(obj-only % :op) (conj ys x y))
+     (apply js-merge x y ys)))
 
 (defn op-function
   ([x y]
@@ -74,35 +82,35 @@
        (reduce op y ys))))
 
 (extend-all Magma
- [(op 
-   ([x y] (?% x y)) 
+ [(op
+   ([x y] (?% x y))
    ([x y ys] (?% x y ys)))]
 
- ;;object             [op-object]
+ object             [op-object]
  function          [op-function]
  array             [op-array]
  string            [op-string]
  number            [op-number]
  Keyword           [op-keyword]
  Atom              [op-atom]
- 
+
  LazySeq           [op-lazyseq]
- 
+
  [EmptyList
-  IndexedSeq RSeq NodeSeq 
+  IndexedSeq RSeq NodeSeq
   ArrayNodeSeq List Cons
-  ChunkedCons ChunkedSeq 
-  KeySeq ValSeq Range 
+  ChunkedCons ChunkedSeq
+  KeySeq ValSeq Range
   PersistentArrayMapSeq
   EmptyList]       [op-list]
 
  [PersistentVector
-  Subvec BlackNode 
-  RedNode             
+  Subvec BlackNode
+  RedNode
 
   PersistentHashSet
   PersistentTreeSet
-  
+
   PersistentHashMap
   PersistentTreeMap
   PersistentArrayMap]  [op-coll])

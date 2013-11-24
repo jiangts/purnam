@@ -1,6 +1,6 @@
 (ns purnam.types.test-magma
   (:use [purnam.core :only [op]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 
 
@@ -45,5 +45,9 @@
 
   (op {:a 1 :b 2} {:a 3 :c 4} {:d 5} {:e 6})
   => {:a 3 :b 2 :c 4 :d 5 :e 6}
+  
+  (op (array 1 2 3) (array 4 5 6)) => (array 1 2 3 4 5 6)
+  
+  (op (obj :a 1 :b 2) (obj :c 3 :d 4)) => (obj :a 1 :b 2 :c 3 :d 4)
   
 ) 

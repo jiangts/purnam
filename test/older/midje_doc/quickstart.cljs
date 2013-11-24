@@ -1,6 +1,6 @@
 (ns midje-doc.quickstart
   (:use [purnam.cljs :only [aget-in aset-in]])
-  (:use-macros [purnam.js :only [obj arr ? ?> ! !> f.n def.n def* def*n]]
+  (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n def* def*n]]
                [purnam.angular :only [def.module def.controller def.service]]
                [purnam.test :only [init describe is is-not it]]
                [purnam.test.sweet :only [fact facts]]
@@ -14,14 +14,14 @@
 "
 The quickest way to start is to look at some sample projects:
 
-- [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game) uses [`purnam.js`](#purnam-js)
+- [Crafty.js Example](https://github.com/zcaudate/purnam-crafty-game) uses [`purnam.core`](#purnam-js)
 - [Angular.js Example](https://github.com/zcaudate/purnam-angular-example) uses [`purnam.angular`](#purnam-angular) and [`purnam.test.angular`](#purnam-test-angular)
 - [Karma Testing Example](https://github.com/zcaudate/purnam-karma-testing) uses [`purnam.test`](#purnam-test) and [`purnam.test.sweet`](#purnam-test-sweet)
 "
 
 [[:section {:title "Native Datastructures"}]]
 
-"[obj](#obj), [arr](#arr) and [def*](#raw) in the [purnam.js](#purnam-js) namespace allow nested objects and arrays to be constructed. The examples below show equivalent objects in javascript and clojurescript"
+"[obj](#obj), [arr](#arr) and [def*](#raw) in the [purnam.core](#purnam-js) namespace allow nested objects and arrays to be constructed. The examples below show equivalent objects in javascript and clojurescript"
 
 [[{:lang "js" :title "js object"}]]
 [[:code 

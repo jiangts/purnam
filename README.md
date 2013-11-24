@@ -46,7 +46,7 @@ Current projects requiring interface with external javascript libraries will gre
 The first pain point was having to deal with the clojurish `(.dot syntax)` for javascript interop as well as a lack of functionality when working with native js objects. This made it especially hard for working with any external js library. Purnam offers:
 
 - [purnam.cljs](http://docs.caudate.me/purnam/#purnam-cljs) - functions for native objects and arrays
-- [purnam.js](http://docs.caudate.me/purnam/#purnam-js) - a set of macros allowing javascript-like syntax for better interop 
+- [purnam.core](http://docs.caudate.me/purnam/#purnam-js) - a set of macros allowing javascript-like syntax for better interop 
 - [purnam.types](http://docs.caudate.me/purnam/#purnam-types) - clojure protocols for native objects and arrays
 
 

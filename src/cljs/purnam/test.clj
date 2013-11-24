@@ -1,13 +1,13 @@
 (ns purnam.test
   (:require [clojure.string :as s])
-  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root hash-map? do.n obj !]]))
+  (:use [purnam.js :only [js-expand change-roots-map cons-sym-root hash-map?]]))
 
 (defmacro init []
-  '(purnam.js/do.n
+  '(purnam.core/do.n
     (js/beforeEach
      (fn []
        (this.addMatchers
-        (purnam.js/obj
+        (purnam.core/obj
          :toSatisfy
          (fn [expected tactual texpected]
            (let [actual this.actual

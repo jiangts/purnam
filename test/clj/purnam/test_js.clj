@@ -1,8 +1,8 @@
 (ns purnam.test-js
   (:use midje.sweet
         purnam.checks
-        [purnam.js :only [obj]])
-  (:require [purnam.js :as j]))
+        [purnam.core :only [obj]])
+  (:require [purnam.core :as j]))
 
 (fact "split-dotted"
   (j/split-dotted "a") => ["a"]
@@ -143,16 +143,16 @@
 (fact "property"
  (macroexpand-1 '(j/property <A>.<B>.<C>))
  => '(clojure.core/fn 
-         ([] (purnam.js/? <A>.<B>.<C>)) 
+         ([] (purnam.core/? <A>.<B>.<C>)) 
          ([v] (clojure.core/cond 
                 (clojure.core/= "object" 
-                (js/goog.typeOf (purnam.js/? <A>.<B>.<C>)) 
+                (js/goog.typeOf (purnam.core/? <A>.<B>.<C>)) 
                 (js/goog.typeOf v)) 
-              (purnam.cljs/js-replace (purnam.js/? <A>.<B>.<C>) v) 
-              :else (purnam.js/! <A>.<B>.<C> v))))
+              (purnam.cljs/js-replace (purnam.core/? <A>.<B>.<C>) v) 
+              :else (purnam.core/! <A>.<B>.<C> v))))
  (macroexpand-1 '(j/property <A>.<B>.<C> true))
  => '(clojure.core/fn 
-       ([] (purnam.js/? <A>.<B>.<C>)) 
+       ([] (purnam.core/? <A>.<B>.<C>)) 
        ([v] (throw (js/Error "<A>.<B>.<C> is readonly")))))
 
 (fact "has-sym-root?"

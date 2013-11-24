@@ -14,4 +14,4 @@
 
 [[Getting Started (Your First Project) ►|Your First Project]]
 
-[[API Reference (purnam.js) ►|purnam.js]]
+[[API Reference (purnam.core) ►|purnam.core]]

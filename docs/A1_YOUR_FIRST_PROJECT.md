@@ -255,7 +255,7 @@ Create a new file at `src/myapp/core.cljs` with the following code:
 ```clojure
 (ns myapp.core
   (:use [purnam.cljs :only [aset-in aget-in]])
-  (:use-macros [purnam.js :only [def.n]]))
+  (:use-macros [purnam.core :only [def.n]]))
 
 (def.n add-and-log [a b]
   (let [answer (+ a.value b.value)]
@@ -274,7 +274,7 @@ Now we add tests for `add-and-log` in `test/myapp/test_core.cljs`:
 (ns myapp.test_core
   (:use [purnam.cljs :only [aget-in aset-in]]
         [myapp.core :only  [add-and-log]]) ;; <--- Added
-  (:use-macros [purnam.js :only [! def.n obj]] <-- Added 
+  (:use-macros [purnam.core :only [! def.n obj]] <-- Added 
                [purnam.test :only [init describe it is is-not]]))
 
 ;;

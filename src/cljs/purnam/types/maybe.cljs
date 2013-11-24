@@ -15,6 +15,7 @@
     (if (some nil? jvs)
       nil
       (Just. (apply g v (map fold jvs)))))
+  
   Applicative
   (pure [_ x]
     (Just. x))
@@ -22,6 +23,7 @@
     (fmap jv v))
   (fapply [_ jv jvs]
     (fmap jv v jvs))
+    
   Monad
   (bind [_ g]
     (g v))

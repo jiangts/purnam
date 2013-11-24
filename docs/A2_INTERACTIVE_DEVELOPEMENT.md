@@ -103,7 +103,7 @@ Open `src/myapp/core.cljs` and add a new function:
 ```clojure
 (ns myapp.core
   (:use [purnam.cljs :only [aset-in aget-in]])
-  (:use-macros [purnam.js :only [def.n]]))
+  (:use-macros [purnam.core :only [def.n]]))
 
 (def.n add-and-log [a b]
   (let [answer (+ a.value b.value)]

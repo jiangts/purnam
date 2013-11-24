@@ -2,7 +2,7 @@
   (:use [purnam.cljs :only [aget-in aset-in js-equals]])
   (:require [purnam.types :as types]
             [midje-doc.api-purnam-angular-test :as test-app])
-  (:use-macros [purnam.js :only [f.n def.n obj arr]]
+  (:use-macros [purnam.core :only [f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller def.service]]
                [purnam.test :only [init describe is it]]
                [purnam.test.sweet :only [fact facts]]

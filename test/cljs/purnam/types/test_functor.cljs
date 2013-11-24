@@ -1,7 +1,7 @@
 (ns purnam.types.test-functor
   (:use [purnam.core :only [fmap pure fapply op]]
         [purnam.cljs :only [js-type js-mapcat]])
-  (:use-macros [purnam.js :only [obj arr !]]
+  (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 
 (facts "Data structures: Functor"
@@ -40,8 +40,14 @@
   (fmap inc {:a 1 :b 2 :c 3}) => {:a 2 :b 3 :c 4}
 
   (fmap + {:a 1 :b 2} {:a 3 :b 4 :c 5} {:a 6 :b 7 :c 8})
-  => {:a 10 :b 13 :c 13})
+  => {:a 10 :b 13 :c 13}
+  
+  (fmap inc (obj)) => (obj)
 
+  (fmap inc (obj :a 1 :b 2 :c 3)) => (obj :a 2 :b 3 :c 4)
+
+  (fmap + (obj :a 1 :b 2) (obj :a 3 :b 4 :c 5) (obj :a 6 :b 7 :c 8))
+  => (obj :a 10 :b 13 :c 13))
 
 (fact
   (fmap inc (cons 1 ())) => '(2)
