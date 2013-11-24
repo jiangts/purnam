@@ -1,9 +1,8 @@
 (ns purnam.types.curried
   (:require
-    [purnam.cljs :refer [js-map js-type]]
-    [purnam.types.clojure :refer [obj-only]]
+    [purnam.common]
     [purnam.protocols :refer [Curried Functor Applicative Monad Monoid Magma Foldable id fmap fold bind]])
-  (:use-macros [purnam.types.macros :only [with-context extend-invoke]]))
+  (:use-macros [purnam.types.macros :only [with-context]]))
     
 (declare curry)
 
@@ -129,6 +128,6 @@
                      x xs))))))
                      
   (join [cf] (bind cf identity)))
-
+  
 (.log js/console (((curry 5 +) 1 2 3 4)))
 #_(.log js/console (js-type (curry +)))

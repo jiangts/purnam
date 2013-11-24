@@ -1,14 +1,10 @@
 (ns purnam.types.monad
   (:require
+    [purnam.common :refer [get-context]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.types.functor :refer [fmap-map-r]]
     [purnam.protocols :refer [Monad join fmap op]])
   (:use-macros [purnam.types.macros :only [extend-all with-context]]))
-
-
-(def ^{:dynamic true :private true} *pure-context*)
-
-(defn get-context [] *pure-context*)
 
 (defn with-current-context
   "Creates a function that applies function f with the supplied arguments,

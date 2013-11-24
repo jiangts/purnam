@@ -9,7 +9,6 @@
         
 (defprotocol Applicative
   (pure [av v])
-  
   (fapply [ag av] [ag av avs]))
 
 (defprotocol Monad

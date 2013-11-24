@@ -1,12 +1,15 @@
 (ns purnam.core
   (:require [purnam.cljs]
+            [purnam.common :refer [get-context]]
             [purnam.types.clojure]
             [purnam.types.functor]
             [purnam.types.applicative]
             [purnam.types.magma]
             [purnam.types.monoid]
             [purnam.types.foldable]
-            [purnam.types.monad :refer [get-context]]
+            [purnam.types.monad]
+            [purnam.types.curried]
+            [purnam.types.maybe]
             [purnam.protocols :as p])
   (:use-macros [purnam.test :only [init]]
                [purnam.types.macros :only [with-context]]))
