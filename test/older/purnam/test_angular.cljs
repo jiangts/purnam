@@ -1,5 +1,5 @@
 (ns purnam.test-angular
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:require [goog.object :as o])
   (:require-macros [purnam.core :as j])
   (:use-macros [purnam.core :only [obj arr ! def.n]]
@@ -29,11 +29,11 @@
                           (fn [$filter]
                             (aset spec "$filter" $filter)))))
 
-                 (it (let [r ((let [obj# (purnam.cljs/aget-in spec [])
+                 (it (let [r ((let [obj# (purnam.native/aget-in spec [])
                                     fn# (aget obj# "$filter")]
                                 (.call fn# obj# "range")) (arr) 5)]
-                       (is (purnam.cljs/aget-in r ["length"]) 5)
-                       (is (purnam.cljs/aget-in r ["0"]) 0))) nil)))
+                       (is (purnam.native/aget-in r ["length"]) 5)
+                       (is (purnam.native/aget-in r ["0"]) 0))) nil)))
 
 
 (describe.ng

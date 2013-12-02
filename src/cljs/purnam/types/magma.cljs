@@ -1,6 +1,6 @@
 (ns purnam.types.magma
   (:require
-    [purnam.cljs :refer [js-concat js-merge]]
+    [purnam.native :refer [js-concat js-merge]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.protocols :refer [Magma op pure]])
   (:use-macros [purnam.types.macros :only [extend-all]]))

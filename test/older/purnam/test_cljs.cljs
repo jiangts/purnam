@@ -1,5 +1,5 @@
 (ns purnam.test-cljs
-  (:require [purnam.cljs :as j])
+  (:require [purnam.native :as j])
   (:use-macros [purnam.core :only [obj arr]]
                [purnam.test :only [init describe it is is-not is]]))
 

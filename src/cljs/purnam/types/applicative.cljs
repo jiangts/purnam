@@ -1,6 +1,6 @@
 (ns purnam.types.applicative
   (:require
-    [purnam.cljs :refer [js-map js-mapcat js-merge]]
+    [purnam.native :refer [js-map js-mapcat js-merge]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.types.functor :refer [group-entries]]
     [purnam.protocols :refer [Applicative fmap]])

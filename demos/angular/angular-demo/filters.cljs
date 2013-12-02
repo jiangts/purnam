@@ -1,5 +1,5 @@
 (ns angular-demos.filters
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:require [purnam.angular.filters :as f])
   (:use-macros [purnam.core :only [obj arr ! !> def.n]]
                [purnam.angular :only

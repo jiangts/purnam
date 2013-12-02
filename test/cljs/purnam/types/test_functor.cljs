@@ -1,6 +1,6 @@
 (ns purnam.types.test-functor
   (:use [purnam.core :only [fmap pure fapply op]]
-        [purnam.cljs :only [js-type js-mapcat]])
+        [purnam.native :only [js-type js-mapcat]])
   (:use-macros [purnam.core :only [obj arr !]]
                [purnam.test.sweet :only [fact facts]]))
 

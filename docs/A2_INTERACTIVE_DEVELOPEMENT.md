@@ -102,7 +102,7 @@ the `grunt server` command will start a server, open up a browser and watch file
 Open `src/myapp/core.cljs` and add a new function:
 ```clojure
 (ns myapp.core
-  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use [purnam.native :only [aset-in aget-in]])
   (:use-macros [purnam.core :only [def.n]]))
 
 (def.n add-and-log [a b]

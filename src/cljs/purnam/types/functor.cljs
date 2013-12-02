@@ -1,6 +1,6 @@
 (ns purnam.types.functor
   (:require
-    [purnam.cljs :refer [js-map js-type]]
+    [purnam.native :refer [js-map js-type]]
     [purnam.types.clojure :refer [obj-only]]
     [purnam.protocols :refer [Functor]])
   (:use-macros

@@ -1,4 +1,4 @@
-(ns purnam.cljs
+(ns purnam.native
   (:require [goog.object :as gobj]
             [goog.array :as garr]
             [purnam.common :as common]
@@ -68,6 +68,14 @@
        (if-let [res (aget o s)]
          res
          not-found))))
+
+(defn js-range [n]
+  (let [res (js/Array. n)]
+    (loop [i   0]
+      (if (< i n) 
+        (do (.push res i)
+            (recur (inc i)))
+        res))))
 
 (defn js-assoc
   ([o k v]

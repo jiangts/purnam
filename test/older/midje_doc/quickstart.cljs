@@ -1,5 +1,5 @@
 (ns midje-doc.quickstart
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n def* def*n]]
                [purnam.angular :only [def.module def.controller def.service]]
                [purnam.test :only [init describe is is-not it]]
@@ -82,7 +82,7 @@ The quickest way to start is to look at some sample projects:
   
   (nth (arr :0 :1 :2 :3 :4) 3) => :3)
   
-"The [purnam.cljs](#purnam-cljs) namespace also provide additional manipulation functions like [js-merge](#js-merge), [js-merge-nil](#js-merge-nil) and [js-deep-copy](#js-deep-copy). More examples can be seen in the [api]((#purnam-cljs))."
+"The [purnam.native](#purnam-cljs) namespace also provide additional manipulation functions like [js-merge](#js-merge), [js-merge-nil](#js-merge-nil) and [js-deep-copy](#js-deep-copy). More examples can be seen in the [api]((#purnam-cljs))."
 
 [[:section {:title "DSL for Testing"}]]
 

@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-angular-test
-  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
+  (:use [purnam.native :only [aget-in aset-in js-equals]])
   (:use-macros [purnam.core :only [! f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller 
                                       def.value def.constant 
@@ -19,10 +19,10 @@
 
 [[:section {:title "init" :tag "init-angular"}]]
 
-"There is a dependency on [purnam.cljs](#purnam-cljs) and so the following MUST be placed in your project namespace:"
+"There is a dependency on [purnam.native](#purnam-cljs) and so the following MUST be placed in your project namespace:"
 
 (comment
-  (:use [purnam.cljs :only [aget-in aset-in]]))
+  (:use [purnam.native :only [aget-in aset-in]]))
 
 [[:section {:title "def.module" :tag "def-module"}]]
 

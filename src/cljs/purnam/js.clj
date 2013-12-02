@@ -116,7 +116,7 @@
 
 (defn js-parse-exp [sym]
  (let [[var & ks] (js-split-syms sym)]
-   (list 'purnam.cljs/aget-in (js-parse-var var)
+   (list 'purnam.native/aget-in (js-parse-var var)
          (vec (map js-parse-sub-exp ks)))))
 
 (defn js-parse-sub-exp [ss]
@@ -142,7 +142,7 @@
   (let [[var & ks] (js-split-syms sym)
         sel  (vec (butlast ks))
         fnc  (last ks)]
-    (list 'let ['obj# (list 'purnam.cljs/aget-in (js-parse-var var)
+    (list 'let ['obj# (list 'purnam.native/aget-in (js-parse-var var)
                             (vec (map js-parse-sub-exp sel)))
                 'fn#  (list 'aget 'obj# (js-parse-sub-exp fnc))]
           (apply list '.call 'fn# 'obj#
@@ -183,7 +183,7 @@
 
     (defmacro ! [sym & [val]]
        (let [[var & ks] (js-split-syms sym)]
-         (list 'purnam.cljs/aset-in (js-parse-var var)
+         (list 'purnam.native/aset-in (js-parse-var var)
              (vec (map js-parse-sub-exp ks))
              (js-expand val))))
 
@@ -208,7 +208,7 @@
                `(cond (= "object" 
                       (js/goog.typeOf (? ~sym))
                       (js/goog.typeOf ~'v))
-                   (purnam.cljs/js-replace (? ~sym) ~'v)
+                   (purnam.native/js-replace (? ~sym) ~'v)
                   :else
                   (! ~sym ~'v))))))
 )

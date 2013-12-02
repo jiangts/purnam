@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-cljs
-  (:require [purnam.cljs :refer [aset-in aget-in 
+  (:require [purnam.native :refer [aset-in aget-in 
                                  js-lookup js-equals 
                                  js-assoc js-dissoc js-empty
                                  js-merge js-merge-nil
@@ -12,7 +12,7 @@
 [[{:hide true}]]
 (init)
 
-[[:chapter {:title "purnam.cljs" :tag "purnam-cljs"}]]
+[[:chapter {:title "purnam.native" :tag "purnam-cljs"}]]
 
 "Utility functions for javascript native objects and arrays."
 

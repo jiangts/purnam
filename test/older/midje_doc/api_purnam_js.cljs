@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-js
-  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
+  (:use [purnam.native :only [aget-in aset-in js-equals]])
   (:use-macros [purnam.core :only [? ?> ! !> f.n def.n do.n 
                                  obj arr def* def*n f*n do*n]]
                [purnam.test :only [init]]
@@ -12,10 +12,10 @@
 
 [[:section {:title "init" :tag "init-js"}]]
 
-"There is a dependency on [purnam.cljs](#purnam-cljs) and so the following MUST be placed in your project namespace:"
+"There is a dependency on [purnam.native](#purnam-cljs) and so the following MUST be placed in your project namespace:"
 
 (comment
-  (:use [purnam.cljs :only [aget-in aset-in]]))
+  (:use [purnam.native :only [aget-in aset-in]]))
 
 [[:section {:title "obj"}]]
 

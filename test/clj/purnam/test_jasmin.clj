@@ -41,7 +41,7 @@
          "<DESC>"
          (clojure.core/fn []
            (it "<IT IS>"
-               (is (purnam.cljs/aget-in spec ["<V>" "array" "<INDEX>"]) <FN>)) nil))))
+               (is (purnam.native/aget-in spec ["<V>" "array" "<INDEX>"]) <FN>)) nil))))
 
 
 (fact "beforeEach"

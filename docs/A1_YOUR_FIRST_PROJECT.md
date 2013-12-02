@@ -192,7 +192,7 @@ Make the following changes to `test/myapp/test_core.cljs`
 ;;
 ;;-- Load our helper functions (required by macros)
 ;;
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
 ;;
 ;;-- Load our macros
 ;; 
@@ -254,7 +254,7 @@ Once the workflow is operation, we can start writing our library functions
 Create a new file at `src/myapp/core.cljs` with the following code:
 ```clojure
 (ns myapp.core
-  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use [purnam.native :only [aset-in aget-in]])
   (:use-macros [purnam.core :only [def.n]]))
 
 (def.n add-and-log [a b]
@@ -272,7 +272,7 @@ Now we add tests for `add-and-log` in `test/myapp/test_core.cljs`:
 ;; macros and functions
 ;;
 (ns myapp.test_core
-  (:use [purnam.cljs :only [aget-in aset-in]]
+  (:use [purnam.native :only [aget-in aset-in]]
         [myapp.core :only  [add-and-log]]) ;; <--- Added
   (:use-macros [purnam.core :only [! def.n obj]] <-- Added 
                [purnam.test :only [init describe it is is-not]]))

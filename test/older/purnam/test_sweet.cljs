@@ -1,5 +1,5 @@
 (ns purnam.test-sweet
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n]]
                [purnam.test :only [init]]
                [purnam.test.sweet :only [fact]]))

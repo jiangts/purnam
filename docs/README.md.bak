@@ -37,7 +37,7 @@ using angular, angular-ui, ui-bootstrap and ui-router:
 
 ```clojure
 (ns <app>.core
-  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use [purnam.native :only [aset-in aget-in]])
   (:require-macros
    [purnam.core :refer [! def.n obj]]
    [purnam.angular :refer [def.module def.config
@@ -78,7 +78,7 @@ Angular has a great testing facility and you can hook right into it with the pur
 
 ```clojure
 (ns purnam.test-js
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:require-macros [purnam.core :as j])
   (:use-macros [purnam.core :only [obj ? ?> ! !> f.n def.n]]
                [purnam.jasmin :only [init-jasmin describe it is is-not equals]]))
@@ -214,7 +214,7 @@ There are other macros that are defined:
 ```clojure
 (ns <app>.core
   
-  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use [purnam.native :only [aset-in aget-in]])
   (:require-macros
    [purnam.core :refer [! ? !> ?> def.n do.n f.n obj]]))
 ```
@@ -339,7 +339,7 @@ Use any editor. Create a new test in the `test/cljs` folder
 ```clojure
 ;;; test-app.js ;;;
 (ns purnam.test-js
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:use-macros [purnam.jasmin :only [init-jasmin describe it is is-not equals]]))
 
 (init-jasmin)
@@ -357,10 +357,10 @@ Use any editor. Create a new test in the `test/cljs` folder
 
 You will now see the output at the bottom of the karma window:
 
-    Expression: (purnam.cljs/aget-in o1 ["array" "2"])
+    Expression: (purnam.native/aget-in o1 ["array" "2"])
        Expected result: even?
        Actual result: 3
-    Expression: (purnam.cljs/aget-in o1 ["array" "4"])
+    Expression: (purnam.native/aget-in o1 ["array" "4"])
        Expected result: 2
        Actual result: undefined
 

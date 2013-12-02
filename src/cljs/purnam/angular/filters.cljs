@@ -1,5 +1,5 @@
 (ns purnam.angular.filters
-  (:use [purnam.cljs :only [aget-in aset-in augment-fn-string check-fn]])
+  (:use [purnam.native :only [aget-in aset-in augment-fn-string check-fn]])
   (:require [goog.object :as o]
             [goog.array :as a])
   (:require-macros [purnam.core :as j])

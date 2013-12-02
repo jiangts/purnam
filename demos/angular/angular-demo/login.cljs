@@ -1,5 +1,5 @@
 (ns angular-demo.login
-  (:use [purnam.cljs :only [aset-in aget-in]])
+  (:use [purnam.native :only [aset-in aget-in]])
   (:use-macros
    [purnam.core :only [! def.n obj]]
    [purnam.angular :only [def.module def.config

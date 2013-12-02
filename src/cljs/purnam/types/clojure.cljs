@@ -1,7 +1,7 @@
 (ns purnam.types.clojure
   (:require [goog.object :as gobject]
             [goog.array :as  garray]
-            [purnam.cljs :as j]))
+            [purnam.native :as j]))
             
 (defn obj-only [o method]
   (when-not (identical? (type o) js/Object)

@@ -5,6 +5,11 @@
               js-parse-sub-exp js-expand-fn make-var make-js-array
               walk-js-raw]]))
 
+(defmacro import-from [nssym fns]
+  (let [imp-fn (fn [f]
+                 (list 'def f (list 'symbol (list 'str nssym "/" f))))]
+  `(do ~@(map imp-fn fns))))
+
 (defmacro ? [sym]
   (js-expand-sym sym))
 
@@ -13,7 +18,7 @@
 
 (defmacro ! [sym & [val]]
    (let [[var & ks] (js-split-syms sym)]
-     (list 'purnam.cljs/aset-in (js-parse-var var)
+     (list 'purnam.native/aset-in (js-parse-var var)
          (vec (map js-parse-sub-exp ks))
          (js-expand val))))
 
@@ -38,11 +43,9 @@
            `(cond (= "object" 
                   (js/goog.typeOf (? ~sym))
                   (js/goog.typeOf ~'v))
-               (purnam.cljs/js-replace (? ~sym) ~'v)
+               (purnam.native/js-replace (? ~sym) ~'v)
               :else
               (! ~sym ~'v))))))
-
-
 
 (defmacro obj [& args]
     (let [m (apply hash-map args)]
@@ -65,3 +68,6 @@
 
 (defmacro do*n [& body]
  `(do ~@(js-expand (walk-js-raw body))))
+ 
+(defmacro range* [n]
+  `(array ~@(range n)))

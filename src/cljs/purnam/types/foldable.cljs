@@ -1,6 +1,6 @@
 (ns purnam.types.foldable
   (:require
-   [purnam.cljs :refer [js-map]]
+   [purnam.native :refer [js-map]]
    [purnam.types.clojure :refer [obj-only]]
    [purnam.protocols :refer [Foldable fold foldmap op id]])
   (:use-macros [purnam.types.macros :only [extend-all]]))

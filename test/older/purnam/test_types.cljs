@@ -1,5 +1,5 @@
 (ns purnam.test-types
-  (:require [purnam.cljs :as j]
+  (:require [purnam.native :as j]
             [purnam.types :as t]
             [goog.object :as o]
             [goog.array :as a])

@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-types
-  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
+  (:use [purnam.native :only [aget-in aset-in js-equals]])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
                [purnam.test :only [init describe is it]]
                [purnam.test.sweet :only [fact facts]]))
@@ -13,10 +13,10 @@
 
 [[:section {:title "init" :tag "init-types"}]]
 
-"There is a dependency on [purnam.cljs](#purnam-cljs) and so the following MUST be placed in your project namespace in order to use this protocol"
+"There is a dependency on [purnam.native](#purnam-cljs) and so the following MUST be placed in your project namespace in order to use this protocol"
 
 (comment
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:require [purnam.types :as types]))
 
 

@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-test
-  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
+  (:use [purnam.native :only [aget-in aset-in js-equals]])
   (:use-macros [purnam.core :only [! ? f.n def.n obj arr]]
                [purnam.test :only [init describe is it is-not]]
                [purnam.test.sweet :only [fact facts]]))
@@ -11,7 +11,7 @@
 "All tests require the following within the namespace declaration."
 
 (comment 
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:use-macros [purnam.test :only [init describe it is is-not]]))
 
 

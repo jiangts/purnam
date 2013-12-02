@@ -61,7 +61,7 @@
                       (aset spec "$compile" $compile)
                       (aset spec "$filter" $mockFilter)
                       (aset spec "$scope"
-                            (let [obj# (purnam.cljs/aget-in $rootScope [])
+                            (let [obj# (purnam.native/aget-in $rootScope [])
                                   fn# (aget obj# "$new")] (.call fn# obj#)))
                       (aset spec "$httpBackend"
                             (do (-> $httpBackend (.when "GET" "/hello")
@@ -131,11 +131,11 @@
                                (fn [$filter]
                                  (aset spec "$filter" $filter)))))
 
-                      (it (let [r ((let [obj# (purnam.cljs/aget-in spec [])
+                      (it (let [r ((let [obj# (purnam.native/aget-in spec [])
                                          fn# (aget obj# "$filter")]
                                      (.call fn# obj# "range")) (arr) 5)]
-                            (is (purnam.cljs/aget-in r ["length"]) 5)
-                            (is (purnam.cljs/aget-in r ["0"]) 0))) nil)))
+                            (is (purnam.native/aget-in r ["length"]) 5)
+                            (is (purnam.native/aget-in r ["0"]) 0))) nil)))
 
 (fact "describe.controller"
   (macroexpand-1
@@ -161,16 +161,16 @@
                      $rootScope <V1-FORM>]
                    (aset spec "$scope"
                          (let [scp#
-                               (let [obj# (purnam.cljs/aget-in $rootScope [])
+                               (let [obj# (purnam.native/aget-in $rootScope [])
                                      fn# (aget obj# "$new")]
                                  (.call fn# obj#))]
                            ($controller "<CONTROLLER-NAME>"
                                         (obj :$scope scp#)) scp#))
                    (aset spec ":<V1>" <V1-FORM>)
                    (aset spec ":<V2>" <V2-FORM>)))))
-        (<FUNC> (purnam.cljs/aget-in spec ["$scope" "<VAR>"]))
-        (<FUNC> (purnam.cljs/aget-in <V1> ["<VAR>"]))
-        (<FUNC> (purnam.cljs/aget-in <V2> ["<VAR>"])) nil))))
+        (<FUNC> (purnam.native/aget-in spec ["$scope" "<VAR>"]))
+        (<FUNC> (purnam.native/aget-in <V1> ["<VAR>"]))
+        (<FUNC> (purnam.native/aget-in <V2> ["<VAR>"])) nil))))
 
 
   (comment

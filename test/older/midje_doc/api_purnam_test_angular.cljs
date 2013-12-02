@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-angular
-  (:use [purnam.cljs :only [aget-in aset-in js-equals]])
+  (:use [purnam.native :only [aget-in aset-in js-equals]])
   (:require [purnam.types :as types]
             [midje-doc.api-purnam-angular-test :as test-app])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
@@ -18,7 +18,7 @@
 "All tests require the following within the namespace declaration."
 
 (comment
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:use-macros [purnam.test :only [init]]
                [purnam.test.angular :only 
                  [describe.ng it-uses it-compiles it-uses-filter]]))

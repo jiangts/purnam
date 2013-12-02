@@ -1,5 +1,5 @@
 (ns purnam.angular.directives
-  (:use [purnam.cljs :only [aget-in aset-in]])
+  (:use [purnam.native :only [aget-in aset-in]])
   (:require-macros [purnam.core :as j])
   (:use-macros [purnam.core :only [obj ! def.n]]
                [purnam.angular :only [def.module def.directive]]))

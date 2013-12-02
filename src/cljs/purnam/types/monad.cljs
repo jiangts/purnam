@@ -1,7 +1,7 @@
 (ns purnam.types.monad
   (:require
    [purnam.common :refer [get-context]]
-   [purnam.cljs :refer [js-mapcat]]
+   [purnam.native :refer [js-mapcat]]
    [purnam.types.clojure :refer [obj-only]]
    [purnam.types.functor :refer [fmap-map-r]]
    [purnam.protocols :refer [Monad bind join fmap op]])

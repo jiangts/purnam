@@ -1,5 +1,5 @@
 (ns purnam.core
-  (:require [purnam.cljs]
+  (:require [purnam.native]
             [purnam.common :refer [get-context]]
             [purnam.types.clojure]
             [purnam.types.functor]
@@ -12,7 +12,10 @@
             [purnam.types.maybe]
             [purnam.protocols :as p])
   (:use-macros [purnam.test :only [init]]
-               [purnam.types.macros :only [with-context]]))
+               [purnam.types.macros :only [with-context]]
+               [purnam.core :only [import-from]]))
+  
+(import-from purnam.native [js-map])  
   
 (defn fmap 
   ([f]
@@ -126,6 +129,6 @@
   ([f g & hs]
      (apply >=> (reverse (into [f g] hs)))))
 
+
 (if (.-jasmine js/window)
-  ;;(js/console.log "JASMINE FOUND")
   (init))

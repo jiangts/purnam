@@ -79,49 +79,49 @@
 
   '(j/? <OBJ>.<V1>)
   => (expands-into
-      '(purnam.cljs/aget-in <OBJ> ["<V1>"]))
+      '(purnam.native/aget-in <OBJ> ["<V1>"]))
 
   '(j/?  <OBJ>.<V1>.<V2>)
   => (expands-into
-      '(purnam.cljs/aget-in <OBJ> ["<V1>" "<V2>"])))
+      '(purnam.native/aget-in <OBJ> ["<V1>" "<V2>"])))
 
 (fact "?>"
   (macroexpand-1
    '(j/?> <FUNC> <OBJ>.<V1> <OBJ>.<V2> <VALUE>))
 
-  => '(<FUNC> (purnam.cljs/aget-in <OBJ> ["<V1>"])
-              (purnam.cljs/aget-in <OBJ> ["<V2>"])
+  => '(<FUNC> (purnam.native/aget-in <OBJ> ["<V1>"])
+              (purnam.native/aget-in <OBJ> ["<V2>"])
               <VALUE>))
 
 ;; Macros
 (fact "!"
   '(j/! <OBJ>.<V1> <VALUE>)
   => (expands-into
-      '(purnam.cljs/aset-in <OBJ> ["<V1>"] <VALUE>))
+      '(purnam.native/aset-in <OBJ> ["<V1>"] <VALUE>))
 
   '(j/! <OBJ>.<V1>.<V2> <VALUE>)
   => (expands-into
-      '(purnam.cljs/aset-in <OBJ> ["<V1>" "<V2>"] <VALUE>))
+      '(purnam.native/aset-in <OBJ> ["<V1>" "<V2>"] <VALUE>))
 
   '(j/! <OBJ>.|<V1>|.<V2> <VALUE>)
   => (expands-into
-      '(purnam.cljs/aset-in <OBJ> [<V1> "<V2>"] <VALUE>))
+      '(purnam.native/aset-in <OBJ> [<V1> "<V2>"] <VALUE>))
 
   '(j/! <OBJ>.|<V1>.<V2>|.<V3> <VALUE>)
   => (expands-into
-      '(purnam.cljs/aset-in
+      '(purnam.native/aset-in
         <OBJ>
-        [(purnam.cljs/aget-in <V1> ["<V2>"]) "<V3>"] <VALUE>)))
+        [(purnam.native/aget-in <V1> ["<V2>"]) "<V3>"] <VALUE>)))
 
 (fact "!>"
   (macroexpand-1
    '(j/!> <OBJ>.<FN> <ARG1> <ARG2> <ARG3>))
-  => '(let [obj# (purnam.cljs/aget-in <OBJ> [])
+  => '(let [obj# (purnam.native/aget-in <OBJ> [])
             fn# (aget obj# "<FN>")]
         (.call fn# obj# <ARG1> <ARG2> <ARG3>))
 
   (macroexpand-1  '(j/!> <OBJ>.<V1>.<FN> <ARG1> <ARG2> <ARG3>))
-  => '(let [obj# (purnam.cljs/aget-in <OBJ> ["<V1>"])
+  => '(let [obj# (purnam.native/aget-in <OBJ> ["<V1>"])
             fn# (aget obj# "<FN>")]
         (.call fn# obj# <ARG1> <ARG2> <ARG3>)))
 
@@ -134,9 +134,9 @@
         (<ARG2>.<FN> <X> <Y> <Z>))))
   =>
   '(clojure.core/defn <FUNCTION> [<ARG1> <ARG2>]
-     (if (purnam.cljs/aget-in <ARG1> ["<V1>" "<V2>"])
-       (purnam.cljs/aget-in <ARG2> ["<W1>"])
-       (let [obj# (purnam.cljs/aget-in <ARG2> [])
+     (if (purnam.native/aget-in <ARG1> ["<V1>" "<V2>"])
+       (purnam.native/aget-in <ARG2> ["<W1>"])
+       (let [obj# (purnam.native/aget-in <ARG2> [])
              fn# (aget obj# "<FN>")]
          (.call fn# obj# <X> <Y> <Z>)))))
 
@@ -148,7 +148,7 @@
                 (clojure.core/= "object" 
                 (js/goog.typeOf (purnam.core/? <A>.<B>.<C>)) 
                 (js/goog.typeOf v)) 
-              (purnam.cljs/js-replace (purnam.core/? <A>.<B>.<C>) v) 
+              (purnam.native/js-replace (purnam.core/? <A>.<B>.<C>) v) 
               :else (purnam.core/! <A>.<B>.<C> v))))
  (macroexpand-1 '(j/property <A>.<B>.<C> true))
  => '(clojure.core/fn 
@@ -208,8 +208,8 @@
                                     this.<Y>))))
   => (matches '(let [%x (js-obj)]
                 (aset %x "<FN>"
-                      (fn [] (+ (purnam.cljs/aget-in %x ["<X>"])
-                               (purnam.cljs/aget-in (js* "this") ["<Y>"]))))
+                      (fn [] (+ (purnam.native/aget-in %x ["<X>"])
+                               (purnam.native/aget-in (js* "this") ["<Y>"]))))
                 (aset %x "<K1>" <X1>)
                 %x)))
 
@@ -264,7 +264,7 @@
        {<X> [<Y> <Z>]})))
   =>
   '(clojure.core/fn [<ARG1> <ARG2>]
-     (let [<X> (array (purnam.cljs/aget-in <ARG1> ["<V1>"]) <V2>)
+     (let [<X> (array (purnam.native/aget-in <ARG1> ["<V1>"]) <V2>)
            <Y> (obj :<W1> this.<W2>)
            <Z> (obj :<W1> self.<W2>)]
        (obj <X> (array <Y> <Z>)))))
