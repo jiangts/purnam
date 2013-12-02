@@ -16,3 +16,4 @@ pom.xml.asc
 .nrepl-port
 samples/*-bak
 harness/purnam-js-unit.js
+*.iml
