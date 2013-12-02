@@ -1,7 +1,7 @@
 (ns purnam.types.test-monoid
   (:use [purnam.core :only [id]])
   (:use-macros [purnam.core :only [obj arr !]]
-               [purnam.test.sweet :only [fact facts]]))
+               [purnam.test :only [fact facts]]))
 
 (facts
  "Data structures: id."

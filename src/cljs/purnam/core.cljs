@@ -1,5 +1,5 @@
 (ns purnam.core
-  (:require [purnam.native]
+  (:require [purnam.native :refer [js-map]]
             [purnam.common :refer [get-context]]
             [purnam.types.clojure]
             [purnam.types.functor]
@@ -15,7 +15,7 @@
                [purnam.types.macros :only [with-context]]
                [purnam.core :only [import-from]]))
   
-(import-from purnam.native [js-map])  
+#_(import-from purnam.native [js-map])  
   
 (defn fmap 
   ([f]

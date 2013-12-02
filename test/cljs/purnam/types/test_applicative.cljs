@@ -2,7 +2,7 @@
   (:use [purnam.core :only [fmap pure fapply op]]
         [purnam.native :only [js-type js-mapcat]])
   (:use-macros [purnam.core :only [obj arr !]]
-               [purnam.test.sweet :only [fact facts]]))
+               [purnam.test :only [fact facts]]))
 
 (fact
   @(pure (atom nil) 1) => 1

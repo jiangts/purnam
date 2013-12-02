@@ -1,7 +1,7 @@
 (ns purnam.types.test-monad
   (:use [purnam.core :only [bind join return]])
   (:use-macros [purnam.core :only [obj arr !]]
-               [purnam.test.sweet :only [fact facts]]))
+               [purnam.test :only [fact facts]]))
                
 (facts
  "Data structures: Monad"

@@ -1,7 +1,7 @@
 (ns purnam.types.test-functor
   (:use [purnam.core :only [fold foldmap]])
   (:use-macros [purnam.core :only [obj arr !]]
-               [purnam.test.sweet :only [fact facts]]))
+               [purnam.test :only [fact facts]]))
 
 (fact
  "Data structures: fold."
