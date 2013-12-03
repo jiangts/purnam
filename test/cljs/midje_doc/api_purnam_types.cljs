@@ -1,11 +1,7 @@
 (ns midje-doc.api-purnam-types
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
-               [purnam.test :only [init describe is it]]
-               [purnam.test.sweet :only [fact facts]]))
-
-[[{:hide true}]]
-(init)
+               [purnam.test :only [describe is it fact facts]]))
 
 [[:chapter {:title "purnam.types" :tag "purnam-types"}]]
 

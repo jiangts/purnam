@@ -1,12 +1,9 @@
-(ns midje-doc.api-purnam-js
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
+(ns midje-doc.api-purnam-core
+  (:require [purnam.core]
+            [purnam.native :refer [js-equals]])
   (:use-macros [purnam.core :only [? ?> ! !> f.n def.n do.n 
                                  obj arr def* def*n f*n do*n]]
-               [purnam.test :only [init]]
-               [purnam.test.sweet :only [fact facts]]))
-
-[[{:hide true}]]
-(init)
+               [purnam.test :only [fact facts]]))
 
 [[:chapter {:title "purnam.core" :tag "purnam-js"}]]
 
@@ -15,7 +12,8 @@
 "There is a dependency on [purnam.native](#purnam-cljs) and so the following MUST be placed in your project namespace:"
 
 (comment
-  (:use [purnam.native :only [aget-in aset-in]]))
+  (:require [purnam.core])
+  (:use-macros [purnam.core :only [obj arr]]))
 
 [[:section {:title "obj"}]]
 

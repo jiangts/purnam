@@ -1,23 +1,7 @@
 (ns midje-doc.api-purnam-test-sweet
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [! ? f.n def.n obj arr]]
-               [purnam.test :only [init describe is it]]
-               [purnam.test.sweet :only [fact facts]]))
-
-[[:chapter {:title "purnam.test.sweet" :tag "purnam-test-sweet"}]]
-
-[[:section {:title "init" :tag "init-sweet"}]]
-
-"All tests require the following within the namespace declaration."
-
-(comment 
-  (:use [purnam.native :only [aget-in aset-in]])
-  (:use-macros [purnam.test :only [init]]
-               [purnam.test.sweet :only [fact facts]]))
-
-"Because `purnam.test.sweet` is an add-on to `purnam.test`, the [init](#init) macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up."
-
-(init) ;; ALWAYS REQUIRED BEFORE ANY TESTS
+               [purnam.test :only [init describe is it fact facts]]))
 
 [[:section {:title "fact"}]]
 

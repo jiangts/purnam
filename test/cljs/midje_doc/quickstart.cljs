@@ -1,13 +1,9 @@
 (ns midje-doc.quickstart
-  (:use [purnam.native :only [aget-in aset-in]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n def* def*n]]
                [purnam.angular :only [def.module def.controller def.service]]
-               [purnam.test :only [init describe is is-not it]]
-               [purnam.test.sweet :only [fact facts]]
+               [purnam.test :only [describe is is-not it fact facts]]
                [purnam.test.angular :only [describe.ng describe.controller it-uses]]))
-
-[[{:hide true}]]
-(init)
 
 [[:chapter {:title "Quickstart"}]]
 
@@ -117,8 +113,7 @@ The quickest way to start is to look at some sample projects:
 (def.service myApp.storage []
   (let [store (atom {})]
     (obj :put (fn [k v] (swap! store #(assoc % k v)))
-         :get (fn [k] (js/console.log  k (@store k))
-                (@store k))
+         :get (fn [k] (@store k))
          :clear (fn [] (reset! store {}))
          :print (fn [] (js/console.log (clj->js @store))))))
 

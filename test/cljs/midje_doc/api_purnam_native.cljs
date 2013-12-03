@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-cljs
+(ns midje-doc.api-purnam-native
   (:require [purnam.native :refer [aset-in aget-in 
                                  js-lookup js-equals 
                                  js-assoc js-dissoc js-empty
@@ -6,11 +6,7 @@
                                  js-copy js-deep-copy
                                  js-replace js-deep-replace]])
   (:use-macros [purnam.core :only [obj arr]]
-               [purnam.test :only [init]]
-               [purnam.test.sweet :only [fact facts]]))
-
-[[{:hide true}]]
-(init)
+               [purnam.test :only [fact facts]]))
 
 [[:chapter {:title "purnam.native" :tag "purnam-cljs"}]]
 
@@ -29,7 +25,7 @@
 (facts [[{:doc "js-equals"}]]
   
   "`js-equals` checks for equality on native objects. The clojurescript equality `=` does not check for equality on native objects"
-  (= (obj :a 1) (obj :a 1)) => false
+  (= (obj :a 1) (obj :a 1)) => false?
 
   "`js-equals` fills this gap:"
   (js-equals (obj :a 1) (obj :a 1)) => true
@@ -151,10 +147,10 @@
   
   "But o1 and o2 are not equal"
   
-  (= o1 o2) => false
+  (= o1 o2) => false?
   
   "And neither are the references"
-  (= (aget o1 "ref") (aget o2 "ref")) => false)
+  (= (aget o1 "ref") (aget o2 "ref")) => false?)
 
 
 [[:section {:title "js-replace"}]]

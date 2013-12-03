@@ -1,6 +1,6 @@
 (ns purnam.test-types
   (:require [purnam.native :as j]
-            [purnam.types :as t]
+            [purnam.types.clojure :as t]
             [goog.object :as o]
             [goog.array :as a])
   (:use-macros [purnam.core :only [obj arr !]]

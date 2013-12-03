@@ -1,17 +1,13 @@
 (ns midje-doc.api-purnam-angular-test
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [! f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller 
                                       def.value def.constant 
                                       def.filter def.factory 
                                       def.provider def.service
                                       def.directive def.config]]
-               [purnam.test :only [init describe is it]]
-               [purnam.test.sweet :only [fact facts]]
+               [purnam.test :only [describe is it fact facts]]
                [purnam.test.angular :only [describe.ng describe.controller it-uses]]))
-
-[[{:hide true}]]
-(init)
 
 [[:chapter {:title "purnam.angular" :tag "purnam-angular"}]]
 

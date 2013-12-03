@@ -1,6 +1,5 @@
 (ns purnam.test-js
-  (:use [purnam.native :only [aget-in aset-in]])
-  (:require-macros [purnam.core :as j])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n]]
                [purnam.test :only [init describe it is is-not]]))
 
@@ -68,7 +67,7 @@
             fn1  o3.fn]}
  (it
   "is different to `this` in js"
-  (is (aget (aget-in o3 []) "a") 2)
+  (is (aget (purnam.native/aget-in o3 []) "a") 2)
   (is (o3.fn) 2)
   (is (o4.fn) 2)
   (is (fn1) 2)

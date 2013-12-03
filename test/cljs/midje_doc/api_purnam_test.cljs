@@ -1,8 +1,7 @@
 (ns midje-doc.api-purnam-test
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [! ? f.n def.n obj arr]]
-               [purnam.test :only [init describe is it is-not]]
-               [purnam.test.sweet :only [fact facts]]))
+               [purnam.test :only [describe is it is-not fact facts]]))
 
 
 [[:chapter {:title "purnam.test" :tag "purnam-test"}]]
@@ -11,13 +10,8 @@
 "All tests require the following within the namespace declaration."
 
 (comment 
-  (:use [purnam.native :only [aget-in aset-in]])
-  (:use-macros [purnam.test :only [init describe it is is-not]]))
-
-
-"`init` is a macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up."
-
-(init) ;; ALWAYS REQUIRED BEFORE ANY TESTS
+  (:require [purnam.core])
+  (:use-macros [purnam.test :only [describe it is is-not]]))
 
 [[:section {:title "describe"}]]
 

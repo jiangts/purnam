@@ -1,9 +1,8 @@
 (ns purnam.test-cljs
-  (:require [purnam.native :as j])
+  (:require [purnam.native :as j]
+            [purnam.core])
   (:use-macros [purnam.core :only [obj arr]]
-               [purnam.test :only [init describe it is is-not is]]))
-
-(init)
+               [purnam.test :only [describe it is is-not is]]))
 
 (describe
   {:doc "js/goog.typeOf"}

@@ -1,15 +1,11 @@
 (ns midje-doc.api-purnam-angular
-  (:use [purnam.native :only [aget-in aset-in js-equals]])
-  (:require [purnam.types :as types]
+  (:require [purnam.core]
+            [purnam.types.clojure :as types]
             [midje-doc.api-purnam-angular-test :as test-app])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller def.service]]
-               [purnam.test :only [init describe is it]]
-               [purnam.test.sweet :only [fact facts]]
+               [purnam.test :only [init describe is it fact facts]]
                [purnam.test.angular :only [describe.ng describe.controller it-uses it-uses-filter it-compiles]]))
-
-[[{:hide true}]]
-(init)
 
 [[:chapter {:title "purnam.test.angular" :tag "purnam-test-angular"}]]
 
@@ -18,14 +14,10 @@
 "All tests require the following within the namespace declaration."
 
 (comment
-  (:use [purnam.native :only [aget-in aset-in]])
+  (:require [purnam.core])
   (:use-macros [purnam.test :only [init]]
                [purnam.test.angular :only 
                  [describe.ng it-uses it-compiles it-uses-filter]]))
-
-"Because `purnam.test.angular` is an add-on to `purnam.test`, the [init](#init) macro that has to be placed at the top of every test file. It is necessary so that the right checkers can be set up."
-
-(init) ;; ALWAYS REQUIRED BEFORE ANY TESTS
 
 [[:section {:title "services" :tag "services"}]]
 "Angular constants, values, services, factories and providers are all tested the same way: with `describe.ng` and `it-uses`. There are a couple ways of testing out functionality. The easiest is with `:inject`. The definition are from previously defined examples - [constant](#def-constant), [value](#def-value)"
@@ -114,7 +106,7 @@
 
 (describe.ng
  {:doc  "Directives"
-  :module sample}
+  :module my.app}
 
  (it-compiles [ele "<div app-welcome>User</div>"]
   (is (ele.html) (type "Welome <strong>User</strong>"))))
@@ -125,7 +117,7 @@
 
 (describe.ng
  {:doc "A sample controller for testing purposes"
-  :module sample
+  :module my.app
   :inject [[$scope ([$rootScope $controller]
                      ($controller "SimpleCtrl" (obj :$scope ($rootScope.$new))))]]}
                      
@@ -143,7 +135,7 @@
 
 (describe.controller
  {:doc "A sample controller for testing purposes"
-  :module sample
+  :module my.app
   :controller SimpleCtrl}
 
  (it "should set a message within the $scope"

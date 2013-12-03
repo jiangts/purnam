@@ -115,14 +115,14 @@
         len   (count forms)]
     (->> (for [i (range len)]
           (cond (or (idxs (dec i)) (idxs (inc i)))
-                nil
+                ::nil
 
                 (and (idxs i) (>= (dec i) 0))
                 [::is (nth forms (dec i)) (nth forms (inc i))]
 
                 :else
                 [::norm (nth forms i)]))
-         (filter identity)
+         (filter #(not= ::nil %))
          (vec))))
 
 (defn fact-is [actual expected]
