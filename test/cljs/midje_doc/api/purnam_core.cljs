@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-core
+(ns midje-doc.api.purnam-core
   (:require [purnam.core]
             [purnam.native :refer [js-equals]])
   (:use-macros [purnam.core :only [? ?> ! !> f.n def.n do.n 
@@ -101,7 +101,7 @@
   "If any of the keys are missing, `?` will not throw an object `undefined` exception but will return `nil`."
   (let [o (obj)]
     (? o.any.nested.syntax))
-  => nil)
+  => nil?)
 
   
 [[:section {:title "setter - !" :tag "setter"}]]

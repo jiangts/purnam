@@ -4,10 +4,8 @@
   :license {:name "The MIT License"
             :url "http://opensource.org/licencses/MIT"}
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2060"]]
-  :profiles {:dev {:dependencies [[midje "1.5.1"]]}}
-  :plugins [[lein-cljsbuild "0.3.3"]
-            [lein-midje "3.0.1"]]
+                 [org.clojure/clojurescript "0.0-2080"]]
+  :profiles {:dev {:dependencies [[midje "1.6.0"]]}}
   :source-paths ["src/cljs"]
   :test-paths ["test/clj"]
   :documentation {:files {"doc/index"

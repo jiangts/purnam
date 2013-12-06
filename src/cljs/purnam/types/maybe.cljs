@@ -8,6 +8,7 @@
     (or (identical? this that)
         (and (instance? Just that)
              (= v (fold that)))))
+             
   Functor
   (fmap [_ g]
     (Just. (g v)))
@@ -33,9 +34,11 @@
       (apply g v (map fold jvs))))
   (join [jjv]
     (if (or (nil? v) (instance? Just v)) v jjv))
+    
   Foldable
   (fold [_] v)
   (foldmap [_ g] (g v))
+  
   Magma
   (op [x y]
     (if-not (nil? y)
@@ -45,6 +48,7 @@
     (if-let [ys* (map fold (remove nil? (cons y ys)))]
       (Just. (op v (first ys*) (rest ys*)))
       x))
+      
   Monoid
   (id [_] nil))
 

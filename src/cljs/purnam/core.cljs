@@ -15,7 +15,7 @@
                [purnam.types.macros :only [with-context]]
                [purnam.core :only [import-from]]))
   
-#_(import-from purnam.native [js-map])  
+;;(import-from purnam.native [js-map])  
   
 (defn fmap 
   ([f]

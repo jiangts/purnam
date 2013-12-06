@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-native
+(ns midje-doc.api.purnam-native
   (:require [purnam.native :refer [aset-in aget-in 
                                  js-lookup js-equals 
                                  js-assoc js-dissoc js-empty

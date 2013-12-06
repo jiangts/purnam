@@ -1,7 +1,7 @@
-(ns midje-doc.api-purnam-angular
+(ns midje-doc.api.purnam-test-angular
   (:require [purnam.core]
             [purnam.types.clojure :as types]
-            [midje-doc.api-purnam-angular-test :as test-app])
+            [midje-doc.api.purnam-angular :as test-app])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller def.service]]
                [purnam.test :only [init describe is it fact facts]]
@@ -99,7 +99,7 @@
  (it "should change the html output"
      (let [ele (($compile "<div app-welcome>User</div>")
                 $rootScope)]
-                (js/console.log ele (ele.html))
+                ;;(js/console.log ele (ele.html))
        (is (ele.html) (type "Welome <strong>User</strong>")))))
 
 "For convenience, there is the `it-compiles` macro which hides the implementation details."

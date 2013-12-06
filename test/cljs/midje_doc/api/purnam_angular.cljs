@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-angular-test
+(ns midje-doc.api.purnam-angular
   (:require [purnam.core])
   (:use-macros [purnam.core :only [! f.n def.n obj arr]]
                [purnam.angular :only [def.module def.controller 

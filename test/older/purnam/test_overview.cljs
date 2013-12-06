@@ -1,10 +1,9 @@
 (ns purnam.test-overview
-  (:use [purnam.native :only [aget-in aset-in]])
+  (:require [purnam.native])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> def.n
                                  f.n do.n f*n do*n def* def*n]]
-               [purnam.test :only [init describe it is is-not beforeEach]]))
+               [purnam.test :only [describe it is is-not beforeEach]]))
 
-(init)
 
 (describe
    {:doc "obj - primitive object constructor"}

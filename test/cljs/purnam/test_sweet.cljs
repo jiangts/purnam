@@ -1,11 +1,7 @@
 (ns purnam.test-sweet
-  (:use [purnam.native :only [aget-in aset-in]])
+  (:require [purnam.core])
   (:use-macros [purnam.core :only [obj arr ? ?> ! !> f.n def.n]]
-               [purnam.test :only [init]]
-               [purnam.test.sweet :only [fact]]))
-
-
-(init)
+               [purnam.test :only [fact]]))
 
 (fact [[{:doc "One Plus One"
          :globals [o1 (obj :a 1)]}]]

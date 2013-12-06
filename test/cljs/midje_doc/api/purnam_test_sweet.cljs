@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-test-sweet
+(ns midje-doc.api.purnam-test-sweet
   (:require [purnam.core])
   (:use-macros [purnam.core :only [! ? f.n def.n obj arr]]
                [purnam.test :only [init describe is it fact facts]]))

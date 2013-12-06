@@ -43,19 +43,19 @@ The fourth pain point was the lack of documentation tools for clojurescript as w
 
 [[:file {:src "test/cljs/midje_doc/quickstart.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_cljs.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_cljs.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_js.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_js.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_types.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_types.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_test.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_test.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_test_sweet.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_test_sweet.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_angular.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_angular.cljs"}]]
 
-[[:file {:src "test/cljs/midje_doc/api_purnam_test_angular.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api/purnam_test_angular.cljs"}]]
 
 [[:chapter {:title "End Notes"}]]
 

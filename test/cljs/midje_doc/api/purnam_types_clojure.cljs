@@ -1,4 +1,4 @@
-(ns midje-doc.api-purnam-types
+(ns midje-doc.api.purnam-types-clojure
   (:require [purnam.core])
   (:use-macros [purnam.core :only [f.n def.n obj arr]]
                [purnam.test :only [describe is it fact facts]]))
