@@ -25,7 +25,8 @@ In your project file, add
 
 #### 0.3.0
 - Bug fix for sets in js-expand
-- Moved namespace around
+- Renamed purnam.js -> purnam.core
+- Renamed purnam.cljs -> purnam.native
 - Ported fluokitten to cljs
 
 todos:
