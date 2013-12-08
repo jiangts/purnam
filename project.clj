@@ -3,9 +3,9 @@
   :url "http://www.github.com/zcaudate/purnam"
   :license {:name "The MIT License"
             :url "http://opensource.org/licencses/MIT"}
-  :dependencies [[org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-2080"]]
-  :profiles {:dev {:dependencies [[midje "1.6.0"]]
+  :dependencies [[org.clojure/clojure "1.5.1"]]
+  :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-2080"]
+                                  [midje "1.6.0"]]
                    :plugins [[lein-midje "3.1.3"]
                              [lein-cljsbuild "1.0.0"]]}}
   :source-paths ["src/cljs"]
