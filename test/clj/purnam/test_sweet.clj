@@ -1,6 +1,6 @@
 (ns purnam.test-angular
   (:use midje.sweet)
-  (:require [purnam.test.sweet :as m]))
+  (:require [purnam.test :as m]))
 
 (fact
   (m/fact-groups

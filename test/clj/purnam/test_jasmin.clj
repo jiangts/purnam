@@ -1,7 +1,7 @@
 (ns purnam.test-jasmin
   (:use [midje.sweet :exclude [contains]]
         purnam.checks
-        purnam.test))
+        [purnam.test :exclude [fact facts]]))
 
 (fact "describe without options"
   (macroexpand-1

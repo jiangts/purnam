@@ -2,6 +2,8 @@
 
 `purnam` - Javascript Language Extensions for Clojurescript
 
+[![Build Status](https://travis-ci.org/zcaudate/purnam.png?branch=master)](https://travis-ci.org/zcaudate/purnam)
+
 ### Installation
 
 In your project file, add
