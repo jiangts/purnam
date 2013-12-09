@@ -3,7 +3,12 @@
         purnam.checks
         [purnam.core :only [obj]])
   (:require [purnam.core :as j]))
-  
+
+
+(fact ""
+  (macroexpand-1
+   '(j/f.n ([] 0) ([n] n) ([n m] (+ n m))))
+   => '(clojure.core/fn ([] 0) ([n] n) ([n m] (+ n m))))
 
 (fact "?"
   '(j/? <OBJ>)
@@ -74,17 +79,17 @@
 
 (fact "property"
  (macroexpand-1 '(j/property <A>.<B>.<C>))
- => '(clojure.core/fn 
-         ([] (purnam.core/? <A>.<B>.<C>)) 
-         ([v] (clojure.core/cond 
-                (clojure.core/= "object" 
-                (js/goog.typeOf (purnam.core/? <A>.<B>.<C>)) 
-                (js/goog.typeOf v)) 
-              (purnam.native/js-replace (purnam.core/? <A>.<B>.<C>) v) 
+ => '(clojure.core/fn
+         ([] (purnam.core/? <A>.<B>.<C>))
+         ([v] (clojure.core/cond
+                (clojure.core/= "object"
+                (js/goog.typeOf (purnam.core/? <A>.<B>.<C>))
+                (js/goog.typeOf v))
+              (purnam.native/js-replace (purnam.core/? <A>.<B>.<C>) v)
               :else (purnam.core/! <A>.<B>.<C> v))))
  (macroexpand-1 '(j/property <A>.<B>.<C> true))
- => '(clojure.core/fn 
-       ([] (purnam.core/? <A>.<B>.<C>)) 
+ => '(clojure.core/fn
+       ([] (purnam.core/? <A>.<B>.<C>))
        ([v] (throw (js/Error "<A>.<B>.<C> is readonly")))))
 
 

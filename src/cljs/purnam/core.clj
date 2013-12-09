@@ -1,6 +1,6 @@
 (ns purnam.core
   (:require [clojure.string :as s]
-            [purnam.js :refer 
+            [purnam.js :refer
               [js-expand js-split-syms js-expand-sym js-parse-var
               js-parse-sub-exp js-expand-fn make-var make-js-array
               walk-js-raw]]))
@@ -25,12 +25,54 @@
 (defmacro !> [sym & args]
   (js-expand-fn sym args))
 
-(defmacro f.n [args & body]
-  `(fn ~args ~@(js-expand body)))
+(defmacro h.n [args & body]
+  (list 'let ['f# `(fn ~args ~@(js-expand body))]
+        (list 'aget 'f# "cljs$arity" 2#_(js-arities ))))
 
-(defmacro def.n [sym args & body]
-  `(defn ~sym ~args
-     ~@(js-expand body)))
+(defn multi-fn?
+  "tests for varidicity"
+  [body]
+  (if (->> body (drop-while string?) first vector?) false true))
+
+(defn args-arity [args]
+  (let [n (count args)
+        nv (count (take-while #(not= % '&) args))]
+    (if (= n nv) n [nv])))
+
+(defn all-arities [body]
+  (cond (multi-fn? body)
+        (->> body
+             (filter list?)
+             (map first)
+             (mapv args-arity))
+
+        :else
+        [(->> body (drop-while string?) first args-arity)]))
+
+(defn fn-body [body]
+  (if (multi-fn? body)
+    (mapcat fn-body (filter list? body))
+    (let [dbody (drop-while string? body)]
+      [[(first dbody) (rest dbody)]])))
+
+(defn fn-prebody [body]
+  (take-while #(or (string? %) (symbol? %)) body))
+
+(defmacro f.n [& body]
+  (list 'let ['f# `(fn ~@(fn-prebody body)
+                     ~@(map (fn [[args forms]]
+                              `(~args ~@(js-expand forms)))
+                            (fn-body body)))]
+        (list 'aset 'f# "cljs$arities" (all-arities body))
+        'f#))
+
+(defmacro def.n [sym & body]
+  (list 'do
+        `(defn ~sym ~@(fn-prebody body)
+           ~@(map (fn [[args forms]]
+                    `(~args ~@(js-expand forms)))
+                  (fn-body body)))
+        (list 'aset sym "cljs$arities" (all-arities body))))
 
 (defmacro do.n [& body]
   `(do ~@(js-expand body)))
@@ -40,7 +82,7 @@
        ([~'v]
         ~(if readonly
            `(throw (js/Error ~(str sym " is readonly")))
-           `(cond (= "object" 
+           `(cond (= "object"
                   (js/goog.typeOf (? ~sym))
                   (js/goog.typeOf ~'v))
                (purnam.native/js-replace (? ~sym) ~'v)
@@ -61,13 +103,13 @@
 
 (defmacro def*n [name args & body]
  `(defn ~name ~args
-        ~@(js-expand (walk-js-raw body))))
+    ~@(js-expand (walk-js-raw body))))
 
 (defmacro f*n [args & body]
  `(fn ~args ~@(js-expand (walk-js-raw body))))
 
 (defmacro do*n [& body]
  `(do ~@(js-expand (walk-js-raw body))))
- 
+
 (defmacro range* [n]
   `(array ~@(range n)))
