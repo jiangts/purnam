@@ -4,9 +4,7 @@
             [goog.object :as o]
             [goog.array :as a])
   (:use-macros [purnam.core :only [obj arr !]]
-               [purnam.test :only [init describe it is is-not beforeEach]]))
-
-(init)
+               [purnam.test :only [describe it is is-not beforeEach]]))
 
 (describe
   {:doc "exploring js/goog.type"}
@@ -116,11 +114,11 @@
   (it "works for objects"
     (is (conj o (arr :b 2)) (obj :a 1 :b 2))))
 
-#_(describe
+(describe
  {:doc "strkey will convert any key to a string"}
 
  (it "works on "
-   (is (t/strkey :a)  "a")
-   (is (t/strkey "a") "a")
-   ;(is (t/strkey 'a)  "a") ;; does not work on symbols
-   (is (t/strkey 1)  "1")))
+   (is (j/js-strkey :a)  "a")
+   (is (j/js-strkey "a") "a")
+   (is (j/js-strkey 'a)  "a")
+   (is (j/js-strkey 1)  "1")))

@@ -19,7 +19,7 @@
                            :tracking "UA-31320512-2"}}}
   :cljsbuild
   {:builds
-   [{:source-paths ["src/cljs" "test/cljs"],
+   [{:source-paths ["src/cljs" "test/candidates"],
      :id "js-test",
      :compiler {:pretty-print true,
                 :output-to "harness/purnam-js-unit.js",

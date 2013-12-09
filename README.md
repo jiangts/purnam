@@ -27,11 +27,13 @@ In your project file, add
 - Bug fix for sets in js-expand
 - Renamed purnam.js -> purnam.core
 - Renamed purnam.cljs -> purnam.native
+- Combined purnam.test.sweet into purnam.test
 - Ported fluokitten to cljs
 
-todos:
-- array - fapply
-- object - fmap fapply pure
+TODOS:
+- Document purnam.native
+- Learn You a haskell
+
 
 ##### 0.1.8
 - Bug fix for `describe.controller`
