@@ -4,7 +4,6 @@
                                  f.n do.n f*n do*n def* def*n]]
                [purnam.test :only [describe it is is-not beforeEach]]))
 
-
 (describe
    {:doc "obj - primitive object constructor"}
    (it "1.1"
