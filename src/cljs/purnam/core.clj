@@ -68,12 +68,10 @@
   (list 'def sym (construct-fn identity body)))
 
 (defmacro f.n> [& body]
-  (let [k (list 'purnam.core/curry
-                (construct-fn identity body))]
-    (prn k)
-    k))
+  (list 'purnam.core/curry
+        (construct-fn identity body)))
 
-(defmacro g.n [& body] "hoeuoe")
+(defmacro g.n [& body] :hello)
 
 (defmacro def.n> [sym & body]
   (list 'def sym
