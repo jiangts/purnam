@@ -71,7 +71,7 @@
   (list 'purnam.core/curry
         (construct-fn identity body)))
 
-(defmacro g.n [& body] :hello)
+(defmacro g.n [& body] (construct-fn identity body))
 
 (defmacro def.n> [sym & body]
   (list 'def sym

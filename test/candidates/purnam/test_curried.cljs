@@ -2,7 +2,7 @@
   (:use [purnam.core :only [fmap pure fapply op curry]]
         [purnam.types.curried :only [curry arities]]
         [purnam.native :only [js-type js-mapcat]])
-  (:use-macros [purnam.core :only [obj arr ! f.n def.n g.n f*n]]
+  (:use-macros [purnam.core :only [obj arr ! f.n def.n def.n> g.n f*n]]
                [purnam.test :only [fact facts]]))
           
 (fact
@@ -20,7 +20,7 @@
   ;;(sub 1) => -1
   ;;(sub 3 2) => 1
   ;;(obj :a 1 :b 2) => 2
-  ;;(g.n 1 2 3) => 2
+  ((g.n [] 1)) => 1
   ;;(f*n [] 1) => 1
   ;;(def add> (curry (fn [a b c] (+ a b c))))
   (def.n> add> [a b c] (+ a b c))
