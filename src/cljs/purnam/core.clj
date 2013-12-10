@@ -25,10 +25,6 @@
 (defmacro !> [sym & args]
   (js-expand-fn sym args))
 
-(defmacro h.n [args & body]
-  (list 'let ['f# `(fn ~args ~@(js-expand body))]
-        (list 'aget 'f# "cljs$arity" 2#_(js-arities ))))
-
 (defn multi-fn?
   "tests for varidicity"
   [body]
@@ -58,21 +54,31 @@
 (defn fn-prebody [body]
   (take-while #(or (string? %) (symbol? %)) body))
 
-(defmacro f.n [& body]
+(defn construct-fn [f body]
   (list 'let ['f# `(fn ~@(fn-prebody body)
                      ~@(map (fn [[args forms]]
-                              `(~args ~@(js-expand forms)))
+                              `(~args ~@(js-expand (f forms))))
                             (fn-body body)))]
         (list 'aset 'f# "cljs$arities" (all-arities body))
         'f#))
 
+(defmacro f.n [& body] (construct-fn identity body))
+
 (defmacro def.n [sym & body]
-  (list 'do
-        `(defn ~sym ~@(fn-prebody body)
-           ~@(map (fn [[args forms]]
-                    `(~args ~@(js-expand forms)))
-                  (fn-body body)))
-        (list 'aset sym "cljs$arities" (all-arities body))))
+  (list 'def sym (construct-fn identity body)))
+
+(defmacro f.n> [& body]
+  (let [k (list 'purnam.core/curry
+                (construct-fn identity body))]
+    (prn k)
+    k))
+
+(defmacro g.n [& body] "hoeuoe")
+
+(defmacro def.n> [sym & body]
+  (list 'def sym
+        (list 'purnam.core/curry
+              (construct-fn identity body))))
 
 (defmacro do.n [& body]
   `(do ~@(js-expand body)))
@@ -101,12 +107,20 @@
  `(def ~name
        ~(js-expand (walk-js-raw form))))
 
-(defmacro def*n [name args & body]
- `(defn ~name ~args
-    ~@(js-expand (walk-js-raw body))))
+(defmacro f*n [& body]
+  (construct-fn walk-js-raw body))
 
-(defmacro f*n [args & body]
- `(fn ~args ~@(js-expand (walk-js-raw body))))
+(defmacro def*n [sym & body]
+  (list 'def sym (construct-fn walk-js-raw body)))
+
+(defmacro f*n> [& body]
+  (list 'purnam.core/curry
+        (construct-fn walk-js-raw body)))
+
+(defmacro def*n> [sym & body]
+  (list 'def sym
+        (list 'purnam.core/curry
+              (construct-fn walk-js-raw body))))
 
 (defmacro do*n [& body]
  `(do ~@(js-expand (walk-js-raw body))))

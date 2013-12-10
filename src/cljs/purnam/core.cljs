@@ -14,10 +14,10 @@
   (:use-macros [purnam.test :only [init]]
                [purnam.types.macros :only [with-context]]
                [purnam.core :only [import-from]]))
-  
-;;(import-from purnam.native [js-map])  
-  
-(defn fmap 
+
+;;(import-from purnam.native [js-map])
+
+(defn fmap
   ([f]
     (if (= identity f) f
         (fn [functor & more]
@@ -26,7 +26,7 @@
     (p/fmap functor f))
   ([f functor & more]
     (p/fmap functor f more)))
-    
+
 (defn pure
   ([applicative]
      #(p/pure applicative %))
@@ -42,7 +42,7 @@
   ([af av & avs]
     (p/fapply af av avs)))
 
-(defn op 
+(defn op
   ([x y]
      (p/op x y))
   ([x y & ys]
@@ -129,6 +129,9 @@
   ([f g & hs]
      (apply >=> (reverse (into [f g] hs)))))
 
+(def curry purnam.types.curried/curry)
+
+(def arities purnam.types.curried/arities)
 
 (if (.-jasmine js/window)
   (init))

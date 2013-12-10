@@ -64,20 +64,32 @@
   => '(let [f# (clojure.core/fn ([] 0) ([n] n) ([n m] (+ n m)))]
         (aset f# "cljs$arities" [0 1 2]) f#))
 
+
+(fact "f.n>"
+  (macroexpand-1
+   '(j/f.n> [a b c] (+ a b c)))
+  =>
+  '(purnam.core/curry
+    (let [f# (clojure.core/fn ([a b c] (+ a b c)))]
+      (aset f# "cljs$arities" [3]) f#)))
+
+
 (fact "def.n"
   (macroexpand-1
    '(j/def.n <FUNCTION> [<ARG1> <ARG2>]
       (if <ARG1>.<V1>.<V2>
         <ARG2>.<W1>
         (<ARG2>.<FN> <X> <Y> <Z>))))
-  => '(do (clojure.core/defn <FUNCTION>
-           ([<ARG1> <ARG2>]
-              (if (purnam.native/aget-in <ARG1> ["<V1>" "<V2>"])
-                (purnam.native/aget-in <ARG2> ["<W1>"])
-                (let [obj# (purnam.native/aget-in <ARG2> [])
-                      fn# (aget obj# "<FN>")]
-                  (.call fn# obj# <X> <Y> <Z>)))))
-         (aset <FUNCTION> "cljs$arities" [2])))
+  =>
+  '(def <FUNCTION>
+     (let [f# (clojure.core/fn
+                ([<ARG1> <ARG2>]
+                   (if (purnam.native/aget-in <ARG1> ["<V1>" "<V2>"])
+                     (purnam.native/aget-in <ARG2> ["<W1>"])
+                     (let [obj# (purnam.native/aget-in <ARG2> []) fn#
+                           (aget obj# "<FN>")]
+                       (.call fn# obj# <X> <Y> <Z>)))))]
+       (aset f# "cljs$arities" [2]) f#)))
 
 (fact "property"
  (macroexpand-1 '(j/property <A>.<B>.<C>))
@@ -138,16 +150,21 @@
            <Z> {<W1> <W2>}]
        {<X> [<X> <Y>]})))
  =>
- '(clojure.core/defn <NAME> [<ARG1> <ARG2>]
-   (let [<X> (array <V1> <V2>)
-         <Y> (obj :<W1> <W2>)
-         <Z> (obj <W1> <W2>)]
-     (obj <X> (array <X> <Y>)))))
+ '(def <NAME> (let [f# (clojure.core/fn
+                         ([<ARG1> <ARG2>]
+                            (let [<X> (array <V1> <V2>)
+                                  <Y> (obj :<W1> <W2>)
+                                  <Z> (obj <W1> <W2>)]
+                              (obj <X> (array <X> <Y>)))))]
+                (aset f# "cljs$arities" [2]) f#)))
 
 (fact "f*n"
  (macroexpand-1
   '(j/f*n [o] (! o.val [1 2 3 4 5])))
- => '(clojure.core/fn [o] (! o.val (array 1 2 3 4 5)))
+ =>
+ '(let [f# (clojure.core/fn
+             ([o] (! o.val (array 1 2 3 4 5))))]
+    (aset f# "cljs$arities" [1]) f#)
 
  (macroexpand-1
   '(j/f*n [<ARG1> <ARG2>]
@@ -156,8 +173,12 @@
           <Z> {:<W1> self.<W2>}]
       {<X> [<Y> <Z>]})))
  =>
- '(clojure.core/fn [<ARG1> <ARG2>]
-    (let [<X> (array (purnam.native/aget-in <ARG1> ["<V1>"]) <V2>)
-          <Y> (obj :<W1> this.<W2>)
-          <Z> (obj :<W1> self.<W2>)]
-      (obj <X> (array <Y> <Z>)))))
+ '(let [f# (clojure.core/fn
+             ([<ARG1> <ARG2>]
+                (let [<X> (array (purnam.native/aget-in <ARG1> ["<V1>"]) <V2>)
+                      <Y> (obj :<W1> this.<W2>)
+                      <Z> (obj :<W1> self.<W2>)]
+                  (obj <X> (array <Y> <Z>)))))]
+    (aset f# "cljs$arities" [2]) f#)
+
+)

@@ -77,10 +77,11 @@
     (if (> n 20) (curry (- n 20) (partial f a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15 a16 a17 a18 a19)) (f a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15 a16 a17 a18 a19))))
     
 (defn arities [f]
-  [(.-length f)])
+ (or (.-cljs$arities f)
+     [(.-length f)]))
 
 (defn curry 
-  ([f] (curry (apply min (arities f)) f))
+  ([f] (curry (apply min (flatten (arities f))) f))
   ([n f] (CFn. n f))
   ([n f & args] (apply (curry n f) args)))
       
