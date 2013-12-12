@@ -71,8 +71,6 @@
   (list 'purnam.core/curry
         (construct-fn identity body)))
 
-(defmacro g.n [& body] (construct-fn identity body))
-
 (defmacro def.n> [sym & body]
   (list 'def sym
         (list 'purnam.core/curry
@@ -125,3 +123,23 @@
 
 (defmacro range* [n]
   `(array ~@(range n)))
+
+(defn next-bound [vs acc]
+  (cond (= '& (first vs))
+        (recur (drop 2 vs) [(conj acc (first vs))])
+        
+        :else
+    acc))
+  
+(defmacro do> [bindings body]
+  (if (and (vector? bindings) (even? (count bindings)))
+    (if (seq bindings)
+      (let [sym (get bindings 0)
+            ;;[ms rest] (next-bound bindings [])
+            monad (get bindings 1)]
+        (list 'purnam.core/bind monad
+               `(fn [~sym]
+                  (do> ~(subvec bindings 2) ~body))))
+      (list 'purnam.core/return body))
+    (throw (IllegalArgumentException.
+            "bindings has to be a vector with even number of elements."))))

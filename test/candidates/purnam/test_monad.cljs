@@ -1,6 +1,7 @@
 (ns purnam.types.test-monad
-  (:use [purnam.core :only [bind join return]])
-  (:use-macros [purnam.core :only [obj arr !]]
+  (:use [purnam.core :only [bind join return pure curry]]
+        [purnam.native :only [js-concat]])
+  (:use-macros [purnam.core :only [obj arr ! range* do>]]
                [purnam.test :only [fact facts]]))
                
 (facts
@@ -87,3 +88,51 @@
  (join (obj :a 1 :b {:c 2 :d {:e 3}})) => (obj :a 1 :b/c 2 :b/d {:e 3})
  
  )
+ 
+(def returning-f (fn ([x]
+                     (return (inc x)))
+                 ([x & ys]
+                    (return (apply + x ys)))))
+
+(fact
+  (bind (vec (range 1 500)) returning-f)
+  => (range 2 501)
+
+  (bind (vec (range 1 500))
+        (vec (range 1 500))
+        (vec (range 1 500))
+        returning-f)
+  => (range 3 1500 3)
+
+  ;;(range* 10) => nil?
+  (apply bind (concat (repeat 5 (array 1 2 3 4)) [returning-f]))
+  => (array 5 10 15 20)
+
+  (do> [a [1 2 3]] 
+    (inc a)) => [2 3 4]
+
+  (do> [a [1 2 3]
+        b [4 5]
+        c [6]]
+    (* a b c))
+
+  => (bind [1 2 3] 
+       (fn [a] 
+         (bind [4 5] 
+           (fn [b] 
+             (bind [6]
+               (fn [c]
+                 (return (* a b c))))))))
+                 
+
+  (do> [a (array 1 2 3)
+        b (array 4 5)]
+    (* a b))
+  => (array 4 5 8 10 12 15)
+  
+
+  (.-length +) => 3
+  
+  ;;($> (curry +) 3 4 5)
+
+)

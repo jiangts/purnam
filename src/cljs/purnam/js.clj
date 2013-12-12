@@ -153,7 +153,9 @@
   ([form pfn]
      (js-expand form pfn '#{! !> ? ?> obj arr
                             f.n def.n do.n
-                            f*n def*n do*n def* property}))
+                            f*n def*n do*n def* 
+                            property
+                            f.n> def.n> f*n> def*n>}))
   ([form pfn ex]
      (cond (set? form) (set (map js-expand form))
 

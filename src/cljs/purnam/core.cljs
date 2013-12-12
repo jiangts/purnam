@@ -129,6 +129,9 @@
   ([f g & hs]
      (apply >=> (reverse (into [f g] hs)))))
 
+(defn guard [b]
+  (if b (return []) (id (get-context))))
+       
 (def curry purnam.types.curried/curry)
 
 (def arities purnam.types.curried/arities)
