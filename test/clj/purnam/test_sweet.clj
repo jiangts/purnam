@@ -1,11 +1,11 @@
-(ns purnam.test-angular
+(ns purnam.test-sweet
   (:use midje.sweet)
   (:require [purnam.test :as m]))
 
 (fact
   (m/fact-groups
    '[1 => 1])
-   => [[:purnam.test.sweet/is 1 1]])
+   => [[:purnam.test/is 1 1]])
 
 
 (fact
