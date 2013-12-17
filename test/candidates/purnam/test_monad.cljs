@@ -1,7 +1,7 @@
 (ns purnam.types.test-monad
   (:use [purnam.core :only [bind join return pure curry]]
         [purnam.native :only [js-concat]])
-  (:use-macros [purnam.core :only [obj arr ! range* do>]]
+  (:use-macros [purnam.core :only [obj arr ! range* $> do>]]
                [purnam.test :only [fact facts]]))
                
 (facts
@@ -21,6 +21,8 @@
  (bind (list 1 2 3) increment) => (list 2 3 4)
 
  (bind (list 1 2 3) (list 4 5 6) add) => (list 5 7 9)
+ 
+ (bind (list 1 2 3) (list 4 5 6) (list 7 8 9) add) => (list 12 15 18)
 
  (bind (empty (seq [2])) increment)
  => (empty (seq [3]))
@@ -116,7 +118,7 @@
         c [6]]
     (* a b c))
 
-  => (bind [1 2 3] 
+  => (bind [1 2 3]
        (fn [a] 
          (bind [4 5] 
            (fn [b] 
@@ -130,9 +132,19 @@
     (* a b))
   => (array 4 5 8 10 12 15)
   
+  (bind (array 1 2 3) (array 1 2 3) 
+    (fn [a b] (bind (array 4 5 6)
+                (fn [c] (return (+ a b c))))))
+  => (array 6 7 8 8 9 10 10 11 12)
+  
+  (do> [a (array 1 2 3) | b (array 1 2 3)
+        c (array 2 3 4)]
+    (+ a b c))
+  => (array 4 5 6 6 7 8 8 9 10)
 
   (.-length +) => 3
   
-  ;;($> (curry +) 3 4 5)
+  ($> (curry +) 3 4 5)
+  => 12
 
 )

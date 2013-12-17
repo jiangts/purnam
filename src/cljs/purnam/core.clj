@@ -124,22 +124,28 @@
 (defmacro range* [n]
   `(array ~@(range n)))
 
-(defn next-bound [vs acc]
-  (cond (= '& (first vs))
-        (recur (drop 2 vs) [(conj acc (first vs))])
-        
-        :else
-    acc))
-  
+
+(defmacro $>
+  ([f x] `(~f ~x))
+  ([f x & more]
+   `($> (~f ~x) ~@more)))
+
+(defn parse-bindings
+  ([vs] (parse-bindings (drop 2 vs) [(first vs)] [(second vs)]))
+  ([vs syms bnds]
+     (cond (= '| (first vs))
+           (recur (drop 3 vs)
+                  (conj syms (second vs))
+                  (conj bnds (nth vs 2)))
+
+           :else [vs syms bnds])))
+
 (defmacro do> [bindings body]
-  (if (and (vector? bindings) (even? (count bindings)))
-    (if (seq bindings)
-      (let [sym (get bindings 0)
-            ;;[ms rest] (next-bound bindings [])
-            monad (get bindings 1)]
-        (list 'purnam.core/bind monad
-               `(fn [~sym]
-                  (do> ~(subvec bindings 2) ~body))))
-      (list 'purnam.core/return body))
-    (throw (IllegalArgumentException.
-            "bindings has to be a vector with even number of elements."))))
+  (if (seq bindings)
+    (let [[more syms bnds] (parse-bindings bindings)]
+      (concat
+       ['purnam.core/bind]
+       bnds
+       [`(fn [~@syms]
+           (do> [~@more] ~body))]))
+    (list 'purnam.core/return body)))
