@@ -51,6 +51,3 @@
       
   Monoid
   (id [_] nil))
-
-
-#_(.log js/console (Just. 2))
