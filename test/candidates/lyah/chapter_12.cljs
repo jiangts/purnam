@@ -4,7 +4,12 @@
   (:use-macros [purnam.core :only [obj arr ! range* $> do>]]
                [purnam.test :only [fact facts]]))
 
-(fact
+(fact  
+  (aget 1 "oeuoeu") => nil?
+  (let [k (obj)]
+    (aset k "oeuoeu" "oeuoeu")
+    k) => nil?
+  
   (<*> (fmap (curry 2 *) (just 2)) (just 8))
   => (just 16)
 
