@@ -238,22 +238,3 @@
   ([x y] (if (coll? x)
            (.log js/console (str x ":") (str y) y)
            (.log js/console (str x ":") (str y))) y))
-
-(defn augment-fn-string [func]
- (if (string? func)
-    (fn [x]
-       (aget-in x (st/split func #"\.")))
-     func))
-
-(defn check-fn
- ([chk]
-   (fn [x]
-     (if (fn? chk)
-        (chk x)
-        (= x chk))))
- ([func chk]
-   (fn [x]
-     (let [res (func x)]
-       (if (fn? chk)
-          (chk res)
-          (= res chk))))))

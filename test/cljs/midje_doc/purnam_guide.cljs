@@ -4,7 +4,7 @@
 
 "Add to `project.clj` dependencies (use double quotes): 
 
-    [im.chit/purnam '{{PROJECT.version}}']"
+    [im.chit/purnam \"{{PROJECT.version}}\"]"
 
 [[:chapter {:title "Motivation"}]]
 
@@ -21,20 +21,12 @@ The first pain point was having to deal with the clojurish `(.dot syntax)` for j
 - [purnam.core](#purnam-js) - a set of macros allowing javascript-like syntax for better interop 
 - [purnam.types](#purnam-types) - clojure protocols for native objects and arrays
 
-
 #### In-Browser Testing
 
 The second pain point was the lack of testing tools that worked within the browser. Even though testing with [phantom.js](http://phantomjs.com) was fine for non-browser code, I wanted something with more debugging power and so unit testing is integrated with the [karma](http://karma-runner.github.io/) test runner using two different test styles:
 
 - [purnam.test](#purnam-test) - testing using [jasmine](http://pivotal.github.io/jasmine/) syntax
 - [purnam.test.sweet](#purnam-test-sweet) - testing using [midje](https://github.com/marick/Midje) syntax (compatible with [`midje-doc`](https://www.github.com/zcaudate/lein-midje-doc))
-
-#### Angularjs on Clojurescript
-
-The third pain point was the code bloat I was experiencing when developing and testing *angular.js* code using javascript. It was very easy to complect modules within large *angular.js* applications and I wanted to use clojure syntax so that my code was smaller, more readable and easier to handle. Purnam offers:
-
-- [purnam.angular](#purnam-angular) - a simple dsl for eliminating boilerplate *angular.js*
-- [purnam.test.angular](#purnam-test-angular) - testing macros for eliminating more boilerplate test code for services, controllers, directives and filters
 
 #### Integrated Documentation
 
@@ -52,10 +44,6 @@ The fourth pain point was the lack of documentation tools for clojurescript as w
 [[:file {:src "test/cljs/midje_doc/api/purnam_test.cljs"}]]
 
 [[:file {:src "test/cljs/midje_doc/api/purnam_test_sweet.cljs"}]]
-
-[[:file {:src "test/cljs/midje_doc/api/purnam_angular.cljs"}]]
-
-[[:file {:src "test/cljs/midje_doc/api/purnam_test_angular.cljs"}]]
 
 [[:chapter {:title "End Notes"}]]
 
