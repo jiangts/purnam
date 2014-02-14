@@ -18,3 +18,4 @@ pom.xml.asc
 samples/*-bak
 harness/purnam-js-unit.js
 *.iml
+purnam.*
