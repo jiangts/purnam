@@ -136,5 +136,8 @@
 
 (def arities purnam.types.curried/arities)
 
+(defn just [n]
+  (purnam.types.maybe/Just. n))
+
 (if (.-jasmine js/window)
   (init))
