@@ -21,8 +21,15 @@ In your project file, add
 
 #### Examples
 
-  - [Crafty.js Example](https://github.com/purnam/example.purnam.game)
-  - [Karma Testing Example](https://github.com/purnam/example.purnam.test)
+- [Crafty.js Example](https://github.com/purnam/example.purnam.game)
+- [Karma Testing Example](https://github.com/purnam/example.purnam.test)
+
+#### Related Projects
+
+- [purnam.common](https://github.com/purnam/purnam.common)
+- [brahmin](https://github.com/purnam/brahmin)
+- [gyr](https://github.com/purnam/gyr)
+
 
 #### History
 
@@ -38,11 +45,108 @@ Support for [angular.js](http://angularjs.org) was a major reason that `purnam` 
 
 As the `purnam` style syntax could be extended to [meteorjs](https://www.meteor.com), [reactjs](facebook.github.io/react/‎) as well as the thousands of javascript libaries out there, decoupling the code-walking component [purnam.common](https://github.com/purnam/purnam.common) from the main project took the most of the time in the redesign. Hopefully, this library will enable other developers to write their own purnam-flavored macros.
 
-Lastly, `purnam.category` namespace has been moved to [brahmin](https://github.com/purnam/brahmin). I started looking at category theory after a conversation with [Logan Campbell](https://github.com/logaan) about [conditional restarts](https://github.com/zcaudate/ribol) for asynchronous calls. Despite porting [fluokitten](https://github.com/uncomplicate/fluokitten) to clojurescript, I still don't understand what a Monad is. So this is a highly experimental branch and may be useful in the future.
+Lastly, `purnam.category` namespace has been moved to [brahmin](https://github.com/purnam/brahmin). I started looking at category theory after a conversation with [Logan Campbell](https://github.com/logaan) about [conditional restarts](https://github.com/zcaudate/ribol) for asynchronous calls. Despite porting [fluokitten](https://github.com/uncomplicate/fluokitten) to clojurescript, I still don't understand what a Monad is. So it is a highly experimental (but fun) project.
 
 #### Mailing List
 
 A Google Group for purnam has been setup [here](https://groups.google.com/forum/#!forum/purnam). Comments, Questions, Feedback, Contributions are most definitely welcome!
+
+
+## Quick Start
+
+##### Functions
+```javascript
+// javascript
+function square(x){
+  return {value: x.value * x.value};
+}
+```
+```clojure
+;; clojurescript + purnam
+(def.n square [x]
+  (obj :value (* x.value x.value)))
+
+;; or
+(def*n square [x]
+  {:value (* x.value x.value)})
+
+```
+```clojure
+;; clojurescript
+(defn square [x]
+  (let [o (js-obj)
+        v (aget x "value")]
+    (aset o "value" (* v v)))
+    o)
+```
+
+##### Objects
+```javascript
+// javascript
+var user = {id: 0 
+            account: {username: "user"
+                      password: "pass"}}
+```
+```clojure
+;; clojurescript + purnam
+(def user (obj :id 0 
+               :account {:username "user"
+                         :password "pass"}))
+;; or
+
+(def* user {:id 0 
+            :account {:username "user"
+                      :password "pass"})})
+```
+```clojure
+;; clojurescript
+(def user
+  (let [acc (js-obj)
+        user (js-obj)]
+    (aset acc "username" "user")
+    (aset acc "password" "pass")
+    (aset user "account" acc)
+    (aset user "id" 0)
+    user)) 
+
+;; clojurescript using clj->js (slower)
+(def user 
+  (clj->js {:id 0 
+            :account {:username "user"
+                      :password "pass"})})
+```
+
+##### Midje Tests
+```
+(fact [[{:doc "an example test description"
+         :globals [ka "a"
+                   kb "b"]
+         :vars [o (obj :a 1 :b 2 :c 3)]}]]
+
+ "dot notation for native objects"
+ o.a => 1
+ (+ o.a o.b o.c) => 6
+
+ "support for both native and cljs comparisons"
+ o => (obj :a 1 :b 2 :c 3)
+ [1 2 3 4] => [1 2 3 4]
+ 
+ "support for function comparison"
+  2 => even?
+  3 => (comp not even?)
+  
+ "globals"
+  o.|ka| => 1
+  (+ o.|ka| o.|kb|) => 3
+  
+  "vars are allowed to be rebound"
+  (! o (arr [1 2 3]
+            [4 5 6]
+            [7 8 9]))
+            
+  (- o.2.2 o.0.0) => 8)
+```
+
 
 ## License
 
