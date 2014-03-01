@@ -19,7 +19,7 @@
                          :author "Chris Zheng"
                          :email  "z@caudate.me"
                          :tracking "UA-31320512-2"}}}
-  :cljsbuild {:builds [{:source-paths ["src" "test"]
+  :cljsbuild {:builds [{:source-paths ["test"]
                         :compiler {:output-to "target/purnam-guide.js"
                                    :optimizations :whitespace
                                    :pretty-print true}}]})
