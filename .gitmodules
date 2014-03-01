@@ -7,3 +7,7 @@
 [submodule "extern/test"]
 	path = extern/test
 	url = https://github.com/purnam/purnam.test
+[submodule "doc"]
+	path = doc
+	url = https://github.com/purnam/purnam.git
+	branch = gh-pages
