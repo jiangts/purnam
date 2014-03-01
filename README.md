@@ -37,7 +37,7 @@ A Google Group for purnam has been setup [here](https://groups.google.com/forum/
 
 ## History
 
-In its earliest incarnation, purnam was more or less a set of scattered ideas about how to play nicely with existing javascript libraries using clojurescript. What initially started off as experimental language extensions for working with clojurescript and [angularjs](http://angularjs.org) has matured into a synergistic set of libraries and workflows for crafting clojurescript applications (now decoupled from angular)
+In its earliest incarnation, `purnam` was more or less a set of scattered ideas about how to play nicely with existing javascript libraries using clojurescript. What initially started off as experimental language extensions for working with clojurescript and [angularjs](http://angularjs.org) has matured into a synergistic set of libraries and workflows for crafting clojurescript applications (now decoupled from `angularjs`)
 
 The original [purnam](https://github.com/purnam/purnam/tree/old) library was way too big.  It has now been broken up into more reasonably sized pieces. The core functionality of purnam have been seperated into independent libraries so that developers can have a choice about including one or all of them inside their projects.
 
@@ -49,7 +49,7 @@ Support for [angular.js](http://angularjs.org) was a major reason that `purnam` 
 
 As the `purnam` style syntax could be extended to [meteorjs](https://www.meteor.com), [reactjs](facebook.github.io/react/‎) as well as the thousands of javascript libaries out there, decoupling the code-walking component [purnam.common](https://github.com/purnam/purnam.common) from the main project took the most of the time in the redesign. Hopefully, this library will enable other developers to write their own purnam-flavored macros.
 
-Lastly, `purnam.category` namespace has been moved to [brahmin](https://github.com/purnam/brahmin). I started looking at category theory after a conversation with [Logan Campbell](https://github.com/logaan) about [conditional restarts](https://github.com/zcaudate/ribol) for asynchronous calls. Despite porting [fluokitten](https://github.com/uncomplicate/fluokitten) to clojurescript, I still don't understand what a Monad is. So it is a highly experimental (but fun) project.
+Lastly, `purnam.category` namespace has been moved to [brahmin](https://github.com/purnam/brahmin). I started looking at category theory after a conversation with [Logan Campbell](https://github.com/logaan) about [conditional restarts](https://github.com/zcaudate/ribol) for asynchronous calls. Despite porting [fluokitten](https://github.com/uncomplicate/fluokitten) to clojurescript, I still don't understand what a Monad is. So it is a highly experimental (but very fun) project.
 
 
 ## Quick Start

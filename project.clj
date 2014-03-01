@@ -12,7 +12,14 @@
                                   [midje "1.6.0"]]
                    :plugins [[lein-cljsbuild "1.0.0"]
                              [lein-midje "3.1.3"]]}}
-  :cljsbuild {:builds [{:source-paths ["src"]
-                        :compiler {:output-to "target/purnam-test.js"
+  :documentation {:files {"doc/index"
+                        {:input "test/midje_doc/purnam_guide.clj"
+                         :title "purnam"
+                         :sub-title "Language extensions for clojurescript"
+                         :author "Chris Zheng"
+                         :email  "z@caudate.me"
+                         :tracking "UA-31320512-2"}}}
+  :cljsbuild {:builds [{:source-paths ["src" "test"]
+                        :compiler {:output-to "target/purnam-guide.js"
                                    :optimizations :whitespace
                                    :pretty-print true}}]})
