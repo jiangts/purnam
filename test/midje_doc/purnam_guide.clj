@@ -6,6 +6,8 @@
 
 `[im.chit/purnam `\"`{{PROJECT.version}}`\"`]`"
 
+"Looking for documentation for `purnam.angular`? The library has been renamed and moved to a new home at http://purnam.github.io/gyr"
+
 [[:chapter {:title "Motivation"}]]
 
 "
