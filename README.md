@@ -4,7 +4,7 @@ Javascript Language Extensions for Clojurescript
 
 [![Build Status](https://travis-ci.org/purnam/purnam.png?branch=master)](https://travis-ci.org/purnam/purnam)
 
-## Installation
+## Usage
 
 In your project file, add
 
@@ -30,8 +30,12 @@ In your project file, add
 - [brahmin](https://github.com/purnam/brahmin)
 - [gyr](https://github.com/purnam/gyr)
 
+#### Mailing List
 
-#### History
+A Google Group for purnam has been setup [here](https://groups.google.com/forum/#!forum/purnam). Comments, Questions, Feedback, Contributions are most definitely welcome!
+
+
+## History
 
 In its earliest incarnation, purnam was more or less a set of scattered ideas about how to play nicely with existing javascript libraries using clojurescript. What initially started off as experimental language extensions for working with clojurescript and [angularjs](http://angularjs.org) has matured into a synergistic set of libraries and workflows for crafting clojurescript applications (now decoupled from angular)
 
@@ -46,10 +50,6 @@ Support for [angular.js](http://angularjs.org) was a major reason that `purnam` 
 As the `purnam` style syntax could be extended to [meteorjs](https://www.meteor.com), [reactjs](facebook.github.io/react/‎) as well as the thousands of javascript libaries out there, decoupling the code-walking component [purnam.common](https://github.com/purnam/purnam.common) from the main project took the most of the time in the redesign. Hopefully, this library will enable other developers to write their own purnam-flavored macros.
 
 Lastly, `purnam.category` namespace has been moved to [brahmin](https://github.com/purnam/brahmin). I started looking at category theory after a conversation with [Logan Campbell](https://github.com/logaan) about [conditional restarts](https://github.com/zcaudate/ribol) for asynchronous calls. Despite porting [fluokitten](https://github.com/uncomplicate/fluokitten) to clojurescript, I still don't understand what a Monad is. So it is a highly experimental (but fun) project.
-
-#### Mailing List
-
-A Google Group for purnam has been setup [here](https://groups.google.com/forum/#!forum/purnam). Comments, Questions, Feedback, Contributions are most definitely welcome!
 
 
 ## Quick Start
@@ -116,8 +116,19 @@ var user = {id: 0
                       :password "pass"})})
 ```
 
-##### Midje Tests
+##### Clojure Protocols
+
+```clojure
+(seq (js* "[1, 2, 3, 4]")) 
+=> '(1 2 3 4)
+
+(seq (js* "{a:1, b:2}"))
+=> '(["a" 1] ["b" 2]) 
 ```
+
+##### Midje Style Testing
+
+```clojure
 (fact [[{:doc "an example test description"
          :globals [ka "a"
                    kb "b"]
