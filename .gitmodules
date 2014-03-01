@@ -1,0 +1,9 @@
+[submodule "extern/native"]
+	path = extern/native
+	url = https://github.com/purnam/purnam.native
+[submodule "extern/core"]
+	path = extern/core
+	url = https://github.com/purnam/purnam.core
+[submodule "extern/test"]
+	path = extern/test
+	url = https://github.com/purnam/purnam.test
