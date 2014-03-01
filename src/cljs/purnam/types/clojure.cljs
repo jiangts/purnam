@@ -13,11 +13,6 @@
     (obj-only o :seq)
     (map (fn [k] [k (get o k)]) (js-keys o))))
 
-  
-#_(extend-protocol IFn
-  array
-  (-invoke []))
-
 (extend-protocol ICounted
   object
   (-count [o]
