@@ -32,21 +32,21 @@ The second pain point was the lack of testing tools that worked with the browser
 The third pain point was the lack of documentation tools for clojurescript as well as clojure. `purnam` is compatible with [midje-doc](https://www.github.com/zcaudate/lein-midje-doc) so that the integrated testing and documentation [workflow](http://z.caudate.me/combining-tests-and-documentation/) can be also used in clojurescript.
 "
 
-[[:file {:src "test/midje_doc/quickstart.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/quickstart.cljs"}]]
 
-[[:file {:src "extern/native/test/midje_doc/api_purnam_native_functions.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api_purnam_native_functions.cljs"}]]
 
-[[:file {:src "extern/native/test/midje_doc/api_purnam_native.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api_purnam_native.cljs"}]]
                
 [[:chapter {:title "purnam.core" :tag "purnam-core"}]]
 
-[[:file {:src "extern/core/test/cljs/midje_doc/purnam_core/api.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api_purnam_core.cljs"}]]
 
 [[:chapter {:title "purnam.test" :tag "purnam-test"}]]
 
-[[:file {:src "extern/test/test/cljs/midje_doc/purnam_test/jasmine.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api_purnam_test_jasmine.cljs"}]]
     
-[[:file {:src "extern/test/test/cljs/midje_doc/purnam_test/sweet.cljs"}]]
+[[:file {:src "test/cljs/midje_doc/api_purnam_test_sweet.cljs"}]]
 
 [[:chapter {:title "End Notes"}]]
 

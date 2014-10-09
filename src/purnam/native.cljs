@@ -113,24 +113,24 @@
            vs)))
 
  (defn js-conj-object
-   [parent pairs]
+   [parent [k v]]
    (let [o (gobject/clone parent)]
-       (js-conj-object! o pairs)))
+       (j/js-assoc o k v)))
 
  (defn js-conj-array
-   [parent values]
+   [parent value]
    (let [a (garray/clone parent)]
-       (js-conj-array! a values)
+       (.push a value)
        a))
 
  (extend-protocol ICollection
    object
-   (-conj [parent pairs]
-     (js-conj-object parent pairs))
+   (-conj [parent pair]
+     (js-conj-object parent pair))
 
    array
-   (-conj [parent values]
-     (js-conj-array parent values)))
+   (-conj [parent value]
+     (js-conj-array parent value)))
 
 (comment
 
