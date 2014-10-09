@@ -1,7 +1,7 @@
 language: clojure
 lein: lein2
 before_install:
-- npm install karma karma-jasmine karma-phantomjs-launcher
+- npm install karma karma-jasmine karma-phantomjs-launcher karma-cli
 
 script:
 - lein2 cljsbuild once
