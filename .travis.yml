@@ -4,9 +4,9 @@ before_install:
 - npm install karma karma-jasmine karma-phantomjs-launcher karma-cli
 
 script:
-- lein2 midje
 - lein2 cljsbuild once
 - karma start --single-run --browsers PhantomJS
+- lein2 midje
 notifications:
   email:
     recipients:
