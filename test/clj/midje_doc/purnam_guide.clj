@@ -23,9 +23,15 @@ The first pain point was having to deal with the clojurish `(.dot syntax)` for j
 
 #### In-Browser Testing
 
-The second pain point was the lack of testing tools that worked with the browser. I wanted something with more debugging power and so unit testing is integrated with the [karma](http://karma-runner.github.io/) test runner using two different test styles:
+`purnam.test` was written to allow clojurescript tests to work with the karma test runner. There are various advantages to using the [karma](http://karma-runner.github.io/) test runner over existing clojurescript solutions:
+  - Supports a variety of browsers including Chrome, Firefox, Safari, Phantomjs and [Node Webkit](https://github.com/intelligentgolf/karma-nodewebkit-launcher)
+  - Uses [nodejs](http://nodejs.org) and so has a very quick startup time
+  - It is supported by [Google](http://google.com) and the [Angularjs](http://angularjs.org) team
+  - Very active community with lots of users and development activity
 
-- [purnam.test](#purnam-test) - testing using [jasmine](http://pivotal.github.io/jasmine/) flavored or [midje](https://github.com/marick/Midje) flavored syntax.
+Furthermore, the javascript `dot.notational.style` to be used for better native integration. Since version `0.4`, there is much better support for error reporting and the library can now be used on its own, outside of all other purnam libraries. Currently two flavors are supported describing clojurescript tests:
+  - [Jasmine style](#describe)  - `describe`, `it` and `is`. It gives a more fully featured interface and has [async](#async) support (`runs`, `waits-for`)
+  - [Midje style](#fact)  - `fact` and *=>*. It can be combined with [MidjeDoc](https://www.github.com/zcaudate/lein-midje-doc) to generate documentation from unit tests (the current article being an auto-generated document using this technique).
 
 #### Integrated Documentation
 
@@ -47,6 +53,8 @@ The third pain point was the lack of documentation tools for clojurescript as we
 [[:file {:src "test/cljs/midje_doc/api_purnam_test_jasmine.cljs"}]]
     
 [[:file {:src "test/cljs/midje_doc/api_purnam_test_sweet.cljs"}]]
+
+[[:file {:src "test/clj/midje_doc/purnam_test_guide.clj"}]]
 
 [[:chapter {:title "End Notes"}]]
 
