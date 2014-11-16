@@ -7,7 +7,7 @@
   object
   (-seq [o]
     (j/obj-only o :seq)
-    (map (fn [k] [k (get o k)]) (js-keys o))))
+    (seq (map (fn [k] [k (get o k)]) (js-keys o)))))
 
 (extend-protocol ICounted
   object
