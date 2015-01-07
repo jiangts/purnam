@@ -4,10 +4,10 @@
 
 (defn find-arrow-positions
   ([forms] (find-arrow-positions forms [] 0))
-  ([[f & more] idxs count]
-     (if f
-       (recur more (if (= f '=>) (conj idxs count) idxs) (inc count))
-       idxs)))
+  ([forms idxs count]
+   (if (empty? forms)
+     idxs
+     (recur (rest forms) (if (= (first forms) '=>) (conj idxs count) idxs) (inc count)))))
 
 (defn fact-groups [forms]
   (let [forms (vec forms)
