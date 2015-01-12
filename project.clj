@@ -1,4 +1,4 @@
-(defproject im.chit/purnam "0.5.1"
+(defproject im.chit/purnam "0.5.2"
   :description "Language extensions for clojurescript"  
   :url "http://www.github.com/purnam/purnam"
   :license {:name "The MIT License"
@@ -11,7 +11,7 @@
                              [lein-cljsbuild "1.0.3"]
                              [lein-midje "3.1.3"]
                              [lein-midje-doc "0.0.24"]
-                             [lein-repack "0.2.3"]]}}
+                             [lein-repack "0.2.4"]]}}
   :documentation {:files {"doc/index"
                         {:input "test/clj/midje_doc/purnam_guide.clj"
                          :title "purnam"

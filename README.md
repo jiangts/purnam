@@ -6,6 +6,11 @@ Javascript Language Extensions for Clojurescript
 
 ## What's New?
 
+#### 0.5.2
+
+- bugfix for midje forms (thanks to [natedev](https://github.com/natedev))
+- bugfix for sequence behaviour (thanks to [deliminator](https://github.com/deliminator))
+
 #### 0.5.1
 
 - purnam has been [repacked](https://github.com/zcaudate/lein-repack) and all subprojects have been merged into a single repo (much easier to maintain)
@@ -16,16 +21,16 @@ Javascript Language Extensions for Clojurescript
 In your project file, add
 
 ```clojure
-[im.chit/purnam "0.5.1"]
+[im.chit/purnam "0.5.2"]
 ```
 
 or for individual libraries:
 
 ```clojure
-[im.chit/purnam.common "0.5.1"]
-[im.chit/purnam.native "0.5.1"]
-[im.chit/purnam.core   "0.5.1"]
-[im.chit/purnam.test   "0.5.1"]
+[im.chit/purnam.common "0.5.2"]
+[im.chit/purnam.native "0.5.2"]
+[im.chit/purnam.core   "0.5.2"]
+[im.chit/purnam.test   "0.5.2"]
 ```
 
 #### Documention
