@@ -8,7 +8,11 @@
   => [1]
 
   (find-arrow-positions '(=> 1))
-  => [0])
+  => [0]
+
+  (find-arrow-positions '((= 1 0) => false nil => nil?))
+  => [1 4]
+  )
 
 
 (fact "fact-groups"
