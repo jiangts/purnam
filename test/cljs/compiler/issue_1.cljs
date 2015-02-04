@@ -6,4 +6,4 @@
 (set! js/aa #js {})
 (def a js/aa)
 (! a.b.c 5555)
-(+ 2 (? a.b.c))
+(+ 2 (? a.b.c) 3)
