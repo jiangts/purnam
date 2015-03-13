@@ -5,7 +5,7 @@
             :url "http://opensource.org/licencses/MIT"}
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :test-paths ["test/clj"]
-  :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-2356"]
+  :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-3058"]
                                   [midje "1.6.3"]]
                    :plugins [[lein-ancient "0.5.5"]
                              [lein-cljsbuild "1.0.3"]
