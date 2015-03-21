@@ -1,6 +1,6 @@
 (ns midje-doc.api-purnam-core
   (:require [purnam.test])
-  (:use-macros [purnam.common :only [set-safe-aget]]
+  (:use-macros [purnam.common :only [set-safe-aget aget-in]]
                [purnam.core :only [? ?> ! !> f.n def.n do.n
                                  obj arr def* do*n def*n f*n]]
                [purnam.test :only [fact facts]]))
