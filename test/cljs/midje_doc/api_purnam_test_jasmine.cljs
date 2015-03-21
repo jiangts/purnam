@@ -1,5 +1,5 @@
 (ns midje-doc.api-purnam-test-jasmine
-  (:use-macros [purnam.test :only [describe is it is-not fact facts waits-for]]))
+  (:use-macros [purnam.test :only [describe is it is-not fact facts]]))
 
 [[:section {:title "init"}]]
 "All tests require the following within the namespace declaration."
