@@ -11,7 +11,7 @@
             js-map js-mapcat js-concat
             js-arities]])
   (:use-macros [purnam.test :only [fact facts]]))
-
+  
 [[:chapter {:title "purnam.native.functions" :tag "purnam-native-functions"}]]
 
 "Clojure protocols for javascript native objects and arrays."

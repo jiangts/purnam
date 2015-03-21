@@ -301,6 +301,5 @@
   "The raw js forms will only recognise the `cljs.core` vector binding constructs: `let`, `loop`, `for`, `doseq`, `if-let` and `when-let`. Any custom macros within a raw form will run into problems."
 )
 
-
 (set-safe-aget false)
 

@@ -5,13 +5,14 @@
             :url "http://opensource.org/licencses/MIT"}
   :dependencies [[org.clojure/clojure "1.6.0"]]
   :test-paths ["test/clj"]
-  :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-3058"]
+  :profiles {:dev {:dependencies [[org.clojure/clojurescript "0.0-3115"]
                                   [midje "1.6.3"]]
                    :plugins [[lein-ancient "0.5.5"]
-                             [lein-cljsbuild "1.0.3"]
+                             [lein-cljsbuild "1.0.5"]
                              [lein-midje "3.1.3"]
-                             [lein-midje-doc "0.0.24"]
-                             [lein-repack "0.2.4"]]}}
+                             ;;[lein-midje-doc "0.0.24"]
+                             ;;[lein-repack "0.2.3"]
+                             ]}}
   :documentation {:files {"doc/index"
                         {:input "test/clj/midje_doc/purnam_guide.clj"
                          :title "purnam"
